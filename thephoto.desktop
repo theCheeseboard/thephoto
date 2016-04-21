@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=thePhoto
+GenericName=Photo Manager
+Exec=thephoto
+Icon=thephoto
+MimeType=image/jpeg;image/png;image/gif;image/exif
