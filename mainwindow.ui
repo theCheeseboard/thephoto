@@ -42,7 +42,7 @@
          <x>0</x>
          <y>0</y>
          <width>593</width>
-         <height>172</height>
+         <height>160</height>
         </rect>
        </property>
        <widget class="QLabel" name="imageLabel">
@@ -68,6 +68,13 @@
         </property>
        </widget>
       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="imageNameLabel">
+      <property name="text">
+       <string>ImageName</string>
+      </property>
      </widget>
     </item>
     <item>

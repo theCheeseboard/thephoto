@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->scrollArea->installEventFilter(this);
 
     ui->criticalIcon->setPixmap(QIcon::fromTheme("dialog-error").pixmap(32, 32));
-
+    ui->mainToolBar->addWidget(ui->imageNameLabel);
 
     QStringList arguments = QApplication::arguments();
     arguments.removeFirst();
@@ -116,6 +116,7 @@ void MainWindow::loadImage(int imageIndex) {
         ui->graphicsView->setScene(scene);
         ui->graphicsView->setSceneRect(scene->sceneRect());*/
 
+        ui->imageNameLabel->setText(QFileInfo(FoundImages.at(imageIndex)).fileName());
         QImageReader reader(FoundImages.at(imageIndex));
         reader.setAutoTransform(true);
         const QImage image = reader.read();
