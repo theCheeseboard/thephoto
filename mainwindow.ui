@@ -230,6 +230,7 @@
    <addaction name="actionZoom_Out"/>
    <addaction name="actionZoom_to_100"/>
    <addaction name="actionFit_to_Window"/>
+   <addaction name="actionDelete"/>
    <addaction name="actionStart_Slideshow"/>
   </widget>
   <action name="actionConnect_to_Phone">
@@ -306,10 +307,19 @@
   </action>
   <action name="actionImport_from_Phone">
    <property name="icon">
-    <iconset theme="smartphone"/>
+    <iconset theme="smartphone">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Import from Phone</string>
+    <string>&amp;Import from Phone</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="icon">
+    <iconset theme="edit-delete"/>
+   </property>
+   <property name="text">
+    <string>Delete</string>
    </property>
   </action>
  </widget>

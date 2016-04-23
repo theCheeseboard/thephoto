@@ -61,6 +61,8 @@ private slots:
 
     void on_actionImport_from_Phone_triggered();
 
+    void on_actionDelete_triggered();
+
 private:
     Ui::MainWindow *ui;
 

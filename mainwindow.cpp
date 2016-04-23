@@ -271,3 +271,12 @@ void MainWindow::on_actionImport_from_Phone_triggered()
     dialog->exec();
     delete dialog;
 }
+
+void MainWindow::on_actionDelete_triggered()
+{
+    if (QMessageBox::warning(this, "Delete Image", "You're about to delete this image forever. Are you sure?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+        QFile(FoundImages.at(currentImage)).remove();
+        FoundImages.removeAt(currentImage);
+        nextImage();
+    }
+}
