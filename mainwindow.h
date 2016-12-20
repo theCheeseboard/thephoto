@@ -34,6 +34,8 @@ public slots:
 
     void nextImage();
 
+    void show();
+
 private slots:
     void on_pushButton_clicked();
 

@@ -11,6 +11,8 @@
 #include <QFile>
 #include <QDir>
 #include <QDateTime>
+#include <QLabel>
+#include <QKeyEvent>
 
 namespace Ui {
 class PhoneDialog;
@@ -24,6 +26,9 @@ public:
     explicit PhoneDialog(QWidget *parent = 0);
     ~PhoneDialog();
 
+public slots:
+    void close();
+
 private slots:
     void newConnection();
 
@@ -31,19 +36,23 @@ private slots:
 
     void setScaleFactor(float factor);
 
+    void broadcastNumber();
+
 private:
     Ui::PhoneDialog *ui;
 
     QTcpServer* server;
-    QTcpSocket* socket = NULL;
-    QByteArray buffer;
+    QList<QTcpSocket*> sockets;
+    QList<QByteArray> buffers;
+    //QTcpSocket* socket = NULL;
+    //QByteArray buffer;
     float scaleFactor;
 
     void loadImage(QString path);
     float calculateScaling(QSize container, QSize image, bool allowLarger = false);
     float calculateScaling(int containerWidth, int containerHeight, int imageWidth, int imageHeight, bool allowLarger = false);
 
-    bool eventFilter(QObject *, QEvent *event);
+    void keyPressEvent(QKeyEvent* event);
 };
 
 #endif // PHONEDIALOG_H

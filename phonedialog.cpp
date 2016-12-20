@@ -7,12 +7,16 @@ PhoneDialog::PhoneDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->ipLabel->setText(QNetworkInterface::allAddresses().at(2).toString());
     ui->scrollArea->setVisible(false);
+    if (QNetworkInterface::allAddresses().count() < 3) {
+        ui->ipLabel->setText("Connect to the internet.");
+    } else {
+        ui->ipLabel->setText(QNetworkInterface::allAddresses().at(2).toString());
 
-    server = new QTcpServer(this);
-    server->listen(QHostAddress::Any, 26157);
-    connect(server, SIGNAL(newConnection()), this, SLOT(newConnection()));
+        server = new QTcpServer(this);
+        server->listen(QHostAddress::Any, 26157);
+        connect(server, SIGNAL(newConnection()), this, SLOT(newConnection()));
+    }
 }
 
 PhoneDialog::~PhoneDialog()
@@ -20,43 +24,66 @@ PhoneDialog::~PhoneDialog()
     delete ui;
 }
 
-bool PhoneDialog::eventFilter(QObject *, QEvent *event) {
-    if (event->type() == QEvent::KeyPress) {
-        QKeyEvent* keyEvent = (QKeyEvent*) event;
-        if (keyEvent->key() == Qt::Key_Escape) {
-            this->close();
-        }
+void PhoneDialog::keyPressEvent(QKeyEvent *event) {
+    if (event->key() == Qt::Key_Escape) {
+        this->close();
     }
-    return false;
 }
 
 void PhoneDialog::newConnection() {
-    socket = server->nextPendingConnection();
-    server->close();
+    QTcpSocket* socket = server->nextPendingConnection();
+    //server->close();
 
+    sockets.append(socket);
+    buffers.append(QByteArray());
     connect(socket, &QTcpSocket::readyRead, [=]() {
+        int index = sockets.indexOf(socket);
+        QByteArray buffer = buffers.at(sockets.indexOf(socket));
         buffer.append(socket->readAll());
         if (buffer.endsWith("\r\n")) {
-            ui->scrollArea->setVisible(true);
-            ui->connectionFrame->setVisible(false);
-            //buffer.remove(buffer.length() - 3, 2);
-            QDir::home().mkdir("thePhoto");
-            QFile image(QDir::homePath() + "/thePhoto/Image_" + QDateTime::currentDateTime().toString("ddMMyy-hhmmss") + ".jpg");
-            image.open(QFile::ReadWrite);
-            image.write(buffer);
-            image.flush();
-            image.close();
+            if (buffer.endsWith("ENDSTREAM\r\n")) {
+                buffers.removeAt(sockets.indexOf(socket));
+                sockets.removeOne(socket);
+                broadcastNumber();
+                if (sockets.count() == 0) {
+                    this->close();
+                }
+                return;
+            } else {
+                //Reply with OK
+                socket->write("OK\r\n");
+                socket->flush();
 
-            loadImage(image.fileName());
+                ui->scrollArea->setVisible(true);
+                ui->connectionFrame->setVisible(false);
+                QDir::home().mkdir("thePhoto");
+                QFile image(QDir::homePath() + "/thePhoto/Image_" + QDateTime::currentDateTime().toString("ddMMyy-hhmmsszzz") + ".jpg");
+                image.open(QFile::ReadWrite);
+                image.write(buffer);
+                image.flush();
+                image.close();
 
-            buffer.clear();
+                loadImage(image.fileName());
+
+                buffer.clear();
+            }
         }
+        buffers.replace(index, buffer);
     });
+
+    broadcastNumber();
 
     ui->ipLabel->setVisible(false);
     ui->connectionStatus->setVisible(false);
     ui->trademarkLabel->setVisible(false);
     ui->statusLabel->setText("Your phone is now connected to this PC. You can start taking images now.");
+}
+
+void PhoneDialog::broadcastNumber() {
+    for (QTcpSocket* socket : sockets) {
+        socket->write(QString("CONNECTIONS " + QString::number(sockets.count()) + "\r\n").toUtf8());
+        socket->flush();
+    }
 }
 
 void PhoneDialog::loadImage(QString path) {
@@ -68,7 +95,7 @@ void PhoneDialog::loadImage(QString path) {
         ui->imageLabel->setText("Unfortunately, that image didn't send correctly.");
     } else {
         ui->imageLabel->setPixmap(QPixmap::fromImage(image));
-        setScaleFactor(calculateScaling(ui->scrollArea->size(), image.size()));
+        setScaleFactor(calculateScaling(this->size(), image.size()));
     }
 }
 
@@ -116,4 +143,15 @@ void PhoneDialog::recenterImage() {
     }
 
     ui->imageLabel->move(newx, newy);
+}
+
+void PhoneDialog::close() {
+    QDialog::close();
+
+    for (QTcpSocket* socket : sockets) {
+        socket->write(QString("ENDSTREAM\r\n").toUtf8());
+        socket->flush();
+    }
+
+    this->deleteLater();
 }

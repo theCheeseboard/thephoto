@@ -107,14 +107,6 @@ void MainWindow::on_actionManage_Library_triggered()
 void MainWindow::loadImage(int imageIndex) {
     if (FoundImages.count() > imageIndex) {
         currentImage = imageIndex;
-        /*QGraphicsScene* scene = new QGraphicsScene();
-        QPixmap pixmap(FoundImages.at(imageIndex));
-        pixmap = pixmap.scaledToHeight(ui->graphicsView->height());
-        pixmap = pixmap.scaledToWidth(ui->graphicsView->width());
-        scene->addPixmap(pixmap);
-        scene->setSceneRect(0, 0, ui->graphicsView->width(), ui->graphicsView->height());
-        ui->graphicsView->setScene(scene);
-        ui->graphicsView->setSceneRect(scene->sceneRect());*/
 
         ui->imageNameLabel->setText(QFileInfo(FoundImages.at(imageIndex)).fileName());
         QImageReader reader(FoundImages.at(imageIndex));
@@ -125,7 +117,6 @@ void MainWindow::loadImage(int imageIndex) {
         } else {
             ui->imageLabel->setPixmap(QPixmap::fromImage(image));
             setScaleFactor(calculateScaling(ui->scrollArea->size(), image.size()));
-            //ui->imageLabel->adjustSize();
         }
     }
 }
@@ -147,7 +138,7 @@ bool MainWindow::eventFilter(QObject *, QEvent *event) {
             ui->menuBar->setVisible(true);
 
             slideshowTimer->stop();
-            delete slideshowTimer;
+            slideshowTimer->deleteLater();
             slideshowTimer = NULL;
         }
     }
@@ -254,15 +245,12 @@ void MainWindow::on_actionStart_Slideshow_triggered()
     slideshowTimer->setInterval(10000);
     connect(slideshowTimer, SIGNAL(timeout()), this, SLOT(nextImage()));
     slideshowTimer->start();
-
-
 }
 
 void MainWindow::on_actionConnect_to_Phone_triggered()
 {
     PhoneDialog* dialog = new PhoneDialog(this);
     dialog->showFullScreen();
-
 }
 
 void MainWindow::on_actionImport_from_Phone_triggered()
@@ -279,4 +267,9 @@ void MainWindow::on_actionDelete_triggered()
         FoundImages.removeAt(currentImage);
         nextImage();
     }
+}
+
+void MainWindow::show() {
+    QMainWindow::show();
+    loadImage(currentImage);
 }
