@@ -95,6 +95,11 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void releaseCamera() {
+        try {
+            camera.setPreviewDisplay(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         camera.release();
     }
 
@@ -134,7 +139,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
                 camera.stopPreview();
                 new MediaActionSound().play(MediaActionSound.SHUTTER_CLICK);
                 onPictureTaken.OnPictureTaken(data);
-                camera.startPreview();
 
                 AsyncTask writeTask = new AsyncTask() {
                     @Override
@@ -154,15 +158,19 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
         });
     }
 
+    public void startPreview() {
+        camera.startPreview();
+    }
+
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         setWillNotDraw(false);
         try {
             camera.setPreviewDisplay(holder);
             camera.startPreview();
-
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (RuntimeException e) {
         }
 
     }

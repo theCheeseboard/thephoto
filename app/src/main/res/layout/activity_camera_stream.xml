@@ -37,29 +37,15 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Capture"
-        android:id="@+id/CapButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="CaptureImage"
-        android:elegantTextHeight="false"
-        android:src="@drawable/capture"
-        android:background="#00ffffff"
-        android:layout_marginBottom="16dp" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/flashButton"
         android:src="@drawable/ic_flash_auto_24dp"
         android:background="#00ffffff"
-        android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/CapButton"
         android:layout_toStartOf="@+id/CapButton"
         android:layout_alignTop="@+id/CapButton"
         android:onClick="SwitchFlash"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_alignBottom="@+id/CapButton" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -70,10 +56,9 @@
         android:onClick="SwitchTimer"
         android:layout_toRightOf="@+id/CapButton"
         android:layout_toEndOf="@+id/CapButton"
-        android:layout_alignParentBottom="true"
         android:layout_alignTop="@+id/CapButton"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="16dp"
+        android:layout_alignBottom="@+id/CapButton" />
 
     <GridLayout
         android:layout_width="40dp"
@@ -116,5 +101,28 @@
         android:layout_alignBottom="@+id/timerButton"
         android:onClick="SwitchCamera"
         android:visibility="gone"/>
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendingBar"
+        android:visibility="invisible"
+        android:indeterminate="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Capture"
+        android:id="@+id/CapButton"
+        android:onClick="CaptureImage"
+        android:elegantTextHeight="false"
+        android:src="@drawable/capture"
+        android:background="#00ffffff"
+        android:layout_marginBottom="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

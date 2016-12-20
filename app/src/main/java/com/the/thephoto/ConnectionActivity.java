@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class ConnectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connection);
 
         getSupportActionBar().setTitle("Live Capture");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         cx = this;
     }
 
@@ -64,7 +66,6 @@ public class ConnectionActivity extends AppCompatActivity {
                     sock.connect(new InetSocketAddress(InetAddress.getByName(IPAddress), 26157), 20000);
                     vars.PcSock = sock;
                 } catch (Exception e) {
-
                     e.printStackTrace();
                     this.cancel(true);
                 }
@@ -101,6 +102,16 @@ public class ConnectionActivity extends AppCompatActivity {
         };
         t.execute();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
