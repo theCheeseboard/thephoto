@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.the.thephoto.MainActivity">
+    <item
+        android:id="@+id/action_stream"
+        android:orderInCategory="100"
+        android:title="Live Capture"
+        app:showAsAction="never" />
+</menu>
