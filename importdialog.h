@@ -11,6 +11,10 @@
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QDirIterator>
+#include <QStackedWidget>
+#include <QFileDialog>
+#include <QRadioButton>
+#include <QPushButton>
 
 namespace Ui {
 class importDialog;
@@ -49,12 +53,19 @@ private slots:
 
     void photoError(QString message);
 
+    void on_photoLocationName_toggled(bool checked);
+
+    void on_photoLocationFolder_toggled(bool checked);
+
+    void on_browseForFolderButton_clicked();
+
 private:
     Ui::importDialog *ui;
 
     stages currentStage;
     QString workDir;
     QStringList foundImagePaths;
+    QString copyDir;
 
     void close();
 };

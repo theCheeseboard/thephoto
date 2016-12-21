@@ -13,6 +13,12 @@
 #include <QDateTime>
 #include <QLabel>
 #include <QKeyEvent>
+#include <QTimer>
+#include <QResizeEvent>
+#include <QDBusReply>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#include <QLayout>
 
 namespace Ui {
 class PhoneDialog;
@@ -53,6 +59,7 @@ private:
     float calculateScaling(int containerWidth, int containerHeight, int imageWidth, int imageHeight, bool allowLarger = false);
 
     void keyPressEvent(QKeyEvent* event);
+    void resizeEvent(QResizeEvent* event);
 };
 
 #endif // PHONEDIALOG_H

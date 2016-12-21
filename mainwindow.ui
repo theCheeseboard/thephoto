@@ -318,6 +318,9 @@
    </property>
   </action>
   <action name="actionImport_from_Phone">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset theme="smartphone">
      <normaloff>.</normaloff>.</iconset>

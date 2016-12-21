@@ -30,6 +30,10 @@ void PhoneDialog::keyPressEvent(QKeyEvent *event) {
     }
 }
 
+void PhoneDialog::resizeEvent(QResizeEvent *event) {
+
+}
+
 void PhoneDialog::newConnection() {
     QTcpSocket* socket = server->nextPendingConnection();
     //server->close();

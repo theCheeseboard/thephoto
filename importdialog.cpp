@@ -25,16 +25,14 @@ importDialog::~importDialog()
 void importDialog::changeStage(stages stage) {
     currentStage = stage;
 
-    ui->deviceFrame->setVisible(false);
-    ui->photoFrame->setVisible(false);
-
-    switch (stage) {
+    /*switch (stage) {
     case Device:
         ui->deviceFrame->setVisible(true);
         break;
     case Photo:
         ui->photoFrame->setVisible(true);
-    }
+    }*/
+    ui->stackedWidget->setCurrentIndex(stage);
 
     setupStage(stage);
 
@@ -129,6 +127,7 @@ void importDialog::setupStage(stages stage) {
 
         QProcess::execute("fusermount -u " + workDir);
         ui->photoProgressFrame->setVisible(true);
+        ui->photoProgressFrame->raise();
         ui->photoErrorFrame->setVisible(false);
         QListWidgetItem* item = ui->deviceList->selectedItems().first();
         QString dev = item->data(Qt::UserRole).toString();
@@ -152,114 +151,134 @@ void importDialog::setupStage(stages stage) {
             QString id = item->data(Qt::UserRole + 1).toString();
             qDebug() << "Mounting iOS Device " + id;
 
-            QProcess* pairProcess = new QProcess(this);
-            pairProcess->start("idevicepair -u " + id + " pair");
-            pairProcess->waitForStarted();
+            QProcess checkProcess;
+            checkProcess.start("idevicepair -u " + id + " validate");
+            checkProcess.waitForFinished();
 
-            while (pairProcess->state() == QProcess::Running) {
-                QApplication::processEvents();
-            }
 
-            QString pairOutput(pairProcess->readAll());
-            if (pairOutput.startsWith("ERROR:")) {
-                if (pairOutput.contains("Please enter the passcode")) { // Ask user to unlock device
-                    photoError("To continue, unlock the device.");
-                } else if (pairOutput.contains("Please accept the trust dialog")) { //Ask user to trust PC
-                    photoError("To continue, trust this PC on the device.");
-                } else if (pairOutput.contains("user denied the trust dialog")) { //User did not trust PC
-                    photoError("You clicked the \"Don't Trust\" button on your device, so we can't access it.");
-                } else { //Generic Error
-                    photoError("An error occurred.");
+            if (checkProcess.readAll().startsWith("ERROR")) {
+                QProcess pairProcess;
+                pairProcess.start("idevicepair -u " + id + " pair");
+                pairProcess.waitForStarted();
+
+                while (pairProcess.state() == QProcess::Running) {
+                    QApplication::processEvents();
                 }
-                return;
-            } else {
-                QString iosDirName = "ios" + id;
-                QDir::home().mkdir(".thefile");
-                QDir(QDir::homePath() + "/.thefile").mkdir(iosDirName);
 
-                QProcess* mountProcess = new QProcess();
-
-                bool mounted = false;
-                for (QString file : QDir(QDir::homePath() + "/.thefile/" + iosDirName).entryList()) {
-                    if (file != "." && file != "..") {
-                        mounted = true;
-                    }
-                }
-                if (!mounted) {
-                    mountProcess->start("ifuse -o ro " + workDir + " -u " + id);
-                    mountProcess->waitForStarted();
-
-                    while (mountProcess->state() == QProcess::Running) {
-                        QApplication::processEvents();
-                    }
-
-                    if (mountProcess->exitCode() != 0) {
+                QString pairOutput(pairProcess.readAll());
+                if (pairOutput.startsWith("ERROR:")) {
+                    if (pairOutput.contains("Please enter the passcode")) { // Ask user to unlock device
+                        photoError("To continue, unlock the device.");
+                    } else if (pairOutput.contains("Please accept the trust dialog")) { //Ask user to trust PC
+                        photoError("To continue, trust this PC on the device.");
+                    } else if (pairOutput.contains("user denied the trust dialog")) { //User did not trust PC
+                        photoError("You clicked the \"Don't Trust\" button on your device, so we can't access it.");
+                    } else { //Generic Error
                         photoError("An error occurred.");
-                        return;
                     }
+                    return;
                 }
             }
-        }
 
-        checkDcimFolder:
-        QDir work(workDir);
-        if (work.exists()) {
-            if (!work.cd("DCIM")) {
-                QInputDialog* dialog = new QInputDialog(this);
-                dialog->setComboBoxEditable(false);
-                dialog->setLabelText("What medium do you want to access the photos from?");
-                QStringList comboItems;
-                if (QDir(work).cd("Card")) {
-                    comboItems.append("Card");
+            QString iosDirName = "ios" + id;
+            QDir::home().mkdir(".thefile");
+            QDir(QDir::homePath() + "/.thefile").mkdir(iosDirName);
+
+            QProcess mountProcess;
+
+            bool mounted = false;
+            for (QString file : QDir(QDir::homePath() + "/.thefile/" + iosDirName).entryList()) {
+                if (file != "." && file != "..") {
+                    mounted = true;
                 }
-                if (QDir(work).cd("Phone")) {
-                    comboItems.append("Phone");
-                }
-                if (QDir(work).cd("Internal Storage")) {
-                    comboItems.append("Internal Storage");
+            }
+            if (!mounted) {
+                mountProcess.start("ifuse -o ro " + workDir + " -u " + id);
+                mountProcess.waitForStarted();
+
+                while (mountProcess.state() == QProcess::Running) {
+                    QApplication::processEvents();
                 }
 
-                if (comboItems.count() == 0) {
-                    photoError("Can't find any images on the device.");
-                } else {
-                    dialog->setComboBoxItems(comboItems);
-                    dialog->exec();
-                    if (dialog->result() == QDialog::Accepted) {
-                        int value = dialog->exec();
-                        work.cd(dialog->comboBoxItems().at(value));
-                        workDir = work.dirName();
+                if (mountProcess.exitCode() != 0) {
+                    photoError("An error occurred.");
+                    return;
+                }
+            }
 
-                        goto checkDcimFolder; //Retry the loop
+            checkDcimFolder:
+            QDir work(workDir);
+            if (work.exists()) {
+                if (!work.cd("DCIM")) {
+                    QInputDialog* dialog = new QInputDialog(this);
+                    dialog->setComboBoxEditable(false);
+                    dialog->setLabelText("What medium do you want to access the photos from?");
+                    QStringList comboItems;
+                    if (QDir(work).cd("Card")) {
+                        comboItems.append("Card");
+                    }
+                    if (QDir(work).cd("Phone")) {
+                        comboItems.append("Phone");
+                    }
+                    if (QDir(work).cd("Internal Storage")) {
+                        comboItems.append("Internal Storage");
+                    }
+
+                    if (comboItems.count() == 0) {
+                        photoError("Can't find any images on the device.");
                     } else {
-                        photoError("We don't know where to get the photos.");
-                        return;
+                        dialog->setComboBoxItems(comboItems);
+                        dialog->exec();
+                        if (dialog->result() == QDialog::Accepted) {
+                            int value = dialog->exec();
+                            work.cd(dialog->comboBoxItems().at(value));
+                            workDir = work.dirName();
+
+                            goto checkDcimFolder; //Retry the loop
+                        } else {
+                            photoError("We don't know where to get the photos.");
+                            return;
+                        }
+                    }
+                }
+            } else {
+                photoError("Can't access the device. You may need to allow MTP access on the device.");
+                return;
+            }
+
+            QDirIterator iterator(work, QDirIterator::Subdirectories);
+            while (iterator.hasNext()) {
+                QString file = iterator.next();
+                if (iterator.fileName() != "." && iterator.fileName() != "..") {
+                    if (QFile(file).exists()) {
+                        foundImagePaths.append(file);
+
+                        QListWidgetItem* item = new QListWidgetItem();
+                        item->setText(QFileInfo(file).fileName());
+                        item->setIcon(QIcon::fromTheme("image"));
+                        ui->detectedPhotoList->addItem(item);
                     }
                 }
             }
-        } else {
-            photoError("Can't access the device.");
-            return;
+
+            ui->photoProgressFrame->setVisible(false);
+            ui->photoSelectFrame->setVisible(true);
+            ui->photoSelectFrame->raise();
         }
-
-        QDirIterator iterator(work, QDirIterator::Subdirectories);
-        while (iterator.hasNext()) {
-            QString file = iterator.next();
-            if (QFile(file).exists()) {
-                foundImagePaths.append(file);
-
-                QListWidgetItem* item = new QListWidgetItem();
-                item->setText(QFileInfo(file).fileName());
-                item->setIcon(QIcon::fromTheme("image"));
-                ui->detectedPhotoList->addItem(item);
-            }
-        }
-
-        ui->photoProgressFrame->setVisible(false);
     } else if (stage == Folder) {
 
     } else if (stage == Confirm) {
-
+        if (ui->photoLocationName->isChecked()) {
+            copyDir = QDir::homePath() + "/thePhoto/" + ui->folderName->text();
+        } else {
+            copyDir = ui->folderPath->text();
+        }
     } else if (stage == Import) {
+        //Begin import
+        ui->forwardButton->setVisible(false);
+        ui->backButton->setVisible(false);
+        ui->quitButton->setVisible(false);
+
 
     }
 }
@@ -310,4 +329,31 @@ void importDialog::photoError(QString message) {
     ui->photoErrorFrame->setVisible(true);
     ui->photoProgressFrame->setVisible(false);
     ui->photoError->setText(message);
+}
+
+
+void importDialog::on_photoLocationName_toggled(bool checked)
+{
+    if (checked) {
+        ui->photoLocationSelectName->setEnabled(true);
+        ui->photoLocationSelectFolder->setEnabled(false);
+    }
+}
+
+void importDialog::on_photoLocationFolder_toggled(bool checked)
+{
+    if (checked) {
+        ui->photoLocationSelectName->setEnabled(false);
+        ui->photoLocationSelectFolder->setEnabled(true);
+    }
+}
+
+void importDialog::on_browseForFolderButton_clicked()
+{
+    QFileDialog* dialog = new QFileDialog;
+    dialog->setAcceptMode(QFileDialog::AcceptOpen);
+    dialog->setFileMode(QFileDialog::DirectoryOnly);
+    if (dialog->exec() == QFileDialog::Accepted) {
+        ui->folderPath->setText(dialog->selectedFiles().first());
+    }
 }
