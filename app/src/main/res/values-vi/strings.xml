@@ -1,2 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">thePhoto Event</string>
+    <string name="code_prompt">Nhập vào mã thePhoto đã cung cấp</string>
+    <string name="go_button">Đi</string>
+    <string name="code_hint">Mã</string>
+    <string name="connecting_prompt">Đang kết nối với thePhoto...</string>
+    <string name="invalid_code_title">Mã không hợp lệ</string>
+    <string name="invalid_code_message">Bạn đã đánh vào mã không hợp lệ.</string>
+    <string name="ok">OK</string>
+
+    <string name="title_activity_camera">Máy ảnh</string>
+    <string name="keep_copy_prompt">Giữ lại ảnh trên máy này</string>
+    <string name="warning_prompt">CẢNH BÁO</string>
+    </resources>
