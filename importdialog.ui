@@ -14,8 +14,8 @@
    <string>Import from Device</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="thephoto" resource="resources.qrc">
-    <normaloff>:/icons/icon.svg</normaloff>:/icons/icon.svg</iconset>
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/thephoto.svg</normaloff>:/icons/thephoto.svg</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -188,7 +188,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resources.qrc">:/icons/icon.svg</pixmap>
+       <pixmap>:/icons/icon.svg</pixmap>
       </property>
      </widget>
     </widget>
