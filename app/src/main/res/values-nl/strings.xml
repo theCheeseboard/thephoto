@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">thePhoto Event</string>
+<resources><string name="app_name">thePhoto Evenement</string>
     <string name="code_prompt">Voer de code gegeven door thePhoto in</string>
     <string name="go_button">Start</string>
     <string name="code_hint">Code</string>

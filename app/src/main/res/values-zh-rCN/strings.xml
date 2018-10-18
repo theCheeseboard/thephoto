@@ -1,3 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="app_name">thePhoto 事件</string>
-    </resources>
+    <string name="code_prompt">输入给出的代码 thePhoto</string>
+    <string name="go_button">走</string>
+    <string name="code_hint">码</string>
+    <string name="connecting_prompt">连接到thePhoto...</string>
+    <string name="invalid_code_title">无效的字符串</string>
+    <string name="invalid_code_message">您输入的代码无效.</string>
+    <string name="ok">好</string>
+
+    <string name="title_activity_camera">相机</string>
+    <string name="keep_copy_prompt">在此设备上保留一份图像副本</string>
+</resources>
