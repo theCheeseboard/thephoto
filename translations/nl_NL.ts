@@ -7,47 +7,47 @@
         <location filename="../event/eventmodesettings.ui" line="14"/>
         <location filename="../event/eventmodesettings.ui" line="25"/>
         <source>Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Evenementenmodus</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="34"/>
         <source>Show Wi-Fi details</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef Wi-Fi-informatie weer</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="43"/>
         <source>wifiIcon</source>
-        <translation type="unfinished"></translation>
+        <translation>wifiIcon</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="50"/>
         <source>SSID</source>
-        <translation type="unfinished"></translation>
+        <translation>SSID</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="57"/>
         <source>keyIcon</source>
-        <translation type="unfinished"></translation>
+        <translation>keyICon</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="64"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutel</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="73"/>
         <source>Use Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik monitor</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="107"/>
         <source>Close Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit evenenementenmodus</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="16"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
 </context>
 <context>
@@ -55,12 +55,12 @@
     <message>
         <location filename="../event/eventmodeshow.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="75"/>
         <source>To connect, use</source>
-        <translation type="unfinished"></translation>
+        <translation>Om te verbinden, gebruik</translation>
     </message>
 </context>
 <context>
@@ -68,7 +68,7 @@
     <message>
         <location filename="../event/eventserver.cpp" line="25"/>
         <source>Can&apos;t create X509 certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen X509-certificaat aanmaken</translation>
     </message>
 </context>
 <context>
@@ -76,12 +76,12 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>thePhoto</source>
-        <translation type="unfinished"></translation>
+        <translation>thePhoto</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="76"/>
         <source>ImageGoesHere</source>
-        <translation type="unfinished"></translation>
+        <translation>ImageGoesHere</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="88"/>
@@ -96,12 +96,12 @@
     <message>
         <location filename="../mainwindow.ui" line="159"/>
         <source>There are no images in your library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er zijn geen afbeeldingen in jouw bibliotheek.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="168"/>
         <source>Manage Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheer bibliotheek</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="220"/>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../mainwindow.ui" line="272"/>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom in</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="275"/>
@@ -131,7 +131,7 @@
     <message>
         <location filename="../mainwindow.ui" line="284"/>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom uit</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="287"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../mainwindow.ui" line="296"/>
         <source>Zoom to 100%</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom naar 100%</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="299"/>
@@ -151,7 +151,7 @@
     <message>
         <location filename="../mainwindow.ui" line="308"/>
         <source>Fit to Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas aan op venster</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="317"/>
@@ -166,17 +166,17 @@
     <message>
         <location filename="../mainwindow.ui" line="338"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
         <source>Connect another screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbind met een ander scherm</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
         <source>Connect another screen to this PC to use Event Mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbind een ander scherm met deze PC om Evenementenmodus te gebruiken.</translation>
     </message>
 </context>
 <context>
@@ -184,32 +184,32 @@
     <message>
         <location filename="../managelibrary.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <location filename="../managelibrary.ui" line="25"/>
         <source>Manage Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheer bibliotheek</translation>
     </message>
     <message>
         <location filename="../managelibrary.ui" line="41"/>
         <source>Add Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg een map toe</translation>
     </message>
     <message>
         <location filename="../managelibrary.ui" line="52"/>
         <source>Remove Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder map</translation>
     </message>
     <message>
         <location filename="../managelibrary.ui" line="76"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <location filename="../managelibrary.ui" line="87"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -217,17 +217,17 @@
     <message>
         <location filename="../importdialog.ui" line="14"/>
         <source>Import from Device</source>
-        <translation type="unfinished"></translation>
+        <translation>importeren vanaf apparaat</translation>
     </message>
     <message>
         <location filename="../importdialog.ui" line="54"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestiging</translation>
     </message>
     <message>
         <location filename="../importdialog.ui" line="92"/>
         <source>Importing</source>
-        <translation type="unfinished"></translation>
+        <translation>Aan het importeren</translation>
     </message>
     <message>
         <location filename="../importdialog.ui" line="105"/>
@@ -238,12 +238,12 @@
         <location filename="../importdialog.ui" line="118"/>
         <location filename="../importdialog.ui" line="280"/>
         <source>Photo Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Fotoselectie</translation>
     </message>
     <message>
         <location filename="../importdialog.ui" line="149"/>
         <source>thePhoto</source>
-        <translation type="unfinished"></translation>
+        <translation>thePhoto</translation>
     </message>
     <message>
         <location filename="../importdialog.ui" line="162"/>
