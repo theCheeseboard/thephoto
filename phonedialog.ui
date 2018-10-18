@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>483</width>
+    <width>484</width>
     <height>493</height>
    </rect>
   </property>
@@ -43,14 +43,14 @@
          </font>
         </property>
         <property name="text">
-         <string>Connect to Phone</string>
+         <string>Event Mode</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="statusLabel">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Got a phone running Android™? Open the Google Play™ store and download thePhoto. Then enter this IP Address:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In Event mode, images are streamed from phones running Android™. Open the Google Play™ store and download thePhoto Event. When asked, enter the following code&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -135,8 +135,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>483</width>
-        <height>241</height>
+        <width>484</width>
+        <height>211</height>
        </rect>
       </property>
       <widget class="QLabel" name="imageLabel">

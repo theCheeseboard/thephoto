@@ -12,7 +12,7 @@
 #include <QImageReader>
 #include <QTimer>
 #include "managelibrary.h"
-#include "phonedialog.h"
+#include "event/eventmodesettings.h"
 #include "importdialog.h"
 
 namespace Ui {

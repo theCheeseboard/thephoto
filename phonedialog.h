@@ -19,6 +19,7 @@
 #include <QDBusConnection>
 #include <QDBusConnectionInterface>
 #include <QLayout>
+#include <QRandomGenerator>
 
 namespace Ui {
 class PhoneDialog;
@@ -53,6 +54,7 @@ private:
     //QTcpSocket* socket = NULL;
     //QByteArray buffer;
     float scaleFactor;
+    int encryptionCode;
 
     void loadImage(QString path);
     float calculateScaling(QSize container, QSize image, bool allowLarger = false);

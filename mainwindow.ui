@@ -54,7 +54,7 @@
          <x>0</x>
          <y>0</y>
          <width>611</width>
-         <height>171</height>
+         <height>169</height>
         </rect>
        </property>
        <widget class="QLabel" name="imageLabel">
@@ -212,7 +212,7 @@
      <x>0</x>
      <y>0</y>
      <width>611</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -251,7 +251,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>&amp;Connect to Phone</string>
+    <string>&amp;Event Mode</string>
    </property>
   </action>
   <action name="actionManage_Library">

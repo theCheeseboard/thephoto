@@ -11,7 +11,16 @@ PhoneDialog::PhoneDialog(QWidget *parent) :
     if (QNetworkInterface::allAddresses().count() < 3) {
         ui->ipLabel->setText("Connect to the internet.");
     } else {
-        ui->ipLabel->setText(QNetworkInterface::allAddresses().at(2).toString());
+        QHostAddress addr = QNetworkInterface::allAddresses().at(2);
+
+        QString code = QString("%1").arg(addr.toIPv4Address(), 10, 10, QChar('0'));
+        code.insert(5, " ");
+
+        encryptionCode = QRandomGenerator::global()->bounded(100000);
+        code = code.append(QString(" %1").arg(encryptionCode, 5, 10, QChar('0')));
+
+        ui->ipLabel->setText(code);
+        //ui->ipLabel->setText(addr.toString());
 
         server = new QTcpServer(this);
         server->listen(QHostAddress::Any, 26157);

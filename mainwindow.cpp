@@ -249,8 +249,15 @@ void MainWindow::on_actionStart_Slideshow_triggered()
 
 void MainWindow::on_actionConnect_to_Phone_triggered()
 {
-    PhoneDialog* dialog = new PhoneDialog(this);
-    dialog->showFullScreen();
+    //PhoneDialog* dialog = new PhoneDialog(this);
+    //dialog->showFullScreen();
+
+    if (QApplication::desktop()->screenCount() == 1) {
+        QMessageBox::warning(this, tr("Connect another screen"), tr("Connect another screen to this PC to use Event Mode."), QMessageBox::Ok, QMessageBox::Ok);
+    } else {
+        EventModeSettings* dialog = new EventModeSettings();
+        dialog->show();
+    }
 }
 
 void MainWindow::on_actionImport_from_Phone_triggered()
