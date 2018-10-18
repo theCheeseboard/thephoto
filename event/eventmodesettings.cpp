@@ -1,6 +1,9 @@
 #include "eventmodesettings.h"
 #include "ui_eventmodesettings.h"
 
+#include <QRandomGenerator>
+#include <QPainter>
+
 EventModeSettings::EventModeSettings(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EventModeSettings)
@@ -44,8 +47,7 @@ void EventModeSettings::show() {
 
 void EventModeSettings::on_closeEventModeButton_clicked()
 {
-    showDialog->close();
-    this->close();
+    this->reject();
 }
 
 void EventModeSettings::on_showWifiDetails_toggled(bool checked)
@@ -81,6 +83,68 @@ void EventModeSettings::on_monitorNumber_valueChanged(int arg1)
 }
 
 void EventModeSettings::newConnection(EventSocket* sock) {
+    QLabel* userLayout = new QLabel;
+
     connect(sock, SIGNAL(newImageAvailable(QImage)), showDialog, SLOT(showNewImage(QImage)));
+    connect(sock, &EventSocket::newUserConnected, [=](QString name) {
+        new EventNotification(tr("User Connected"), name, showDialog);
+
+        //Generate a new square based on the name
+        QPixmap px(showDialog->getProfileLayoutHeight(), showDialog->getProfileLayoutHeight());
+        QPainter painter(&px);
+
+        //Set the background to a random colour
+        QColor backgroundCol = QColor::fromRgb(QRandomGenerator::global()->generate());
+        painter.setBrush(backgroundCol);
+        painter.setPen(Qt::transparent);
+        painter.drawRect(0, 0, px.width(), px.height());
+
+        if ((backgroundCol.red() + backgroundCol.green() + backgroundCol.blue()) / 3 > 127) {
+            painter.setPen(Qt::black);
+        } else {
+            painter.setPen(Qt::white);
+        }
+
+        QString nameCharacter(name.at(0).toUpper());
+
+        QFont f;
+        f.setFamily(this->font().family());
+        f.setPointSize(1);
+        while (QFontMetrics(f).height() < (float) px.height() * (float) 0.75) {
+            f.setPointSize(f.pointSize() + 1);
+        }
+        f.setPointSize(f.pointSize() - 1);
+        painter.setFont(f);
+
+        QFontMetrics metrics(f);
+        int charWidth = metrics.width(nameCharacter);
+        int charHeight = metrics.height();
+
+        QRect textRect;
+        textRect.setWidth(charWidth);
+        textRect.setHeight(charHeight);
+        textRect.moveTop(px.height() / 2 - charHeight / 2);
+        textRect.moveLeft(px.width() / 2 - charWidth / 2);
+        painter.drawText(textRect, nameCharacter);
+        painter.end();
+
+        userLayout->setPixmap(px);
+        showDialog->addToProfileLayout(userLayout);
+    });
+    connect(sock, &EventSocket::aboutToClose, [=] {
+        new EventNotification(tr("User Disconnected"), sock->deviceName(), showDialog);
+        sockets.removeOne(sock);
+        userLayout->deleteLater();
+    });
     sockets.append(sock);
+}
+
+void EventModeSettings::reject() {
+    showDialog->close();
+    for (EventSocket* sock : sockets) {
+        //Close all sockets
+        sock->closeFromClient();
+    }
+
+    QDialog::reject();
 }

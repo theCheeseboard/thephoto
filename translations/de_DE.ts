@@ -15,18 +15,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="43"/>
-        <source>wifiIcon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../event/eventmodesettings.ui" line="50"/>
         <source>SSID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="57"/>
-        <source>keyIcon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -45,8 +35,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="16"/>
+        <location filename="../event/eventmodesettings.cpp" line="19"/>
         <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="90"/>
+        <source>User Connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="135"/>
+        <source>User Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -58,8 +58,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="75"/>
+        <location filename="../event/eventmodeshow.ui" line="105"/>
         <source>To connect, use</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EventNotification</name>
+    <message>
+        <location filename="../event/eventnotification.ui" line="14"/>
+        <source>Frame</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -68,6 +76,15 @@
     <message>
         <location filename="../event/eventserver.cpp" line="25"/>
         <source>Can&apos;t create X509 certificate</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EventSocket</name>
+    <message>
+        <location filename="../event/eventsocket.cpp" line="72"/>
+        <location filename="../event/eventsocket.h" line="40"/>
+        <source>An unknown person</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

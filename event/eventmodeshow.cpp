@@ -55,10 +55,18 @@ void EventModeShow::paintEvent(QPaintEvent *event) {
     QRect pixmapRect;
     pixmapRect.setSize(px.size().scaled(this->width(), this->height() - ui->frame->height(), Qt::KeepAspectRatio));
     pixmapRect.moveLeft(this->width() / 2 - pixmapRect.width() / 2);
-    pixmapRect.moveTop(this->height() / 2 - pixmapRect.height() / 2);
+    pixmapRect.moveTop((this->height() - ui->frame->height()) / 2 - pixmapRect.height() / 2);
 
     painter.setBrush(Qt::black);
     painter.setPen(Qt::transparent);
     painter.drawRect(0, 0, this->width(), this->height());
     painter.drawPixmap(pixmapRect, px);
+}
+
+void EventModeShow::addToProfileLayout(QWidget *widget) {
+    ui->profileLayout->addWidget(widget);
+}
+
+int EventModeShow::getProfileLayoutHeight() {
+    return ui->frame->height();
 }

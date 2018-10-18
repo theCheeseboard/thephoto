@@ -8,20 +8,25 @@
 #include <QImageReader>
 #include <QDateTime>
 #include <QSslSocket>
+#include <QTimer>
 
 class EventSocket : public QSslSocket
 {
         Q_OBJECT
     public:
         explicit EventSocket(QObject *parent = nullptr);
+        QString deviceName();
 
     signals:
         void newImageAvailable(QImage image);
+        void newUserConnected(QString name);
 
     public slots:
         void newData();
         void writeString(QString string);
         void readBuffer();
+        void ping();
+        void closeFromClient();
 
     private:
         unsigned char pendingRead;
@@ -32,6 +37,10 @@ class EventSocket : public QSslSocket
         QByteArray buffer;
         QByteArray encrypted;
         QByteArray currentImageData;
+        QString name = tr("An unknown person");
+
+        QTimer* pingTimer;
+        QDateTime lastPingSent, lastPingReceived;
 };
 
 #endif // EVENTSOCKET_H

@@ -27,6 +27,8 @@ class EventModeShow : public QDialog
         void updateInternetDetails(QString ssid, QString password, bool show);
         void showFullScreen(int monitor);
         void showNewImage(QImage image);
+        void addToProfileLayout(QWidget* widget);
+        int getProfileLayoutHeight();
 
     private:
         Ui::EventModeShow *ui;

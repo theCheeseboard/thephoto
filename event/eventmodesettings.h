@@ -11,6 +11,7 @@
 #include "eventserver.h"
 #include "eventsocket.h"
 #include "eventmodeshow.h"
+#include "eventnotification.h"
 
 namespace Ui {
     class EventModeSettings;
@@ -28,6 +29,8 @@ class EventModeSettings : public QDialog
         void show();
 
         void newConnection(EventSocket* socket);
+
+        void reject();
 
     private slots:
         void on_closeEventModeButton_clicked();

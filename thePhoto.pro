@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     event/eventmodeshow.cpp \
     event/eventmodesettings.cpp \
     event/eventsocket.cpp \
-    event/eventserver.cpp
+    event/eventserver.cpp \
+    event/eventnotification.cpp
 
 HEADERS  += mainwindow.h \
     managelibrary.h \
@@ -29,14 +30,16 @@ HEADERS  += mainwindow.h \
     event/eventmodeshow.h \
     event/eventmodesettings.h \
     event/eventsocket.h \
-    event/eventserver.h
+    event/eventserver.h \
+    event/eventnotification.h
 
 FORMS    += mainwindow.ui \
     managelibrary.ui \
     #phonedialog.ui \
     importdialog.ui \
     event/eventmodeshow.ui \
-    event/eventmodesettings.ui
+    event/eventmodesettings.ui \
+    event/eventnotification.ui
 
 RESOURCES += \
     resources.qrc

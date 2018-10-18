@@ -40,7 +40,7 @@
        <item>
         <widget class="QLabel" name="wifiIcon">
          <property name="text">
-          <string>wifiIcon</string>
+          <string notr="true">wifiIcon</string>
          </property>
         </widget>
        </item>
@@ -54,7 +54,7 @@
        <item>
         <widget class="QLabel" name="keyIcon">
          <property name="text">
-          <string>keyIcon</string>
+          <string notr="true">keyIcon</string>
          </property>
         </widget>
        </item>
@@ -107,7 +107,8 @@
         <string>Close Event Mode</string>
        </property>
        <property name="icon">
-        <iconset theme="dialog-close"/>
+        <iconset theme="dialog-close">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
