@@ -86,7 +86,7 @@ unix:!macx {
     desktop.files = thephoto.desktop
 
     icon.path = /usr/share/icons/hicolor/scalable/apps/
-    icon.files = icons/thephoto.svg
+    icon.files = thephoto.svg
 
     INSTALLS += target translations desktop icon
 }
