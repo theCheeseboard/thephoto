@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">thePhoto Event</string>
+    <string name="code_prompt">Enter the code given by thePhoto</string>
+    <string name="go_button">Go</string>
+    <string name="code_hint">Code</string>
+    <string name="connecting_prompt">Connecting to thePhoto...</string>
+    <string name="invalid_code_title">Invalid Code</string>
+    <string name="invalid_code_message">You\'ve entered an invalid code.</string>
+    <string name="ok">OK</string>
+
+    <string name="title_activity_camera">Camera</string>
+    <string name="keep_copy_prompt">Keep a copy of images on this device</string>
+    <string name="warning_prompt">WARNING</string>
+    <string name="encryption_warning">thePhoto does not encrypt your data. Ensure that the network you use thePhoto with is secured.</string>
+</resources>
