@@ -727,4 +727,9 @@ public class CameraActivity extends AppCompatActivity {
 
         super.finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

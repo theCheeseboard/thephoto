@@ -1,9 +1,14 @@
 package com.vicr123.thephotoevent;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Network;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,6 +21,9 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -95,6 +103,9 @@ public class EventSocket {
     Handler mainHandler;
     boolean authenticated = false;
     SSLSocket socket;
+    long lastPingReceived = 0;
+    Timer pingChecker;
+    boolean closeRequested = false;
 
     Runnable onError, onEstablished, onClose, onEndOfPhotoQueue;
 
@@ -232,6 +243,18 @@ public class EventSocket {
                             if (message.equals("HANDSHAKE OK")) {
                                 authenticated = true;
                                 mainHandler.post(onEstablished);
+
+                                //Identify
+                                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(ctx);
+                                String displayName = pref.getString("display_name", "");
+                                if (displayName.equals("device_name")) {
+                                    displayName = Globals.getDeviceName();
+                                }
+
+                                sock.sendCommand("IDENTIFY " + displayName);
+
+                                //Register for pings
+                                sock.sendCommand("REGISTERPING");
                             } else if (message.equals("CLOSE")) {
                                 //Finalize the connection
                                 mainHandler.post(onClose);
@@ -242,6 +265,29 @@ public class EventSocket {
                                 mainHandler.post(onClose);
 
                                 thread.interrupt();
+                            } else if (message.equals("PING")) {
+                                //Reply with a ping
+                                sock.sendCommand("PING");
+                                lastPingReceived = System.currentTimeMillis();
+
+                                if (pingChecker == null) {
+                                    pingChecker = new Timer("pingchecker");
+                                    pingChecker.scheduleAtFixedRate(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            if (System.currentTimeMillis() - lastPingReceived > 30000) {
+                                                //Close the connection; it's been too long
+                                                mainHandler.post(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toast.makeText(ctx, R.string.ERROR_DISCONNECTED, Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                                close();
+                                            }
+                                        }
+                                    }, 5000, 5000);
+                                }
                             }
                         }
                     }
@@ -256,8 +302,17 @@ public class EventSocket {
     }
 
     public void close() {
-        mainHandler.post(onClose);
+        if (!closeRequested) {
+            closeRequested = true;
+            sendCommand("CLOSE");
 
-        thread.interrupt();
+            mainHandler.post(onClose);
+            thread.interrupt();
+
+            if (pingChecker != null) {
+                //Stop the timer
+                pingChecker.cancel();
+            }
+        }
     }
 }
