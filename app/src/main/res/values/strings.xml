@@ -10,6 +10,4 @@
 
     <string name="title_activity_camera">Camera</string>
     <string name="keep_copy_prompt">Keep a copy of images on this device</string>
-    <string name="warning_prompt">WARNING</string>
-    <string name="encryption_warning">thePhoto does not encrypt your data. Ensure that the network you use thePhoto with is secured.</string>
 </resources>

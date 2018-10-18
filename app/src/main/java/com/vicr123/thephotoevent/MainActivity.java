@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (textLength == 6 || textLength == 12)
+                if (textLength == 6)
                 {
                     codeText.setText(new StringBuilder(text).insert(text.length() - 1, " ").toString());
                     codeText.setSelection(codeText.getText().length());
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
         String code = ((EditText) findViewById(R.id.codeText)).getText().toString();
         code = code.replace(" ", "");
-        if (code.length() != 15) {
+        if (code.length() != 10) {
             //Error
             new AlertDialog.Builder(this).setTitle(R.string.invalid_code_title)
                                      .setMessage(R.string.invalid_code_message)
