@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">thePhoto Event</string>
+    <string name="code_prompt">Gib deinen Code ein den du von thePhoto bekommen hast</string>
+    <string name="go_button">Los</string>
+    <string name="code_hint">Code</string>
+    <string name="connecting_prompt">Verbinde mit thePhoto...</string>
+    <string name="invalid_code_title">Ungültiger Code</string>
+    <string name="invalid_code_message">Du hast einen Ungültigen Code eingegeben.</string>
+    <string name="ok">OK</string>
+
+    <string name="title_activity_camera">Kamera</string>
+    <string name="keep_copy_prompt">Behalte eine Kopie von den Bildern auf diesem Gerät</string>
+</resources>
