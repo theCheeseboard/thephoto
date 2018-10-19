@@ -69,7 +69,7 @@ private:
     Ui::MainWindow *ui;
 
     QStringList FoundImages;
-    int currentImage;
+    int currentImage = 0;
     float scaleFactor;
     QTimer* slideshowTimer = NULL;
 
