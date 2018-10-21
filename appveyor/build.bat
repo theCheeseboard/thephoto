@@ -15,7 +15,7 @@ cd ..
 qmake thePhoto.pro
 nmake release
 mkdir deploy
-copy slate\release\thephoto.exe deploy
+copy release\thephoto.exe deploy
 copy "C:\Program Files\thelibs\lib\the-libs.dll" deploy
 copy "C:\OpenSSL-Win64\bin\openssl.exe" deploy
 cd deploy
