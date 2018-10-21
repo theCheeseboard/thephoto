@@ -20,15 +20,20 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
     } else {
         QHostAddress addr = QNetworkInterface::allAddresses().at(2);
 
-        QString code = QString("%1").arg(addr.toIPv4Address(), 10, 10, QChar('0'));
-        code.insert(5, " ");
+        for (QHostAddress addr : QNetworkInterface::allAddresses()) {
+            if (addr.isLoopback()) continue;
+            if (addr.isLinkLocal()) continue;
 
-        showDialog->setCode(code);
-        //ui->ipLabel->setText(addr.toString());
+            QString code = QString("%1").arg(addr.toIPv4Address(), 10, 10, QChar('0'));
+            code.insert(5, " ");
 
-        server = new EventServer(this);
-        server->listen(QHostAddress::Any, 26157);
-        connect(server, SIGNAL(connectionAvailable(EventSocket*)), this, SLOT(newConnection(EventSocket*)));
+            server = new EventServer(this);
+            server->listen(QHostAddress::Any, 26157);
+            connect(server, SIGNAL(connectionAvailable(EventSocket*)), this, SLOT(newConnection(EventSocket*)));
+            connect(server, &EventServer::ready, [=] {
+                showDialog->setCode(code);
+            });
+        }
     }
 }
 

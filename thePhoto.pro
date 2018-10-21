@@ -4,13 +4,25 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network dbus concurrent thelib
+QT       += core gui network dbus concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = thephoto
+TARGET = thePhoto
 TEMPLATE = app
-CONFIG += c++14
+CONFIG += c++1
+
+unix:!macx {
+    QT += thelib
+    TARGET = theslate
+}
+
+win32 {
+    QT += thelib
+    INCLUDEPATH += "C:/Program Files/thelibs/include"
+    LIBS += -L"C:/Program Files/thelibs/lib" -lthe-libs
+    #RC_FILE = icon.rc
+}
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -21,7 +33,8 @@ SOURCES += main.cpp\
     event/eventmodesettings.cpp \
     event/eventsocket.cpp \
     event/eventserver.cpp \
-    event/eventnotification.cpp
+    event/eventnotification.cpp \
+    aboutdialog.cpp
 
 HEADERS  += mainwindow.h \
     managelibrary.h \
@@ -31,7 +44,8 @@ HEADERS  += mainwindow.h \
     event/eventmodesettings.h \
     event/eventsocket.h \
     event/eventserver.h \
-    event/eventnotification.h
+    event/eventnotification.h \
+    aboutdialog.h
 
 FORMS    += mainwindow.ui \
     managelibrary.ui \
@@ -39,7 +53,8 @@ FORMS    += mainwindow.ui \
     importdialog.ui \
     event/eventmodeshow.ui \
     event/eventmodesettings.ui \
-    event/eventnotification.ui
+    event/eventnotification.ui \
+    aboutdialog.ui
 
 RESOURCES += \
     resources.qrc

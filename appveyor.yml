@@ -1,0 +1,36 @@
+version: 1.0.{build}
+branches:
+  only:
+  - blueprint
+skip_tags: true
+image: Visual Studio 2017
+
+environment:
+  REPO_SLUG: vicr123/thephoto
+  GITHUB_TOKEN:
+    secure: 7kCuJ9vWfcEzKYVQRGlNFBqkuTFaRPaqRs+5ibROZWXcTNpy99bRPOKAWkdirQj9
+  deploy_project: thephoto
+  deploy_version: ''
+  deploy_artifact: ''
+    
+build_script:
+- cmd: >-
+    appveyor\build.bat
+
+test: off
+
+artifacts:
+- path: deploy
+  name: thePhoto-Windows
+  
+  
+before_deploy:
+- ps:
+    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/deploy.ps1'))
+    
+deploy_script:
+- ps: >-
+    
+    Start-FileDownload 'https://github.com/probonopd/uploadtool/raw/master/upload.sh'
+    
+    sh -c "TRAVIS_BRANCH=$env:APPVEYOR_REPO_BRANCH TRAVIS_COMMIT=$env:APPVEYOR_REPO_COMMIT ./upload.sh /c/projects/thephoto/thePhoto-Windows.zip 2>/dev/null"

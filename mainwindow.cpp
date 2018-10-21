@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "aboutdialog.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -279,4 +281,10 @@ void MainWindow::on_actionDelete_triggered()
 void MainWindow::show() {
     QMainWindow::show();
     loadImage(currentImage);
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    AboutDialog a;
+    a.exec();
 }

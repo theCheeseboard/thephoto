@@ -41,6 +41,8 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
         this->ssl.cert = QSslCertificate(&certFile);
         this->ssl.key = QSslKey(keyFile.readAll(), QSsl::Rsa, QSsl::Pem);
         qDebug() << "SSL Certificate Ready";
+
+        emit ready();
     })->error([=](QString error) {
         qDebug() << error;
     });

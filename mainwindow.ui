@@ -54,7 +54,7 @@
          <x>0</x>
          <y>0</y>
          <width>611</width>
-         <height>169</height>
+         <height>172</height>
         </rect>
        </property>
        <widget class="QLabel" name="imageLabel">
@@ -212,7 +212,7 @@
      <x>0</x>
      <y>0</y>
      <width>611</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -226,7 +226,14 @@
     <addaction name="actionImport_from_Phone"/>
     <addaction name="actionConnect_to_Phone"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="toolButtonStyle">
@@ -336,6 +343,14 @@
    </property>
    <property name="text">
     <string>Delete</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset theme="help-about"/>
+   </property>
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

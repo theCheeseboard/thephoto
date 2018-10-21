@@ -65,7 +65,9 @@ private slots:
 
     void on_actionDelete_triggered();
 
-private:
+    void on_actionAbout_triggered();
+
+    private:
     Ui::MainWindow *ui;
 
     QStringList FoundImages;

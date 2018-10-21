@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QLayout>
 #include <QPainter>
+#include <QWindow>
 
 EventModeShow::EventModeShow(QWidget *parent) :
     QDialog(parent),
@@ -29,6 +30,7 @@ void EventModeShow::updateInternetDetails(QString ssid, QString password, bool s
 
 void EventModeShow::setCode(QString code) {
     ui->code->setText(code);
+    ui->bottomFrameStack->setCurrentIndex(1);
 }
 
 void EventModeShow::showFullScreen(int monitor) {
@@ -53,9 +55,9 @@ void EventModeShow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
 
     QRect pixmapRect;
-    pixmapRect.setSize(px.size().scaled(this->width(), this->height() - ui->frame->height(), Qt::KeepAspectRatio));
+    pixmapRect.setSize(px.size().scaled(this->width(), this->height() - ui->bottomFrameStack->height(), Qt::KeepAspectRatio));
     pixmapRect.moveLeft(this->width() / 2 - pixmapRect.width() / 2);
-    pixmapRect.moveTop((this->height() - ui->frame->height()) / 2 - pixmapRect.height() / 2);
+    pixmapRect.moveTop((this->height() - ui->bottomFrameStack->height()) / 2 - pixmapRect.height() / 2);
 
     painter.setBrush(Qt::black);
     painter.setPen(Qt::transparent);
@@ -68,5 +70,5 @@ void EventModeShow::addToProfileLayout(QWidget *widget) {
 }
 
 int EventModeShow::getProfileLayoutHeight() {
-    return ui->frame->height();
+    return ui->bottomFrameStack->height();
 }
