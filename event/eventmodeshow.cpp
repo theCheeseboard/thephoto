@@ -18,6 +18,17 @@ EventModeShow::EventModeShow(QWidget *parent) :
     ui->internetDetails->setVisible(false);
     ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(16, 16));
     ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
+
+    animationTimerPx = new tVariantAnimation();
+    animationTimerPxOpacity = new tVariantAnimation();
+    animationTimerBlur = new tVariantAnimation();
+
+    animationTimerPx->setDuration(500);
+    animationTimerPxOpacity->setDuration(500);
+    animationTimerBlur->setDuration(500);
+    connect(animationTimerPx, &tVariantAnimation::valueChanged, [=] {
+        this->repaint();
+    });
 }
 
 EventModeShow::~EventModeShow()
@@ -50,17 +61,56 @@ void EventModeShow::showFullScreen(int monitor) {
 }
 
 void EventModeShow::showNewImage(QImage image) {
-    this->px = QPixmap::fromImage(image);
+    pendingImages.push(QPixmap::fromImage(image));
+    tryNewImage();
+}
 
-    updateBlurredImage();
-    this->repaint();
+void EventModeShow::tryNewImage() {
+    if (!blockingOnNewImage && !pendingImages.isEmpty()) {
+        blockingOnNewImage = true;
+
+        animationTimerPx->setStartValue((float) 1);
+        animationTimerPx->setEndValue((float) 1.25);
+        animationTimerPx->setEasingCurve(QEasingCurve::InCubic);
+        animationTimerPx->start();
+        animationTimerPxOpacity->setStartValue((float) 1);
+        animationTimerPxOpacity->setEndValue((float) 0);
+        animationTimerPxOpacity->setEasingCurve(QEasingCurve::InCubic);
+        animationTimerPxOpacity->start();
+
+        QMetaObject::Connection* connection = new QMetaObject::Connection;
+        *connection = connect(animationTimerPx, &tVariantAnimation::finished, [=] {
+            disconnect(*connection);
+
+            this->px = pendingImages.pop();
+
+            updateBlurredImage();
+
+            animationTimerPx->setStartValue((float) 0.75);
+            animationTimerPx->setEndValue((float) 1);
+            animationTimerPx->setEasingCurve(QEasingCurve::OutCubic);
+            animationTimerPx->start();
+
+            animationTimerPxOpacity->stop();
+            animationTimerPxOpacity->setStartValue((float) 0);
+            animationTimerPxOpacity->setEndValue((float) 1);
+            animationTimerPxOpacity->setEasingCurve(QEasingCurve::OutCubic);
+            animationTimerPxOpacity->start();
+
+            //Give each image at least 5 seconds on the screen
+            QTimer::singleShot(5000, [=] {
+                blockingOnNewImage = false;
+                tryNewImage();
+            });
+        });
+    }
 }
 
 void EventModeShow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
 
     QRect pixmapRect;
-    pixmapRect.setSize(px.size().scaled(this->width(), this->height() - ui->bottomFrameStack->height(), Qt::KeepAspectRatio));
+    pixmapRect.setSize(px.size().scaled(this->width(), this->height() - ui->bottomFrameStack->height(), Qt::KeepAspectRatio) * animationTimerPx->currentValue().toFloat());
     pixmapRect.moveLeft(this->width() / 2 - pixmapRect.width() / 2);
     pixmapRect.moveTop((this->height() - ui->bottomFrameStack->height()) / 2 - pixmapRect.height() / 2);
 
@@ -73,6 +123,7 @@ void EventModeShow::paintEvent(QPaintEvent *event) {
     blurredRect.moveLeft(this->width() / 2 - blurredRect.width() / 2);
     blurredRect.moveTop((this->height() - ui->bottomFrameStack->height()) / 2 - blurredRect.height() / 2);
 
+    painter.setOpacity(animationTimerPxOpacity->currentValue().toFloat());
     painter.drawPixmap(blurredRect, blurred);
     painter.drawPixmap(pixmapRect, px);
 }

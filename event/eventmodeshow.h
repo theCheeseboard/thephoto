@@ -9,6 +9,8 @@
 #include <QDesktopWidget>
 #include <QTimer>
 #include <QEventLoop>
+#include <QStack>
+#include <tvariantanimation.h>
 
 namespace Ui {
     class EventModeShow;
@@ -36,8 +38,14 @@ class EventModeShow : public QDialog
 
         void paintEvent(QPaintEvent* event);
         void updateBlurredImage();
+        void tryNewImage();
+
         QPixmap px;
         QPixmap blurred;
+        QStack<QPixmap> pendingImages;
+        bool blockingOnNewImage = false;
+
+        tVariantAnimation *animationTimerPx, *animationTimerPxOpacity, *animationTimerBlur;
 };
 
 #endif // EVENTMODESHOW_H
