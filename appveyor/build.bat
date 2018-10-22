@@ -27,6 +27,6 @@ copy "C:\OpenSSL-Win64\bin\openssl.exe" deploy
 copy "C:\OpenSSL-Win64\bin\libeay32.dll" deploy
 copy "C:\OpenSSL-Win64\bin\ssleay32.dll" deploy
 copy "C:\OpenSSL-Win64\bin\openssl.cfg" deploy
-copy "contemporary-theme\Contemporary.dll" deploy\styles
+copy "contemporary-theme\release\Contemporary.dll" deploy\styles
 cd deploy
 windeployqt thephoto.exe
