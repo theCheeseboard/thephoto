@@ -53,7 +53,7 @@ EventNotification::EventNotification(QString title, QString text, QWidget *paren
     opacAnim->start(QAbstractAnimation::DeleteWhenStopped);
     connect(this, SIGNAL(destroyed(QObject*)), opacAnim, SLOT(deleteLater()));
 
-    QTimer::singleShot(5000, [=] {
+    QTimer::singleShot(10000, [=] {
         tPropertyAnimation* opacAnim = new tPropertyAnimation(opacity, "opacity");
         opacAnim->setStartValue((float) 1);
         opacAnim->setEndValue((float) 0);

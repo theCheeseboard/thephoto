@@ -257,8 +257,21 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
     if (QApplication::desktop()->screenCount() == 1) {
         QMessageBox::warning(this, tr("Connect another screen"), tr("Connect another screen to this PC to use Event Mode."), QMessageBox::Ok, QMessageBox::Ok);
     } else {
+        this->hide();
+
+        #ifdef Q_OS_WIN
+            QApplication::setStyle("contemporary");
+        #endif
+
         EventModeSettings* dialog = new EventModeSettings();
         dialog->show();
+        dialog->exec();
+        dialog->deleteLater();
+
+        #ifdef Q_OS_WIN
+            QApplication::setStyle("windowsvista");
+        #endif
+        this->show();
     }
 }
 

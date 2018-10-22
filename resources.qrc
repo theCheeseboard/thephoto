@@ -5,5 +5,9 @@
     <qresource prefix="/">
         <file>icons/network-wireless.svg</file>
         <file>icons/password-show-on.svg</file>
+        <file>icons/window-close.svg</file>
+        <file>icons/configure.svg</file>
+        <file>icons/user.svg</file>
+        <file>icons/view-grid.svg</file>
     </qresource>
 </RCC>

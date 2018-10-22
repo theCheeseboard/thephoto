@@ -49,9 +49,11 @@ EventModeSettings::~EventModeSettings()
 
 void EventModeSettings::show() {
     showDialog->showFullScreen(1);
-    QDialog::show();
 
-    this->move(QApplication::desktop()->screenGeometry(0).center());
+    QDialog::showFullScreen();
+    this->setGeometry(QApplication::desktop()->screenGeometry(0));
+
+    //this->move(QApplication::desktop()->screenGeometry(0).center());
 }
 
 void EventModeSettings::on_closeEventModeButton_clicked()
@@ -80,16 +82,15 @@ void EventModeSettings::on_monitorNumber_valueChanged(int arg1)
 {
     int monitor = arg1 - 1;
     showDialog->showFullScreen(monitor);
-    QDialog::show();
 
-    if (QApplication::desktop()->screenNumber(this->geometry().topLeft()) == monitor) {
-        QRect rect;
+    QDialog::showFullScreen();
+
+    if (QApplication::desktop()->screenNumber(this->geometry().center()) == monitor) {
         if (monitor == 0) {
-            rect = QRect(QApplication::desktop()->screenGeometry(1).center(), this->size());
+            this->setGeometry(QApplication::desktop()->screenGeometry(1));
         } else {
-            rect = QRect(QApplication::desktop()->screenGeometry(0).center(), this->size());
+            this->setGeometry(QApplication::desktop()->screenGeometry(0));
         }
-        this->setGeometry(rect);
     }
 }
 
@@ -158,4 +159,25 @@ void EventModeSettings::reject() {
     }
 
     QDialog::reject();
+}
+
+void EventModeSettings::on_exchangedImagesButton_toggled(bool checked)
+{
+    if (checked) {
+        ui->mainStack->setCurrentIndex(2);
+    }
+}
+
+void EventModeSettings::on_connectedUsersButton_toggled(bool checked)
+{
+    if (checked) {
+        ui->mainStack->setCurrentIndex(1);
+    }
+}
+
+void EventModeSettings::on_sessionSettingsButton_toggled(bool checked)
+{
+    if (checked) {
+        ui->mainStack->setCurrentIndex(0);
+    }
 }

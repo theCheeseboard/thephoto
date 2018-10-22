@@ -43,6 +43,12 @@ class EventModeSettings : public QDialog
 
         void on_monitorNumber_valueChanged(int arg1);
 
+        void on_exchangedImagesButton_toggled(bool checked);
+
+        void on_connectedUsersButton_toggled(bool checked);
+
+        void on_sessionSettingsButton_toggled(bool checked);
+
     private:
         Ui::EventModeSettings *ui;
 

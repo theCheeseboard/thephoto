@@ -42,33 +42,48 @@
 <context>
     <name>EventModeSettings</name>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="14"/>
-        <location filename="../event/eventmodesettings.ui" line="44"/>
+        <location filename="../event/eventmodesettings.ui" line="267"/>
+        <location filename="../event/eventmodesettings.ui" line="297"/>
         <source>Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="118"/>
+        <location filename="../event/eventmodesettings.ui" line="371"/>
         <source>Show Wi-Fi details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="91"/>
+        <location filename="../event/eventmodesettings.ui" line="344"/>
         <source>SSID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="84"/>
+        <location filename="../event/eventmodesettings.ui" line="337"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="135"/>
+        <location filename="../event/eventmodesettings.ui" line="391"/>
         <source>Use Monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="161"/>
+        <location filename="../event/eventmodesettings.ui" line="426"/>
+        <source>Session Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="446"/>
+        <source>Connected Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="463"/>
+        <source>Exchanged Images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="493"/>
         <source>End Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -78,22 +93,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="59"/>
+        <location filename="../event/eventmodesettings.cpp" line="61"/>
         <source>End Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="59"/>
+        <location filename="../event/eventmodesettings.cpp" line="61"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="101"/>
+        <location filename="../event/eventmodesettings.cpp" line="102"/>
         <source>User Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="146"/>
+        <location filename="../event/eventmodesettings.cpp" line="147"/>
         <source>User Disconnected</source>
         <translation type="unfinished"></translation>
     </message>

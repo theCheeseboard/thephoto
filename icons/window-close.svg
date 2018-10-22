@@ -9,10 +9,10 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    height="16"
    width="16"
+   id="svg2"
    version="1.1"
-   id="svg5"
-   sodipodi:docname="password-show-on.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="window-close.svg">
   <metadata
      id="metadata9">
     <rdf:RDF>
@@ -30,15 +30,15 @@
   <sodipodi:namedview
      id="namedview1"
      showgrid="true"
-     inkscape:zoom="41.7193"
-     inkscape:cx="4.9785407"
-     inkscape:cy="7.2867208"
+     inkscape:zoom="29.5"
+     inkscape:cx="2.8946977"
+     inkscape:cy="8.2343654"
      inkscape:window-width="1280"
      inkscape:window-height="737"
      inkscape:window-x="1912"
      inkscape:window-y="278"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg5">
+     inkscape:current-layer="svg2">
     <inkscape:grid
        type="xygrid"
        id="grid1px"
@@ -52,7 +52,7 @@
        originx="0.5" />
   </sodipodi:namedview>
   <path
-     style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     d="M 8 4 A 7 4 0 0 0 1 8 A 7 4 0 0 0 8 12 A 7 4 0 0 0 15 8 A 7 4 0 0 0 8 4 z M 8 5 C 9.6509319 5 11 6.3490681 11 8 C 11 9.6509319 9.6509319 11 8 11 C 6.3490681 11 5 9.6509319 5 8 C 5 6.3490681 6.3490681 5 8 5 z M 8 6 C 6.8895082 6 6 6.8895082 6 8 C 6 9.1104918 6.8895082 10 8 10 C 9.1104918 10 10 9.1104918 10 8 C 10 6.8895082 9.1104918 6 8 6 z "
+     style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98845269"
+     d="M 8 0 A 8 8 0 0 0 0 8 A 8 8 0 0 0 8 16 A 8 8 0 0 0 16 8 A 8 8 0 0 0 8 0 z M 4.4941406 3.9941406 A 0.50005 0.50005 0 0 1 4.8535156 4.1464844 L 8 7.2929688 L 11.146484 4.1464844 A 0.50005 0.50005 0 0 1 11.490234 3.9960938 A 0.50005 0.50005 0 0 1 11.853516 4.8535156 L 8.7070312 8 L 11.853516 11.146484 A 0.50005 0.50005 0 1 1 11.146484 11.853516 L 8 8.7070312 L 4.8535156 11.853516 A 0.50005 0.50005 0 1 1 4.1464844 11.146484 L 7.2929688 8 L 4.1464844 4.8535156 A 0.50005 0.50005 0 0 1 4.4941406 3.9941406 z "
      id="path4486" />
 </svg>

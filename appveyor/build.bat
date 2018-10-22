@@ -12,14 +12,21 @@ qmake the-libs.pro
 nmake release
 nmake install
 cd ..
+git clone https://github.com/vicr123/contemporary-theme.git
+cd contemporary-theme
+qmake Contemporary.pro
+nmake release
+cd ..
 qmake thePhoto.pro
 nmake release
 mkdir deploy
+mkdir deploy\styles
 copy release\thephoto.exe deploy
 copy "C:\Program Files\thelibs\lib\the-libs.dll" deploy
 copy "C:\OpenSSL-Win64\bin\openssl.exe" deploy
 copy "C:\OpenSSL-Win64\bin\libeay32.dll" deploy
 copy "C:\OpenSSL-Win64\bin\ssleay32.dll" deploy
 copy "C:\OpenSSL-Win64\bin\openssl.cfg" deploy
+copy "contemporary-theme\Contemporary.dll" deploy\styles
 cd deploy
 windeployqt thephoto.exe
