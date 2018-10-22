@@ -4,6 +4,7 @@
 #include <QRandomGenerator>
 #include <QPainter>
 #include <QMessageBox>
+#include <QMenu>
 
 EventModeSettings::EventModeSettings(QWidget *parent) :
     QDialog(parent),
@@ -97,6 +98,11 @@ void EventModeSettings::on_monitorNumber_valueChanged(int arg1)
 void EventModeSettings::newConnection(EventSocket* sock) {
     QLabel* userLayout = new QLabel;
 
+    QListWidgetItem* userEntry = new QListWidgetItem();
+    userEntry->setData(Qt::UserRole, QVariant::fromValue(sock));
+    userEntry->setText(tr("Unidentified User"));
+    ui->usersList->addItem(userEntry);
+
     connect(sock, SIGNAL(newImageAvailable(QImage)), showDialog, SLOT(showNewImage(QImage)));
     connect(sock, &EventSocket::newUserConnected, [=](QString name) {
         new EventNotification(tr("User Connected"), name, showDialog);
@@ -142,11 +148,15 @@ void EventModeSettings::newConnection(EventSocket* sock) {
 
         userLayout->setPixmap(px);
         showDialog->addToProfileLayout(userLayout);
+
+        userEntry->setText(name);
     });
     connect(sock, &EventSocket::aboutToClose, [=] {
         new EventNotification(tr("User Disconnected"), sock->deviceName(), showDialog);
         sockets.removeOne(sock);
         userLayout->deleteLater();
+
+        delete userEntry;
     });
     sockets.append(sock);
 }
@@ -180,4 +190,22 @@ void EventModeSettings::on_sessionSettingsButton_toggled(bool checked)
     if (checked) {
         ui->mainStack->setCurrentIndex(0);
     }
+}
+
+void EventModeSettings::on_usersList_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu* menu = new QMenu();
+    if (ui->usersList->selectedItems().count() == 1) {
+        QListWidgetItem* selected = ui->usersList->selectedItems().first();
+        menu->addSection(tr("For %1").arg(selected->text()));
+        menu->addAction(tr("Kick"), [=] {
+            if (QMessageBox::question(this, tr("Kick?"), tr("Kick %1? They'll be able to rejoin the session by entering the session code again.").arg(selected->text()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+                EventSocket* sock = selected->data(Qt::UserRole).value<EventSocket*>();
+                sock->closeFromClient();
+            }
+        });
+    } else if (ui->usersList->selectedItems().count() > 1) {
+
+    }
+    menu->exec(this->mapToGlobal(pos));
 }

@@ -49,6 +49,8 @@ class EventModeSettings : public QDialog
 
         void on_sessionSettingsButton_toggled(bool checked);
 
+        void on_usersList_customContextMenuRequested(const QPoint &pos);
+
     private:
         Ui::EventModeSettings *ui;
 

@@ -263,10 +263,16 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
             QApplication::setStyle("contemporary");
         #endif
 
+        QPalette oldPal = QApplication::palette();
+
         EventModeSettings* dialog = new EventModeSettings();
+        QApplication::setPalette(dialog->palette());
         dialog->show();
         dialog->exec();
         dialog->deleteLater();
+
+        QApplication::setPalette(oldPal);
+        this->setPalette(oldPal);
 
         #ifdef Q_OS_WIN
             QApplication::setStyle("windowsvista");
