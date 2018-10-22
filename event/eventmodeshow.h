@@ -29,6 +29,7 @@ class EventModeShow : public QDialog
         void showNewImage(QImage image);
         void addToProfileLayout(QWidget* widget);
         int getProfileLayoutHeight();
+        void showError(QString error);
 
     private:
         Ui::EventModeShow *ui;

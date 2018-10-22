@@ -22,6 +22,7 @@ class EventServer : public QTcpServer
     signals:
         void connectionAvailable(EventSocket* socket);
         void ready();
+        void error(QString err);
 
     public slots:
 

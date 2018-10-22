@@ -21,8 +21,8 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
         QFile certFile(certPath.absoluteFilePath("cert.pem"));
         QFile keyFile(certPath.absoluteFilePath("key.pem"));
 
-        if (!certFile.exists() || !keyFile.exists()) {
-            error = tr("Can't create X509 certificate");
+        if (!certFile.exists() || !keyFile.exists() || genProc.exitCode() != 0) {
+            error = tr("Can't create X509 certificate. Event Mode cannot start.");
             return QStringList();
         }
 
@@ -45,6 +45,8 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
         emit ready();
     })->error([=](QString error) {
         qDebug() << error;
+
+        emit this->error(error);
     });
 }
 

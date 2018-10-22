@@ -33,6 +33,9 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
             connect(server, &EventServer::ready, [=] {
                 showDialog->setCode(code);
             });
+            connect(server, &EventServer::error, [=](QString error) {
+                showDialog->showError(error);
+            });
         }
     }
 }

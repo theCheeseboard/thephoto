@@ -78,12 +78,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="95"/>
+        <location filename="../event/eventmodesettings.cpp" line="98"/>
         <source>User Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="140"/>
+        <location filename="../event/eventmodesettings.cpp" line="143"/>
         <source>User Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -110,7 +110,7 @@
     <name>EventServer</name>
     <message>
         <location filename="../event/eventserver.cpp" line="25"/>
-        <source>Can&apos;t create X509 certificate</source>
+        <source>Can&apos;t create X509 certificate. Event Mode cannot start.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -72,3 +72,8 @@ void EventModeShow::addToProfileLayout(QWidget *widget) {
 int EventModeShow::getProfileLayoutHeight() {
     return ui->bottomFrameStack->height();
 }
+
+void EventModeShow::showError(QString error) {
+    ui->statusLabel->setText(error);
+    ui->bottomFrameStack->setCurrentIndex(0);
+}
