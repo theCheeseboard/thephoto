@@ -13,6 +13,7 @@ EventNotification::EventNotification(QString title, QString text, QWidget *paren
 {
     ui->setupUi(this);
 
+    connect(parent, SIGNAL(destroyed(QObject*)), this, SLOT(deleteLater()));
     for (EventNotification* n : notifications) {
         n->moveUp();
     }
