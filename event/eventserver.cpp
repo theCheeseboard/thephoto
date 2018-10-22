@@ -10,7 +10,17 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
         QDir::home().mkpath(".thephoto/cert");
         QDir certPath(QDir::homePath() + "/.thephoto/cert");
 
+
         QProcess genProc;
+
+        #ifdef Q_OS_WIN
+            QString opensslConfigFile = QApplication::applicationDirPath() + "/openssl.cfg";
+
+            QStringList env = genProc.environment();
+            env.append("OPENSSL_CONF=" + opensslConfigFile);
+            genProc.setEnvironment(env);
+        #endif
+
         genProc.setProcessChannelMode(QProcess::ForwardedChannels);
         genProc.setWorkingDirectory(certPath.path());
         genProc.start("openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 2 -nodes -subj \"/CN=localhost\"");

@@ -14,7 +14,7 @@ CONFIG += c++1
 
 unix:!macx {
     QT += thelib
-    TARGET = theslate
+    TARGET = thephoto
 }
 
 win32 {

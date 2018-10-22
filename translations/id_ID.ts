@@ -109,7 +109,7 @@
 <context>
     <name>EventServer</name>
     <message>
-        <location filename="../event/eventserver.cpp" line="25"/>
+        <location filename="../event/eventserver.cpp" line="35"/>
         <source>Can&apos;t create X509 certificate. Event Mode cannot start.</source>
         <translation type="unfinished"></translation>
     </message>
