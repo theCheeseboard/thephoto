@@ -19,5 +19,6 @@ copy release\thephoto.exe deploy
 copy "C:\Program Files\thelibs\lib\the-libs.dll" deploy
 copy "C:\OpenSSL-Win64\bin\openssl.exe" deploy
 copy "C:\OpenSSL-Win64\bin\libeay32.dll" deploy
+copy "C:\OpenSSL-Win64\bin\ssleay32.dll" deploy
 cd deploy
 windeployqt thephoto.exe
