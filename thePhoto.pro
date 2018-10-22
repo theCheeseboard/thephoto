@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = thePhoto
 TEMPLATE = app
-CONFIG += c++1
+CONFIG += c++14
 
 unix:!macx {
     QT += thelib

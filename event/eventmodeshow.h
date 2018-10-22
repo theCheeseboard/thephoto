@@ -35,7 +35,9 @@ class EventModeShow : public QDialog
         Ui::EventModeShow *ui;
 
         void paintEvent(QPaintEvent* event);
+        void updateBlurredImage();
         QPixmap px;
+        QPixmap blurred;
 };
 
 #endif // EVENTMODESHOW_H

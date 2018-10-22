@@ -2,4 +2,8 @@
     <qresource prefix="/icons">
         <file>thephoto.svg</file>
     </qresource>
+    <qresource prefix="/">
+        <file>icons/network-wireless.svg</file>
+        <file>icons/password-show-on.svg</file>
+    </qresource>
 </RCC>

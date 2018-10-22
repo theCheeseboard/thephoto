@@ -3,6 +3,7 @@
 
 #include <QRandomGenerator>
 #include <QPainter>
+#include <QMessageBox>
 
 EventModeSettings::EventModeSettings(QWidget *parent) :
     QDialog(parent),
@@ -11,8 +12,8 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
     ui->setupUi(this);
 
     showDialog = new EventModeShow();
-    ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless").pixmap(16, 16));
-    ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on").pixmap(16, 16));
+    ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(16, 16));
+    ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
     ui->monitorNumber->setMaximum(QApplication::desktop()->screenCount());
 
     if (QNetworkInterface::allAddresses().count() < 3) {
@@ -55,7 +56,9 @@ void EventModeSettings::show() {
 
 void EventModeSettings::on_closeEventModeButton_clicked()
 {
-    this->reject();
+    if (QMessageBox::question(this, tr("End Event Mode?"), tr("Close connections to all connected devices and end Event Mode?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+        this->reject();
+    }
 }
 
 void EventModeSettings::on_showWifiDetails_toggled(bool checked)

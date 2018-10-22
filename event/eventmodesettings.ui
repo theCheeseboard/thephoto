@@ -13,98 +13,152 @@
   <property name="windowTitle">
    <string>Event Mode</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/icons/thephoto.svg</normaloff>:/icons/thephoto.svg</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QLabel" name="label">
      <property name="font">
       <font>
-       <pointsize>20</pointsize>
+       <pointsize>15</pointsize>
       </font>
      </property>
      <property name="text">
       <string>Event Mode</string>
      </property>
+     <property name="margin">
+      <number>9</number>
+     </property>
     </widget>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="1" column="0" colspan="2">
-      <widget class="QCheckBox" name="showWifiDetails">
-       <property name="text">
-        <string>Show Wi-Fi details</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="2">
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
+    <widget class="Line" name="line">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>1</height>
+      </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="mainStack">
+     <widget class="QWidget" name="page">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="2" column="0">
         <widget class="QLabel" name="wifiIcon">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string notr="true">wifiIcon</string>
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLineEdit" name="ssid">
-         <property name="placeholderText">
-          <string>SSID</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="keyIcon">
-         <property name="text">
-          <string notr="true">keyIcon</string>
-         </property>
-        </widget>
-       </item>
-       <item>
+       <item row="2" column="3">
         <widget class="QLineEdit" name="key">
          <property name="placeholderText">
           <string>Key</string>
          </property>
         </widget>
        </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="ssid">
+         <property name="placeholderText">
+          <string>SSID</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="keyIcon">
+         <property name="text">
+          <string notr="true">keyIcon</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" colspan="4">
+        <widget class="QCheckBox" name="showWifiDetails">
+         <property name="text">
+          <string>Show Wi-Fi details</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QSpinBox" name="monitorNumber">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="value">
+          <number>2</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Use Monitor</string>
+         </property>
+        </widget>
+       </item>
       </layout>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Use Monitor</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QSpinBox" name="monitorNumber">
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="value">
-        <number>2</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     </widget>
+     <widget class="QWidget" name="page_2"/>
+    </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
+    <layout class="QGridLayout" name="gridLayout"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="leftMargin">
+      <number>9</number>
+     </property>
+     <property name="rightMargin">
+      <number>9</number>
+     </property>
+     <property name="bottomMargin">
+      <number>9</number>
+     </property>
      <item>
       <widget class="QPushButton" name="closeEventModeButton">
        <property name="text">
-        <string>Close Event Mode</string>
+        <string>End Event Mode</string>
        </property>
        <property name="icon">
         <iconset theme="dialog-close">
@@ -129,6 +183,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
