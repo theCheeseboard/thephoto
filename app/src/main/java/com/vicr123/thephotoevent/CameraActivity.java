@@ -19,6 +19,7 @@ package com.vicr123.thephotoevent;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -40,11 +41,15 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.MediaActionSound;
+import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.util.Size;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -56,11 +61,15 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -68,6 +77,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -116,6 +127,11 @@ public class CameraActivity extends AppCompatActivity {
     Semaphore cameraOpenCloseLock = new Semaphore(1);
     int state = STATE_PREVIEW;
     int currentOrientation;
+    int flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
+
+    CountDownTimer captureTimer;
+    int timerDelay;
+    MediaPlayer timerHighBeep, timerBeep;
 
     CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
         private void process(CaptureResult result) {
@@ -132,15 +148,12 @@ public class CameraActivity extends AppCompatActivity {
                             CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
                         // CONTROL_AE_STATE can be null on some devices
                         Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
-                        if (aeState == null ||
-                                aeState == CaptureResult.CONTROL_AE_STATE_CONVERGED) {
+                        if (aeState == null || aeState == CaptureResult.CONTROL_AE_STATE_CONVERGED) {
                             state = STATE_PICTURE_TAKEN;
                             captureStillPicture();
                         } else {
                             try {
-                                // This is how to tell the camera to trigger.
                                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER_START);
-                                // Tell #mCaptureCallback to wait for the precapture sequence to be set.
                                 state = STATE_WAITING_PRECAPTURE;
                                 captureSession.capture(previewRequestBuilder.build(), captureCallback, background);
                             } catch (CameraAccessException e) {
@@ -153,9 +166,7 @@ public class CameraActivity extends AppCompatActivity {
                 case STATE_WAITING_PRECAPTURE: {
                     // CONTROL_AE_STATE can be null on some devices
                     Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
-                    if (aeState == null ||
-                            aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE ||
-                            aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
+                    if (aeState == null || aeState == CaptureResult.CONTROL_AE_STATE_PRECAPTURE || aeState == CaptureRequest.CONTROL_AE_STATE_FLASH_REQUIRED) {
                         state = STATE_WAITING_NON_PRECAPTURE;
                     }
                     break;
@@ -192,16 +203,18 @@ public class CameraActivity extends AppCompatActivity {
             final CaptureRequest.Builder captureBuilder = device.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
             captureBuilder.addTarget(imageReader.getSurface());
 
+            captureBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO);
+
             // Use the same AE and AF modes as the preview.
             captureBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-            //setAutoFlash(captureBuilder);
 
             // Orientation
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, getOrientation(currentOrientation));
 
-            CameraCaptureSession.CaptureCallback CaptureCallback
-                    = new CameraCaptureSession.CaptureCallback() {
+            //Flash
+            captureBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
 
+            CameraCaptureSession.CaptureCallback CaptureCallback = new CameraCaptureSession.CaptureCallback() {
                 @Override
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
@@ -234,7 +247,7 @@ public class CameraActivity extends AppCompatActivity {
         try {
             // Reset the auto-focus trigger
             previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
-            //setAutoFlash(mPreviewRequestBuilder);
+            previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
             captureSession.capture(previewRequestBuilder.build(), captureCallback, background);
             // After this, the camera will go back to the normal state of preview.
             state = STATE_PREVIEW;
@@ -285,6 +298,8 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        getSupportActionBar().hide();
+
         txView = findViewById(R.id.viewfinder);
         imagesLayout = findViewById(R.id.pendingImagesContainer);
 
@@ -318,11 +333,15 @@ public class CameraActivity extends AppCompatActivity {
         orientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
             @Override
             public void onOrientationChanged(int o) {
+
                 if (o != OrientationEventListener.ORIENTATION_UNKNOWN) {
                     currentOrientation = 360 - o;
                 }
             }
         };
+
+        timerHighBeep = MediaPlayer.create(this, R.raw.timer_beep_sound_high);
+        timerBeep = MediaPlayer.create(this, R.raw.timer_beep_sound);
     }
 
     @Override
@@ -356,11 +375,16 @@ public class CameraActivity extends AppCompatActivity {
                 }
             });
         }
+    }
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
 
-        getSupportActionBar().hide();
+        if (hasFocus) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        }
     }
 
     @Override
@@ -449,8 +473,6 @@ public class CameraActivity extends AppCompatActivity {
                             swappedDimensions = true;
                         }
                         break;
-                    default:
-                        //Log.e(TAG, "Display rotation is invalid: " + displayRotation);
                 }
 
                 Point displaySize = new Point();
@@ -470,6 +492,13 @@ public class CameraActivity extends AppCompatActivity {
                 if (maxPreviewWidth > 1920) maxPreviewWidth = 1920;
                 if (maxPreviewHeight > 1080) maxPreviewWidth = 1080;
 
+                Boolean flashAvailable = chars.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+                if (flashAvailable == null || !flashAvailable) {
+                    findViewById(R.id.button_flash).setVisibility(View.GONE);
+                } else {
+                    findViewById(R.id.button_flash).setVisibility(View.VISIBLE);
+                }
+
                 //Choose a size for the preview
                 previewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class), rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth, maxPreviewHeight, largest);
                 txView.setAspectRatio(previewSize.getHeight(), previewSize.getWidth());
@@ -488,7 +517,6 @@ public class CameraActivity extends AppCompatActivity {
             public void onImageAvailable(ImageReader imageReader) {
                 new MediaActionSound().play(MediaActionSound.SHUTTER_CLICK);
 
-                //TODO: Queue image for sending
                 Image image = imageReader.acquireLatestImage();
                 ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                 byte[] bytes = new byte[buffer.capacity()];
@@ -620,13 +648,10 @@ public class CameraActivity extends AppCompatActivity {
                             try {
                                 // Auto focus should be continuous for camera preview.
                                 previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-                                // Flash is automatically enabled when necessary.
-                                //setAutoFlash(mPreviewRequestBuilder);
+                                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
 
                                 // Finally, we start displaying the camera preview.
-                                previewRequest = previewRequestBuilder.build();
-                                captureSession.setRepeatingRequest(previewRequest,
-                                        captureCallback, background);
+                                captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
                             } catch (CameraAccessException e) {
                                 e.printStackTrace();
                             }
@@ -667,9 +692,7 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    private static Size chooseOptimalSize(Size[] choices, int textureViewWidth,
-                                          int textureViewHeight, int maxWidth, int maxHeight, Size aspectRatio) {
-
+    private static Size chooseOptimalSize(Size[] choices, int textureViewWidth, int textureViewHeight, int maxWidth, int maxHeight, Size aspectRatio) {
         // Collect the supported resolutions that are at least as big as the preview Surface
         List<Size> bigEnough = new ArrayList<>();
         // Collect the supported resolutions that are smaller than the preview Surface
@@ -717,8 +740,163 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
+    void hideAuxiliaryButtons() {
+        findViewById(R.id.button_flash).animate()
+                .alpha(0f)
+                .setDuration(500)
+                .setListener(null);
+
+        findViewById(R.id.button_timer).animate()
+                .alpha(0f)
+                .setDuration(500)
+                .setListener(null);
+    }
+
+    void showAuxiliaryButtons() {
+        findViewById(R.id.button_flash).animate()
+                .alpha(1f)
+                .setDuration(500)
+                .setListener(null);
+
+        findViewById(R.id.button_timer).animate()
+                .alpha(1f)
+                .setDuration(500)
+                .setListener(null);
+    }
+
     public void Capture(View view) {
-        lockFocus();
+        final TextView hudText = findViewById(R.id.timer_hud_text);
+        if (captureTimer == null) {
+            hudText.setVisibility(View.VISIBLE);
+            hudText.setText(Integer.toString(timerDelay / 1000));
+
+            //Start counting down
+            final CameraActivity activity = this;
+            hideAuxiliaryButtons();
+            captureTimer = new CountDownTimer(timerDelay, 1000) {
+                @Override
+                public void onTick(long l) {
+                    int seconds = (int) Math.ceil(l / 1000) + 1;
+                    sock.sendCommand("TIMER " + seconds);
+                    hudText.setText(Integer.toString(seconds));
+
+                    if (seconds <= 3) {
+                        timerHighBeep.start();
+                    } else {
+                        timerBeep.start();
+                    }
+                }
+
+                @Override
+                public void onFinish() {
+                    sock.sendCommand("TIMER 0");
+                    lockFocus();
+                    captureTimer = null;
+                    showAuxiliaryButtons();
+                    hudText.setVisibility(View.GONE);
+                }
+            };
+            captureTimer.start();
+        } else {
+            //Cancel picture
+            sock.sendCommand("TIMER 0");
+            captureTimer.cancel();
+            captureTimer = null;
+            showAuxiliaryButtons();
+            hudText.setVisibility(View.GONE);
+        }
+    }
+
+    public void changeFlash(View view) {
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
+
+        View content = getLayoutInflater().inflate(R.layout.dialog_select_flash, null);
+
+        content.findViewById(R.id.flash_dialog_automatic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
+                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashauto);
+                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+
+                // Finally, we start displaying the camera preview.
+                try {
+                    captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        });
+        content.findViewById(R.id.flash_dialog_off).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flashType = CaptureRequest.CONTROL_AE_MODE_ON;
+                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashoff);
+                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+
+                // Finally, we start displaying the camera preview.
+                try {
+                    captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        });
+        content.findViewById(R.id.flash_dialog_on).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                flashType = CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH;
+                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashon);
+                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+
+                // Finally, we start displaying the camera preview.
+                try {
+                    captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setContentView(content);
+        dialog.show();
+    }
+
+    public void changeTimer(View view) {
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
+
+        View content = getLayoutInflater().inflate(R.layout.dialog_select_timer, null);
+
+        content.findViewById(R.id.timer_dialog_0sec).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer0);
+                timerDelay = 0;
+                dialog.dismiss();
+            }
+        });
+        content.findViewById(R.id.timer_dialog_3sec).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer3);
+                timerDelay = 3000;
+                dialog.dismiss();
+            }
+        });
+        content.findViewById(R.id.timer_dialog_10sec).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer10);
+                timerDelay = 10000;
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setContentView(content);
+        dialog.show();
     }
 
     @Override
@@ -730,6 +908,10 @@ public class CameraActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        if (captureTimer != null) {
+            Capture(null);
+        } else {
+            finish();
+        }
     }
 }

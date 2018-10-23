@@ -21,4 +21,12 @@
     <!-- General settings -->
     <string name="pref_header_general">General</string>
     <string name="pref_title_display_name">Display name</string>
+    <string name="flash_value_automatic">Automatic</string>
+    <string name="flash_value_on">On</string>
+    <string name="flash_value_off">Off</string>
+    <string name="flash_dialog_title">Flash</string>
+    <string name="timer_dialog_title">Timer</string>
+    <string name="timer_value_0sec">Off</string>
+    <string name="timer_value_3sec">3 seconds</string>
+    <string name="timer_value_10sec">10 seconds</string>
 </resources>
