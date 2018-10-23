@@ -17,6 +17,15 @@
     <string name="ERROR_DISCONNECTED_TITLE">Disconnected from the server</string>
     <string name="ERROR_DISCONNECTED">You\'ve been unexpectedly disconnected from the server. Reconnect to the server to continue.</string>
 
+    <string name="connected_notification_title">Connected to thePhoto</string>
+    <string name="connected_notification_text">You\'re currently connected to thePhoto.</string>
+    <string name="connected_notification_disconnect_button">Disconnect</string>
+    <string name="connected_notification_channel_name">Connected</string>
+    <string name="connected_notification_channel_description">Notifications that show when you\'re connected to thePhoto</string>
+
+    <string name="disconnected_notification_title">Disconnected from thePhoto</string>
+    <string name="disconnected_notification_text">While you were gone, your device was disconnected from thePhoto. To continue taking pictures, you\'ll need to reconnect to thePhoto.</string>
+
     <!-- Strings related to Settings -->
     <!-- General settings -->
     <string name="pref_header_general">General</string>

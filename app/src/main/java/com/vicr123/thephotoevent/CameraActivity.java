@@ -16,10 +16,18 @@
 
 package com.vicr123.thephotoevent;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,6 +51,7 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.media.MediaActionSound;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -51,6 +60,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Size;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -129,10 +140,16 @@ public class CameraActivity extends AppCompatActivity {
     int state = STATE_PREVIEW;
     int currentOrientation;
     int flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
+    int currentCameraOrientation = CameraCharacteristics.LENS_FACING_BACK;
+
+    boolean canFlash, canFlip;
 
     CountDownTimer captureTimer;
     int timerDelay;
     MediaPlayer timerHighBeep, timerBeep;
+
+    BroadcastReceiver closeReceiver;
+    boolean userRequestedCloseFromNotification = false;
 
     CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
         private void process(CaptureResult result) {
@@ -308,6 +325,22 @@ public class CameraActivity extends AppCompatActivity {
         sock.setOnClose(new Runnable() {
             @Override
             public void run() {
+                if (!context.hasWindowFocus() && !userRequestedCloseFromNotification) {
+                    Intent intent = new Intent(context, MainActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "connected_notification")
+                            .setSmallIcon(R.drawable.ic_notification_icon)
+                            .setContentTitle(getString(R.string.disconnected_notification_title))
+                            .setContentText(getString(R.string.disconnected_notification_text))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.disconnected_notification_text)))
+                            .setContentIntent(pendingIntent)
+                            .setColor(getResources().getColor(R.color.colorPrimary));
+
+                    NotificationManagerCompat mgr = NotificationManagerCompat.from(context);
+                    mgr.notify(1, builder.build());
+                }
                 finish();
             }
         });
@@ -334,7 +367,6 @@ public class CameraActivity extends AppCompatActivity {
         orientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
             @Override
             public void onOrientationChanged(int o) {
-
                 if (o != OrientationEventListener.ORIENTATION_UNKNOWN) {
                     currentOrientation = 360 - o;
                 }
@@ -343,6 +375,47 @@ public class CameraActivity extends AppCompatActivity {
 
         timerHighBeep = MediaPlayer.create(this, R.raw.timer_beep_sound_high);
         timerBeep = MediaPlayer.create(this, R.raw.timer_beep_sound);
+
+        //Set up connected notification
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //Set up notification channel on Android Oreo
+            NotificationChannel channel = new NotificationChannel("connected_notification", getString(R.string.connected_notification_channel_description), NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(getString(R.string.connected_notification_channel_description));
+
+            NotificationManager mgr = getSystemService(NotificationManager.class);
+            mgr.createNotificationChannel(channel);
+        }
+
+        Intent openIntent = new Intent(this, CameraActivity.class);
+        openIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        PendingIntent pendingOpenIntent = PendingIntent.getActivity(this, 0, openIntent, 0);
+
+        IntentFilter disconnectIntentFilter = new IntentFilter("android.intent.CLOSE_ACTIVITY");
+        closeReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                userRequestedCloseFromNotification = true;
+                finish();
+            }
+        };
+        registerReceiver(closeReceiver, disconnectIntentFilter);
+
+        Intent disconnectIntent = new Intent("android.intent.CLOSE_ACTIVITY");
+        PendingIntent pendingDisconnectIntent = PendingIntent.getBroadcast(this, 0, disconnectIntent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "connected_notification")
+                .setSmallIcon(R.drawable.ic_notification_icon)
+                .setContentTitle(getString(R.string.connected_notification_title))
+                .setContentText(getString(R.string.connected_notification_text))
+                .setOngoing(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.connected_notification_text)))
+                .setContentIntent(pendingOpenIntent)
+                .addAction(R.drawable.ic_close_black_24dp, getString(R.string.connected_notification_disconnect_button), pendingDisconnectIntent)
+                .setColor(getResources().getColor(R.color.colorPrimary));
+
+        NotificationManagerCompat mgr = NotificationManagerCompat.from(this);
+        mgr.notify(0, builder.build());
     }
 
     @Override
@@ -398,8 +471,12 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void openCamera(int width, int height) {
+        openCamera(width, height, currentCameraOrientation);
+    }
+
+    private void openCamera(int width, int height, int preferredCameraOrientation) {
         //Set up camera variables
-        setUpCameraOutputs(width, height);
+        setUpCameraOutputs(width, height, preferredCameraOrientation);
         configureTransform(width, height);
 
         CameraManager mgr = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -436,75 +513,99 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpCameraOutputs(int width, int height) {
+    private void setUpCameraOutputs(int width, int height, int preferredCameraOrientation) {
         CameraManager mgr = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
+            ArrayList<String> preferredCameras = new ArrayList<>();
+            ArrayList<String> allAvailableCameras = new ArrayList<>();
+
             for (String cameraId : mgr.getCameraIdList()) {
                 CameraCharacteristics chars = mgr.getCameraCharacteristics(cameraId);
-
-                //Ignore front facing cameras for now
-                Integer cameraFacing = chars.get(CameraCharacteristics.LENS_FACING);
-                if (cameraFacing != null && cameraFacing == CameraCharacteristics.LENS_FACING_FRONT) {
-                    continue;
-                }
-
                 StreamConfigurationMap map = chars.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-                if (map == null) continue;
+                if (map != null) {
+                    allAvailableCameras.add(cameraId);
 
-                Size largest = Collections.max(Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)), new CompareSizesByArea());
-                refreshImageReader(largest);
-
-                // Find out if we need to swap dimension to get the preview size relative to sensor
-                // coordinate.
-                int displayRotation = getWindowManager().getDefaultDisplay().getRotation();
-                //noinspection ConstantConditions
-                sensorOrientation = chars.get(CameraCharacteristics.SENSOR_ORIENTATION);
-
-                boolean swappedDimensions = false;
-                switch (displayRotation) {
-                    case Surface.ROTATION_0:
-                    case Surface.ROTATION_180:
-                        if (sensorOrientation == 90 || sensorOrientation == 270) {
-                            swappedDimensions = true;
-                        }
-                        break;
-                    case Surface.ROTATION_90:
-                    case Surface.ROTATION_270:
-                        if (sensorOrientation == 0 || sensorOrientation == 180) {
-                            swappedDimensions = true;
-                        }
-                        break;
+                    //Check if the preferred orientation is correct
+                    Integer cameraFacing = chars.get(CameraCharacteristics.LENS_FACING);
+                    if (cameraFacing != null && cameraFacing == preferredCameraOrientation) {
+                        preferredCameras.add(cameraId);
+                    }
                 }
-
-                Point displaySize = new Point();
-                getWindowManager().getDefaultDisplay().getSize(displaySize);
-                int rotatedPreviewWidth = width;
-                int rotatedPreviewHeight = height;
-                int maxPreviewWidth = displaySize.x;
-                int maxPreviewHeight = displaySize.y;
-
-                if (swappedDimensions) {
-                    rotatedPreviewWidth = height;
-                    rotatedPreviewHeight = width;
-                    maxPreviewWidth = displaySize.y;
-                    maxPreviewHeight = displaySize.x;
-                }
-
-                if (maxPreviewWidth > 1920) maxPreviewWidth = 1920;
-                if (maxPreviewHeight > 1080) maxPreviewWidth = 1080;
-
-                Boolean flashAvailable = chars.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-                if (flashAvailable == null || !flashAvailable) {
-                    findViewById(R.id.button_flash).setVisibility(View.GONE);
-                } else {
-                    findViewById(R.id.button_flash).setVisibility(View.VISIBLE);
-                }
-
-                //Choose a size for the preview
-                previewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class), rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth, maxPreviewHeight, largest);
-                txView.setAspectRatio(previewSize.getHeight(), previewSize.getWidth());
-                this.cameraId = cameraId;
             }
+
+            if (preferredCameras.size() != 0) {
+                cameraId = preferredCameras.get(0);
+            } else {
+                cameraId = allAvailableCameras.get(0);
+            }
+
+            if (allAvailableCameras.size() == 0) {
+                findViewById(R.id.button_flip).setVisibility(View.GONE);
+                canFlip = false;
+            } else {
+                findViewById(R.id.button_flip).setVisibility(View.VISIBLE);
+                canFlip = true;
+            }
+
+            CameraCharacteristics chars = mgr.getCameraCharacteristics(cameraId);
+
+            currentCameraOrientation = chars.get(CameraCharacteristics.LENS_FACING);
+
+            StreamConfigurationMap map = chars.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+            Size largest = Collections.max(Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)), new CompareSizesByArea());
+            refreshImageReader(largest);
+
+            // Find out if we need to swap dimension to get the preview size relative to sensor
+            // coordinate.
+            int displayRotation = getWindowManager().getDefaultDisplay().getRotation();
+            //noinspection ConstantConditions
+            sensorOrientation = chars.get(CameraCharacteristics.SENSOR_ORIENTATION);
+
+            boolean swappedDimensions = false;
+            switch (displayRotation) {
+                case Surface.ROTATION_0:
+                case Surface.ROTATION_180:
+                    if (sensorOrientation == 90 || sensorOrientation == 270) {
+                        swappedDimensions = true;
+                    }
+                    break;
+                case Surface.ROTATION_90:
+                case Surface.ROTATION_270:
+                    if (sensorOrientation == 0 || sensorOrientation == 180) {
+                        swappedDimensions = true;
+                    }
+                    break;
+            }
+
+            Point displaySize = new Point();
+            getWindowManager().getDefaultDisplay().getSize(displaySize);
+            int rotatedPreviewWidth = width;
+            int rotatedPreviewHeight = height;
+            int maxPreviewWidth = displaySize.x;
+            int maxPreviewHeight = displaySize.y;
+
+            if (swappedDimensions) {
+                rotatedPreviewWidth = height;
+                rotatedPreviewHeight = width;
+                maxPreviewWidth = displaySize.y;
+                maxPreviewHeight = displaySize.x;
+            }
+
+            if (maxPreviewWidth > 1920) maxPreviewWidth = 1920;
+            if (maxPreviewHeight > 1080) maxPreviewWidth = 1080;
+
+            Boolean flashAvailable = chars.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+            if (flashAvailable == null || !flashAvailable) {
+                findViewById(R.id.button_flash).setVisibility(View.GONE);
+                canFlash = false;
+            } else {
+                findViewById(R.id.button_flash).setVisibility(View.VISIBLE);
+                canFlash = true;
+            }
+
+            //Choose a size for the preview
+            previewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class), rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth, maxPreviewHeight, largest);
+            txView.setAspectRatio(previewSize.getHeight(), previewSize.getWidth());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -743,28 +844,59 @@ public class CameraActivity extends AppCompatActivity {
 
     @SuppressLint("WrongViewCast")
     void hideAuxiliaryButtons() {
-        findViewById(R.id.button_flash).animate()
-                .alpha(0f)
-                .setDuration(500)
-                .setListener(null);
+        View[] viewsToChange = {
+                canFlash ? findViewById(R.id.button_flash) : null,
+                findViewById(R.id.button_timer),
+                canFlip ? findViewById(R.id.button_flip) : null
+        };
 
-        findViewById(R.id.button_timer).animate()
-                .alpha(0f)
-                .setDuration(500)
-                .setListener(null);
+        for (final View v : viewsToChange) {
+            if (v != null) {
+                v.animate()
+                        .alpha(0f)
+                        .setDuration(500)
+                        .setListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animator) {
+                                v.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animator) {
+
+                            }
+                        });
+            }
+        }
     }
 
     @SuppressLint("WrongViewCast")
     void showAuxiliaryButtons() {
-        findViewById(R.id.button_flash).animate()
-                .alpha(1f)
-                .setDuration(500)
-                .setListener(null);
+        View[] viewsToChange = {
+                canFlash ? findViewById(R.id.button_flash) : null,
+                findViewById(R.id.button_timer),
+                canFlip ? findViewById(R.id.button_flip) : null
+        };
 
-        findViewById(R.id.button_timer).animate()
-                .alpha(1f)
-                .setDuration(500)
-                .setListener(null);
+        for (View v : viewsToChange) {
+            if (v != null) {
+                v.setVisibility(View.VISIBLE);
+                v.animate()
+                        .alpha(1f)
+                        .setDuration(500)
+                        .setListener(null);
+            }
+        }
     }
 
     public void Capture(View view) {
@@ -902,11 +1034,31 @@ public class CameraActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    public void flipCamera(View view) {
+        closeCamera();
+
+        if (currentCameraOrientation == CameraCharacteristics.LENS_FACING_BACK) {
+            openCamera(txView.getWidth(), txView.getHeight(), CameraCharacteristics.LENS_FACING_FRONT);
+        } else {
+            openCamera(txView.getWidth(), txView.getHeight(), CameraCharacteristics.LENS_FACING_BACK);
+        }
+    }
+
     @Override
     public void finish() {
         sock.close();
 
         super.finish();
+    }
+
+    @Override
+    public void onDestroy() {
+        NotificationManagerCompat mgr = NotificationManagerCompat.from(this);
+        mgr.cancel(0);
+
+        unregisterReceiver(closeReceiver);
+
+        super.onDestroy();
     }
 
     @Override
