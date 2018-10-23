@@ -10,4 +10,30 @@
 
     <string name="title_activity_camera">Máy ảnh</string>
     <string name="keep_copy_prompt">Giữ lại ảnh trên máy này</string>
-    </resources>
+    <string name="ENTER_NAME_TO_IDENTIFY">Nhập vào tên bạn sẽ gọi</string>
+    <string name="title_activity_settings">Cài đặt</string>
+    <string name="STRING_SETTINGS">Cài đặt</string>
+
+    <string name="ERROR_DISCONNECTED_TITLE">Đã ngắt kết nối với máy chủ</string>
+    <string name="ERROR_DISCONNECTED">Bạn bất ngờ bị ngắt kết nối với máy chủ. Kết nối lại với máy chủ để tiếp tục.</string>
+
+    <string name="connected_notification_title">Đã kết nối với thePhoto</string>
+    <string name="connected_notification_text">Bạn đã kết nối với thePhoto.</string>
+    <string name="connected_notification_disconnect_button">Ngắt kết nối</string>
+    <string name="connected_notification_channel_name">Đã kết nối</string>
+    <string name="connected_notification_channel_description">Thông báo bị hiện khi bạn kết nối với thePhoto</string>
+
+    <string name="disconnected_notification_title">Đã ngắt kết nối với thePhoto</string>
+    <string name="disconnected_notification_text">Trong khi bạn đi vắng, bạn đã bị ngắt kết nối với thePhoto. Để chụp ảnh tiếp, bạn cần kết nối lại với thePhoto.</string>
+
+    <string name="pref_header_general">Chung</string>
+    <string name="pref_title_display_name">Tên dùng</string>
+    <string name="flash_value_automatic">Tự động</string>
+    <string name="flash_value_on">Bật</string>
+    <string name="flash_value_off">Tắt</string>
+    <string name="flash_dialog_title">Đèn flash</string>
+    <string name="timer_dialog_title">Hẹn giờ chụp ảnh</string>
+    <string name="timer_value_0sec">Tắt</string>
+    <string name="timer_value_3sec">3 giây</string>
+    <string name="timer_value_10sec">10 giây</string>
+</resources>
