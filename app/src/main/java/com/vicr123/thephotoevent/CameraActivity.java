@@ -16,6 +16,7 @@
 
 package com.vicr123.thephotoevent;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -740,6 +741,7 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("WrongViewCast")
     void hideAuxiliaryButtons() {
         findViewById(R.id.button_flash).animate()
                 .alpha(0f)
@@ -752,6 +754,7 @@ public class CameraActivity extends AppCompatActivity {
                 .setListener(null);
     }
 
+    @SuppressLint("WrongViewCast")
     void showAuxiliaryButtons() {
         findViewById(R.id.button_flash).animate()
                 .alpha(1f)
