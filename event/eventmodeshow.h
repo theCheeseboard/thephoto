@@ -32,11 +32,15 @@ class EventModeShow : public QDialog
         void addToProfileLayout(QWidget* widget);
         int getProfileLayoutHeight();
         void showError(QString error);
+        void updateRedactor();
 
     private:
         Ui::EventModeShow *ui;
 
         void paintEvent(QPaintEvent* event);
+        void resizeEvent(QResizeEvent* event);
+        bool eventFilter(QObject *watched, QEvent *event);
+
         void updateBlurredImage();
         void tryNewImage();
 
@@ -44,6 +48,8 @@ class EventModeShow : public QDialog
         QPixmap blurred;
         QStack<QPixmap> pendingImages;
         bool blockingOnNewImage = false;
+
+        QWidget* scrollRedactor;
 
         tVariantAnimation *animationTimerPx, *animationTimerPxOpacity, *animationTimerBlur;
 };

@@ -8,6 +8,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsBlurEffect>
+#include <QScrollArea>
+#include <QScrollBar>
 
 EventModeShow::EventModeShow(QWidget *parent) :
     QDialog(parent),
@@ -30,6 +32,18 @@ EventModeShow::EventModeShow(QWidget *parent) :
         this->repaint();
     });
 
+    connect(ui->profileScroller->horizontalScrollBar(), &QScrollBar::rangeChanged, [=] {
+        ui->profileScroller->horizontalScrollBar()->setValue(ui->profileScroller->horizontalScrollBar()->maximum());
+    });
+
+    scrollRedactor = new QWidget(this);
+    scrollRedactor->setParent(ui->profileScroller);
+    scrollRedactor->resize(ui->bottomFrameStack->sizeHint().height(), 30 * theLibsGlobal::getDPIScaling());
+    scrollRedactor->move(0, 0);
+    scrollRedactor->installEventFilter(this);
+    scrollRedactor->show();
+    scrollRedactor->raise();
+
     ui->bottomFrameStack->setCurrentIndex(0);
 }
 
@@ -38,10 +52,19 @@ EventModeShow::~EventModeShow()
     delete ui;
 }
 
+void EventModeShow::resizeEvent(QResizeEvent *event) {
+    updateRedactor();
+}
+
+void EventModeShow::updateRedactor() {
+    scrollRedactor->resize(50 * theLibsGlobal::getDPIScaling(), ui->bottomFrameStack->height());
+}
+
 void EventModeShow::updateInternetDetails(QString ssid, QString password, bool show) {
     ui->internetDetails->setVisible(show);
     ui->ssid->setText(ssid);
     ui->key->setText(password);
+    updateRedactor();
 }
 
 void EventModeShow::setCode(QString code) {
@@ -132,7 +155,8 @@ void EventModeShow::paintEvent(QPaintEvent *event) {
 }
 
 void EventModeShow::addToProfileLayout(QWidget *widget) {
-    ui->profileLayout->addWidget(widget);
+    //ui->profileLayout->addWidget(widget);
+    ui->profileArea->layout()->addWidget(widget);
 }
 
 int EventModeShow::getProfileLayoutHeight() {
@@ -164,4 +188,26 @@ void EventModeShow::updateBlurredImage() {
     QPainter painter(&blurred);
     blurred.fill(Qt::black);
     scene.render(&painter, QRectF(), QRectF(-radius, -radius, px.width() + radius, px.height() + radius));
+}
+
+bool EventModeShow::eventFilter(QObject *watched, QEvent *event) {
+    if (watched = scrollRedactor) {
+        if (event->type() == QEvent::Paint) {
+            QPainter painter(scrollRedactor);
+
+            QLinearGradient gradient;
+            gradient.setStart(0, 0);
+            gradient.setFinalStop(scrollRedactor->width(), 0);
+            gradient.setColorAt(0, this->palette().color(QPalette::Window));
+
+            QColor endCol = this->palette().color(QPalette::Window);
+            endCol.setAlpha(0);
+            gradient.setColorAt(1, endCol);
+
+            painter.setBrush(gradient);
+            painter.setPen(Qt::transparent);
+            painter.drawRect(0, 0, scrollRedactor->width(), scrollRedactor->height());
+        }
+    }
+    return true;
 }
