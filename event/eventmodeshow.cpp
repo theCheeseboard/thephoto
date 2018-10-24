@@ -29,6 +29,8 @@ EventModeShow::EventModeShow(QWidget *parent) :
     connect(animationTimerPx, &tVariantAnimation::valueChanged, [=] {
         this->repaint();
     });
+
+    ui->bottomFrameStack->setCurrentIndex(0);
 }
 
 EventModeShow::~EventModeShow()
@@ -47,14 +49,15 @@ void EventModeShow::setCode(QString code) {
     ui->bottomFrameStack->setCurrentIndex(1);
 }
 
-void EventModeShow::showFullScreen(int monitor) {
-    //this->showNormal();
+void EventModeShow::showFullScreen(int monitor) {    
+    #ifdef Q_OS_LINUX
+        this->showNormal();
+    #endif
 
     if (QApplication::desktop()->screenCount() <= monitor) {
         monitor = QApplication::desktop()->screenCount() - 1;
     }
 
-    //this->setGeometry(QRect(QApplication::desktop()->screenGeometry(monitor).center(), QSize(5, 5)));
     this->setGeometry(QApplication::desktop()->screenGeometry(monitor));
 
     QDialog::showFullScreen();

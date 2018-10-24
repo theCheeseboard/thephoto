@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QMessageBox>
 #include <QMenu>
+#include "eventmodeuserindicator.h"
 
 EventModeSettings::EventModeSettings(QWidget *parent) :
     QDialog(parent),
@@ -81,10 +82,12 @@ void EventModeSettings::on_key_textChanged(const QString &arg1)
 
 void EventModeSettings::on_monitorNumber_valueChanged(int arg1)
 {
+    #ifdef Q_OS_LINUX
+        this->showNormal();
+    #endif
+
     int monitor = arg1 - 1;
     showDialog->showFullScreen(monitor);
-
-    QDialog::showFullScreen();
 
     if (QApplication::desktop()->screenNumber(this->geometry().center()) == monitor) {
         if (monitor == 0) {
@@ -93,9 +96,17 @@ void EventModeSettings::on_monitorNumber_valueChanged(int arg1)
             this->setGeometry(QApplication::desktop()->screenGeometry(0));
         }
     }
+
+    QDialog::showFullScreen();
 }
 
 void EventModeSettings::newConnection(EventSocket* sock) {
+    if (bans.contains(sock->peerAddress())) {
+        //Banned from session
+        sock->closeFromClient();
+        return;
+    }
+
     QLabel* userLayout = new QLabel;
 
     QListWidgetItem* userEntry = new QListWidgetItem();
@@ -103,51 +114,12 @@ void EventModeSettings::newConnection(EventSocket* sock) {
     userEntry->setText(tr("Unidentified User"));
     ui->usersList->addItem(userEntry);
 
+    EventModeUserIndicator* userIndicator = new EventModeUserIndicator(sock);
+    showDialog->addToProfileLayout(userIndicator);
+
     connect(sock, SIGNAL(newImageAvailable(QImage)), showDialog, SLOT(showNewImage(QImage)));
     connect(sock, &EventSocket::newUserConnected, [=](QString name) {
         new EventNotification(tr("User Connected"), name, showDialog);
-
-        //Generate a new square based on the name
-        QPixmap px(showDialog->getProfileLayoutHeight(), showDialog->getProfileLayoutHeight());
-        QPainter painter(&px);
-
-        //Set the background to a random colour
-        QColor backgroundCol = QColor::fromRgb(QRandomGenerator::global()->generate());
-        painter.setBrush(backgroundCol);
-        painter.setPen(Qt::transparent);
-        painter.drawRect(0, 0, px.width(), px.height());
-
-        if ((backgroundCol.red() + backgroundCol.green() + backgroundCol.blue()) / 3 > 127) {
-            painter.setPen(Qt::black);
-        } else {
-            painter.setPen(Qt::white);
-        }
-
-        QString nameCharacter(name.at(0).toUpper());
-
-        QFont f;
-        f.setFamily(this->font().family());
-        f.setPointSize(1);
-        while (QFontMetrics(f).height() < (float) px.height() * (float) 0.75) {
-            f.setPointSize(f.pointSize() + 1);
-        }
-        f.setPointSize(f.pointSize() - 1);
-        painter.setFont(f);
-
-        QFontMetrics metrics(f);
-        int charWidth = metrics.width(nameCharacter);
-        int charHeight = metrics.height();
-
-        QRect textRect;
-        textRect.setWidth(charWidth);
-        textRect.setHeight(charHeight);
-        textRect.moveTop(px.height() / 2 - charHeight / 2);
-        textRect.moveLeft(px.width() / 2 - charWidth / 2);
-        painter.drawText(textRect, nameCharacter);
-        painter.end();
-
-        userLayout->setPixmap(px);
-        showDialog->addToProfileLayout(userLayout);
 
         userEntry->setText(name);
     });
@@ -162,11 +134,11 @@ void EventModeSettings::newConnection(EventSocket* sock) {
 }
 
 void EventModeSettings::reject() {
-    showDialog->close();
     for (EventSocket* sock : sockets) {
         //Close all sockets
         sock->closeFromClient();
     }
+    showDialog->close();
 
     QDialog::reject();
 }
@@ -204,8 +176,15 @@ void EventModeSettings::on_usersList_customContextMenuRequested(const QPoint &po
                 sock->closeFromClient();
             }
         });
+        menu->addAction(tr("Ban"), [=] {
+            if (QMessageBox::question(this, tr("Ban?"), tr("Ban %1? They won't be able to rejoin this session.").arg(selected->text()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+                EventSocket* sock = selected->data(Qt::UserRole).value<EventSocket*>();
+                bans.append(sock->peerAddress());
+                sock->closeFromClient();
+            }
+        });
     } else if (ui->usersList->selectedItems().count() > 1) {
 
     }
-    menu->exec(this->mapToGlobal(pos));
+    menu->exec(ui->usersList->mapToGlobal(pos));
 }

@@ -82,6 +82,15 @@ void EventSocket::readBuffer() {
                 } else if (line == "CLOSE") {
                     //Close the connection
                     close();
+                } else if (line.startsWith("TIMER")) {
+                    QStringList args = line.split(" ");
+                    if (args.count() == 2) {
+                        bool ok;
+                        int secondsLeft = args.last().toInt(&ok);
+                        if (ok) {
+                            emit timer(secondsLeft);
+                        }
+                    }
                 }
             } else if (line.trimmed() == "HELLO") {
                 authenticated = true;

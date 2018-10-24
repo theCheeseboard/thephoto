@@ -59,6 +59,7 @@ class EventModeSettings : public QDialog
 
         EventServer* server;
         QList<EventSocket*> sockets;
+        QList<QHostAddress> bans;
 };
 
 #endif // EVENTMODESETTINGS_H

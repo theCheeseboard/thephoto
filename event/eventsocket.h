@@ -20,6 +20,7 @@ class EventSocket : public QSslSocket
     signals:
         void newImageAvailable(QImage image);
         void newUserConnected(QString name);
+        void timer(int durationLeft);
 
     public slots:
         void newData();

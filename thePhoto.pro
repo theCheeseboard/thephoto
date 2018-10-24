@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     event/eventsocket.cpp \
     event/eventserver.cpp \
     event/eventnotification.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    event/eventmodeuserindicator.cpp
 
 HEADERS  += mainwindow.h \
     managelibrary.h \
@@ -45,7 +46,8 @@ HEADERS  += mainwindow.h \
     event/eventsocket.h \
     event/eventserver.h \
     event/eventnotification.h \
-    aboutdialog.h
+    aboutdialog.h \
+    event/eventmodeuserindicator.h
 
 FORMS    += mainwindow.ui \
     managelibrary.ui \
@@ -54,7 +56,8 @@ FORMS    += mainwindow.ui \
     event/eventmodeshow.ui \
     event/eventmodesettings.ui \
     event/eventnotification.ui \
-    aboutdialog.ui
+    aboutdialog.ui \
+    event/eventmodeuserindicator.ui
 
 RESOURCES += \
     resources.qrc

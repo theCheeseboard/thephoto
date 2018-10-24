@@ -88,53 +88,68 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="21"/>
+        <location filename="../event/eventmodesettings.cpp" line="22"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="62"/>
+        <location filename="../event/eventmodesettings.cpp" line="63"/>
         <source>End Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="62"/>
+        <location filename="../event/eventmodesettings.cpp" line="63"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="103"/>
+        <location filename="../event/eventmodesettings.cpp" line="114"/>
         <source>Unidentified User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="108"/>
+        <location filename="../event/eventmodesettings.cpp" line="122"/>
         <source>User Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="155"/>
+        <location filename="../event/eventmodesettings.cpp" line="127"/>
         <source>User Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="200"/>
+        <location filename="../event/eventmodesettings.cpp" line="172"/>
         <source>For %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="201"/>
+        <location filename="../event/eventmodesettings.cpp" line="173"/>
         <source>Kick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="202"/>
+        <location filename="../event/eventmodesettings.cpp" line="174"/>
         <source>Kick?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="202"/>
+        <location filename="../event/eventmodesettings.cpp" line="174"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="179"/>
+        <source>Ban</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="180"/>
+        <source>Ban?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="180"/>
+        <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -146,13 +161,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="229"/>
+        <location filename="../event/eventmodeshow.ui" line="232"/>
         <source>Preparing Event Mode...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="272"/>
+        <location filename="../event/eventmodeshow.ui" line="275"/>
         <source>To connect, use</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EventModeUserIndicator</name>
+    <message>
+        <location filename="../event/eventmodeuserindicator.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodeuserindicator.cpp" line="67"/>
+        <location filename="../event/eventmodeuserindicator.cpp" line="233"/>
+        <source>Camera Timer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -168,7 +197,7 @@
     <name>EventSocket</name>
     <message>
         <location filename="../event/eventsocket.cpp" line="72"/>
-        <location filename="../event/eventsocket.h" line="40"/>
+        <location filename="../event/eventsocket.h" line="41"/>
         <source>An unknown person</source>
         <translation type="unfinished"></translation>
     </message>

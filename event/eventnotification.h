@@ -2,6 +2,7 @@
 #define EVENTNOTIFICATION_H
 
 #include <QFrame>
+#include "eventmodeshow.h"
 
 namespace Ui {
     class EventNotification;
@@ -12,7 +13,7 @@ class EventNotification : public QFrame
         Q_OBJECT
 
     public:
-        explicit EventNotification(QString title, QString text, QWidget *parent);
+        explicit EventNotification(QString title, QString text, EventModeShow *parent);
         ~EventNotification();
 
     protected:
