@@ -299,6 +299,19 @@ public class EventSocket {
         readThread.start();
 
         sock.sendCommand("HELLO");
+
+        //Time out after 5 seconds
+        mainHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!authenticated) {
+                    //Time out
+                    mainHandler.post(onError);
+                    thread.interrupt();
+                    close();
+                }
+            }
+        }, 5000);
     }
 
     public void close() {

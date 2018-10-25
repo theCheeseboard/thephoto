@@ -316,8 +316,6 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        getSupportActionBar().hide();
-
         txView = findViewById(R.id.viewfinder);
         imagesLayout = findViewById(R.id.pendingImagesContainer);
 

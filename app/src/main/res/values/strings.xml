@@ -38,4 +38,13 @@
     <string name="timer_value_0sec">Off</string>
     <string name="timer_value_3sec">3 seconds</string>
     <string name="timer_value_10sec">10 seconds</string>
+
+    <!-- Strings related to Onboarding -->
+    <string name="onboarding_welcome">Welcome to thePhoto!</string>
+    <string name="onboarding_welcome_description">Let\'s get you taking photos and showing them on the big screen!</string>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_finish">Finish</string>
+    <string name="onboarding_identify_title">Who are you?</string>
+    <string name="onboarding_identify_why">This will be used to identify yourself on the big screen. You can always change this later in Settings.</string>
+    <string name="onboarding_identify_display_name">Display Name</string>
 </resources>
