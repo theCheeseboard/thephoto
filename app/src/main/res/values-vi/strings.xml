@@ -36,4 +36,10 @@
     <string name="timer_value_0sec">Tắt</string>
     <string name="timer_value_3sec">3 giây</string>
     <string name="timer_value_10sec">10 giây</string>
+<string name="onboarding_welcome">Chào mừng đến thePhoto!</string>
+    <string name="onboarding_welcome_description">Chúng tôi chuẩn bị bạn chụp ảnh và chuyển lên màn hình lớn!</string>
+    <string name="onboarding_skip">Bỏ qua</string>
+    <string name="onboarding_finish">Kết thúc</string>
+    <string name="onboarding_identify_title">Tên bạn là gì?</string>
+    <string name="onboarding_identify_display_name">Tên dùng</string>
 </resources>
