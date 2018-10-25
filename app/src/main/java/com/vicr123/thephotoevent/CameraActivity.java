@@ -269,7 +269,7 @@ public class CameraActivity extends AppCompatActivity {
             captureSession.capture(previewRequestBuilder.build(), captureCallback, background);
             // After this, the camera will go back to the normal state of preview.
             state = STATE_PREVIEW;
-            captureSession.setRepeatingRequest(previewRequest, captureCallback, background);
+            captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
