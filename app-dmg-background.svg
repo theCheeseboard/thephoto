@@ -17,27 +17,49 @@
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
    sodipodi:docname="app-dmg-background.svg"
-   inkscape:export-filename="/Users/victor/Documents/Apps/theSlate/app-dmg-background@2x.png"
-   inkscape:export-xdpi="192"
-   inkscape:export-ydpi="192">
+   inkscape:export-filename="/Users/victor/Documents/Apps/thePhoto/app-dmg-background.png"
+   inkscape:export-xdpi="72"
+   inkscape:export-ydpi="72">
   <defs
      id="defs2">
     <linearGradient
        inkscape:collect="always"
-       id="linearGradient5496">
+       id="linearGradient1069">
       <stop
-         style="stop-color:#6464ff;stop-opacity:1"
+         style="stop-color:#ff6400;stop-opacity:1"
          offset="0"
-         id="stop5492" />
+         id="stop1065" />
       <stop
-         style="stop-color:#c8c8ff;stop-opacity:1"
+         style="stop-color:#ffc800;stop-opacity:1"
          offset="1"
-         id="stop5494" />
+         id="stop1067" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient5496"
-       id="linearGradient5498"
+       id="linearGradient1025">
+      <stop
+         style="stop-color:#ff6400;stop-opacity:1"
+         offset="0"
+         id="stop1021" />
+      <stop
+         style="stop-color:#ffc800;stop-opacity:1"
+         offset="1"
+         id="stop1023" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1025"
+       id="linearGradient1027"
+       x1="800"
+       y1="1.2598426e-05"
+       x2="1.5118126e-05"
+       y2="560.00006"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(-0.26458332,0,0,-0.26458332,211.66666,296.99998)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1069"
+       id="linearGradient1071"
        x1="0"
        y1="560"
        x2="800"
@@ -52,8 +74,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="424.8283"
-     inkscape:cy="270.95973"
+     inkscape:cx="402.81948"
+     inkscape:cy="320.66536"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -62,7 +84,8 @@
      inkscape:window-height="1036"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0">
+     inkscape:window-maximized="0"
+     borderlayer="true">
     <inkscape:grid
        type="xygrid"
        id="grid10"
@@ -107,10 +130,10 @@
        x="4.4408921e-16"
        y="148.83331" />
     <path
-       style="fill:url(#linearGradient5498);fill-opacity:1;stroke:none;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 0 0 L 0 560 L 120 560 L 220 0 L 0 0 z M 680 0 L 580 560 L 800 560 L 800 0 L 680 0 z "
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:url(#linearGradient1071);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="M 740 0 L 740 0.001953125 L 735 0.001953125 L 735 317.92578 L 577.92773 474.99805 L 0 474.99805 L 0 480 L 0 485 L 0 560 L 760 560 L 800 560 L 800 0 L 740 0 z M 259.99805 75.001953 A 5.0004995 5.0004995 0 0 0 255 80 L 255 110 A 5.0012293 5.0012293 0 1 0 265.00195 110 L 265.00195 84.998047 L 289.99805 84.998047 A 5.0004995 5.0004995 0 1 0 289.99805 75.001953 L 259.99805 75.001953 z M 510 75.001953 A 5.0004995 5.0004995 0 1 0 510 84.998047 L 535.00195 84.998047 L 535.00195 110 A 5.0004995 5.0004995 0 1 0 544.99805 110 L 544.99805 80 A 5.0004995 5.0004995 0 0 0 540 75.001953 L 510 75.001953 z M 259.92383 124.92578 A 5.0004995 5.0004995 0 0 0 255 129.99805 L 255 159.99805 A 5.0004995 5.0004995 0 0 0 259.99805 165.00195 L 289.99805 165.00195 A 5.0012217 5.0012217 0 0 0 289.99805 155 L 265.00195 155 L 265.00195 129.99805 A 5.0004995 5.0004995 0 0 0 259.92383 124.92578 z M 539.92578 124.92578 A 5.0004995 5.0004995 0 0 0 535.00195 129.99805 L 535.00195 155 L 510 155 A 5.0012217 5.0012217 0 0 0 510 165.00195 L 540 165.00195 A 5.0004995 5.0004995 0 0 0 544.99805 159.99805 L 544.99805 129.99805 A 5.0004995 5.0004995 0 0 0 539.92578 124.92578 z "
        transform="matrix(0.26458333,0,0,0.26458333,0,148.83331)"
-       id="path5436" />
+       id="path1038" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:14.00043392px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.35001084"
@@ -122,7 +145,7 @@
          x="104.77925"
          y="187.69438"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Contemporary;-inkscape-font-specification:Contemporary;text-align:center;text-anchor:middle;stroke-width:0.35001084"
-         id="tspan4566">theSlate</tspan></text>
+         id="tspan4566">thePhoto</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.85208309;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4625"
