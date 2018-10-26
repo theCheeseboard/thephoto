@@ -53,6 +53,8 @@ class EventModeSettings : public QDialog
 
         void on_backToEventModeButton_clicked();
 
+        void on_openMissionControl_clicked();
+
     signals:
         void done();
 

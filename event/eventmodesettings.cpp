@@ -46,6 +46,14 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
             });
         }
     }
+
+    #ifdef Q_OS_MAC
+        ui->useMonitorLabel->setVisible(false);
+        ui->monitorNumber->setVisible(false);
+    #else
+       ui->useMissionControlLabel->setVisible(false);
+       ui->openMissionControl->setVisible(false);
+    #endif
 }
 
 EventModeSettings::~EventModeSettings()
@@ -55,7 +63,7 @@ EventModeSettings::~EventModeSettings()
 }
 
 void EventModeSettings::show() {
-    if (QApplication::screens().count() == 1) {
+    if (QApplication::screens().count() == 1 && QSysInfo::productType() != "osx") {
         ui->useMonitorLabel->setVisible(false);
         ui->monitorNumber->setVisible(false);
     } else {
@@ -209,4 +217,9 @@ void EventModeSettings::on_backToEventModeButton_clicked()
     showDialog->showFullScreen(0);
 
     new EventNotification(tr("Welcome to Event Mode!"), tr("To get back to the Backstage, simply hit the TAB key."), showDialog);
+}
+
+void EventModeSettings::on_openMissionControl_clicked()
+{
+    QProcess::startDetached("open -a \"Mission Control\"");
 }

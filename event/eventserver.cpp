@@ -24,12 +24,21 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
         genProc.setProcessChannelMode(QProcess::ForwardedChannels);
         genProc.setWorkingDirectory(certPath.path());
         genProc.start("openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 2 -nodes -subj \"/CN=localhost\"");
-        genProc.waitForFinished();
+        genProc.waitForFinished(-1);
 
         qDebug() << genProc.readAll();
 
         QFile certFile(certPath.absoluteFilePath("cert.pem"));
         QFile keyFile(certPath.absoluteFilePath("key.pem"));
+
+        #ifdef Q_OS_MAC
+            //Convert to a PKCS1 key that Secure Transport likes
+            genProc.start("openssl rsa -in key.pem -out pkcs1key.key");
+            genProc.waitForFinished(-1);
+
+            keyFile.setFileName(certPath.absoluteFilePath("pkcs1key.key"));
+        #endif
+
 
         if (!certFile.exists() || !keyFile.exists() || genProc.exitCode() != 0) {
             error = tr("Can't create X509 certificate. Event Mode cannot start.");
@@ -50,6 +59,7 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
 
         this->ssl.cert = QSslCertificate(&certFile);
         this->ssl.key = QSslKey(keyFile.readAll(), QSsl::Rsa, QSsl::Pem);
+
         qDebug() << "SSL Certificate Ready";
 
         emit ready();
@@ -70,6 +80,7 @@ void EventServer::incomingConnection(qintptr handle) {
             [=](QAbstractSocket::SocketError socketError){
             if (socketError == QSslSocket::SslHandshakeFailedError) {
                 qDebug() << "SSL Handshake failure";
+
             } else if (socketError == QSslSocket::RemoteHostClosedError) {
             } else {
                 qDebug() << "Socket Error " + QString::number(socketError);

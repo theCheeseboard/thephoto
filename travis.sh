@@ -34,6 +34,12 @@ if [ $STAGE = "script" ]; then
     make
     sudo make install INSTALL_ROOT=/
     cd ..
+    echo "[TRAVIS] Building and installing Contemporary"
+    git clone https://github.com/vicr123/contemporary-theme.git
+    cd contemporary-theme
+    qmake
+    make
+    cd ..
     mkdir "build-thephoto"
     cd "build-thephoto"
     echo "[TRAVIS] Running qmake"
@@ -49,6 +55,12 @@ if [ $STAGE = "script" ]; then
     install_name_tool -change @rpath/QtWidgets.framework/Versions/5/QtCore @executable_path/../Frameworks/QtSvg.framework/Versions/5/QtCore thePhoto.app/Libraries/libthe-libs.1.dylib
     echo "[TRAVIS] Deploying Qt Libraries"
     macdeployqt thePhoto.app
+    echo "[TRAVIS] Deploying Contemporary"
+    cp ../contemporary-theme/libContemporary.dylib thePhoto.app/Contents/Plugins/styles/
+    install_name_tool -change libthe-libs.1.dylib @executable_path/../Libraries/libthe-libs.1.dylib /thePhoto.app/Contents/Plugins/styles/libContemporary.dylib
+    install_name_tool -change @rpath/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtSvg.framework/Versions/5/QtWidgets thePhoto.app/Contents/Plugins/styles/libContemporary.dylib
+    install_name_tool -change @rpath/QtWidgets.framework/Versions/5/QtGui @executable_path/../Frameworks/QtSvg.framework/Versions/5/QtGui thePhoto.app/Contents/Plugins/styles/libContemporary.dylib
+    install_name_tool -change @rpath/QtWidgets.framework/Versions/5/QtCore @executable_path/../Frameworks/QtSvg.framework/Versions/5/QtCore thePhoto.app/Contents/Plugins/styles/libContemporary.dylib
     echo "[TRAVIS] Preparing Disk Image creator"
     npm install appdmg
     echo "[TRAVIS] Building Disk Image"

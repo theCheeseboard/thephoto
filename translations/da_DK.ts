@@ -47,12 +47,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="374"/>
+        <location filename="../event/eventmodesettings.ui" line="361"/>
         <source>Show Wi-Fi details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="347"/>
+        <location filename="../event/eventmodesettings.ui" line="381"/>
         <source>SSID</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62,37 +62,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="340"/>
+        <location filename="../event/eventmodesettings.ui" line="327"/>
         <source>Key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="394"/>
+        <location filename="../event/eventmodesettings.ui" line="354"/>
         <source>Use Monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="457"/>
+        <location filename="../event/eventmodesettings.ui" line="409"/>
+        <source>Use Mission Control to adjust monitors.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="416"/>
+        <source>Open Mission Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="481"/>
         <source>Session Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="477"/>
+        <location filename="../event/eventmodesettings.ui" line="501"/>
         <source>Connected Users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="494"/>
+        <location filename="../event/eventmodesettings.ui" line="518"/>
         <source>Exchanged Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="524"/>
+        <location filename="../event/eventmodesettings.ui" line="548"/>
         <source>Back to Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="534"/>
+        <location filename="../event/eventmodesettings.ui" line="559"/>
         <source>End Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -102,72 +112,72 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="74"/>
+        <location filename="../event/eventmodesettings.cpp" line="82"/>
         <source>End Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="74"/>
+        <location filename="../event/eventmodesettings.cpp" line="82"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="127"/>
+        <location filename="../event/eventmodesettings.cpp" line="135"/>
         <source>Unidentified User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="135"/>
+        <location filename="../event/eventmodesettings.cpp" line="143"/>
         <source>User Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="140"/>
+        <location filename="../event/eventmodesettings.cpp" line="148"/>
         <source>User Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="186"/>
+        <location filename="../event/eventmodesettings.cpp" line="194"/>
         <source>For %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="187"/>
+        <location filename="../event/eventmodesettings.cpp" line="195"/>
         <source>Kick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="188"/>
+        <location filename="../event/eventmodesettings.cpp" line="196"/>
         <source>Kick?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="188"/>
+        <location filename="../event/eventmodesettings.cpp" line="196"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="193"/>
+        <location filename="../event/eventmodesettings.cpp" line="201"/>
         <source>Ban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="194"/>
+        <location filename="../event/eventmodesettings.cpp" line="202"/>
         <source>Ban?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="194"/>
+        <location filename="../event/eventmodesettings.cpp" line="202"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="211"/>
+        <location filename="../event/eventmodesettings.cpp" line="219"/>
         <source>Welcome to Event Mode!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="211"/>
+        <location filename="../event/eventmodesettings.cpp" line="219"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -207,7 +217,7 @@
 <context>
     <name>EventServer</name>
     <message>
-        <location filename="../event/eventserver.cpp" line="35"/>
+        <location filename="../event/eventserver.cpp" line="44"/>
         <source>Can&apos;t create X509 certificate. Event Mode cannot start.</source>
         <translation type="unfinished"></translation>
     </message>

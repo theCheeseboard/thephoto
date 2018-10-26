@@ -12,6 +12,16 @@ TARGET = thePhoto
 TEMPLATE = app
 CONFIG += c++14
 
+macx {
+    QT += macextras
+    #ICON = icon.icns
+    LIBS += -framework CoreFoundation -framework AppKit
+    #QMAKE_INFO_PLIST = Info.plist
+
+    INCLUDEPATH += "/usr/local/include/the-libs"
+    LIBS += -L/usr/local/lib -lthe-libs
+}
+
 unix:!macx {
     QT += thelib
     TARGET = thephoto
@@ -110,4 +120,13 @@ unix:!macx {
     icon.files = thephoto.svg
 
     INSTALLS += target translations desktop icon
+}
+
+macx {
+    translations.files = translations/
+    translations.path = Contents/translations
+
+    QMAKE_BUNDLE_DATA = translations
+
+    QMAKE_POST_LINK += $$quote(cp $${PWD}/dmgicon.icns $${PWD}/app-dmg-background.png $${PWD}/node-appdmg-config.json $${OUT_PWD}/..)
 }

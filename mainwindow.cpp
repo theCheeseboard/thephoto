@@ -259,9 +259,9 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
     } else {*/
         this->hide();
 
-        #ifdef Q_OS_WIN
-            QApplication::setStyle("contemporary");
-        #endif
+        if (QStyleFactory::keys().contains("Contemporary")) {
+            QApplication::setStyle("Contemporary");
+        }
 
         QPalette oldPal = QApplication::palette();
 
@@ -276,9 +276,14 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
             QApplication::setPalette(oldPal);
             this->setPalette(oldPal);
 
-            #ifdef Q_OS_WIN
-                QApplication::setStyle("windowsvista");
-            #endif
+            if (QStyleFactory::keys().contains("Contemporary")) {
+                #ifdef Q_OS_WIN
+                    QApplication::setStyle("windowsvista");
+                #elif defined(Q_OS_MAC)
+                    QApplication::setStyle("macintosh");
+                #endif
+            }
+
             this->show();
         });
     //}

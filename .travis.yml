@@ -1,7 +1,7 @@
 language: cpp
 os:
   - linux
-#  - osx
+  - osx
 before_install:
   - export STAGE=before_install
   - ./travis.sh
