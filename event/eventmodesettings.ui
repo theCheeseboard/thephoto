@@ -294,7 +294,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Event Mode</string>
+      <string>Backstage</string>
      </property>
      <property name="margin">
       <number>9</number>
@@ -389,7 +389,7 @@
         </widget>
        </item>
        <item row="0" column="0" colspan="2">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="useMonitorLabel">
          <property name="text">
           <string>Use Monitor</string>
          </property>
@@ -517,6 +517,16 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="backToEventModeButton">
+       <property name="text">
+        <string>Back to Event Mode</string>
+       </property>
+       <property name="icon">
+        <iconset theme="arrow-right"/>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="closeEventModeButton">

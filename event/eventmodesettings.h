@@ -51,6 +51,11 @@ class EventModeSettings : public QDialog
 
         void on_usersList_customContextMenuRequested(const QPoint &pos);
 
+        void on_backToEventModeButton_clicked();
+
+    signals:
+        void done();
+
     private:
         Ui::EventModeSettings *ui;
 

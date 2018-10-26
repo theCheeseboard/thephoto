@@ -254,9 +254,9 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
     //PhoneDialog* dialog = new PhoneDialog(this);
     //dialog->showFullScreen();
 
-    if (QApplication::desktop()->screenCount() == 1) {
+    /*if (QApplication::desktop()->screenCount() == 1) {
         QMessageBox::warning(this, tr("Connect another screen"), tr("Connect another screen to this PC to use Event Mode."), QMessageBox::Ok, QMessageBox::Ok);
-    } else {
+    } else {*/
         this->hide();
 
         #ifdef Q_OS_WIN
@@ -269,16 +269,19 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
         QApplication::setPalette(dialog->palette());
         dialog->show();
         dialog->exec();
-        dialog->deleteLater();
 
-        QApplication::setPalette(oldPal);
-        this->setPalette(oldPal);
+        connect(dialog, &EventModeSettings::done, [=] {
+            dialog->deleteLater();
 
-        #ifdef Q_OS_WIN
-            QApplication::setStyle("windowsvista");
-        #endif
-        this->show();
-    }
+            QApplication::setPalette(oldPal);
+            this->setPalette(oldPal);
+
+            #ifdef Q_OS_WIN
+                QApplication::setStyle("windowsvista");
+            #endif
+            this->show();
+        });
+    //}
 }
 
 void MainWindow::on_actionImport_from_Phone_triggered()

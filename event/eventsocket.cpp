@@ -107,9 +107,6 @@ void EventSocket::readBuffer() {
 
 void EventSocket::writeString(QString string) {
     QByteArray data = string.append("\n").toUtf8();
-    //QByteArray encrypted = cipher->encrypted(data);
-
-    //sock->write(encrypted);
     write(data);
     flush();
 }

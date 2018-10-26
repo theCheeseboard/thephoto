@@ -14,6 +14,11 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
     ui->setupUi(this);
 
     showDialog = new EventModeShow();
+    connect(showDialog, &EventModeShow::returnToBackstage, [=] {
+        showDialog->hide();
+        this->show();
+    });
+
     ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(16, 16));
     ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
     ui->monitorNumber->setMaximum(QApplication::desktop()->screenCount());
@@ -50,7 +55,13 @@ EventModeSettings::~EventModeSettings()
 }
 
 void EventModeSettings::show() {
-    showDialog->showFullScreen(1);
+    if (QApplication::screens().count() == 1) {
+        ui->useMonitorLabel->setVisible(false);
+        ui->monitorNumber->setVisible(false);
+    } else {
+        showDialog->showFullScreen(1);
+        ui->backToEventModeButton->setVisible(false);
+    }
 
     QDialog::showFullScreen();
     this->setGeometry(QApplication::desktop()->screenGeometry(0));
@@ -82,22 +93,24 @@ void EventModeSettings::on_key_textChanged(const QString &arg1)
 
 void EventModeSettings::on_monitorNumber_valueChanged(int arg1)
 {
-    #ifdef Q_OS_LINUX
-        this->showNormal();
-    #endif
+    if (QApplication::screens().count() != 1) {
+        #ifdef Q_OS_LINUX
+            this->showNormal();
+        #endif
 
-    int monitor = arg1 - 1;
-    showDialog->showFullScreen(monitor);
+        int monitor = arg1 - 1;
+        showDialog->showFullScreen(monitor);
 
-    if (QApplication::desktop()->screenNumber(this->geometry().center()) == monitor) {
-        if (monitor == 0) {
-            this->setGeometry(QApplication::desktop()->screenGeometry(1));
-        } else {
-            this->setGeometry(QApplication::desktop()->screenGeometry(0));
+        if (QApplication::desktop()->screenNumber(this->geometry().center()) == monitor) {
+            if (monitor == 0) {
+                this->setGeometry(QApplication::desktop()->screenGeometry(1));
+            } else {
+                this->setGeometry(QApplication::desktop()->screenGeometry(0));
+            }
         }
-    }
 
-    QDialog::showFullScreen();
+        QDialog::showFullScreen();
+    }
 }
 
 void EventModeSettings::newConnection(EventSocket* sock) {
@@ -141,6 +154,7 @@ void EventModeSettings::reject() {
     showDialog->close();
 
     QDialog::reject();
+    emit done();
 }
 
 void EventModeSettings::on_exchangedImagesButton_toggled(bool checked)
@@ -187,4 +201,12 @@ void EventModeSettings::on_usersList_customContextMenuRequested(const QPoint &po
 
     }
     menu->exec(ui->usersList->mapToGlobal(pos));
+}
+
+void EventModeSettings::on_backToEventModeButton_clicked()
+{
+    this->hide();
+    showDialog->showFullScreen(0);
+
+    new EventNotification(tr("Welcome to Event Mode!"), tr("To get back to the Backstage, simply hit the TAB key."), showDialog);
 }

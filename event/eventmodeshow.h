@@ -10,6 +10,7 @@
 #include <QTimer>
 #include <QEventLoop>
 #include <QStack>
+#include <QKeyEvent>
 #include <tvariantanimation.h>
 
 namespace Ui {
@@ -34,12 +35,16 @@ class EventModeShow : public QDialog
         void showError(QString error);
         void updateRedactor();
 
+    signals:
+        void returnToBackstage();
+
     private:
         Ui::EventModeShow *ui;
 
         void paintEvent(QPaintEvent* event);
         void resizeEvent(QResizeEvent* event);
         bool eventFilter(QObject *watched, QEvent *event);
+        void keyPressEvent(QKeyEvent* event);
 
         void updateBlurredImage();
         void tryNewImage();
@@ -50,6 +55,7 @@ class EventModeShow : public QDialog
         bool blockingOnNewImage = false;
 
         QWidget* scrollRedactor;
+
 
         tVariantAnimation *animationTimerPx, *animationTimerPxOpacity, *animationTimerBlur;
 };

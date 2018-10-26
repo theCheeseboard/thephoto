@@ -10,6 +10,7 @@
 #include <QGraphicsBlurEffect>
 #include <QScrollArea>
 #include <QScrollBar>
+#include <QKeyEvent>
 
 EventModeShow::EventModeShow(QWidget *parent) :
     QDialog(parent),
@@ -210,4 +211,12 @@ bool EventModeShow::eventFilter(QObject *watched, QEvent *event) {
         }
     }
     return true;
+}
+
+void EventModeShow::keyPressEvent(QKeyEvent *event) {
+    if (QApplication::screens().count() == 1) {
+        if (event->key() == Qt::Key_Tab) {
+            emit returnToBackstage();
+        }
+    }
 }
