@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QMessageBox>
 #include <QMenu>
+#include <QMenuBar>
 #include "eventmodeuserindicator.h"
 
 EventModeSettings::EventModeSettings(QWidget *parent) :
@@ -19,8 +20,11 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
         this->show();
     });
 
+    QMenuBar* menuBar = new QMenuBar(this);
+
     ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(16, 16));
     ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
+    ui->openMissionControl->setIcon(QIcon("/Applications/Mission Control.app/Contents/Resources/Expose.icns"));
     ui->monitorNumber->setMaximum(QApplication::desktop()->screenCount());
 
     if (QNetworkInterface::allAddresses().count() < 3) {

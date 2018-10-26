@@ -6,6 +6,7 @@
 #include <QProcess>
 #include <QSslCertificate>
 #include <QSslKey>
+#include <QTemporaryDir>
 #include "eventsocket.h"
 
 struct SslInformation {
@@ -28,6 +29,7 @@ class EventServer : public QTcpServer
 
     private:
         SslInformation ssl;
+        QTemporaryDir certificateDirectory;
 
         void incomingConnection(qintptr handle);
 };

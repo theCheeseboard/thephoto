@@ -222,12 +222,28 @@
       <enum>QFrame::Raised</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
+        <widget class="tCircularSpinner" name="spinner" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="statusLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string>Preparing Event Mode...</string>
          </property>
@@ -370,7 +386,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>183</width>
+            <width>187</width>
             <height>68</height>
            </rect>
           </property>
@@ -413,6 +429,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>tCircularSpinner</class>
+   <extends>QWidget</extends>
+   <header location="global">tcircularspinner.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

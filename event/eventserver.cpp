@@ -7,10 +7,6 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
 {
     (new tPromise<QStringList>([=](QString& error) {
         //Generate an X509 certificate
-        QDir::home().mkpath(".thephoto/cert");
-        QDir certPath(QDir::homePath() + "/.thephoto/cert");
-
-
         QProcess genProc;
 
         #ifdef Q_OS_WIN
@@ -22,21 +18,21 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
         #endif
 
         genProc.setProcessChannelMode(QProcess::ForwardedChannels);
-        genProc.setWorkingDirectory(certPath.path());
+        genProc.setWorkingDirectory(certificateDirectory.path());
         genProc.start("openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 2 -nodes -subj \"/CN=localhost\"");
         genProc.waitForFinished(-1);
 
         qDebug() << genProc.readAll();
 
-        QFile certFile(certPath.absoluteFilePath("cert.pem"));
-        QFile keyFile(certPath.absoluteFilePath("key.pem"));
+        QFile certFile(certificateDirectory.filePath("cert.pem"));
+        QFile keyFile(certificateDirectory.filePath("key.pem"));
 
         #ifdef Q_OS_MAC
             //Convert to a PKCS1 key that Secure Transport likes
             genProc.start("openssl rsa -in key.pem -out pkcs1key.key");
             genProc.waitForFinished(-1);
 
-            keyFile.setFileName(certPath.absoluteFilePath("pkcs1key.key"));
+            keyFile.setFileName(certificateDirectory.filePath("pkcs1key.key"));
         #endif
 
 

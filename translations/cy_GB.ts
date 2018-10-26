@@ -107,77 +107,77 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="27"/>
+        <location filename="../event/eventmodesettings.cpp" line="31"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="82"/>
+        <location filename="../event/eventmodesettings.cpp" line="86"/>
         <source>End Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="82"/>
+        <location filename="../event/eventmodesettings.cpp" line="86"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="135"/>
+        <location filename="../event/eventmodesettings.cpp" line="139"/>
         <source>Unidentified User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="143"/>
+        <location filename="../event/eventmodesettings.cpp" line="147"/>
         <source>User Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="148"/>
+        <location filename="../event/eventmodesettings.cpp" line="152"/>
         <source>User Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="194"/>
+        <location filename="../event/eventmodesettings.cpp" line="198"/>
         <source>For %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="195"/>
+        <location filename="../event/eventmodesettings.cpp" line="199"/>
         <source>Kick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="196"/>
+        <location filename="../event/eventmodesettings.cpp" line="200"/>
         <source>Kick?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="196"/>
+        <location filename="../event/eventmodesettings.cpp" line="200"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="201"/>
+        <location filename="../event/eventmodesettings.cpp" line="205"/>
         <source>Ban</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="202"/>
+        <location filename="../event/eventmodesettings.cpp" line="206"/>
         <source>Ban?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="202"/>
+        <location filename="../event/eventmodesettings.cpp" line="206"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="219"/>
+        <location filename="../event/eventmodesettings.cpp" line="223"/>
         <source>Welcome to Event Mode!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="219"/>
+        <location filename="../event/eventmodesettings.cpp" line="223"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -190,12 +190,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="232"/>
+        <location filename="../event/eventmodeshow.ui" line="248"/>
         <source>Preparing Event Mode...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="275"/>
+        <location filename="../event/eventmodeshow.ui" line="291"/>
         <source>To connect, use</source>
         <translation type="unfinished"></translation>
     </message>
@@ -217,7 +217,7 @@
 <context>
     <name>EventServer</name>
     <message>
-        <location filename="../event/eventserver.cpp" line="44"/>
+        <location filename="../event/eventserver.cpp" line="40"/>
         <source>Can&apos;t create X509 certificate. Event Mode cannot start.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -228,6 +228,44 @@
         <location filename="../event/eventsocket.cpp" line="72"/>
         <location filename="../event/eventsocket.h" line="41"/>
         <source>An unknown person</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MAC_APPLICATION_MENU</name>
+    <message>
+        <location filename="../main.cpp" line="17"/>
+        <source>Services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="18"/>
+        <source>Hide %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="19"/>
+        <source>Hide Others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="20"/>
+        <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="21"/>
+        <source>Preferences...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="22"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="23"/>
+        <source>Quit %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
