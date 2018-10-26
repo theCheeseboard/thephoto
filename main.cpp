@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef Q_OS_LINUX
-    localTranslator.load(QLocale::system().name(), "/usr/share/theslate/translations");
+    localTranslator.load(QLocale::system().name(), "/usr/share/thephoto/translations");
 #endif
 
 #ifdef Q_OS_WIN

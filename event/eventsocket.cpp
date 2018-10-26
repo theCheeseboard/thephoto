@@ -30,26 +30,7 @@ void EventSocket::readBuffer() {
 
         if (imageDataReadingLength == 0) {
             //End of image
-            //Write out to file
-            QDir::home().mkdir("thePhoto");
-            QFile image(QDir::homePath() + "/thePhoto/Image_" + QDateTime::currentDateTime().toString("ddMMyy-hhmmsszzz") + ".jpg");
-            image.open(QFile::ReadWrite);
-            image.write(currentImageData);
-            image.flush();
-            image.close();
-
-
-            QImageReader reader(image.fileName());
-            reader.setAutoTransform(true);
-            QImage i = reader.read();
-
-            if (i.isNull()) {
-                //ui->imageLabel->setText("Unfortunately, that image didn't send correctly.");
-            } else {
-                //ui->imageLabel->setPixmap(QPixmap::fromImage(image));
-                //setScaleFactor(calculateScaling(this->size(), image.size()));
-                emit newImageAvailable(i);
-            }
+            emit imageDataAvailable(currentImageData);
 
             currentImageData.clear();
             imageDataReading = false;

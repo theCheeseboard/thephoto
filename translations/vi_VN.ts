@@ -30,11 +30,16 @@
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="72"/>
+        <source>Android™ is a trademark of Google LLC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdialog.ui" line="79"/>
         <source>Copyright (c) Victor Tran 2018. Licensed under the terms of the GNU General Public License, version 3 or later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdialog.ui" line="97"/>
+        <location filename="../aboutdialog.ui" line="104"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,137 +52,207 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="361"/>
+        <location filename="../event/eventmodesettings.ui" line="710"/>
         <source>Show Wi-Fi details</source>
         <translation>Hiện chi tiết Wi-Fi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="381"/>
+        <location filename="../event/eventmodesettings.ui" line="717"/>
         <source>SSID</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="297"/>
+        <location filename="../event/eventmodesettings.ui" line="320"/>
         <source>Backstage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="327"/>
+        <location filename="../event/eventmodesettings.ui" line="457"/>
+        <source>SESSION</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="464"/>
+        <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="509"/>
+        <source>DISPLAYS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="737"/>
         <source>Key</source>
         <translation>Mật mã</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="354"/>
+        <location filename="../event/eventmodesettings.ui" line="750"/>
+        <source>WI-FI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="547"/>
         <source>Use Monitor</source>
         <translation>Dùng màn hình</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="409"/>
+        <location filename="../event/eventmodesettings.ui" line="292"/>
+        <source>thePhoto Event Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="388"/>
+        <source>APP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="395"/>
+        <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="437"/>
+        <source>Session Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="444"/>
+        <source>Store users in subfolders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="598"/>
         <source>Use Mission Control to adjust monitors.</source>
         <translation>Dùng Mission Control để chuyển sang màn hình.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="416"/>
+        <location filename="../event/eventmodesettings.ui" line="605"/>
         <source>Open Mission Control</source>
         <translation>Mở Mission Control</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="481"/>
+        <location filename="../event/eventmodesettings.ui" line="628"/>
+        <source>There&apos;s only one display on this computer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="657"/>
+        <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="664"/>
+        <source>Swap Displays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="764"/>
+        <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="808"/>
+        <source>Here are all the users currently connected to your computer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="900"/>
         <source>Session Settings</source>
         <translation>Cài Đặt Phiên</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="501"/>
+        <location filename="../event/eventmodesettings.ui" line="920"/>
         <source>Connected Users</source>
         <translation>Người Dùng Kết Nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="518"/>
+        <location filename="../event/eventmodesettings.ui" line="937"/>
         <source>Exchanged Images</source>
         <translation>Ảnh Được Chuyển</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="548"/>
+        <location filename="../event/eventmodesettings.ui" line="967"/>
         <source>Back to Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="559"/>
+        <location filename="../event/eventmodesettings.ui" line="978"/>
         <source>End Event Mode</source>
         <translation>Thoát Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="31"/>
-        <source>Error</source>
-        <translation>Lỗi</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="86"/>
+        <location filename="../event/eventmodesettings.cpp" line="85"/>
         <source>End Event Mode?</source>
         <translation>Thoát Event Mode?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="86"/>
+        <location filename="../event/eventmodesettings.cpp" line="85"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation>Bạn có muốn ngắt kết nối với tất cả thiết bị và thoát Event Mode?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="139"/>
+        <location filename="../event/eventmodesettings.cpp" line="138"/>
         <source>Unidentified User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="147"/>
+        <location filename="../event/eventmodesettings.cpp" line="149"/>
+        <source>Uncategorized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="179"/>
         <source>User Connected</source>
         <translation>Người đã kết nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="152"/>
+        <location filename="../event/eventmodesettings.cpp" line="184"/>
         <source>User Disconnected</source>
         <translation>Người ngắt kết nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="198"/>
+        <location filename="../event/eventmodesettings.cpp" line="230"/>
         <source>For %1</source>
         <translation>Cho %1</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="199"/>
+        <location filename="../event/eventmodesettings.cpp" line="231"/>
         <source>Kick</source>
         <translation>Đuổi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="200"/>
+        <location filename="../event/eventmodesettings.cpp" line="232"/>
         <source>Kick?</source>
         <translation>Đuổi?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="200"/>
+        <location filename="../event/eventmodesettings.cpp" line="232"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
         <translation>Đuổi %1? Họ sẽ được kết nối lại dùng mã phiên.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="205"/>
+        <location filename="../event/eventmodesettings.cpp" line="237"/>
         <source>Ban</source>
         <translation>Chặn</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="206"/>
+        <location filename="../event/eventmodesettings.cpp" line="238"/>
         <source>Ban?</source>
         <translation>Chặn?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="206"/>
+        <location filename="../event/eventmodesettings.cpp" line="238"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
         <translation>Chặn %1? Họ sẽ không được kết nối lại.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="223"/>
+        <location filename="../event/eventmodesettings.cpp" line="255"/>
         <source>Welcome to Event Mode!</source>
         <translation>Chào mừng đến Event Mode!</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="223"/>
+        <location filename="../event/eventmodesettings.cpp" line="255"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
         <translation>Để trở lại Backstage, đánh phím TAB.</translation>
     </message>
@@ -225,8 +300,8 @@
 <context>
     <name>EventSocket</name>
     <message>
-        <location filename="../event/eventsocket.cpp" line="72"/>
-        <location filename="../event/eventsocket.h" line="41"/>
+        <location filename="../event/eventsocket.cpp" line="53"/>
+        <location filename="../event/eventsocket.h" line="42"/>
         <source>An unknown person</source>
         <translation>Người</translation>
     </message>

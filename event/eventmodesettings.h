@@ -55,6 +55,8 @@ class EventModeSettings : public QDialog
 
         void on_openMissionControl_clicked();
 
+        void on_swapDisplayButton_clicked();
+
     signals:
         void done();
 
@@ -63,6 +65,8 @@ class EventModeSettings : public QDialog
 
         EventModeShow* showDialog;
         int encryptionCode;
+
+        QDir saveDir;
 
         EventServer* server;
         QList<EventSocket*> sockets;

@@ -18,7 +18,8 @@ class EventSocket : public QSslSocket
         QString deviceName();
 
     signals:
-        void newImageAvailable(QImage image);
+        //void newImageAvailable(QImage image);
+        void imageDataAvailable(QByteArray imageData);
         void newUserConnected(QString name);
         void timer(int durationLeft);
 

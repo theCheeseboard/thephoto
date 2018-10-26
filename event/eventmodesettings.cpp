@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QMenu>
 #include <QMenuBar>
+#include <QStackedWidget>
 #include "eventmodeuserindicator.h"
 
 EventModeSettings::EventModeSettings(QWidget *parent) :
@@ -20,44 +21,33 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
         this->show();
     });
 
+    //Set up macOS menu bar
     QMenuBar* menuBar = new QMenuBar(this);
+
+    saveDir.setPath(QDir::homePath() + "/Pictures/thePhoto");
 
     ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(16, 16));
     ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
     ui->openMissionControl->setIcon(QIcon("/Applications/Mission Control.app/Contents/Resources/Expose.icns"));
     ui->monitorNumber->setMaximum(QApplication::desktop()->screenCount());
 
-    if (QNetworkInterface::allAddresses().count() < 3) {
-        showDialog->setCode(tr("Error"));
-    } else {
-        QHostAddress addr = QNetworkInterface::allAddresses().at(2);
+    for (QHostAddress addr : QNetworkInterface::allAddresses()) {
+        if (addr.isLoopback()) continue;
+        if (addr.isLinkLocal()) continue;
 
-        for (QHostAddress addr : QNetworkInterface::allAddresses()) {
-            if (addr.isLoopback()) continue;
-            if (addr.isLinkLocal()) continue;
+        QString code = QString("%1").arg(addr.toIPv4Address(), 10, 10, QChar('0'));
+        code.insert(5, " ");
 
-            QString code = QString("%1").arg(addr.toIPv4Address(), 10, 10, QChar('0'));
-            code.insert(5, " ");
-
-            server = new EventServer(this);
-            server->listen(QHostAddress::Any, 26157);
-            connect(server, SIGNAL(connectionAvailable(EventSocket*)), this, SLOT(newConnection(EventSocket*)));
-            connect(server, &EventServer::ready, [=] {
-                showDialog->setCode(code);
-            });
-            connect(server, &EventServer::error, [=](QString error) {
-                showDialog->showError(error);
-            });
-        }
+        server = new EventServer(this);
+        server->listen(QHostAddress::Any, 26157);
+        connect(server, SIGNAL(connectionAvailable(EventSocket*)), this, SLOT(newConnection(EventSocket*)));
+        connect(server, &EventServer::ready, [=] {
+            showDialog->setCode(code);
+        });
+        connect(server, &EventServer::error, [=](QString error) {
+            showDialog->showError(error);
+        });
     }
-
-    #ifdef Q_OS_MAC
-        ui->useMonitorLabel->setVisible(false);
-        ui->monitorNumber->setVisible(false);
-    #else
-       ui->useMissionControlLabel->setVisible(false);
-       ui->openMissionControl->setVisible(false);
-    #endif
 }
 
 EventModeSettings::~EventModeSettings()
@@ -68,9 +58,18 @@ EventModeSettings::~EventModeSettings()
 
 void EventModeSettings::show() {
     if (QApplication::screens().count() == 1 && QSysInfo::productType() != "osx") {
-        ui->useMonitorLabel->setVisible(false);
-        ui->monitorNumber->setVisible(false);
+        ui->displaysSettingStack->setCurrentIndex(2); //Only one display
     } else {
+        if (QSysInfo::productType() == "osx") {
+            ui->displaysSettingStack->setCurrentIndex(1); //Mission Control
+        } else {
+            if (QApplication::screens().count() == 2) {
+                ui->displaysSettingStack->setCurrentIndex(3); //Swap Displays
+            } else {
+                ui->displaysSettingStack->setCurrentIndex(0); //Spin Box
+            }
+        }
+
         showDialog->showFullScreen(1);
         ui->backToEventModeButton->setVisible(false);
     }
@@ -142,7 +141,40 @@ void EventModeSettings::newConnection(EventSocket* sock) {
     EventModeUserIndicator* userIndicator = new EventModeUserIndicator(sock);
     showDialog->addToProfileLayout(userIndicator);
 
-    connect(sock, SIGNAL(newImageAvailable(QImage)), showDialog, SLOT(showNewImage(QImage)));
+    connect(sock, &EventSocket::imageDataAvailable, [=](QByteArray imageData) {
+        //Write out to file
+
+        QDir endDir = saveDir;
+        if (ui->sessionNameLineEdit->text() == "") {
+            endDir.setPath(endDir.absoluteFilePath(tr("Uncategorized")));
+        } else {
+            endDir.setPath(endDir.absoluteFilePath(ui->sessionNameLineEdit->text()));
+        }
+
+        if (ui->storeUserSubfolders->isChecked()) {
+            endDir.setPath(endDir.absoluteFilePath(sock->deviceName()));
+        }
+
+        if (!endDir.exists()) {
+            endDir.mkpath(".");
+        }
+
+        QFile image(endDir.absoluteFilePath("Image_" + QDateTime::currentDateTime().toString("yyMMdd-hhmmsszzz") + ".jpg"));
+        image.open(QFile::ReadWrite);
+        image.write(imageData);
+        image.flush();
+        image.close();
+
+        QImageReader reader(image.fileName());
+        reader.setAutoTransform(true);
+        QImage i = reader.read();
+
+        if (i.isNull()) {
+
+        } else {
+            showDialog->showNewImage(i);
+        }
+    });
     connect(sock, &EventSocket::newUserConnected, [=](QString name) {
         new EventNotification(tr("User Connected"), name, showDialog);
 
@@ -226,4 +258,14 @@ void EventModeSettings::on_backToEventModeButton_clicked()
 void EventModeSettings::on_openMissionControl_clicked()
 {
     QProcess::startDetached("open -a \"Mission Control\"");
+}
+
+void EventModeSettings::on_swapDisplayButton_clicked()
+{
+    //Swap the displays
+    if (ui->monitorNumber->value() == 1) {
+        ui->monitorNumber->setValue(2);
+    } else {
+        ui->monitorNumber->setValue(1);
+    }
 }

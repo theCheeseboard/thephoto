@@ -94,7 +94,8 @@ TRANSLATIONS += translations/vi_VN.ts \
     translations/no_NO.ts \
     translations/ro_RO.ts \
     translations/cy_GB.ts \
-    translations/fr_FR.ts
+    translations/fr_FR.ts \
+    translations/ur_PK.ts
 
 qtPrepareTool(LUPDATE, lupdate)
 genlang.commands = "$$LUPDATE -no-obsolete -source-language en_US $$_PRO_FILE_"
