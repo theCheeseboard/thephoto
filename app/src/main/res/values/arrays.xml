@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_sound_type_entries">
+        <item>@string/pref_sound_type_entries_1</item>
+        <item>@string/pref_sound_type_entries_2</item>
+    </string-array>
+
+    <string-array name="pref_sound_type_values">
+        <item>ping</item>
+        <item>vrabbers</item>
+    </string-array>
+</resources>

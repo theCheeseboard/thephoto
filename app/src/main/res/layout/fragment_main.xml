@@ -76,11 +76,11 @@
 
         <EditText
             android:id="@+id/codeText"
-            android:layout_width="368dp"
-            android:layout_height="49dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:ems="10"
             android:hint="@string/code_hint"
-            android:imeOptions="actionGo"
+            android:imeOptions="actionGo|flagNoExtractUi"
             android:inputType="number"
             android:maxLength="11"
             android:singleLine="true"

@@ -4,8 +4,8 @@
     <string name="go_button">Go</string>
     <string name="code_hint">Code</string>
     <string name="connecting_prompt">Connecting to thePhoto...</string>
-    <string name="invalid_code_title">Invalid Code</string>
-    <string name="invalid_code_message">You\'ve entered an invalid code.</string>
+    <string name="invalid_code_title">That didn\'t work.</string>
+    <string name="invalid_code_message">We can\'t seem to get to that computer. Check that you\'ve got the code correct and that you\'re connected to the correct WiFi network.</string>
     <string name="ok">OK</string>
 
     <string name="title_activity_camera">Camera</string>
@@ -39,6 +39,9 @@
     <string name="timer_value_3sec">3 seconds</string>
     <string name="timer_value_10sec">10 seconds</string>
 
+    <string name="pref_sound_type_entries_1">Ping</string>
+    <string name="pref_sound_type_entries_2">turtleTimer</string>
+
     <!-- Strings related to Onboarding -->
     <string name="onboarding_welcome">Welcome to thePhoto!</string>
     <string name="onboarding_welcome_description">Let\'s get you taking photos and showing them on the big screen!</string>
@@ -47,4 +50,5 @@
     <string name="onboarding_identify_title">Who are you?</string>
     <string name="onboarding_identify_why">This will be used to identify yourself on the big screen. You can always change this later in Settings.</string>
     <string name="onboarding_identify_display_name">Display Name</string>
+    <string name="open_wifi_settings">Open Wi-Fi Settings</string>
 </resources>

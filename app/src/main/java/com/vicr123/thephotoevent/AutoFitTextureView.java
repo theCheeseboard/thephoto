@@ -17,7 +17,10 @@
 package com.vicr123.thephotoevent;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Point;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.TextureView;
 
 /**
@@ -27,7 +30,6 @@ public class AutoFitTextureView extends TextureView {
 
     private int mRatioWidth = 0;
     private int mRatioHeight = 0;
-
     public AutoFitTextureView(Context context) {
         this(context, null);
     }
@@ -72,5 +74,4 @@ public class AutoFitTextureView extends TextureView {
             }
         }
     }
-
 }

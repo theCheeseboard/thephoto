@@ -4,8 +4,6 @@
     <string name="go_button">Los</string>
     <string name="code_hint">Code</string>
     <string name="connecting_prompt">Verbinde mit thePhoto...</string>
-    <string name="invalid_code_title">Ungültiger Code</string>
-    <string name="invalid_code_message">Du hast einen Ungültigen Code eingegeben.</string>
     <string name="ok">OK</string>
 
     <string name="title_activity_camera">Kamera</string>

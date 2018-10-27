@@ -4,8 +4,6 @@
     <string name="go_button">Start</string>
     <string name="code_hint">Code</string>
     <string name="connecting_prompt">Aan het verbinden met thePhoto...</string>
-    <string name="invalid_code_title">Ongeldige code</string>
-    <string name="invalid_code_message">Je hebt een ongeldige code ingevoerd.</string>
     <string name="ok">OK</string>
 
     <string name="title_activity_camera">Camera</string>

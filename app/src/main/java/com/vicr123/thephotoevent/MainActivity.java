@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -70,7 +71,7 @@ class ConnectionTask extends AsyncTask<Object, Integer, Object> {
                 @Override
                 public void run() {
                     //Change page
-                    context.pager.setCurrentItem(2);
+                    context.pager.setCurrentItem(MainActivity.PAGE_ERROR);
                     context = null;
                 }
             });
@@ -101,7 +102,7 @@ class ConnectionTask extends AsyncTask<Object, Integer, Object> {
         super.onCancelled();
 
         //Change page
-        context.pager.setCurrentItem(2);
+        context.pager.setCurrentItem(MainActivity.PAGE_ERROR);
 
         context = null;
     }
@@ -110,6 +111,10 @@ class ConnectionTask extends AsyncTask<Object, Integer, Object> {
 public class MainActivity extends AppCompatActivity {
     ViewPager pager;
     SectionsPagerAdapter pagerAdapter;
+
+    static final int PAGE_INITIAL = 0;
+    static final int PAGE_CONNECTING = 1;
+    static final int PAGE_ERROR = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,12 +163,12 @@ public class MainActivity extends AppCompatActivity {
         String code = ((EditText) findViewById(R.id.codeText)).getText().toString();
         code = code.replace(" ", "");
         if (code.length() != 10) {
-            pager.setCurrentItem(2);
+            pager.setCurrentItem(PAGE_ERROR);
             return;
         }
 
         //Change page
-        pager.setCurrentItem(1);
+        pager.setCurrentItem(PAGE_CONNECTING);
 
         new ConnectionTask().execute(this, code);
     }
@@ -195,8 +200,13 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(i);
     }
 
+    public void openWifiSettings(View view) {
+        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+        pager.setCurrentItem(PAGE_INITIAL);
+    }
+
     public void returnToConnectionScreen(View view) {
-        pager.setCurrentItem(0);
+        pager.setCurrentItem(PAGE_INITIAL);
     }
 
     @Override

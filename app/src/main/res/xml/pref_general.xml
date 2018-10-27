@@ -12,6 +12,13 @@
         android:singleLine="true"
         android:title="@string/pref_title_display_name" />
 
+    <ListPreference
+        android:key="sound_type"
+        android:defaultValue="ping"
+        android:entries="@array/pref_sound_type_entries"
+        android:entryValues="@array/pref_sound_type_values"
+        android:title="Sound Type"/>
+
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it. -->
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->

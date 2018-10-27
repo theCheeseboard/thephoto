@@ -28,12 +28,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.SensorManager;
@@ -46,6 +48,7 @@ import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
+import android.hardware.camera2.params.MeteringRectangle;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
@@ -55,6 +58,7 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -62,12 +66,14 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 import android.util.Size;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.TextureView;
@@ -82,6 +88,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -135,36 +142,50 @@ public class CameraActivity extends AppCompatActivity {
     CameraDevice device;
     CaptureRequest.Builder previewRequestBuilder;
     CameraCaptureSession captureSession;
-    CaptureRequest previewRequest;
     Semaphore cameraOpenCloseLock = new Semaphore(1);
+    MediaActionSound shutterSound;
+    CameraHudView cameraHud;
     int state = STATE_PREVIEW;
     int currentOrientation;
     int flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
     int currentCameraOrientation = CameraCharacteristics.LENS_FACING_BACK;
+    boolean lockAF = false;
+    boolean processingAF = false;
 
     boolean canFlash, canFlip;
 
     CountDownTimer captureTimer;
     int timerDelay;
-    MediaPlayer timerHighBeep, timerBeep;
+    MediaPlayer timerHighBeep, timerBeep, timer10, timer3;
 
     BroadcastReceiver closeReceiver;
     boolean userRequestedCloseFromNotification = false;
 
     CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
         private void process(CaptureResult result) {
+            Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);
+            if (afState != null) {
+                cameraHud.setAfState(afState);
+            }
+
             switch (state) {
                 case STATE_PREVIEW: {
                     // We have nothing to do when the camera preview is working normally.
                     break;
                 }
                 case STATE_WAITING_LOCK: {
-                    Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);
                     if (afState == null) {
-                        captureStillPicture();
-                    } else if (CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState ||
-                            CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
-                        // CONTROL_AE_STATE can be null on some devices
+                        //Wait a bit to see if the state comes in
+                        background.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (state == STATE_WAITING_LOCK) {
+                                    state = STATE_PICTURE_TAKEN;
+                                    captureStillPicture();
+                                }
+                            }
+                        }, 250);
+                    } else if (CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED == afState || CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED == afState) {
                         Integer aeState = result.get(CaptureResult.CONTROL_AE_STATE);
                         if (aeState == null || aeState == CaptureResult.CONTROL_AE_STATE_CONVERGED) {
                             state = STATE_PICTURE_TAKEN;
@@ -224,13 +245,13 @@ public class CameraActivity extends AppCompatActivity {
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO);
 
             // Use the same AE and AF modes as the preview.
-            captureBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+            captureBuilder.set(CaptureRequest.CONTROL_AF_MODE, previewRequestBuilder.get(CaptureRequest.CONTROL_AF_MODE));
+            captureBuilder.set(CaptureRequest.CONTROL_AE_MODE, previewRequestBuilder.get(CaptureRequest.CONTROL_AE_MODE));
+            captureBuilder.set(CaptureRequest.CONTROL_AF_REGIONS, previewRequestBuilder.get(CaptureRequest.CONTROL_AF_REGIONS));
+            captureBuilder.set(CaptureRequest.CONTROL_AE_REGIONS, previewRequestBuilder.get(CaptureRequest.CONTROL_AE_REGIONS));
 
             // Orientation
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, getOrientation(currentOrientation));
-
-            //Flash
-            captureBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
 
             CameraCaptureSession.CaptureCallback CaptureCallback = new CameraCaptureSession.CaptureCallback() {
                 @Override
@@ -311,6 +332,7 @@ public class CameraActivity extends AppCompatActivity {
         //return (sensorOrientation + orientation + 360) % 360;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -318,6 +340,7 @@ public class CameraActivity extends AppCompatActivity {
 
         txView = findViewById(R.id.viewfinder);
         imagesLayout = findViewById(R.id.pendingImagesContainer);
+        cameraHud = findViewById(R.id.cameraHudView);
 
         final CameraActivity context = this;
         sock.setOnClose(new Runnable() {
@@ -362,6 +385,83 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
+        txView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        try {
+                            CameraCharacteristics chars = ((CameraManager) getSystemService(CAMERA_SERVICE)).getCameraCharacteristics(cameraId);
+
+                            //Get the coordinates that were tapped
+                            //float x = motionEvent.getX();
+                            //float y = motionEvent.getY();
+
+                            Rect sensorArraySize = chars.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+
+                            //Scale the coordinates
+                            //x = x * txView.getAspectRatio();
+                            //y = y * txView.getAspectRatio();
+                            float x = (motionEvent.getY() / txView.getHeight()) * sensorArraySize.width();
+                            float y = (motionEvent.getX() / txView.getWidth()) * sensorArraySize.height();
+
+                            cameraHud.setAfPoint(new Point((int) motionEvent.getX(), (int) motionEvent.getY()));
+                            cameraHud.setFixedFocus(true);
+
+                            MeteringRectangle region = new MeteringRectangle((int) x, (int) y, 300, 300, MeteringRectangle.METERING_WEIGHT_MAX - 1);
+                            MeteringRectangle[] regions = {
+                                    region
+                            };
+
+                            //Stop repeating request
+                            captureSession.stopRepeating();
+
+                            //Cancel any other AFs
+                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
+                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AE_MODE_OFF);
+                            captureSession.capture(previewRequestBuilder.build(), null, background);
+
+
+                            if (chars.get(CameraCharacteristics.CONTROL_MAX_REGIONS_AF) >= 1) {
+                                previewRequestBuilder.set(CaptureRequest.CONTROL_AF_REGIONS, regions);
+                            }
+                            if (chars.get(CameraCharacteristics.CONTROL_MAX_REGIONS_AE) >= 1) {
+                                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_REGIONS, regions);
+                            }
+
+                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_START);
+                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_AUTO);
+                            previewRequestBuilder.setTag("FOCUS");
+                            lockAF = true;
+                            processingAF = true;
+
+                            //Fire one request
+                            captureSession.capture(previewRequestBuilder.build(), new CameraCaptureSession.CaptureCallback() {
+                                @Override
+                                public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+                                    super.onCaptureCompleted(session, request, result);
+
+                                    previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_IDLE);
+                                    previewRequestBuilder.setTag(null);
+                                    processingAF = false;
+
+                                    //Start preview again
+                                    try {
+                                        captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, background);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
+
         orientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
             @Override
             public void onOrientationChanged(int o) {
@@ -373,11 +473,14 @@ public class CameraActivity extends AppCompatActivity {
 
         timerHighBeep = MediaPlayer.create(this, R.raw.timer_beep_sound_high);
         timerBeep = MediaPlayer.create(this, R.raw.timer_beep_sound);
+        timer10 = MediaPlayer.create(this, R.raw.tenseconds);
+        timer3 = MediaPlayer.create(this, R.raw.threeseconds);
+        shutterSound = new MediaActionSound();
 
         //Set up connected notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //Set up notification channel on Android Oreo
-            NotificationChannel channel = new NotificationChannel("connected_notification", getString(R.string.connected_notification_channel_description), NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("connected_notification", getString(R.string.connected_notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription(getString(R.string.connected_notification_channel_description));
 
             NotificationManager mgr = getSystemService(NotificationManager.class);
@@ -611,19 +714,25 @@ public class CameraActivity extends AppCompatActivity {
 
     private void refreshImageReader(final Size largest) {
         final CameraActivity activity = this;
-        imageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, 1);
+        imageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, 5);
         imageReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
             @Override
             public void onImageAvailable(ImageReader imageReader) {
-                new MediaActionSound().play(MediaActionSound.SHUTTER_CLICK);
+                if (processingAF) {
+                    imageReader.acquireNextImage().close();
+                    //refreshImageReader(largest);
+                    return; //Don't do anything
+                }
+                shutterSound.play(MediaActionSound.SHUTTER_CLICK);
 
                 Image image = imageReader.acquireLatestImage();
                 ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                 byte[] bytes = new byte[buffer.capacity()];
                 buffer.get(bytes);
                 final Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
+                image.close();
 
-                refreshImageReader(largest);
+                //refreshImageReader(largest);
 
                 final ProgressBar progress = new ProgressBar(activity, null, android.R.attr.progressBarStyleHorizontal);
                 //spinner.setVisibility(View.GONE);
@@ -662,7 +771,7 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 });
 
-                refreshImageReader(largest);
+                //refreshImageReader(largest);
                 createCameraPreviewSession();
                 openCamera(txView.getWidth(), txView.getHeight());
 
@@ -733,9 +842,7 @@ public class CameraActivity extends AppCompatActivity {
             previewRequestBuilder.addTarget(surface);
 
             // Here, we create a CameraCaptureSession for camera preview.
-            device.createCaptureSession(Arrays.asList(surface, imageReader.getSurface()),
-                    new CameraCaptureSession.StateCallback() {
-
+            device.createCaptureSession(Arrays.asList(surface, imageReader.getSurface()), new CameraCaptureSession.StateCallback() {
                         @Override
                         public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
                             // The camera is already closed
@@ -746,8 +853,13 @@ public class CameraActivity extends AppCompatActivity {
                             // When the session is ready, we start displaying the preview.
                             captureSession = cameraCaptureSession;
                             try {
-                                // Auto focus should be continuous for camera preview.
-                                previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+                                if (lockAF) {
+                                    //Set AF to auto
+                                    previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_AUTO);
+                                } else {
+                                    //Set AF to continuous
+                                    previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+                                }
                                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
 
                                 // Finally, we start displaying the camera preview.
@@ -899,9 +1011,21 @@ public class CameraActivity extends AppCompatActivity {
 
     public void Capture(View view) {
         final TextView hudText = findViewById(R.id.timer_hud_text);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        final String soundType = prefs.getString("sound_type", "vrabbers");
+
         if (captureTimer == null) {
             hudText.setVisibility(View.VISIBLE);
             hudText.setText(Integer.toString(timerDelay / 1000));
+
+            if (soundType.equals("vrabbers")) {
+                if (timerDelay == 10000) {
+                    timer10.start();
+                } else if (timerDelay == 3000) {
+                    timer3.start();
+                }
+            }
 
             //Start counting down
             final CameraActivity activity = this;
@@ -913,10 +1037,12 @@ public class CameraActivity extends AppCompatActivity {
                     sock.sendCommand("TIMER " + seconds);
                     hudText.setText(Integer.toString(seconds));
 
-                    if (seconds <= 3) {
-                        timerHighBeep.start();
-                    } else {
-                        timerBeep.start();
+                    if (!soundType.equals("vrabbers")) {
+                        if (seconds <= 3) {
+                            timerHighBeep.start();
+                        } else {
+                            timerBeep.start();
+                        }
                     }
                 }
 
@@ -937,6 +1063,11 @@ public class CameraActivity extends AppCompatActivity {
             captureTimer = null;
             showAuxiliaryButtons();
             hudText.setVisibility(View.GONE);
+
+            if (soundType.equals("vrabbers")) {
+                if (timer10.isPlaying()) timer10.stop();
+                if (timer3.isPlaying()) timer3.stop();
+            }
         }
     }
 
