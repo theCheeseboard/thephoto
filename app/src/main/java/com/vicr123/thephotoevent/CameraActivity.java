@@ -163,9 +163,16 @@ public class CameraActivity extends AppCompatActivity {
 
     CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
         private void process(CaptureResult result) {
-            Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);
+            final Integer afState = result.get(CaptureResult.CONTROL_AF_STATE);
             if (afState != null) {
-                cameraHud.setAfState(afState);
+                //Tell the HUD about the state
+                //Needs to be put on the end of the event loop for some reason
+                cameraHud.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        cameraHud.setAfState(afState);
+                    }
+                });
             }
 
             switch (state) {
