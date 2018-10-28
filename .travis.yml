@@ -1,0 +1,23 @@
+language: android
+jdk: oraclejdk8
+env:
+ global:
+ - ANDROID_API=27
+ - ANDROID_BUILD_TOOLS=24.0.2
+ - ADB_INSTALL_TIMEOUT=5
+android:
+ components:
+ - tools
+ - platform-tools
+ - tools
+ - build-tools-$ANDROID_BUILD_TOOLS
+ - android-$ANDROID_API
+ - extra
+ - addon-google_apis-google-27
+ licenses:
+ - android-sdk-preview-license-.+
+ - android-sdk-license-.+
+ - google-gdk-license-.+
+script:
+ - export STAGE=script
+ - ./travis.sh
