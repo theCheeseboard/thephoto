@@ -807,7 +807,7 @@ public class CameraActivity extends AppCompatActivity {
         }
 
         int rotation = getWindowManager().getDefaultDisplay().getRotation();
-        Matrix matrix = new Matrix();
+        final Matrix matrix = new Matrix();
         RectF viewRect = new RectF(0, 0, width, height);
         RectF bufferRect = new RectF(0, 0, previewSize.getHeight(), previewSize.getWidth());
         float centerX = viewRect.centerX();
@@ -823,7 +823,13 @@ public class CameraActivity extends AppCompatActivity {
         } else if (Surface.ROTATION_180 == rotation) {
             matrix.postRotate(180, centerX, centerY);
         }
-        txView.setTransform(matrix);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                txView.setTransform(matrix);
+            }
+        });
     }
 
     private void createCameraPreviewSession() {
@@ -1082,6 +1088,7 @@ public class CameraActivity extends AppCompatActivity {
                 flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
                 findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashauto);
                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
 
                 // Finally, we start displaying the camera preview.
                 try {
@@ -1098,6 +1105,7 @@ public class CameraActivity extends AppCompatActivity {
                 flashType = CaptureRequest.CONTROL_AE_MODE_ON;
                 findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashoff);
                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
 
                 // Finally, we start displaying the camera preview.
                 try {
@@ -1114,6 +1122,7 @@ public class CameraActivity extends AppCompatActivity {
                 flashType = CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH;
                 findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashon);
                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_SINGLE);
 
                 // Finally, we start displaying the camera preview.
                 try {
