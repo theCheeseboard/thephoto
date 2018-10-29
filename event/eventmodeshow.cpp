@@ -11,6 +11,12 @@
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QKeyEvent>
+#include <QDateTime>
+
+#ifdef Q_OS_LINUX
+    #include <QDBusConnection>
+    #include <QDBusConnectionInterface>
+#endif
 
 EventModeShow::EventModeShow(QWidget *parent) :
     QDialog(parent),
@@ -47,6 +53,13 @@ EventModeShow::EventModeShow(QWidget *parent) :
     scrollRedactor->raise();
 
     ui->bottomFrameStack->setCurrentIndex(0);
+
+    QTimer* timer = new QTimer(this);
+    timer->setInterval(1000);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->start();
+
+    musicProvider = new MusicProvider(this);
 }
 
 EventModeShow::~EventModeShow()
@@ -88,8 +101,8 @@ void EventModeShow::showFullScreen(int monitor) {
     QDialog::showFullScreen();
 }
 
-void EventModeShow::showNewImage(QImage image) {
-    pendingImages.push(QPixmap::fromImage(image));
+void EventModeShow::showNewImage(ImageProperties image) {
+    pendingImages.push(image);
     tryNewImage();
 }
 
@@ -137,10 +150,12 @@ void EventModeShow::tryNewImage() {
 void EventModeShow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
 
+    int height = this->height() - ui->bottomFrameStack->height();
+
     QRect pixmapRect;
-    pixmapRect.setSize(px.size().scaled(this->width(), this->height() - ui->bottomFrameStack->height(), Qt::KeepAspectRatio) * animationTimerPx->currentValue().toFloat());
+    pixmapRect.setSize(px.image.size().scaled(this->width(), height, Qt::KeepAspectRatio) * animationTimerPx->currentValue().toFloat());
     pixmapRect.moveLeft(this->width() / 2 - pixmapRect.width() / 2);
-    pixmapRect.moveTop((this->height() - ui->bottomFrameStack->height()) / 2 - pixmapRect.height() / 2);
+    pixmapRect.moveTop(height / 2 - pixmapRect.height() / 2);
 
     painter.setBrush(Qt::black);
     painter.setPen(Qt::transparent);
@@ -149,11 +164,51 @@ void EventModeShow::paintEvent(QPaintEvent *event) {
     QRect blurredRect;
     blurredRect.setSize(blurred.size());
     blurredRect.moveLeft(this->width() / 2 - blurredRect.width() / 2);
-    blurredRect.moveTop((this->height() - ui->bottomFrameStack->height()) / 2 - blurredRect.height() / 2);
+    blurredRect.moveTop(height / 2 - blurredRect.height() / 2);
 
     painter.setOpacity(animationTimerPxOpacity->currentValue().toFloat());
     painter.drawPixmap(blurredRect, blurred);
-    painter.drawPixmap(pixmapRect, px);
+    painter.drawPixmap(pixmapRect, px.image);
+
+    if (showVignette) {
+        //Draw vignette
+        QLinearGradient darkener;
+        darkener.setColorAt(0, QColor::fromRgb(0, 0, 0, 0));
+        darkener.setColorAt(1, QColor::fromRgb(0, 0, 0, 200));
+
+        darkener.setStart(0, 0);
+        darkener.setFinalStop(0, height);
+
+        painter.setBrush(darkener);
+        painter.drawRect(0, 0, this->width(), height);
+
+        painter.setPen(Qt::white);
+        int currentX = 30 * theLibsGlobal::getDPIScaling();
+        int baselineY;
+
+        baselineY = height - 50 * theLibsGlobal::getDPIScaling();
+
+        if (showClock) {
+            painter.setFont(QFont(this->font().family(), 20));
+            QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
+            int width = painter.fontMetrics().width(time);
+            painter.drawText(currentX, baselineY, time);
+
+            currentX += width + 9 * theLibsGlobal::getDPIScaling();
+        }
+
+        if (musicProvider->getMusicString() != "" && showAudio) {
+            painter.setFont(QFont(this->font().family(), 10));
+            painter.drawText(30 * theLibsGlobal::getDPIScaling(), baselineY + painter.fontMetrics().height(), musicProvider->getMusicString());
+        }
+
+        if (showAuthor) {
+            painter.setFont(QFont(this->font().family(), 10));
+            QString author = tr("by %1").arg(px.author);
+            int width = painter.fontMetrics().width(px.author);
+            painter.drawText(this->width() - width - 30 * theLibsGlobal::getDPIScaling(), baselineY, author);
+        }
+    }
 }
 
 void EventModeShow::addToProfileLayout(QWidget *widget) {
@@ -178,19 +233,19 @@ void EventModeShow::updateBlurredImage() {
 
     QGraphicsScene scene;
     QGraphicsPixmapItem item;
-    item.setPixmap(px);
+    item.setPixmap(px.image);
     item.setGraphicsEffect(blur);
     scene.addItem(&item);
 
     QRect pixmapRect;
-    pixmapRect.setSize(px.size().scaled(this->width(), this->height() - ui->bottomFrameStack->height(), Qt::KeepAspectRatioByExpanding));
+    pixmapRect.setSize(px.image.size().scaled(this->width(), this->height() - ui->bottomFrameStack->height(), Qt::KeepAspectRatioByExpanding));
     pixmapRect.moveLeft(this->width() / 2 - pixmapRect.width() / 2);
     pixmapRect.moveTop((this->height() - ui->bottomFrameStack->height()) / 2 - pixmapRect.height() / 2);
 
     blurred = QPixmap(pixmapRect.size() + QSize(radius * 2, radius * 2));
     QPainter painter(&blurred);
     blurred.fill(Qt::black);
-    scene.render(&painter, QRectF(), QRectF(-radius, -radius, px.width() + radius, px.height() + radius));
+    scene.render(&painter, QRectF(), QRectF(-radius, -radius, px.image.width() + radius, px.image.height() + radius));
 }
 
 bool EventModeShow::eventFilter(QObject *watched, QEvent *event) {
@@ -221,4 +276,11 @@ void EventModeShow::keyPressEvent(QKeyEvent *event) {
             emit returnToBackstage();
         }
     }
+}
+
+void EventModeShow::configureVignette(bool showVignette, bool showClock, bool showAuthor, bool showAudio) {
+    this->showVignette = showVignette;
+    this->showClock = showClock;
+    this->showAudio = showAudio;
+    this->showAuthor = showAuthor;
 }

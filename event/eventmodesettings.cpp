@@ -48,6 +48,11 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
             showDialog->showError(error);
         });
     }
+
+    connect(ui->showVignette, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
+    connect(ui->showAudio, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
+    connect(ui->showAuthor, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
+    connect(ui->showClock, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
 }
 
 EventModeSettings::~EventModeSettings()
@@ -172,7 +177,10 @@ void EventModeSettings::newConnection(EventSocket* sock) {
         if (i.isNull()) {
 
         } else {
-            showDialog->showNewImage(i);
+            EventModeShow::ImageProperties imageProperties;
+            imageProperties.image = QPixmap::fromImage(i);
+            imageProperties.author = sock->deviceName();
+            showDialog->showNewImage(imageProperties);
         }
     });
     connect(sock, &EventSocket::newUserConnected, [=](QString name) {
@@ -267,5 +275,19 @@ void EventModeSettings::on_swapDisplayButton_clicked()
         ui->monitorNumber->setValue(2);
     } else {
         ui->monitorNumber->setValue(1);
+    }
+}
+
+void EventModeSettings::configureVignette() {
+    showDialog->configureVignette(ui->showVignette->isChecked(), ui->showClock->isChecked(), ui->showAuthor->isChecked(), ui->showAudio->isChecked());
+
+    if (ui->showVignette->isChecked()) {
+        ui->showAudio->setEnabled(true);
+        ui->showAuthor->setEnabled(true);
+        ui->showClock->setEnabled(true);
+    } else {
+        ui->showAudio->setEnabled(false);
+        ui->showAuthor->setEnabled(false);
+        ui->showClock->setEnabled(false);
     }
 }

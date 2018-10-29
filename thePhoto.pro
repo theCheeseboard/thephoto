@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network dbus concurrent
+QT       += core gui network concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,7 +23,7 @@ macx {
 }
 
 unix:!macx {
-    QT += thelib
+    QT += thelib dbus
     TARGET = thephoto
 }
 
@@ -58,6 +58,21 @@ HEADERS  += mainwindow.h \
     event/eventnotification.h \
     aboutdialog.h \
     event/eventmodeuserindicator.h
+
+macx {
+    SOURCES += event/musicprovider/musicprovider_mac.cpp
+    HEADERS += event/musicprovider/musicprovider_mac.h
+}
+
+unix:!macx {
+    SOURCES += event/musicprovider/musicprovider_linux.cpp
+    HEADERS += event/musicprovider/musicprovider_linux.h
+}
+
+win32 {
+    SOURCES += event/musicprovider/musicprovider_win.cpp
+    HEADERS += event/musicprovider/musicprovider_win.h
+}
 
 FORMS    += mainwindow.ui \
     managelibrary.ui \

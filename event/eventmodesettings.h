@@ -57,6 +57,8 @@ class EventModeSettings : public QDialog
 
         void on_swapDisplayButton_clicked();
 
+        void configureVignette();
+
     signals:
         void done();
 
