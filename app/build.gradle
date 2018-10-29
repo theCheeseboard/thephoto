@@ -4,7 +4,7 @@ android {
     signingConfigs {
         release
     }
-    
+
     compileSdkVersion 26
     buildToolsVersion '28.0.3'
     defaultConfig {
@@ -31,7 +31,7 @@ android {
     if (isRunningOnTravis) {
         signingConfigs.release.storeFile = file("../keys.jks.enc")
         signingConfigs.release.storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
-        signingConfigs.release.keyAlias = System.getenv("uploadkey")
+        signingConfigs.release.keyAlias = "uploadkey"
         signingConfigs.release.keyPassword = System.getenv("ANDROID_KEYSTORE_KEY_PASSWORD")
     }
 }
