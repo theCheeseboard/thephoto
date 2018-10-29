@@ -21,6 +21,14 @@ android {
         disable 'MissingTranslation'
         abortOnError false
     }
+
+    def isRunningOnTravis = System.getenv("TRAVIS") == "true"
+    if (isRunningOnTravis) {
+        signingConfigs.release.storeFile = file("../keys.jks.enc")
+        signingConfigs.release.storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+        signingConfigs.release.keyAlias = System.getenv("uploadkey")
+        signingConfigs.release.keyPassword = System.getenv("ANDROID_KEYSTORE_KEY_PASSWORD")
+    }
 }
 
 dependencies {
