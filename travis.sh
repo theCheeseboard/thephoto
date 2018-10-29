@@ -3,6 +3,8 @@ if [ $STAGE = "before_install" ]; then
   tar -xvf secrets.tar
   cp google-play.json ~/
 elif [ $STAGE = "script" ]; then
+  ls keys.jks
+  
   ./gradlew assembleRelease;
   cp app/build/outputs/apk/release/app-release.apk ~/thePhoto-android.apk
 elif [ $STAGE = "after_success" ]; then
