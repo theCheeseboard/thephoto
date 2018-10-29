@@ -5,13 +5,25 @@ android {
         release
     }
 
+    def vcode
+    def isRunningOnTravis = System.getenv("TRAVIS") == "true"
+    if (isRunningOnTravis) {
+        signingConfigs.release.storeFile = file("../keys.jks")
+        signingConfigs.release.storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+        signingConfigs.release.keyAlias = "uploadkey"
+        signingConfigs.release.keyPassword = System.getenv("ANDROID_KEYSTORE_KEY_PASSWORD")
+        vcode = 1000 + Integer.valueOf(System.getenv("TRAVIS_BUILD_NUMBER"))
+    } else {
+        vcode = 1000
+    }
+
     compileSdkVersion 26
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.vicr123.thephotoevent"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 9
+        versionCode vcode
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -27,13 +39,6 @@ android {
         abortOnError false
     }
 
-    def isRunningOnTravis = System.getenv("TRAVIS") == "true"
-    if (isRunningOnTravis) {
-        signingConfigs.release.storeFile = file("../keys.jks")
-        signingConfigs.release.storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
-        signingConfigs.release.keyAlias = "uploadkey"
-        signingConfigs.release.keyPassword = System.getenv("ANDROID_KEYSTORE_KEY_PASSWORD")
-    }
 }
 
 dependencies {

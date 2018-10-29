@@ -23,8 +23,8 @@ script:
 - export STAGE=script
 - "./travis.sh"
 before_install:
-- openssl aes-256-cbc -K $encrypted_ed87c803ec54_key -iv $encrypted_ed87c803ec54_iv
-  -in keys.jks.enc -out keys.jks -d
+- export STAGE=before_install
+- "./travis.sh"
 after_success:
 - export STAGE=after_success
 - "./travis.sh"
