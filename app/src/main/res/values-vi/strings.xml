@@ -40,4 +40,11 @@
     <string name="onboarding_finish">Kết thúc</string>
     <string name="onboarding_identify_title">Tên bạn là gì?</string>
     <string name="onboarding_identify_display_name">Tên dùng</string>
+<string name="invalid_code_title">Không kết nối được.</string>
+    <string name="invalid_code_message">Chúng tôi không thể kết nối với máy tính này. Kiểm tra xem mã đúng, và bạn đã kết nối với mạng Wi-Fi đúng.</string>
+    <string name="pref_sound_type_entries_1">Ping</string>
+    <string name="pref_sound_type_entries_2">turtleTimer</string>
+
+    <string name="onboarding_identify_why">Chúng tôi sẽ chiếu tên này trên màn hình lớn. Bạn thay dổi tên này trong Cài Đặt được.</string>
+    <string name="open_wifi_settings">Mở cài đặt Wi-Fi</string>
 </resources>
