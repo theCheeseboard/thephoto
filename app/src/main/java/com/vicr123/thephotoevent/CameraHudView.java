@@ -1,5 +1,6 @@
 package com.vicr123.thephotoevent;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -14,9 +15,10 @@ import android.view.View;
 
 public class CameraHudView extends View {
     int afState;
-    Point afPoint;
+    int afX = -1, afY = -1;
     boolean fixedFocus = false;
     float density;
+    int radius = 1000;
 
     Paint focusCircleFocusingPaint, focusCircleFocusedPaint, focusCircleFailedPaint;
 
@@ -65,7 +67,60 @@ public class CameraHudView extends View {
     }
 
     public void setAfPoint(Point afPoint) {
-        this.afPoint = afPoint;
+        if (afX == -1 || afY == -1) {
+            this.afX = afPoint.x;
+            this.afY = afPoint.y;
+
+            ValueAnimator radiusAnimation = ValueAnimator.ofInt(1000, 30);
+            radiusAnimation.setDuration(500);
+            radiusAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    radius = (int) valueAnimator.getAnimatedValue();
+
+                    invalidate();
+                }
+            });
+            radiusAnimation.start();
+        } else {
+            ValueAnimator xAnimation = ValueAnimator.ofInt(afX, afPoint.x);
+            xAnimation.setDuration(250);
+            xAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    afX = (int) valueAnimator.getAnimatedValue();
+
+                    invalidate();
+                }
+            });
+            xAnimation.start();
+
+            ValueAnimator yAnimation = ValueAnimator.ofInt(afY, afPoint.y);
+            yAnimation.setDuration(250);
+            yAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    afY = (int) valueAnimator.getAnimatedValue();
+
+                    invalidate();
+                }
+            });
+            yAnimation.start();
+
+            ValueAnimator radiusAnimation = ValueAnimator.ofInt(30, 80, 30);
+            radiusAnimation.setDuration(250);
+            radiusAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    radius = (int) valueAnimator.getAnimatedValue();
+
+                    invalidate();
+                }
+            });
+            radiusAnimation.start();
+        }
+
+
         invalidate();
     }
 
@@ -97,7 +152,7 @@ public class CameraHudView extends View {
                 default:
                     p = focusCircleFocusingPaint;
             }
-            canvas.drawCircle(afPoint.x, afPoint.y, 30 * density, p);
+            canvas.drawCircle(afX, afY, radius * density, p);
             //canvas.drawCircle(afPoint.x, afPoint.y, 100, focusCircleFocusingPaint);
         }
     }

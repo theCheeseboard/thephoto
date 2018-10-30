@@ -1,7 +1,8 @@
 <component name="CopyrightManager">
-  <settings>
+  <settings default="GPLv3">
     <module2copyright>
-      <element module="Project Files" copyright="GPLv3" />
+      <element module="All" copyright="GPLv3" />
+      <element module="AOSP" copyright="Android Apache" />
     </module2copyright>
   </settings>
 </component>

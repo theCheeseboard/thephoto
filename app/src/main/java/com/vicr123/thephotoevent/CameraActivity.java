@@ -1,17 +1,35 @@
 /*
- * Copyright 2017 The Android Open Source Project
+ *  Copyright 2017 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+/*
+ *  thePhoto Event Mode Client: Sends photos to thePhoto on a PC
+ *  Copyright (C) 2018 Victor Tran
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.vicr123.thephotoevent;
@@ -146,7 +164,7 @@ public class CameraActivity extends AppCompatActivity {
     MediaActionSound shutterSound;
     CameraHudView cameraHud;
     int state = STATE_PREVIEW;
-    int currentOrientation;
+    int currentOrientation = 0, currentCardinalOrientation = 0;
     int flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
     int currentCameraOrientation = CameraCharacteristics.LENS_FACING_BACK;
     boolean lockAF = false;
@@ -409,8 +427,11 @@ public class CameraActivity extends AppCompatActivity {
                             //Scale the coordinates
                             //x = x * txView.getAspectRatio();
                             //y = y * txView.getAspectRatio();
-                            float x = (motionEvent.getY() / txView.getHeight()) * sensorArraySize.width();
-                            float y = (motionEvent.getX() / txView.getWidth()) * sensorArraySize.height();
+                            float x = (motionEvent.getY() / txView.getHeight()) * sensorArraySize.width() - 150;
+                            float y = (motionEvent.getX() / txView.getWidth()) * sensorArraySize.height() - 150;
+
+                            if (x < 0) x = 0;
+                            if (y < 0) y = 0;
 
                             cameraHud.setAfPoint(new Point((int) motionEvent.getX(), (int) motionEvent.getY()));
                             cameraHud.setFixedFocus(true);
@@ -474,6 +495,25 @@ public class CameraActivity extends AppCompatActivity {
             public void onOrientationChanged(int o) {
                 if (o != OrientationEventListener.ORIENTATION_UNKNOWN) {
                     currentOrientation = 360 - o;
+
+                    int newCardinal;
+                    if (currentOrientation < 45) {
+                        newCardinal = 0;
+                    } else if (currentOrientation < 135) {
+                        newCardinal = 90;
+                    } else if (currentOrientation < 225) {
+                        newCardinal = 180;
+                    } else if (currentOrientation < 315) {
+                        newCardinal = 270;
+                    } else {
+                        newCardinal = 0;
+                    }
+
+                    if (currentCardinalOrientation != newCardinal) {
+                        currentCardinalOrientation = newCardinal;
+
+                        rotateViews();
+                    }
                 }
             }
         };
@@ -1022,11 +1062,29 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
+    void rotateViews() {
+        View[] viewsToChange = {
+                findViewById(R.id.button_flash),
+                findViewById(R.id.button_timer),
+                findViewById(R.id.button_flip),
+                findViewById(R.id.timer_hud_text)
+        };
+
+        for (View v : viewsToChange) {
+            if (v != null) {
+                v.animate()
+                        .rotation(currentCardinalOrientation)
+                        .setDuration(500)
+                        .setListener(null);
+            }
+        }
+    }
+
     public void Capture(View view) {
         final TextView hudText = findViewById(R.id.timer_hud_text);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final String soundType = prefs.getString("sound_type", "vrabbers");
+        final String soundType = prefs.getString("sound_type", "ping");
 
         if (captureTimer == null) {
             hudText.setVisibility(View.VISIBLE);
