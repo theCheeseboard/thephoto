@@ -17,7 +17,7 @@ elif [ $STAGE = "after_success" ]; then
   if [ $TRAVIS_BRANCH = "android-blueprint" ]; then
     echo "[TRAVIS] Pushing to Google Play"
     gem install fastlane
-    fastlane supply --apk_paths ['thePhoto-android.apk','thePhoto-wearos.apk'] --track beta --json_key google-play.json --package_name com.vicr123.thephotoevent
+    fastlane supply --apk_paths 'thePhoto-android.apk','thePhoto-wearos.apk' --track beta --json_key google-play.json --package_name com.vicr123.thephotoevent
     #fastlane supply --apk thePhoto-wearos.apk --track beta --json_key google-play.json --package_name com.vicr123.thephotoevent
   fi
 fi
