@@ -155,6 +155,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int STATE_WAITING_NON_PRECAPTURE = 3;
     private static final int STATE_PICTURE_TAKEN = 4;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+    public static boolean currentlyRunning = false;
     int sensorOrientation;
 
     class TxViewGestures extends ScaleGestureDetector.SimpleOnScaleGestureListener implements View.OnTouchListener {
@@ -659,6 +660,8 @@ public class CameraActivity extends AppCompatActivity {
 
         NotificationManagerCompat mgr = NotificationManagerCompat.from(this);
         mgr.notify(0, builder.build());
+
+        currentlyRunning = true;
 
         //Tell Wear OS that we're in
         wearableMessageClient = Wearable.getMessageClient(this);
@@ -1493,6 +1496,8 @@ public class CameraActivity extends AppCompatActivity {
         mgr.cancel(0);
 
         unregisterReceiver(closeReceiver);
+
+        currentlyRunning = false;
 
         super.onDestroy();
     }

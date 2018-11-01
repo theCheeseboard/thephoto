@@ -18,6 +18,9 @@
 
 package com.vicr123.thephotoevent;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,9 +33,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.wearable.CapabilityClient;
+import com.google.android.gms.wearable.CapabilityInfo;
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
 
 import org.json.JSONException;
@@ -48,7 +55,7 @@ public class CameraActivity extends WearableActivity {
     String nodeId;
     MessageClient messageClient;
     CarouselPicker timerPicker, flashPicker;
-    MessageClient.OnMessageReceivedListener wearableMessageReceivedListener;
+    MessageClient.OnMessageReceivedListener wearableMessageReceivedListener, capCheckMessageReceivedListener;
     boolean updatingState = false;
 
     @Override
@@ -96,6 +103,8 @@ public class CameraActivity extends WearableActivity {
             }
         };
 
+        final Context ctx = this;
+
         //Add items to carousels
         List<CarouselPicker.PickerItem> flashItems = new ArrayList<>();
         flashItems.add(new CarouselPicker.DrawableItem(R.drawable.flashauto_default));
@@ -132,6 +141,29 @@ public class CameraActivity extends WearableActivity {
                 }
             }
         };
+
+        capCheckMessageReceivedListener = new MessageClient.OnMessageReceivedListener() {
+            @Override
+            public void onMessageReceived(@NonNull MessageEvent messageEvent) {
+                if (messageEvent.getPath().equals("/capcheck")) {
+                    CapabilityClient cap = Wearable.getCapabilityClient(ctx);
+                    cap.getCapability("camera_active", CapabilityClient.FILTER_REACHABLE)
+                            .addOnCompleteListener(new OnCompleteListener<CapabilityInfo>() {
+                                @Override
+                                public void onComplete(@NonNull Task<CapabilityInfo> task) {
+                                    if (task.isSuccessful()) {
+                                        for (Node n : task.getResult().getNodes()) {
+                                            if (n.getId() == nodeId) return; //We're still connected so don't do anything
+                                        }
+
+                                        //We're done here
+                                        finish();
+                                    }
+                                }
+                            });
+                }
+            }
+        };
     }
 
     @Override
@@ -140,6 +172,7 @@ public class CameraActivity extends WearableActivity {
 
         Wearable.getCapabilityClient(this).addLocalCapability("camera_message");
         messageClient.addListener(wearableMessageReceivedListener, Uri.parse("wear://*/cameraaction"), MessageClient.FILTER_PREFIX);
+        messageClient.addListener(capCheckMessageReceivedListener, Uri.parse("wear://*/capcheck"), MessageClient.FILTER_LITERAL);
         messageClient.sendMessage(nodeId, "/cameraaction/requeststate", null);
     }
 
@@ -149,6 +182,23 @@ public class CameraActivity extends WearableActivity {
 
         Wearable.getCapabilityClient(this).removeLocalCapability("camera_message");
         messageClient.removeListener(wearableMessageReceivedListener);
+        messageClient.removeListener(capCheckMessageReceivedListener);
+    }
+
+    @Override
+    public void onEnterAmbient(Bundle ambientDetails) {
+        super.onEnterAmbient(ambientDetails);
+
+        findViewById(R.id.cameraLayoutRootView).setBackgroundColor(Color.BLACK);
+        findViewById(R.id.captureButton).setBackgroundResource(R.drawable.button_capture_ambient);
+    }
+
+    @Override
+    public void onExitAmbient() {
+        super.onExitAmbient();
+
+        findViewById(R.id.cameraLayoutRootView).setBackgroundResource(R.color.dark_grey);
+        findViewById(R.id.captureButton).setBackgroundResource(R.drawable.button_capture);
     }
 
     public void sendCaptureMessage(View view) {

@@ -106,17 +106,4 @@ public class WearableService extends WearableListenerService {
 
         }
     }
-
-    @Override
-    public void onCapabilityChanged(CapabilityInfo capabilityInfo) {
-        if (capabilityInfo.getName().equals("camera_active")) {
-            if (capabilityInfo.getNodes().size() == 0) {
-                //Remove notification
-                NotificationManagerCompat.from(this).cancel(0);
-            } else {
-                //Post notification
-                NotificationManagerCompat.from(this).notify(0, notificationBuilder.build());
-            }
-        }
-    }
 }
