@@ -3,6 +3,7 @@ jdk: oraclejdk8
 env:
   global:
   - ANDROID_API=26
+  - ANDROID_API_WEAR=28
   - ANDROID_BUILD_TOOLS=28.0.3
   - ADB_INSTALL_TIMEOUT=5
   - UPLOADTOOL_SUFFIX=android
@@ -13,6 +14,7 @@ android:
   - tools
   - build-tools-$ANDROID_BUILD_TOOLS
   - android-$ANDROID_API
+  - android-$ANDROID_API_WEAR
   - extra
   - addon-google_apis-google-27
   licenses:
