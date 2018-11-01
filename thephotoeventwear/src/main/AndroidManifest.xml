@@ -19,7 +19,6 @@
     package="com.vicr123.thephotoevent">
 
     <uses-feature android:name="android.hardware.type.watch" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -63,11 +62,6 @@
         <activity
             android:name=".CameraActivity"
             android:label="@string/title_activity_camera">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
