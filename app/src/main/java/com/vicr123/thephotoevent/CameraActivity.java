@@ -121,6 +121,8 @@ import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
 
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -673,6 +675,17 @@ public class CameraActivity extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         Log.wtf("wearable_message", e);
                     }
+                } else if (messageEvent.getPath().equals("/cameraaction/stateupdate")) {
+                    try {
+                        JSONObject state = new JSONObject(new String(messageEvent.getData(), "UTF-8"));
+
+                        setFlash(state.getInt("flash"));
+                        setTimer(state.getInt("timer"));
+                    } catch (Exception e) {
+                        Log.wtf("wearable_message", e);
+                    }
+                } else if (messageEvent.getPath().equals("/cameraaction/requeststate")) {
+                    sendStateUpdateMessage();
                 }
             }
         };
@@ -725,7 +738,7 @@ public class CameraActivity extends AppCompatActivity {
                 }
             }
         });
-        wearableMessageClient.addListener(wearableMessageReceivedListener, Uri.parse("wear://*/cameraaction"), MessageClient.FILTER_LITERAL);
+        wearableMessageClient.addListener(wearableMessageReceivedListener, Uri.parse("wear://*/cameraaction"), MessageClient.FILTER_PREFIX);
     }
 
     @Override
@@ -1290,6 +1303,36 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
+    void setFlash(int flashSetting) {
+        switch (flashSetting) {
+            case 0: //Auto
+                flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
+                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashauto);
+                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
+                break;
+            case 1: //Off
+                flashType = CaptureRequest.CONTROL_AE_MODE_ON;
+                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashoff);
+                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
+                break;
+            case 2: //On
+                flashType = CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH;
+                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashon);
+                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
+                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_SINGLE);
+                break;
+        }
+
+        //Refresh preview
+        try {
+            captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void changeFlash(View view) {
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
 
@@ -1298,57 +1341,50 @@ public class CameraActivity extends AppCompatActivity {
         content.findViewById(R.id.flash_dialog_automatic).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
-                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashauto);
-                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
-                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
-
-                // Finally, we start displaying the camera preview.
-                try {
-                    captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
-                } catch (CameraAccessException e) {
-                    e.printStackTrace();
-                }
+                setFlash(0);
+                sendStateUpdateMessage();
                 dialog.dismiss();
             }
         });
         content.findViewById(R.id.flash_dialog_off).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flashType = CaptureRequest.CONTROL_AE_MODE_ON;
-                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashoff);
-                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
-                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_OFF);
-
-                // Finally, we start displaying the camera preview.
-                try {
-                    captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
-                } catch (CameraAccessException e) {
-                    e.printStackTrace();
-                }
+                setFlash(1);
+                sendStateUpdateMessage();
                 dialog.dismiss();
             }
         });
         content.findViewById(R.id.flash_dialog_on).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flashType = CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH;
-                findViewById(R.id.button_flash).setBackgroundResource(R.drawable.button_flashon);
-                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, flashType);
-                previewRequestBuilder.set(CaptureRequest.FLASH_MODE, CaptureRequest.FLASH_MODE_SINGLE);
-
-                // Finally, we start displaying the camera preview.
-                try {
-                    captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
-                } catch (CameraAccessException e) {
-                    e.printStackTrace();
-                }
+                setFlash(2);
+                sendStateUpdateMessage();
                 dialog.dismiss();
             }
         });
 
         dialog.setContentView(content);
         dialog.show();
+    }
+
+    void setTimer(int timerSetting) {
+        switch (timerSetting) {
+            case 0: //0 sec
+                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer0);
+                timerDelay = 0;
+                sendStateUpdateMessage();
+                break;
+            case 1: //3 sec
+                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer3);
+                timerDelay = 3000;
+                sendStateUpdateMessage();
+                break;
+            case 2: //10 sec
+                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer10);
+                timerDelay = 10000;
+                sendStateUpdateMessage();
+                break;
+        }
     }
 
     public void changeTimer(View view) {
@@ -1359,24 +1395,21 @@ public class CameraActivity extends AppCompatActivity {
         content.findViewById(R.id.timer_dialog_0sec).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer0);
-                timerDelay = 0;
+                setTimer(0);
                 dialog.dismiss();
             }
         });
         content.findViewById(R.id.timer_dialog_3sec).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer3);
-                timerDelay = 3000;
+                setTimer(1);
                 dialog.dismiss();
             }
         });
         content.findViewById(R.id.timer_dialog_10sec).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                findViewById(R.id.button_timer).setBackgroundResource(R.drawable.button_timer10);
-                timerDelay = 10000;
+                setTimer(2);
                 dialog.dismiss();
             }
         });
@@ -1392,6 +1425,58 @@ public class CameraActivity extends AppCompatActivity {
             openCamera(txView.getWidth(), txView.getHeight(), CameraCharacteristics.LENS_FACING_FRONT);
         } else {
             openCamera(txView.getWidth(), txView.getHeight(), CameraCharacteristics.LENS_FACING_BACK);
+        }
+    }
+
+
+    public void sendStateUpdateMessage() {
+        try {
+            final JSONObject stateUpdate = new JSONObject();
+
+            switch (flashType) {
+                case CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH:
+                    stateUpdate.put("flash", 0);
+                    break;
+                case CaptureRequest.CONTROL_AE_MODE_ON:
+                    stateUpdate.put("flash", 1);
+                    break;
+                case CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH:
+                    stateUpdate.put("flash", 2);
+                    break;
+            }
+
+            switch (timerDelay) {
+                case 0:
+                    stateUpdate.put("timer", 0);
+                    break;
+                case 3000:
+                    stateUpdate.put("timer", 1);
+                    break;
+                case 10000:
+                    stateUpdate.put("timer", 2);
+                    break;
+            }
+
+            Wearable.getCapabilityClient(this).getCapability("camera_message", CapabilityClient.FILTER_REACHABLE)
+                    .addOnCompleteListener(new OnCompleteListener<CapabilityInfo>() {
+                        @Override
+                        public void onComplete(@NonNull Task<CapabilityInfo> task) {
+                            if (task.isSuccessful()) {
+                                for (Node n : task.getResult().getNodes()) {
+                                    if (n.isNearby()) {
+                                        try {
+                                            Task<Integer> launchTask = wearableMessageClient.sendMessage(n.getId(), "/cameraaction/stateupdate", stateUpdate.toString().getBytes("UTF-8"));
+                                        } catch (Exception e) {
+                                            Log.wtf("STATE_UPDATE_MESSAGE", e);
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            Log.wtf("STATE_UPDATE_MESSAGE", e);
         }
     }
 

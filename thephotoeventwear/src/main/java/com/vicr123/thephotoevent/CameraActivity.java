@@ -18,8 +18,11 @@
 
 package com.vicr123.thephotoevent;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.view.ViewPager;
 import android.support.wearable.activity.WearableActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -29,13 +32,24 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wearable.MessageClient;
+import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Wearable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import in.goodiebag.carouselpicker.CarouselPicker;
 
 public class CameraActivity extends WearableActivity {
     String nodeId;
     MessageClient messageClient;
+    CarouselPicker timerPicker, flashPicker;
+    MessageClient.OnMessageReceivedListener wearableMessageReceivedListener;
+    boolean updatingState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +58,8 @@ public class CameraActivity extends WearableActivity {
 
         nodeId = getIntent().getStringExtra("NODE_ID");
         messageClient = Wearable.getMessageClient(this);
+        flashPicker = findViewById(R.id.flashPicker);
+        timerPicker = findViewById(R.id.timerPicker);
 
         // Enables Always-on
         setAmbientEnabled();
@@ -60,6 +76,79 @@ public class CameraActivity extends WearableActivity {
         layoutParams.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID;
 
         findViewById(R.id.captureButton).setLayoutParams(layoutParams);
+
+        ViewPager.OnPageChangeListener listener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (!updatingState) {
+                    sendStateUpdateMessage();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        };
+
+        //Add items to carousels
+        List<CarouselPicker.PickerItem> flashItems = new ArrayList<>();
+        flashItems.add(new CarouselPicker.DrawableItem(R.drawable.flashauto_default));
+        flashItems.add(new CarouselPicker.DrawableItem(R.drawable.flashoff_default));
+        flashItems.add(new CarouselPicker.DrawableItem(R.drawable.flashon_default));
+        CarouselPicker.CarouselViewAdapter flashAdapter = new CarouselPicker.CarouselViewAdapter(this, flashItems, 0);
+        flashPicker.setAdapter(flashAdapter);
+
+        List<CarouselPicker.PickerItem> timerItems = new ArrayList<>();
+        timerItems.add(new CarouselPicker.DrawableItem(R.drawable.timer0_default));
+        timerItems.add(new CarouselPicker.DrawableItem(R.drawable.timer3_default));
+        timerItems.add(new CarouselPicker.DrawableItem(R.drawable.timer10_default));
+        CarouselPicker.CarouselViewAdapter timerAdapter = new CarouselPicker.CarouselViewAdapter(this, timerItems, 0);
+        timerPicker.setAdapter(timerAdapter);
+
+        flashPicker.addOnPageChangeListener(listener);
+        timerPicker.addOnPageChangeListener(listener);
+
+        //Set up message listeners
+        wearableMessageReceivedListener = new MessageClient.OnMessageReceivedListener() {
+            @Override
+            public void onMessageReceived(@NonNull MessageEvent messageEvent) {
+                if (messageEvent.getPath().equals("/cameraaction/stateupdate")) {
+                    try {
+                        JSONObject state = new JSONObject(new String(messageEvent.getData(), "UTF-8"));
+
+                        updatingState = true;
+                        flashPicker.setCurrentItem(state.getInt("flash"), true);
+                        timerPicker.setCurrentItem(state.getInt("timer"), true);
+                        updatingState = false;
+                    } catch (Exception e) {
+                        Log.wtf("wearable_message", e);
+                    }
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Wearable.getCapabilityClient(this).addLocalCapability("camera_message");
+        messageClient.addListener(wearableMessageReceivedListener, Uri.parse("wear://*/cameraaction"), MessageClient.FILTER_PREFIX);
+        messageClient.sendMessage(nodeId, "/cameraaction/requeststate", null);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Wearable.getCapabilityClient(this).removeLocalCapability("camera_message");
+        messageClient.removeListener(wearableMessageReceivedListener);
     }
 
     public void sendCaptureMessage(View view) {
@@ -67,6 +156,18 @@ public class CameraActivity extends WearableActivity {
             Task<Integer> launchTask = messageClient.sendMessage(nodeId, "/cameraaction", "CAPTURE".getBytes("UTF-8"));
         } catch (UnsupportedEncodingException e) {
             Log.wtf("WEARABLE_MESSAGE", e);
+        }
+    }
+
+    public void sendStateUpdateMessage() {
+        try {
+            JSONObject stateUpdate = new JSONObject();
+            stateUpdate.put("flash", flashPicker.getCurrentItem());
+            stateUpdate.put("timer", timerPicker.getCurrentItem());
+
+            Task<Integer> launchTask = messageClient.sendMessage(nodeId, "/cameraaction/stateupdate", stateUpdate.toString().getBytes("UTF-8"));
+        } catch (Exception e) {
+            Log.wtf("STATE_UPDATE_MESSAGE", e);
         }
     }
 }

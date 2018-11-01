@@ -12,9 +12,9 @@ android {
         signingConfigs.release.storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
         signingConfigs.release.keyAlias = "uploadkey"
         signingConfigs.release.keyPassword = System.getenv("ANDROID_KEYSTORE_KEY_PASSWORD")
-        vcode = 1000 + Integer.valueOf(System.getenv("TRAVIS_BUILD_NUMBER"))
+        vcode = 2000 + (Integer.valueOf(System.getenv("TRAVIS_BUILD_NUMBER")) * 2)
     } else {
-        vcode = 1000
+        vcode = 2000
     }
 
     compileSdkVersion 26

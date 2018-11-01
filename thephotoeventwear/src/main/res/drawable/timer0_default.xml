@@ -1,0 +1,35 @@
+<!--
+  ~     thePhoto Event Mode Client: Sends photos to thePhoto on a PC
+  ~     Copyright (C) 2018 Victor Tran
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector android:height="32dp" android:viewportHeight="4.2333336"
+    android:viewportWidth="4.233333" android:width="32dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillAlpha="1" android:fillColor="#ffffff"
+        android:pathData="M2.11667,2.11667m-2.11667,0a2.11667,2.11667 0,1 1,4.23333 0a2.11667,2.11667 0,1 1,-4.23333 0"
+        android:strokeAlpha="1" android:strokeColor="#00000000"
+        android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeWidth="0.26499999"/>
+    <path android:fillAlpha="1" android:fillColor="#00000000"
+        android:fillType="nonZero"
+        android:pathData="M2.11667,2.38129m-1.45521,0a1.45521,1.45521 0,1 1,2.91042 0a1.45521,1.45521 0,1 1,-2.91042 0"
+        android:strokeAlpha="1" android:strokeColor="#000000"
+        android:strokeLineCap="round" android:strokeLineJoin="bevel" android:strokeWidth="0.26458332"/>
+    <path android:fillAlpha="1" android:fillColor="#ffffff"
+        android:fillType="nonZero"
+        android:pathData="M1.45521,0.39688L2.77813,0.39688"
+        android:strokeAlpha="1" android:strokeColor="#000000"
+        android:strokeLineCap="round" android:strokeLineJoin="bevel" android:strokeWidth="0.26458332"/>
+</vector>
