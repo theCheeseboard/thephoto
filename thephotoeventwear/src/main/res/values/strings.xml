@@ -22,8 +22,7 @@
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">thePhoto Event</string>
     <string name="open_main_app">Connect to a computer using thePhoto on your phone to remotely control the camera.</string>
     <string name="get_on_play">Download the thePhoto app on your phone from Google Play</string>
 
