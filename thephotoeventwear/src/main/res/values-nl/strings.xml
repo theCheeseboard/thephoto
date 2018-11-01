@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">thePhoto Event</string>
+    <string name="title_activity_main">thePhoto Event</string>
+    <string name="open_main_app">Verbind met een computer door thePhoto op je telefoon te gebruiken om van een afstand de camera te bedienen.</string>
+    <string name="get_on_play">Download de thePhoto-app op je telefoon uit Google Play</string>
+
+    <string name="connected_notification_channel_name">Verbonden</string>
+    <string name="connected_notification_channel_description">Meldingen die weergegeven worden als je met thePhoto verbonden bent</string>
+    <string name="connected_notification_title">Verbonden met thePhoto</string>
+    <string name="connected_notification_text">Bedien je camera van een afstand met jouw horloge</string>
+    <string name="check_phone">Verwijs naar je telefoon</string>
+
+</resources>
