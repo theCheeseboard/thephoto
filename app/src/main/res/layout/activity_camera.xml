@@ -85,6 +85,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/button_flashauto"
             android:onClick="changeFlash"
+            android:tooltipText="@string/flash_dialog_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_capture"
             app:layout_constraintTop_toTopOf="parent" />
@@ -98,6 +99,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/button_timer0"
             android:onClick="changeTimer"
+            android:tooltipText="@string/timer_dialog_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_capture"
             app:layout_constraintTop_toTopOf="parent" />

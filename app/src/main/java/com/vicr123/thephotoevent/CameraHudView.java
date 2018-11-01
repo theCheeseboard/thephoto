@@ -19,6 +19,8 @@ public class CameraHudView extends View {
     boolean fixedFocus = false;
     float density;
     int radius = 1000;
+    boolean showScalingCircle = false;
+    float scalingCircleScale = 1;
 
     Paint focusCircleFocusingPaint, focusCircleFocusedPaint, focusCircleFailedPaint;
 
@@ -153,7 +155,28 @@ public class CameraHudView extends View {
                     p = focusCircleFocusingPaint;
             }
             canvas.drawCircle(afX, afY, radius * density, p);
-            //canvas.drawCircle(afPoint.x, afPoint.y, 100, focusCircleFocusingPaint);
         }
+
+        if (showScalingCircle) {
+            canvas.drawCircle(getWidth() / 2, getHeight() / 2, 30 * scalingCircleScale, focusCircleFocusingPaint);
+        }
+    }
+
+    public void startScaling() {
+        showScalingCircle = true;
+
+        invalidate();
+    }
+
+    public void setScalingCircleScale(float scale) {
+        scalingCircleScale = scale;
+
+        invalidate();
+    }
+
+    public void stopScaling() {
+        showScalingCircle = false;
+
+        invalidate();
     }
 }

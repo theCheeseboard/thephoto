@@ -72,12 +72,14 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.media.MediaActionSound;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.design.widget.BottomSheetDialog;
@@ -90,9 +92,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseIntArray;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.OrientationEventListener;
+import android.view.ScaleGestureDetector;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -108,6 +112,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.wearable.CapabilityClient;
+import com.google.android.gms.wearable.CapabilityInfo;
+import com.google.android.gms.wearable.MessageClient;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.Wearable;
+
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,6 +155,152 @@ public class CameraActivity extends AppCompatActivity {
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     int sensorOrientation;
 
+    class TxViewGestures extends ScaleGestureDetector.SimpleOnScaleGestureListener implements View.OnTouchListener {
+        float currentScaling = 1;
+        ScaleGestureDetector scaleDetector;
+        Rect originalSize;
+        float maxZoom;
+        boolean coordinateSystemPreCorrectionArraySize = false;
+
+        public TxViewGestures(Context c) {
+            scaleDetector = new ScaleGestureDetector(c, this);
+        }
+
+        public void newCamera() {
+            try {
+                CameraCharacteristics chars = ((CameraManager) getSystemService(CAMERA_SERVICE)).getCameraCharacteristics(cameraId);
+
+                if (Build.VERSION.SDK_INT >= 23) {
+                    originalSize = chars.get(CameraCharacteristics.SENSOR_INFO_PRE_CORRECTION_ACTIVE_ARRAY_SIZE);
+                } else {
+                    originalSize = chars.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+                }
+                originalSize = new Rect(0, 0, originalSize.width(), originalSize.height());
+
+                maxZoom = chars.get(CameraCharacteristics.SCALER_AVAILABLE_MAX_DIGITAL_ZOOM);
+
+                currentScaling = 1;
+                cameraHud.setScalingCircleScale(1);
+
+                previewRequestBuilder.set(CaptureRequest.SCALER_CROP_REGION, originalSize);
+            } catch (Exception e) {
+
+            }
+        }
+
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+            try {
+                currentScaling *= scaleGestureDetector.getScaleFactor();
+                if (currentScaling < 1) currentScaling = 1;
+                if (currentScaling > 2) currentScaling = 2;
+                if (currentScaling > maxZoom) currentScaling = maxZoom;
+
+                cameraHud.setScalingCircleScale(currentScaling);
+
+                if (currentScaling == 1) {
+                    previewRequestBuilder.set(CaptureRequest.SCALER_CROP_REGION, originalSize);
+                } else {
+                    Rect scaledRect = new Rect(0, 0, (int) (originalSize.width() / currentScaling), (int) (originalSize.height() / currentScaling));
+                    scaledRect.left = originalSize.width() / 2 - scaledRect.width() / 2;
+                    scaledRect.top = originalSize.height() / 2 - scaledRect.height() / 2;
+                    previewRequestBuilder.set(CaptureRequest.SCALER_CROP_REGION, scaledRect);
+                }
+
+                captureSession.stopRepeating();
+                captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector scaleGestureDetector) {
+            cameraHud.startScaling();
+            return true;
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector scaleGestureDetector) {
+            cameraHud.stopScaling();
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            //Detect scaling gesture
+            scaleDetector.onTouchEvent(motionEvent);
+
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    try {
+                        CameraCharacteristics chars = ((CameraManager) getSystemService(CAMERA_SERVICE)).getCameraCharacteristics(cameraId);
+
+                        Rect sensorArraySize = chars.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+
+                        float x = (motionEvent.getY() / txView.getHeight()) * sensorArraySize.width() - 150;
+                        float y = (motionEvent.getX() / txView.getWidth()) * sensorArraySize.height() - 150;
+
+                        if (x < 0) x = 0;
+                        if (y < 0) y = 0;
+
+                        cameraHud.setAfPoint(new Point((int) motionEvent.getX(), (int) motionEvent.getY()));
+                        cameraHud.setFixedFocus(true);
+
+                        MeteringRectangle region = new MeteringRectangle((int) x, (int) y, 300, 300, MeteringRectangle.METERING_WEIGHT_MAX - 1);
+                        MeteringRectangle[] regions = {
+                                region
+                        };
+
+                        //Stop repeating request
+                        captureSession.stopRepeating();
+
+                        //Cancel any other AFs
+                        previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
+                        previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AE_MODE_OFF);
+                        captureSession.capture(previewRequestBuilder.build(), null, background);
+
+
+                        if (chars.get(CameraCharacteristics.CONTROL_MAX_REGIONS_AF) >= 1) {
+                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_REGIONS, regions);
+                        }
+                        if (chars.get(CameraCharacteristics.CONTROL_MAX_REGIONS_AE) >= 1) {
+                            previewRequestBuilder.set(CaptureRequest.CONTROL_AE_REGIONS, regions);
+                        }
+
+                        previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_START);
+                        previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_AUTO);
+                        previewRequestBuilder.setTag("FOCUS");
+                        lockAF = true;
+                        processingAF = true;
+
+                        //Fire one request
+                        captureSession.capture(previewRequestBuilder.build(), new CameraCaptureSession.CaptureCallback() {
+                            @Override
+                            public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+                                super.onCaptureCompleted(session, request, result);
+
+                                previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_IDLE);
+                                previewRequestBuilder.setTag(null);
+                                processingAF = false;
+
+                                //Start preview again
+                                try {
+                                    captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, background);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+            return true;
+        }
+    }
+
     OrientationEventListener orientationListener;
 
     static {
@@ -163,6 +323,9 @@ public class CameraActivity extends AppCompatActivity {
     Semaphore cameraOpenCloseLock = new Semaphore(1);
     MediaActionSound shutterSound;
     CameraHudView cameraHud;
+    TxViewGestures txGestures;
+    MessageClient wearableMessageClient;
+    MessageClient.OnMessageReceivedListener wearableMessageReceivedListener;
     int state = STATE_PREVIEW;
     int currentOrientation = 0, currentCardinalOrientation = 0;
     int flashType = CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH;
@@ -363,6 +526,13 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        if (sock == null) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+
         txView = findViewById(R.id.viewfinder);
         imagesLayout = findViewById(R.id.pendingImagesContainer);
         cameraHud = findViewById(R.id.cameraHudView);
@@ -402,93 +572,16 @@ public class CameraActivity extends AppCompatActivity {
                                 dialogInterface.dismiss();
                             }
                         }).setOnDismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialogInterface) {
-                                finish();
-                            }
-                        }).show();
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        finish();
+                    }
+                }).show();
             }
         });
 
-        txView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        try {
-                            CameraCharacteristics chars = ((CameraManager) getSystemService(CAMERA_SERVICE)).getCameraCharacteristics(cameraId);
-
-                            //Get the coordinates that were tapped
-                            //float x = motionEvent.getX();
-                            //float y = motionEvent.getY();
-
-                            Rect sensorArraySize = chars.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
-
-                            //Scale the coordinates
-                            //x = x * txView.getAspectRatio();
-                            //y = y * txView.getAspectRatio();
-                            float x = (motionEvent.getY() / txView.getHeight()) * sensorArraySize.width() - 150;
-                            float y = (motionEvent.getX() / txView.getWidth()) * sensorArraySize.height() - 150;
-
-                            if (x < 0) x = 0;
-                            if (y < 0) y = 0;
-
-                            cameraHud.setAfPoint(new Point((int) motionEvent.getX(), (int) motionEvent.getY()));
-                            cameraHud.setFixedFocus(true);
-
-                            MeteringRectangle region = new MeteringRectangle((int) x, (int) y, 300, 300, MeteringRectangle.METERING_WEIGHT_MAX - 1);
-                            MeteringRectangle[] regions = {
-                                    region
-                            };
-
-                            //Stop repeating request
-                            captureSession.stopRepeating();
-
-                            //Cancel any other AFs
-                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
-                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AE_MODE_OFF);
-                            captureSession.capture(previewRequestBuilder.build(), null, background);
-
-
-                            if (chars.get(CameraCharacteristics.CONTROL_MAX_REGIONS_AF) >= 1) {
-                                previewRequestBuilder.set(CaptureRequest.CONTROL_AF_REGIONS, regions);
-                            }
-                            if (chars.get(CameraCharacteristics.CONTROL_MAX_REGIONS_AE) >= 1) {
-                                previewRequestBuilder.set(CaptureRequest.CONTROL_AE_REGIONS, regions);
-                            }
-
-                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_START);
-                            previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_AUTO);
-                            previewRequestBuilder.setTag("FOCUS");
-                            lockAF = true;
-                            processingAF = true;
-
-                            //Fire one request
-                            captureSession.capture(previewRequestBuilder.build(), new CameraCaptureSession.CaptureCallback() {
-                                @Override
-                                public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
-                                    super.onCaptureCompleted(session, request, result);
-
-                                    previewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_IDLE);
-                                    previewRequestBuilder.setTag(null);
-                                    processingAF = false;
-
-                                    //Start preview again
-                                    try {
-                                        captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }, background);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                }
-                return false;
-            }
-        });
+        txGestures = new TxViewGestures(this);
+        txView.setOnTouchListener(txGestures);
 
         orientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
             @Override
@@ -527,7 +620,7 @@ public class CameraActivity extends AppCompatActivity {
         //Set up connected notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //Set up notification channel on Android Oreo
-            NotificationChannel channel = new NotificationChannel("connected_notification", getString(R.string.connected_notification_channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("connected_notification", getString(R.string.connected_notification_channel_name), NotificationManager.IMPORTANCE_LOW);
             channel.setDescription(getString(R.string.connected_notification_channel_description));
 
             NotificationManager mgr = getSystemService(NotificationManager.class);
@@ -564,6 +657,25 @@ public class CameraActivity extends AppCompatActivity {
 
         NotificationManagerCompat mgr = NotificationManagerCompat.from(this);
         mgr.notify(0, builder.build());
+
+        //Tell Wear OS that we're in
+        wearableMessageClient = Wearable.getMessageClient(this);
+        wearableMessageReceivedListener = new MessageClient.OnMessageReceivedListener() {
+            @Override
+            public void onMessageReceived(@NonNull MessageEvent messageEvent) {
+                if (messageEvent.getPath().equals("/cameraaction")) {
+                    try {
+                        String data = new String(messageEvent.getData(), "UTF-8");
+
+                        if (data.equals("CAPTURE")) {
+                            Capture(null);
+                        }
+                    } catch (UnsupportedEncodingException e) {
+                        Log.wtf("wearable_message", e);
+                    }
+                }
+            }
+        };
     }
 
     @Override
@@ -597,6 +709,23 @@ public class CameraActivity extends AppCompatActivity {
                 }
             });
         }
+
+        //Tell Wear OS that we exist
+        Wearable.getCapabilityClient(this).addLocalCapability("camera_active");
+        Wearable.getCapabilityClient(this).getCapability("check_capabilities", CapabilityClient.FILTER_REACHABLE)
+                .addOnCompleteListener(new OnCompleteListener<CapabilityInfo>() {
+            @Override
+            public void onComplete(@NonNull Task<CapabilityInfo> task) {
+                if (task.isSuccessful()) {
+                    for (Node n : task.getResult().getNodes()) {
+                        if (n.isNearby()) {
+                            Task<Integer> launchTask = wearableMessageClient.sendMessage(n.getId(), "/capcheck", null);
+                        }
+                    }
+                }
+            }
+        });
+        wearableMessageClient.addListener(wearableMessageReceivedListener, Uri.parse("wear://*/cameraaction"), MessageClient.FILTER_LITERAL);
     }
 
     @Override
@@ -614,6 +743,23 @@ public class CameraActivity extends AppCompatActivity {
         closeCamera();
         stopBackgroundThread();
         orientationListener.disable();
+
+        //Tell Wear OS that we don't exist
+        Wearable.getCapabilityClient(this).removeLocalCapability("camera_active");
+        Wearable.getCapabilityClient(this).getCapability("check_capabilities", CapabilityClient.FILTER_REACHABLE)
+                .addOnCompleteListener(new OnCompleteListener<CapabilityInfo>() {
+                    @Override
+                    public void onComplete(@NonNull Task<CapabilityInfo> task) {
+                        if (task.isSuccessful()) {
+                            for (Node n : task.getResult().getNodes()) {
+                                if (n.isNearby()) {
+                                    Task<Integer> launchTask = wearableMessageClient.sendMessage(n.getId(), "/capcheck", null);
+                                }
+                            }
+                        }
+                    }
+                });
+        wearableMessageClient.removeListener(wearableMessageReceivedListener);
 
         super.onPause();
     }
@@ -686,6 +832,8 @@ public class CameraActivity extends AppCompatActivity {
             } else {
                 cameraId = allAvailableCameras.get(0);
             }
+
+            txGestures.newCamera();
 
             if (allAvailableCameras.size() == 0) {
                 findViewById(R.id.button_flip).setVisibility(View.GONE);
