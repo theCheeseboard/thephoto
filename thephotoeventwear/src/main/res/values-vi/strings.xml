@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">thePhoto Event</string>
+    <string name="title_activity_main">thePhoto Event</string>
+    <string name="open_main_app">Kết nối với máy tính với thePhoto trên điện thoại để điều khiển máy ảnh.</string>
+    <string name="get_on_play">Tải xuống ứng dụng thePhoto trên điện thoại của bạn từ Cửa Hàng Google Play</string>
+
+    <string name="connected_notification_channel_name">Đã kết nối</string>
+    <string name="connected_notification_channel_description">Thông báo bị hiện khi bạn kết nối với thePhoto</string>
+    <string name="connected_notification_title">Đã kết nối với thePhoto</string>
+    <string name="connected_notification_text">Điều khiển máy ảnh của bạn từ xa với đồng hồ tay của bạn</string>
+    <string name="check_phone">Xem điện thoại</string>
+
+</resources>
