@@ -30,6 +30,6 @@
     <string name="connected_notification_channel_description">Notifications that show when you\'re connected to thePhoto</string>
     <string name="connected_notification_title">Connected to thePhoto</string>
     <string name="connected_notification_text">Remotely control your camera with your watch</string>
-    <string name="title_activity_camera">CameraActivity</string>
+    <string name="check_phone">Refer to your phone</string>
 
 </resources>

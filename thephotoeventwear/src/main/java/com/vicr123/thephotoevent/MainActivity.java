@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.activity.WearableActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -33,6 +34,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.android.gms.wearable.CapabilityClient;
@@ -153,7 +155,17 @@ public class MainActivity extends WearableActivity {
         if (launchMainNodeId == null) {
 
         } else {
+            final Context ctx = this;
             Task<Integer> launchTask = messageClient.sendMessage(launchMainNodeId, "/launch", null);
+            launchTask.addOnSuccessListener(new OnSuccessListener<Integer>() {
+                @Override
+                public void onSuccess(Integer integer) {
+                    Intent intent = new Intent(ctx, ConfirmationActivity.class);
+                    intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, ConfirmationActivity.OPEN_ON_PHONE_ANIMATION);
+                    intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, getString(R.string.check_phone));
+                    startActivity(intent);
+                }
+            });
         }
     }
 }
