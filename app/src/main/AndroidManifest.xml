@@ -44,6 +44,10 @@
                     android:scheme="wear" />
             </intent-filter>
         </service>
+
+        <activity android:name=".HelpActivity"
+            android:theme="@style/SettingsTheme"
+            android:label="@string/help_activity_title"></activity>
     </application>
 
 </manifest>

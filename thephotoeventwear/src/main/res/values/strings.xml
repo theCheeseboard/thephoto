@@ -25,6 +25,7 @@
     <string name="title_activity_main">thePhoto Event</string>
     <string name="open_main_app">Connect to a computer using thePhoto on your phone to remotely control the camera.</string>
     <string name="get_on_play">Download the thePhoto app on your phone from Google Play</string>
+    <string name="get_unsupported">You can\'t use thePhoto because your watch is not paired to an Android phone.</string>
 
     <string name="connected_notification_channel_name">Connected</string>
     <string name="connected_notification_channel_description">Notifications that show when you\'re connected to thePhoto</string>

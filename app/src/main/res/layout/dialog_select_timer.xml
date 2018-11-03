@@ -8,14 +8,14 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/list_item_padding"
         android:text="@string/timer_dialog_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/list_item_height"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="@dimen/list_item_padding"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -32,16 +32,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/list_item_padding"
             android:layout_weight="1"
             android:text="@string/timer_value_0sec" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/list_item_height"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="@dimen/list_item_padding"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -58,16 +58,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/list_item_padding"
             android:layout_weight="1"
             android:text="@string/timer_value_3sec" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/list_item_height"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="@dimen/list_item_padding"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/list_item_padding"
             android:layout_weight="1"
             android:text="@string/timer_value_10sec" />
     </LinearLayout>

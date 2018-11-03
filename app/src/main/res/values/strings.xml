@@ -52,4 +52,17 @@
     <string name="onboarding_identify_why">This will be used to identify yourself on the big screen. You can always change this later in Settings.</string>
     <string name="onboarding_identify_display_name">Display Name</string>
     <string name="open_wifi_settings">Open Wi-Fi Settings</string>
+    <string name="menu_options_help">Help</string>
+    <string name="main_more_button">More</string>
+    <string name="help_title">What can we help you with?</string>
+    <string name="help_activity_title">Help</string>
+
+    <string name="help_getting_started">Getting Started</string>
+    <string name="help_getting_started_step">Step</string>
+    <string name="help_getting_started_step_1_title">On your computer, grab the thePhoto Event Client App.</string>
+    <string name="help_getting_started_step_1_text1">Visit this link on your computer:</string>
+    <string name="help_getting_started_step_2_title">Enter Event Mode</string>
+    <string name="help_getting_started_step_2_text1">After opening thePhoto, go to File > Event Mode</string>
+    <string name="help_getting_started_step_3_title">Obtain the code</string>
+    <string name="help_getting_started_step_3_text1">Enter the code found in the bottom right corner of the second screen into thePhoto.</string>
 </resources>

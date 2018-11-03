@@ -50,6 +50,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -213,9 +214,29 @@ public class MainActivity extends AppCompatActivity {
         goButtonClicked(null);
     }
 
-    public void openSettings(View view) {
-        Intent i = new Intent(this, SettingsActivity.class);
-        this.startActivity(i);
+    public void openMore(View view) {
+        final Context ctx = this;
+        PopupMenu menu = new PopupMenu(this, findViewById(R.id.moreButton));
+        menu.getMenuInflater().inflate(R.menu.activity_main_options, menu.getMenu());
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Intent i;
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_main_options_settings:
+                        i = new Intent(ctx, SettingsActivity.class);
+                        break;
+                    case R.id.menu_main_options_help:
+                        i = new Intent(ctx, HelpActivity.class);
+                        break;
+                    default:
+                        i = new Intent();
+                }
+                startActivity(i);
+                return false;
+            }
+        });
+        menu.show();
     }
 
     public void openWifiSettings(View view) {

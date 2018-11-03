@@ -24,10 +24,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.activity.WearableActivity;
+import android.support.wearable.phone.PhoneDeviceType;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +46,7 @@ import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
+import com.google.android.wearable.intent.RemoteIntent;
 
 import org.json.JSONObject;
 
@@ -57,6 +61,7 @@ public class MainActivity extends WearableActivity {
         setContentView(R.layout.activity_main);
 
         messageClient = Wearable.getMessageClient(this);
+        final Context ctx = this;
 
         // Enables Always-on
         setAmbientEnabled();
@@ -94,7 +99,12 @@ public class MainActivity extends WearableActivity {
                     }
 
                     if (launchMainNodeId == null) {
-                        ((TextView) findViewById(R.id.explainText)).setText(R.string.get_on_play);
+                        if (PhoneDeviceType.getPhoneDeviceType(ctx) == PhoneDeviceType.DEVICE_TYPE_ANDROID) {
+                            ((TextView) findViewById(R.id.explainText)).setText(R.string.get_on_play);
+                        } else {
+                            ((TextView) findViewById(R.id.explainText)).setText(R.string.get_unsupported);
+                            findViewById(R.id.handheldAppButton).setVisibility(View.INVISIBLE);
+                        }
                     }
                 }
             });
@@ -152,8 +162,18 @@ public class MainActivity extends WearableActivity {
     }
 
     public void launchHandheldApp(View view) {
-        if (launchMainNodeId == null) {
+        if (launchMainNodeId == null || true) {
+            if (PhoneDeviceType.getPhoneDeviceType(this) == PhoneDeviceType.DEVICE_TYPE_ANDROID) {
+                Intent rIntent = new Intent(Intent.ACTION_VIEW);
+                rIntent.addCategory(Intent.CATEGORY_BROWSABLE);
+                rIntent.setData(Uri.parse("market://details?id=com.vicr123.thephotoevent"));
+                RemoteIntent.startRemoteActivity(this, rIntent, null);
 
+                Intent intent = new Intent(this, ConfirmationActivity.class);
+                intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, ConfirmationActivity.OPEN_ON_PHONE_ANIMATION);
+                intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, getString(R.string.check_phone));
+                startActivity(intent);
+            }
         } else {
             final Context ctx = this;
             Task<Integer> launchTask = messageClient.sendMessage(launchMainNodeId, "/launch", null);
