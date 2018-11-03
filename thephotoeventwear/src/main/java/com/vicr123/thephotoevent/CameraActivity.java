@@ -29,6 +29,7 @@ import android.support.v4.view.ViewPager;
 import android.support.wearable.activity.WearableActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -199,6 +200,19 @@ public class CameraActivity extends WearableActivity {
 
         findViewById(R.id.cameraLayoutRootView).setBackgroundResource(R.color.dark_grey);
         findViewById(R.id.captureButton).setBackgroundResource(R.drawable.button_capture);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getRepeatCount() == 0) {
+            if (keyCode == KeyEvent.KEYCODE_STEM_1 || keyCode == KeyEvent.KEYCODE_STEM_2 || keyCode == KeyEvent.KEYCODE_STEM_3) {
+                //Take a picture
+                sendCaptureMessage(null);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+
     }
 
     public void sendCaptureMessage(View view) {

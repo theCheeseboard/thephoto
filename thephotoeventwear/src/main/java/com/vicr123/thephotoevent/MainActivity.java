@@ -162,7 +162,7 @@ public class MainActivity extends WearableActivity {
     }
 
     public void launchHandheldApp(View view) {
-        if (launchMainNodeId == null || true) {
+        if (launchMainNodeId == null) {
             if (PhoneDeviceType.getPhoneDeviceType(this) == PhoneDeviceType.DEVICE_TYPE_ANDROID) {
                 Intent rIntent = new Intent(Intent.ACTION_VIEW);
                 rIntent.addCategory(Intent.CATEGORY_BROWSABLE);
