@@ -6,37 +6,37 @@
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
         <source>About thePhoto</source>
-        <translation type="unfinished"></translation>
+        <translation>Over thePhoto</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="25"/>
         <source>thePhoto 1.0</source>
-        <translation type="unfinished"></translation>
+        <translation>thePhoto 1.0</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="32"/>
         <source>Photo Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Fotobeheerder</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="52"/>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in de OpenSSL Toolkit (http://www.openssl.org/)</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="62"/>
         <source>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit product bevat cryptografische software geshreven door Eric Young (eay@cryptsoft.com)</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="72"/>
         <source>Android™ is a trademark of Google LLC</source>
-        <translation type="unfinished"></translation>
+        <translation>Android™ is een handelsmerk van Google LLC</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="79"/>
         <source>Copyright (c) Victor Tran 2018. Licensed under the terms of the GNU General Public License, version 3 or later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright (c) Victor Tran 2018. Gelicenseerd onder de termen van de GNU General Public License, versie 3 of later.</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="104"/>
