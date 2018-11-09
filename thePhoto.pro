@@ -45,7 +45,8 @@ SOURCES += main.cpp\
     event/eventserver.cpp \
     event/eventnotification.cpp \
     aboutdialog.cpp \
-    event/eventmodeuserindicator.cpp
+    event/eventmodeuserindicator.cpp \
+    flowlayout.cpp
 
 HEADERS  += mainwindow.h \
     managelibrary.h \
@@ -57,7 +58,8 @@ HEADERS  += mainwindow.h \
     event/eventserver.h \
     event/eventnotification.h \
     aboutdialog.h \
-    event/eventmodeuserindicator.h
+    event/eventmodeuserindicator.h \
+    flowlayout.h
 
 macx {
     SOURCES += event/musicprovider/musicprovider_mac.cpp

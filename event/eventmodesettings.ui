@@ -941,16 +941,23 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QListWidget" name="imagesReceivedWidget">
+        <widget class="QScrollArea" name="imagesReceivedScrollArea">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="movement">
-          <enum>QListView::Static</enum>
+         <property name="widgetResizable">
+          <bool>true</bool>
          </property>
-         <property name="viewMode">
-          <enum>QListView::IconMode</enum>
-         </property>
+         <widget class="QWidget" name="imagesReceivedWidget">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1072</width>
+            <height>555</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>

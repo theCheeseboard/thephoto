@@ -7,7 +7,10 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QStackedWidget>
+#include <QScroller>
+#include <QScrollBar>
 #include "eventmodeuserindicator.h"
+#include "ttoast.h"
 
 EventModeSettings::EventModeSettings(QWidget *parent) :
     QDialog(parent),
@@ -53,6 +56,13 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
     connect(ui->showAudio, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
     connect(ui->showAuthor, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
     connect(ui->showClock, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
+
+    imagesReceivedLayout = new FlowLayout(ui->imagesReceivedWidget, -1, 0, 0);
+    imagesReceivedLayout->setContentsMargins(0, 0, 0, 0);
+    //imagesReceivedLayout->s
+    ui->imagesReceivedWidget->setLayout(imagesReceivedLayout);
+
+    QScroller::grabGesture(ui->imagesReceivedScrollArea->viewport(), QScroller::LeftMouseButtonGesture);
 }
 
 EventModeSettings::~EventModeSettings()
@@ -148,7 +158,6 @@ void EventModeSettings::newConnection(EventSocket* sock) {
 
     connect(sock, &EventSocket::imageDataAvailable, [=](QByteArray imageData) {
         //Write out to file
-
         QDir endDir = saveDir;
         if (ui->sessionNameLineEdit->text() == "") {
             endDir.setPath(endDir.absoluteFilePath(tr("Uncategorized")));
@@ -164,7 +173,8 @@ void EventModeSettings::newConnection(EventSocket* sock) {
             endDir.mkpath(".");
         }
 
-        QFile image(endDir.absoluteFilePath("Image_" + QDateTime::currentDateTime().toString("yyMMdd-hhmmsszzz") + ".jpg"));
+        QString fileName = "Image_" + QDateTime::currentDateTime().toString("yyMMdd-hhmmsszzz") + ".jpg";
+        QFile image(endDir.absoluteFilePath(fileName));
         image.open(QFile::ReadWrite);
         image.write(imageData);
         image.flush();
@@ -177,10 +187,59 @@ void EventModeSettings::newConnection(EventSocket* sock) {
         if (i.isNull()) {
 
         } else {
+            QString author = sock->deviceName();
+
             EventModeShow::ImageProperties imageProperties;
             imageProperties.image = QPixmap::fromImage(i);
-            imageProperties.author = sock->deviceName();
+            imageProperties.author = author;
             showDialog->showNewImage(imageProperties);
+
+            //Add to transferred images list
+            QLabel* label = new QLabel();
+            label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
+            label->setContextMenuPolicy(Qt::CustomContextMenu);
+            connect(this, &EventModeSettings::windowSizeChanged, [=] {
+                label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
+            });
+            connect(label, &QLabel::customContextMenuRequested, [=](QPoint pos) {
+                QMenu* menu = new QMenu();
+                menu->addSection(tr("About this picture"));
+
+                QAction* authorAction = new QAction();
+                authorAction->setText(tr("By %1").arg(author));
+                authorAction->setIcon(QIcon::fromTheme("user"));
+                authorAction->setEnabled(false);
+                menu->addAction(authorAction);
+
+                menu->addSection(tr("For this picture"));
+                menu->addAction(QIcon::fromTheme("media-playback-start"), tr("Enqueue for show"), [=] {
+                    showDialog->showNewImage(imageProperties);
+                });
+                menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"), [=] {
+                    label->setVisible(false);
+
+                    tToast* toast = new tToast();
+                    toast->setTitle(tr("Image Deleted"));
+                    toast->setText(tr("The image was deleted from your computer."));
+
+                    QMap<QString, QString> actions;
+                    actions.insert("undo", "Undo");
+                    toast->setActions(actions);
+                    toast->show(ui->imagesReceivedScrollArea);
+                    connect(toast, &tToast::doDefaultOption, [=] {
+                        QFile::remove(endDir.absoluteFilePath(fileName));
+                        label->deleteLater();
+                    });
+                    connect(toast, &tToast::dismiss, [=] {
+                        toast->deleteLater();
+                    });
+                    connect(toast, &tToast::actionClicked, [=] {
+                        label->setVisible(true);
+                    });
+                });
+                menu->exec(label->mapToGlobal(pos));
+            });
+            imagesReceivedLayout->addWidget(label);
         }
     });
     connect(sock, &EventSocket::newUserConnected, [=](QString name) {
@@ -290,4 +349,14 @@ void EventModeSettings::configureVignette() {
         ui->showAuthor->setEnabled(false);
         ui->showClock->setEnabled(false);
     }
+}
+
+void EventModeSettings::resizeEvent(QResizeEvent* event) {
+    //Calculate height of transferred image
+    //Assuming we want to fit about 10 4:3 images horizontally
+    QSize s(20, 3);
+    s.scale(this->width() - 1, this->height(), Qt::KeepAspectRatio);
+    imageHeight = s.height();
+
+    emit windowSizeChanged();
 }

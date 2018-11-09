@@ -8,10 +8,12 @@
 #include <QRandomGenerator>
 #include <QNetworkInterface>
 #include <QSpinBox>
+#include <QResizeEvent>
 #include "eventserver.h"
 #include "eventsocket.h"
 #include "eventmodeshow.h"
 #include "eventnotification.h"
+#include "flowlayout.h"
 
 namespace Ui {
     class EventModeSettings;
@@ -61,6 +63,7 @@ class EventModeSettings : public QDialog
 
     signals:
         void done();
+        void windowSizeChanged();
 
     private:
         Ui::EventModeSettings *ui;
@@ -70,9 +73,14 @@ class EventModeSettings : public QDialog
 
         QDir saveDir;
 
+        FlowLayout* imagesReceivedLayout;
+        int imageHeight;
+
         EventServer* server;
         QList<EventSocket*> sockets;
         QList<QHostAddress> bans;
+
+        void resizeEvent(QResizeEvent* event);
 };
 
 #endif // EVENTMODESETTINGS_H

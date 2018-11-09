@@ -182,102 +182,137 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="986"/>
+        <location filename="../event/eventmodesettings.ui" line="993"/>
         <source>Session Settings</source>
         <translation>Cài Đặt Phiên</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1006"/>
+        <location filename="../event/eventmodesettings.ui" line="1013"/>
         <source>Connected Users</source>
         <translation>Người Dùng Kết Nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1023"/>
+        <location filename="../event/eventmodesettings.ui" line="1030"/>
         <source>Exchanged Images</source>
         <translation>Ảnh Được Chuyển</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1053"/>
+        <location filename="../event/eventmodesettings.ui" line="1060"/>
         <source>Back to Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1064"/>
+        <location filename="../event/eventmodesettings.ui" line="1071"/>
         <source>End Event Mode</source>
         <translation>Thoát Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="90"/>
+        <location filename="../event/eventmodesettings.cpp" line="100"/>
         <source>End Event Mode?</source>
         <translation>Thoát Event Mode?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="90"/>
+        <location filename="../event/eventmodesettings.cpp" line="100"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation>Bạn có muốn ngắt kết nối với tất cả thiết bị và thoát Event Mode?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="143"/>
+        <location filename="../event/eventmodesettings.cpp" line="153"/>
         <source>Unidentified User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="154"/>
+        <location filename="../event/eventmodesettings.cpp" line="163"/>
         <source>Uncategorized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="187"/>
+        <location filename="../event/eventmodesettings.cpp" line="206"/>
+        <source>About this picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="209"/>
+        <source>By %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="214"/>
+        <source>For this picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="215"/>
+        <source>Enqueue for show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="218"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="222"/>
+        <source>Image Deleted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="223"/>
+        <source>The image was deleted from your computer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="246"/>
         <source>User Connected</source>
         <translation>Người đã kết nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="192"/>
+        <location filename="../event/eventmodesettings.cpp" line="251"/>
         <source>User Disconnected</source>
         <translation>Người ngắt kết nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="238"/>
+        <location filename="../event/eventmodesettings.cpp" line="297"/>
         <source>For %1</source>
         <translation>Cho %1</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="239"/>
+        <location filename="../event/eventmodesettings.cpp" line="298"/>
         <source>Kick</source>
         <translation>Đuổi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="240"/>
+        <location filename="../event/eventmodesettings.cpp" line="299"/>
         <source>Kick?</source>
         <translation>Đuổi?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="240"/>
+        <location filename="../event/eventmodesettings.cpp" line="299"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
         <translation>Đuổi %1? Họ sẽ được kết nối lại dùng mã phiên.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="245"/>
+        <location filename="../event/eventmodesettings.cpp" line="304"/>
         <source>Ban</source>
         <translation>Chặn</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="246"/>
+        <location filename="../event/eventmodesettings.cpp" line="305"/>
         <source>Ban?</source>
         <translation>Chặn?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="246"/>
+        <location filename="../event/eventmodesettings.cpp" line="305"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
         <translation>Chặn %1? Họ sẽ không được kết nối lại.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="263"/>
+        <location filename="../event/eventmodesettings.cpp" line="322"/>
         <source>Welcome to Event Mode!</source>
         <translation>Chào mừng đến Event Mode!</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="263"/>
+        <location filename="../event/eventmodesettings.cpp" line="322"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
         <translation>Để trở lại Backstage, đánh phím TAB.</translation>
     </message>
@@ -322,7 +357,7 @@
 <context>
     <name>EventServer</name>
     <message>
-        <location filename="../event/eventserver.cpp" line="40"/>
+        <location filename="../event/eventserver.cpp" line="39"/>
         <source>Can&apos;t create X509 certificate. Event Mode cannot start.</source>
         <translation type="unfinished"></translation>
     </message>

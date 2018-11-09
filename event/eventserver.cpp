@@ -17,7 +17,6 @@ EventServer::EventServer(QObject *parent) : QTcpServer(parent)
             genProc.setEnvironment(env);
         #endif
 
-        genProc.setProcessChannelMode(QProcess::ForwardedChannels);
         genProc.setWorkingDirectory(certificateDirectory.path());
         genProc.start("openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 2 -nodes -subj \"/CN=localhost\"");
         genProc.waitForFinished(-1);
