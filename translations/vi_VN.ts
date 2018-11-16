@@ -49,7 +49,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="267"/>
         <source>Event Mode</source>
-        <translation>Event Mode</translation>
+        <translation>Chế độ biến cố</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="711"/>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="457"/>
         <source>SESSION</source>
-        <translation></translation>
+        <translation>PHIÊN</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="464"/>
@@ -199,22 +199,22 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="1060"/>
         <source>Back to Event Mode</source>
-        <translation>Trở lại đến Chế Độ Biến Cố</translation>
+        <translation>Trở lại đến Chế độ biến cố</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="1071"/>
         <source>End Event Mode</source>
-        <translation>Thoát Event Mode</translation>
+        <translation>Thoát Chế độ biến cố</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="100"/>
         <source>End Event Mode?</source>
-        <translation>Thoát Event Mode?</translation>
+        <translation>Thoát Chế độ biến cố?</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="100"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
-        <translation>Bạn có muốn ngắt kết nối với tất cả thiết bị và thoát Event Mode?</translation>
+        <translation>Bạn có muốn ngắt kết nối với tất cả thiết bị và thoát Chế độ biến cố?</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="153"/>
@@ -309,7 +309,7 @@
     <message>
         <location filename="../event/eventmodesettings.cpp" line="322"/>
         <source>Welcome to Event Mode!</source>
-        <translation>Chào mừng đến Event Mode!</translation>
+        <translation>Chào mừng đến Chế độ biến cố!</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="322"/>
@@ -327,7 +327,7 @@
     <message>
         <location filename="../event/eventmodeshow.ui" line="248"/>
         <source>Preparing Event Mode...</source>
-        <translation>Đang chuẩn bị Event Mode...</translation>
+        <translation>Đang chuẩn bị Chế độ biến cố...</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="291"/>
