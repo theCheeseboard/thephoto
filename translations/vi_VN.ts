@@ -6,7 +6,7 @@
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
         <source>About thePhoto</source>
-        <translation type="unfinished"></translation>
+        <translation>Giới thiệu về thePhoto</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="25"/>
@@ -49,7 +49,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="267"/>
         <source>Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Event Mode</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="711"/>
@@ -64,12 +64,12 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="320"/>
         <source>Backstage</source>
-        <translation type="unfinished"></translation>
+        <translation>Hậu trường</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="457"/>
         <source>SESSION</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="464"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="509"/>
         <source>DISPLAYS</source>
-        <translation type="unfinished"></translation>
+        <translation>MÀN HÌNH</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="738"/>
@@ -89,7 +89,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="751"/>
         <source>WI-FI</source>
-        <translation type="unfinished"></translation>
+        <translation>WI-FI</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="547"/>
@@ -104,7 +104,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="388"/>
         <source>APP</source>
-        <translation type="unfinished"></translation>
+        <translation>ỨNG DỤNG ĐIỆN THOẠI</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="395"/>
@@ -114,7 +114,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="437"/>
         <source>Session Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Tên Phiên</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="444"/>
@@ -134,22 +134,22 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="628"/>
         <source>There&apos;s only one display on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bạn chỉ có một màn hình trên máy tính này.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="657"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nếu hậu trường đằng hiện trên màn hình sai, bạn có thể trao đổi màn hình.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="664"/>
         <source>Swap Displays</source>
-        <translation type="unfinished"></translation>
+        <translation>Trao đổi màn hình</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="765"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện chi tiết Wi-Fi bên sang mã cho người khách kết nối</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="813"/>
@@ -322,12 +322,12 @@
     <message>
         <location filename="../event/eventmodeshow.ui" line="159"/>
         <source>Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Event Mode</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="248"/>
         <source>Preparing Event Mode...</source>
-        <translation>Đang chuẩn bị Event Mode</translation>
+        <translation>Đang chuẩn bị Event Mode...</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="291"/>
@@ -337,7 +337,7 @@
     <message>
         <location filename="../event/eventmodeshow.cpp" line="207"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>bởi %1</translation>
     </message>
 </context>
 <context>
