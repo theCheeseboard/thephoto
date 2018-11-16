@@ -47,4 +47,17 @@
 
     <string name="onboarding_identify_why">Chúng tôi sẽ chiếu tên này trên màn hình lớn. Bạn thay dổi tên này trong Cài Đặt được.</string>
     <string name="open_wifi_settings">Mở cài đặt Wi-Fi</string>
+<string name="menu_options_help">Trợ Giúp</string>
+    <string name="main_more_button">Khác</string>
+    <string name="help_title">Chúng tôi sẽ giúp bạn vơi gì?</string>
+    <string name="help_activity_title">Trợ Giúp</string>
+
+    <string name="help_getting_started">Chuẩn bị bắt đầu</string>
+    <string name="help_getting_started_step">Bước</string>
+    <string name="help_getting_started_step_1_title">Trên máy tính của bạn, tải xuống ứng dụng thePhoto.</string>
+    <string name="help_getting_started_step_1_text1">Xem trang web này trên máy tính của bạn:</string>
+    <string name="help_getting_started_step_2_title">Nhập chế độ event</string>
+    <string name="help_getting_started_step_2_text1">Sau khi bạn mở thePhoto, đi tới Tệp &gt; Chế Độ Biến Cố</string>
+    <string name="help_getting_started_step_3_title">Nhận mã</string>
+    <string name="help_getting_started_step_3_text1">Nhập vào mã tìm thấy ở góc dưới bên phải trên màn hình thứ hai vào thePhoto</string>
 </resources>
