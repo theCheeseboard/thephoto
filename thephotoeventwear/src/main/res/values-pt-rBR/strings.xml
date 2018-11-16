@@ -1,2 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">thePhoto Event</string>
+    <string name="title_activity_main">thePhoto Event</string>
+    <string name="open_main_app">Conecte um computador usando thePhoto no seu celular para controlar a câmera remotamente.</string>
+    <string name="get_on_play">Baixe o aplicativo thePhoto em seu celular do Google Play</string>
+    <string name="get_unsupported">Você não pode usar thePhoto porque seu celular não está pareado a um celular Android.</string>
+
+    <string name="connected_notification_channel_name">Conectado</string>
+    <string name="connected_notification_channel_description">Notificações que aparecem quando você está conectado a thePhoto</string>
+    <string name="connected_notification_title">Conectado a thePhoto</string>
+    <string name="connected_notification_text">Controle sua câmera remotamente com seu watch</string>
+    <string name="check_phone">Refira ao seu celular</string>
+
+</resources>
