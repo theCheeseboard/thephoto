@@ -10,4 +10,6 @@
     <string name="connected_notification_text">Điều khiển máy ảnh của bạn từ xa với đồng hồ tay của bạn</string>
     <string name="check_phone">Xem điện thoại</string>
 
-</resources>
+<string name="get_unsupported">Bạn không dùng thePhoto được tại vì đồng hồ tay của bạn không có ghép nối với điện thoại Android.</string>
+
+    </resources>
