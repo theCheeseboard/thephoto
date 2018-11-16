@@ -6,7 +6,7 @@
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
         <source>About thePhoto</source>
-        <translation type="unfinished"></translation>
+        <translation>Giới thiệu về thePhoto</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="25"/>
