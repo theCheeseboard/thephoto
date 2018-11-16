@@ -42,4 +42,6 @@
     <string name="pref_sound_type_entries_2">turtleTimer</string>
 
     <string name="onboarding_welcome">Bem-vindo a thePhoto!</string>
+    <string name="onboarding_welcome_description">Vamos te introduzir a tirar fotos e mostrar-las na tela grande!</string>
+    <string name="onboarding_skip">Pular</string>
     </resources>
