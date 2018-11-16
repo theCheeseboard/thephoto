@@ -44,4 +44,22 @@
     <string name="onboarding_welcome">Bem-vindo a thePhoto!</string>
     <string name="onboarding_welcome_description">Vamos te introduzir a tirar fotos e mostrar-las na tela grande!</string>
     <string name="onboarding_skip">Pular</string>
-    </resources>
+    <string name="onboarding_finish">Terminar</string>
+    <string name="onboarding_identify_title">Quem é você?</string>
+    <string name="onboarding_identify_why">Isso vai ser usado para te identificar na tela grande. Você pode sempre mudar-lo nas Configurações.</string>
+    <string name="onboarding_identify_display_name">Nome de Exibição</string>
+    <string name="open_wifi_settings">Abrir Configuração de WiFi</string>
+    <string name="menu_options_help">Ajuda</string>
+    <string name="main_more_button">Mais</string>
+    <string name="help_title">O que posso te ajudar?</string>
+    <string name="help_activity_title">Ajuda</string>
+
+    <string name="help_getting_started">Começando</string>
+    <string name="help_getting_started_step">Passo</string>
+    <string name="help_getting_started_step_1_title">Em seu computador, baixe o thePhoto Event Client App.</string>
+    <string name="help_getting_started_step_1_text1">Visite esse link no seu computador:</string>
+    <string name="help_getting_started_step_2_title">Entrar em modo evento</string>
+    <string name="help_getting_started_step_2_text1">Depois de abrir thePhoto, vá a Arquivo &gt; Modo Evento</string>
+    <string name="help_getting_started_step_3_title">Obtenha o código</string>
+    <string name="help_getting_started_step_3_text1">Digite o código que você vai achar no canto inferior direito da segunda tela no thePhoto.</string>
+</resources>
