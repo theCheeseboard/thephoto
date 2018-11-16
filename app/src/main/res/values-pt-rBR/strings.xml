@@ -1,2 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">thePhoto Event</string>
+    <string name="code_prompt">Digite o código dado por thePhoto</string>
+    <string name="go_button">Vai</string>
+    <string name="code_hint">Código</string>
+    <string name="connecting_prompt">Conectando a thePhoto…</string>
+    <string name="invalid_code_title">Não funcionou.</string>
+    <string name="invalid_code_message">Nós não conseguimos conectar a esse computador. Verifique que você digitou o código corretamente e que você está conectado a mesma rede WiFi.</string>
+    <string name="ok">OK</string>
+
+    <string name="title_activity_camera">Câmera</string>
+    <string name="keep_copy_prompt">Deixar uma cópia das imagens nesse dispositivo</string>
+    <string name="ENTER_NAME_TO_IDENTIFY">"Digite um nome para se identificar "</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="STRING_SETTINGS">Configurações</string>
+
+    <string name="ERROR_DISCONNECTED_TITLE">Desconectado do servidor</string>
+    <string name="ERROR_DISCONNECTED">Você foi inesperadamente desconectado do servidor. Reconecte ao servidor para continuar.</string>
+
+    <string name="connected_notification_title">Conectado a thePhoto</string>
+    <string name="connected_notification_text">Você está conectado a thePhoto neste momento.</string>
+    <string name="connected_notification_disconnect_button">Desconectar</string>
+    <string name="connected_notification_channel_name">Conectado</string>
+    <string name="connected_notification_channel_description">Notificações que aparecem quando você está conectado a thePhoto</string>
+
+    <string name="disconnected_notification_title">Desconectado do thePhoto</string>
+    <string name="disconnected_notification_text">Enquanto não estava aqui, seu dispositivo foi desconectado do thePhoto. Para continuar tirando fotos, você vai precisar reconectar a thePhoto.</string>
+
+    <string name="pref_header_general">Geral</string>
+    <string name="pref_title_display_name">Nome de exibição</string>
+
+    <string name="flash_value_automatic">Automático</string>
+    <string name="flash_value_on">Ligado</string>
+    <string name="flash_value_off">Desligado</string>
+    <string name="flash_dialog_title">Flash</string>
+    <string name="timer_dialog_title">Timer</string>
+    <string name="timer_value_0sec">Desligado</string>
+    <string name="timer_value_3sec">3 segundos</string>
+    <string name="timer_value_10sec">10 segundos</string>
+
+    <string name="pref_sound_type_entries_1">Ping</string>
+    <string name="pref_sound_type_entries_2">turtleTimer</string>
+
+    <string name="onboarding_welcome">Bem-vindo a thePhoto!</string>
+    </resources>
