@@ -73,7 +73,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>ImageGoesHere</string>
+         <string notr="true">ImageGoesHere</string>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -322,18 +322,6 @@
    </property>
    <property name="text">
     <string>&amp;Start Slideshow</string>
-   </property>
-  </action>
-  <action name="actionImport_from_Phone">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset theme="smartphone">
-     <normaloff>.</normaloff>.</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Import from Phone</string>
    </property>
   </action>
   <action name="actionDelete">

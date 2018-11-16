@@ -412,11 +412,6 @@
         <translation>thePhoto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="76"/>
-        <source>ImageGoesHere</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="159"/>
         <source>There are no images in your library.</source>
         <translation>Bạn không có ảnh nào trong thư viện ảnh của bạn.</translation>
@@ -487,27 +482,22 @@
         <translation>&amp;Bắt đầu trình chiếu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="336"/>
-        <source>&amp;Import from Phone</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="345"/>
+        <location filename="../mainwindow.ui" line="333"/>
         <source>Delete</source>
         <translation>Xóa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../mainwindow.ui" line="342"/>
         <source>&amp;About</source>
         <translation>&amp;Giới thiệu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="362"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>Exit</source>
         <translation>Thoát</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="365"/>
+        <location filename="../mainwindow.ui" line="353"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
@@ -536,10 +526,6 @@
     <name>ManageLibrary</name>
     <message>
         <location filename="../managelibrary.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../managelibrary.ui" line="25"/>
         <source>Manage Library</source>
         <translation>Quản lý thư viện ảnh</translation>

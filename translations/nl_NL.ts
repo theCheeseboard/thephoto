@@ -412,11 +412,6 @@
         <translation>thePhoto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="76"/>
-        <source>ImageGoesHere</source>
-        <translation>ImageGoesHere</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="159"/>
         <source>There are no images in your library.</source>
         <translation>Er zijn geen afbeeldingen in jouw bibliotheek.</translation>
@@ -487,27 +482,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="336"/>
-        <source>&amp;Import from Phone</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="345"/>
+        <location filename="../mainwindow.ui" line="333"/>
         <source>Delete</source>
         <translation>Verwijder</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="../mainwindow.ui" line="342"/>
         <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="362"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="365"/>
+        <location filename="../mainwindow.ui" line="353"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
@@ -536,10 +526,6 @@
     <name>ManageLibrary</name>
     <message>
         <location filename="../managelibrary.ui" line="14"/>
-        <source>Dialog</source>
-        <translation>Dialoog</translation>
-    </message>
-    <message>
         <location filename="../managelibrary.ui" line="25"/>
         <source>Manage Library</source>
         <translation>Beheer bibliotheek</translation>
