@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>611</width>
-    <height>428</height>
+    <width>748</width>
+    <height>444</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -53,8 +53,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>611</width>
-         <height>172</height>
+         <width>748</width>
+         <height>177</height>
         </rect>
        </property>
        <widget class="QLabel" name="imageLabel">
@@ -85,7 +85,7 @@
     <item>
      <widget class="QLabel" name="imageNameLabel">
       <property name="text">
-       <string>ImageName</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -143,7 +143,7 @@
            <item>
             <widget class="QLabel" name="criticalIcon">
              <property name="text">
-              <string>icon</string>
+              <string notr="true">icon</string>
              </property>
             </widget>
            </item>
@@ -211,8 +211,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>611</width>
-     <height>20</height>
+     <width>748</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -220,11 +220,11 @@
      <string>Fi&amp;le</string>
     </property>
     <addaction name="actionManage_Library"/>
-    <addaction name="separator"/>
     <addaction name="actionStart_Slideshow"/>
     <addaction name="separator"/>
-    <addaction name="actionImport_from_Phone"/>
     <addaction name="actionConnect_to_Phone"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -347,10 +347,25 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>About</string>
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
    </property>
   </action>
  </widget>

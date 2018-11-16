@@ -46,9 +46,9 @@ MainWindow::~MainWindow()
 void MainWindow::reloadLibrary(bool rebuild) {
     QProgressDialog* dialog = new QProgressDialog(this);
     dialog->setWindowModality(Qt::WindowModal);
-    dialog->setWindowTitle("Reading Library...");
-    dialog->setLabelText("<p>We're building your library. Please wait while we do this.</p>"
-                         "<p>You can shorten this process by narrowing your library.</p>");
+    dialog->setWindowTitle(tr("Reading Library..."));
+    dialog->setLabelText(tr("<p>We're building your library. Please wait while we do this.</p>"
+                         "<p>You can shorten this process by narrowing your library.</p>"));
     dialog->setMaximum(0);
 
     dialog->show();
@@ -289,16 +289,9 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
     //}
 }
 
-void MainWindow::on_actionImport_from_Phone_triggered()
-{
-    importDialog* dialog = new importDialog(this);
-    dialog->exec();
-    delete dialog;
-}
-
 void MainWindow::on_actionDelete_triggered()
 {
-    if (QMessageBox::warning(this, "Delete Image", "You're about to delete this image forever. Are you sure?", QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+    if (QMessageBox::warning(this, tr("Delete Image"), tr("You're about to delete this image forever. Are you sure?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
         QFile(FoundImages.at(currentImage)).remove();
         FoundImages.removeAt(currentImage);
         nextImage();
@@ -314,4 +307,9 @@ void MainWindow::on_actionAbout_triggered()
 {
     AboutDialog a;
     a.exec();
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    QApplication::exit();
 }

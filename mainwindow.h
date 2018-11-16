@@ -11,9 +11,9 @@
 #include <QKeyEvent>
 #include <QImageReader>
 #include <QTimer>
+#include <QMessageBox>
 #include "managelibrary.h"
 #include "event/eventmodesettings.h"
-#include "importdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -61,11 +61,11 @@ private slots:
 
     void on_actionConnect_to_Phone_triggered();
 
-    void on_actionImport_from_Phone_triggered();
-
     void on_actionDelete_triggered();
 
     void on_actionAbout_triggered();
+
+    void on_actionExit_triggered();
 
     private:
     Ui::MainWindow *ui;

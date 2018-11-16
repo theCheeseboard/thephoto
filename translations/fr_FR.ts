@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="25"/>
-        <source>thePhoto 1.0</source>
+        <source>thePhoto 2.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -153,12 +153,12 @@
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="813"/>
-        <source>VIGNETTE</source>
+        <source>INFORMATION DISPLAY</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="820"/>
-        <source>Show Vignette</source>
+        <source>Show Information Display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -343,11 +343,6 @@
 <context>
     <name>EventModeUserIndicator</name>
     <message>
-        <location filename="../event/eventmodeuserindicator.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../event/eventmodeuserindicator.cpp" line="67"/>
         <location filename="../event/eventmodeuserindicator.cpp" line="233"/>
         <source>Camera Timer</source>
@@ -419,16 +414,6 @@
     <message>
         <location filename="../mainwindow.ui" line="76"/>
         <source>ImageGoesHere</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="88"/>
-        <source>ImageName</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="146"/>
-        <source>icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -512,8 +497,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="353"/>
-        <source>About</source>
+        <location filename="../mainwindow.ui" line="354"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="362"/>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="365"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="49"/>
+        <source>Reading Library...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="50"/>
+        <source>&lt;p&gt;We&apos;re building your library. Please wait while we do this.&lt;/p&gt;&lt;p&gt;You can shorten this process by narrowing your library.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="294"/>
+        <source>Delete Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="294"/>
+        <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -547,167 +562,6 @@
     <message>
         <location filename="../managelibrary.ui" line="87"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>importDialog</name>
-    <message>
-        <location filename="../importdialog.ui" line="14"/>
-        <source>Import from Device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="54"/>
-        <source>Confirmation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="92"/>
-        <source>Importing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="105"/>
-        <source>Flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="118"/>
-        <location filename="../importdialog.ui" line="280"/>
-        <source>Photo Selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="149"/>
-        <source>thePhoto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="162"/>
-        <location filename="../importdialog.ui" line="213"/>
-        <source>Device Selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="175"/>
-        <location filename="../importdialog.ui" line="531"/>
-        <source>Folder Selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="220"/>
-        <source>Which device are you importing your images from?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="236"/>
-        <source>If you&apos;re transferring images from an MTP device, make sure it is unmounted first. Leaving it mounted somewhere else can cause problems.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="259"/>
-        <source>Select the photos that you want to transfer to this PC.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="311"/>
-        <source>To continue, unlock your iOS device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="327"/>
-        <source>Try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="402"/>
-        <source>Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="432"/>
-        <source>PhotoGoesHere</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="452"/>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="464"/>
-        <source>Import toda&amp;y&apos;s photos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="483"/>
-        <source>Import photos from</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="538"/>
-        <source>Where do you want to put your photos?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="548"/>
-        <source>In a fo&amp;lder within thePhoto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="561"/>
-        <source>Folder Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="574"/>
-        <source>In another folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="587"/>
-        <source>Folder:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="597"/>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="629"/>
-        <source>Ready to import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="636"/>
-        <source>Ready to import your photos?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="668"/>
-        <source>Importing photos...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="675"/>
-        <source>This could take a while. Please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="704"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="728"/>
-        <source>Back</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../importdialog.ui" line="742"/>
-        <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

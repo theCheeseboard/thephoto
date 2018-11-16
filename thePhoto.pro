@@ -38,7 +38,6 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     managelibrary.cpp \
     #phonedialog.cpp \
-    importdialog.cpp \
     event/eventmodeshow.cpp \
     event/eventmodesettings.cpp \
     event/eventsocket.cpp \
@@ -51,7 +50,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     managelibrary.h \
     #phonedialog.h \
-    importdialog.h \
     event/eventmodeshow.h \
     event/eventmodesettings.h \
     event/eventsocket.h \
@@ -79,7 +77,6 @@ win32 {
 FORMS    += mainwindow.ui \
     managelibrary.ui \
     #phonedialog.ui \
-    importdialog.ui \
     event/eventmodeshow.ui \
     event/eventmodesettings.ui \
     event/eventnotification.ui \

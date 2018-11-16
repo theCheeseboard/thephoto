@@ -810,14 +810,14 @@
             </font>
            </property>
            <property name="text">
-            <string>VIGNETTE</string>
+            <string>INFORMATION DISPLAY</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="showVignette">
            <property name="text">
-            <string>Show Vignette</string>
+            <string>Show Information Display</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -953,8 +953,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1072</width>
-            <height>555</height>
+            <width>100</width>
+            <height>30</height>
            </rect>
           </property>
          </widget>
