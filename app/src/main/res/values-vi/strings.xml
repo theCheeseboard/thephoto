@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="app_name">thePhoto Event</string>
+<resources><string name="app_name">thePhoto Biến Cố</string>
     <string name="code_prompt">Nhập vào mã thePhoto đã cung cấp</string>
     <string name="go_button">Đi</string>
     <string name="code_hint">Mã</string>
@@ -56,7 +56,7 @@
     <string name="help_getting_started_step">Bước</string>
     <string name="help_getting_started_step_1_title">Trên máy tính của bạn, tải xuống ứng dụng thePhoto.</string>
     <string name="help_getting_started_step_1_text1">Xem trang web này trên máy tính của bạn:</string>
-    <string name="help_getting_started_step_2_title">Nhập chế độ event</string>
+    <string name="help_getting_started_step_2_title">Nhập chế độ biến cố</string>
     <string name="help_getting_started_step_2_text1">Sau khi bạn mở thePhoto, đi tới Tệp &gt; Chế Độ Biến Cố</string>
     <string name="help_getting_started_step_3_title">Nhận mã</string>
     <string name="help_getting_started_step_3_text1">Nhập vào mã tìm thấy ở góc dưới bên phải trên màn hình thứ hai vào thePhoto.</string>
