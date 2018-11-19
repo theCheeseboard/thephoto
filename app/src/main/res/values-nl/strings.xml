@@ -49,4 +49,17 @@
     <string name="onboarding_identify_why">Dit zal gebruikt worden om je op het grote scherm te identificeren. Je kunt dit altijd in Instellingen veranderen.</string>
     <string name="onboarding_identify_display_name">Schermnaam</string>
     <string name="open_wifi_settings">Open WiFi-instellingen</string>
+<string name="menu_options_help">Help</string>
+    <string name="main_more_button">Meer</string>
+    <string name="help_title">Waar kunnen we je mee helpen?</string>
+    <string name="help_activity_title">Help</string>
+
+    <string name="help_getting_started">Om te beginnen</string>
+    <string name="help_getting_started_step">Stap</string>
+    <string name="help_getting_started_step_1_title">Open de thePhoto Event Client App op je computer.</string>
+    <string name="help_getting_started_step_1_text1">Bezoek deze link op je computer:</string>
+    <string name="help_getting_started_step_2_title">Start Event Mode</string>
+    <string name="help_getting_started_step_2_text1">Ga naar Bestand &gt; Event Mode zodra je thePhoto opent</string>
+    <string name="help_getting_started_step_3_title">Ontvang de code</string>
+    <string name="help_getting_started_step_3_text1">Voer de code in de hoek rechtsonder op het tweede scherm in thePhoto.</string>
 </resources>
