@@ -56,7 +56,6 @@
             android:layout_marginLeft="16dp"
 
             android:layout_weight="1"
-            android:onClick="openSettings"
             android:text="thePhoto"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="@android:color/black" />

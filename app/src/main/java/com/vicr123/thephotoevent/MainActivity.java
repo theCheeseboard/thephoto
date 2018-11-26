@@ -32,6 +32,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -139,6 +140,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Initialize uncaught exception handler
+        final Thread.UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable throwable) {
+                //Hide the ongoing notification if it exists
+                NotificationManagerCompat mgr = NotificationManagerCompat.from(getApplicationContext());
+                mgr.cancel(0);
+
+                //Re-throw the exception
+                uncaughtExceptionHandler.uncaughtException(thread, throwable);
+            }
+        });
 
         //Open the onboarding activity if needed
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

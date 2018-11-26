@@ -151,6 +151,7 @@ public class MainActivity extends WearableActivity {
                                 if (n.isNearby()) {
                                     //Open the camera activity
                                     Intent intent = new Intent(ctx, CameraActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                     intent.putExtra("NODE_ID", n.getId());
                                     startActivity(intent);
                                     break;

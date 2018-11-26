@@ -44,5 +44,4 @@ public class WearableService extends WearableListenerService {
             }
         }
     }
-
 }
