@@ -10,4 +10,6 @@
     <string name="connected_notification_text">Bedien je camera van een afstand met jouw horloge</string>
     <string name="check_phone">Verwijs naar je telefoon</string>
 
-</resources>
+<string name="get_unsupported">Je kan thePhoto niet gebruiken omdat je horloge niet verbonden aan een Android telefoon.</string>
+
+    </resources>
