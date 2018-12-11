@@ -65,4 +65,5 @@
     <string name="help_getting_started_step_2_text1">After opening thePhoto, go to File > Event Mode</string>
     <string name="help_getting_started_step_3_title">Obtain the code</string>
     <string name="help_getting_started_step_3_text1">Enter the code found in the bottom right corner of the second screen into thePhoto.</string>
+    <string name="disconnected_reconnecting">Attempting to reconnect...</string>
 </resources>

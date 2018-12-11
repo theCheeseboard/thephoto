@@ -104,7 +104,7 @@ class ConnectionTask extends AsyncTask<Object, Integer, Object> {
                     context.finish();
                 }
             });
-            sock.connect(new InetSocketAddress(addr, 26157), 5000);
+            sock.connect(new InetSocketAddress(addr, 26157), 5000, false);
         } catch (Exception e) {
             this.cancel(true);
             e.printStackTrace();

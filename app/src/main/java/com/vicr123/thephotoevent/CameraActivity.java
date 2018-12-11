@@ -563,23 +563,20 @@ public class CameraActivity extends AppCompatActivity {
                 finish();
             }
         });
-        sock.setOnErrorHandler(new Runnable() {
+        sock.setOnUnexpectedDisconnect(new Runnable() {
             @Override
             public void run() {
-                //Error
-                new AlertDialog.Builder(context).setTitle(R.string.invalid_code_title)
-                        .setMessage(R.string.invalid_code_message)
-                        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        }).setOnDismissListener(new DialogInterface.OnDismissListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setView(R.layout.dialog_reconnect_needed);
+
+                final AlertDialog d = builder.create();
+                sock.setOnReconnect(new Runnable() {
                     @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        finish();
+                    public void run() {
+                        d.dismiss();
                     }
-                }).show();
+                });
+                d.show();
             }
         });
 

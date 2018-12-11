@@ -24,8 +24,10 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Network;
 import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -77,14 +79,13 @@ class NetworkWriteThread extends Thread {
     public void run() {
         try {
             while (!isInterrupted() && blocks.remainingCapacity() != 0) {
+                NetworkBlock block = blocks.take();
                 try {
-                    NetworkBlock block = blocks.take();
-
                     block.beforeSend();
 
                     ByteBuffer buffer = ByteBuffer.wrap(block.data.toByteArray());
 
-                    while (buffer.hasRemaining()) {
+                    while (buffer.hasRemaining() && sock.socket != null) {
                         int readIn = 2048;
                         if (readIn > buffer.remaining()) readIn = buffer.remaining();
 
@@ -97,9 +98,18 @@ class NetworkWriteThread extends Thread {
                         block.progress(buffer.position(), buffer.limit());
                     }
 
-                    block.afterSend();
+                    if (sock.socket != null) {
+                        block.afterSend();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
+
+                    block.afterSend();
+                }
+
+                if (sock.socket == null) {
+                    //We're disconnected; clear all the remaining images
+                    blocks.clear();
                 }
             }
         } catch (InterruptedException e) {
@@ -120,12 +130,12 @@ public class EventSocket {
     Context ctx;
     Handler mainHandler;
     boolean authenticated = false;
-    SSLSocket socket;
+    SSLSocket socket = null;
     long lastPingReceived = 0;
     Timer pingChecker;
     boolean closeRequested = false;
 
-    Runnable onError, onEstablished, onClose, onEndOfPhotoQueue;
+    private Runnable onError, onEstablished, onClose, onEndOfPhotoQueue, onUnexpectedDisconnect, onReconnect;
 
     public EventSocket(Context ctx) {
         super();
@@ -137,6 +147,7 @@ public class EventSocket {
     }
 
     public void writeImage(byte[] bytes, final SendImageCallback callback) {
+        if (socket == null) return; //Do nothing if the socket is invalid
         try {
             NetworkBlock block = new NetworkBlock("image") {
                 @Override
@@ -168,6 +179,7 @@ public class EventSocket {
     }
 
     public void sendCommand(String command) {
+        if (socket == null) return; //Do nothing if the socket is invalid
         try {
             NetworkBlock block = new NetworkBlock("command") {
                 @Override
@@ -205,11 +217,19 @@ public class EventSocket {
         onClose = r;
     }
 
+    public void setOnUnexpectedDisconnect(Runnable r) {
+        onUnexpectedDisconnect = r;
+    }
+
+    public void setOnReconnect(Runnable r) {
+        onReconnect = r;
+    }
+
     public void setOnEndOfPhotoQueue(Runnable r) {
         onEndOfPhotoQueue = r;
     }
 
-    public void connect(SocketAddress endpoint, int timeout) throws IOException, KeyManagementException, NoSuchAlgorithmException {
+    public void connect(final SocketAddress endpoint, final int timeout, final boolean isReconnect) throws IOException, KeyManagementException, NoSuchAlgorithmException {
         Socket tcpSocket = new Socket();
         tcpSocket.connect(endpoint, timeout);
 
@@ -239,7 +259,7 @@ public class EventSocket {
             public void run() {
                 try {
                     InputStream stream = socket.getInputStream();
-                    while (this.isAlive()) {
+                    while (socket != null && this.isAlive()) {
                         byte[] buffer = new byte[2048];
                         int read = stream.read(buffer);
 
@@ -253,14 +273,18 @@ public class EventSocket {
                         }
 
                         //Decrypt the data
-
                         String messages = new String(buffer, "UTF-8").trim();
                         String[] messagesArray = messages.split("\n");
 
                         for (String message : messagesArray) {
                             if (message.equals("HANDSHAKE OK")) {
                                 authenticated = true;
-                                mainHandler.post(onEstablished);
+
+                                if (isReconnect) {
+                                    mainHandler.post(onReconnect);
+                                } else {
+                                    mainHandler.post(onEstablished);
+                                }
 
                                 //Identify
                                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -294,14 +318,28 @@ public class EventSocket {
                                         @Override
                                         public void run() {
                                             if (System.currentTimeMillis() - lastPingReceived > 30000) {
-                                                //Close the connection; it's been too long
-                                                mainHandler.post(new Runnable() {
+                                                //Set socket to null to tell everything we're gone
+                                                Log.w("thePhoto", "Unexpectedly disconnected!");
+                                                socket = null;
+                                                authenticated = false;
+                                                lastPingReceived = 0;
+                                                mainHandler.post(onUnexpectedDisconnect);
+                                                pingChecker.cancel();
+                                                pingChecker = null;
+
+                                                //Attempt to reconnect after 1000 milliseconds
+                                                new Timer().schedule(new TimerTask() {
                                                     @Override
                                                     public void run() {
-                                                        Toast.makeText(ctx, R.string.ERROR_DISCONNECTED, Toast.LENGTH_LONG).show();
+                                                        Log.w("thePhoto", "Attempting a reconnect");
+                                                        try {
+                                                            connect(endpoint, timeout, true);
+                                                        } catch (Exception e) {
+                                                            //Error occurred; just close
+                                                            close();
+                                                        }
                                                     }
-                                                });
-                                                close();
+                                                }, 1000);
                                             }
                                         }
                                     }, 5000, 5000);
