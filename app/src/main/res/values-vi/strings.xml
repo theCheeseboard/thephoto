@@ -60,4 +60,10 @@
     <string name="help_getting_started_step_2_text1">Sau khi bạn mở thePhoto, đi tới Tệp &gt; Chế Độ Biến Cố</string>
     <string name="help_getting_started_step_3_title">Nhận mã</string>
     <string name="help_getting_started_step_3_text1">Nhập vào mã tìm thấy ở góc dưới bên phải trên màn hình thứ hai vào thePhoto.</string>
+<string name="disconnected_dialog_text">Kết nối với thePhoto của bạn đã bị ngắt không mong đợi, và chúng tôi không thể kết nối lại.
+\n
+\nKiểm tra bạn đang kết nối với mạng Wi-Fi, và máy chủ còn chạy.
+\n
+\nBạn có thể kết nối lại bằng mở thePhoto Biến Cố lại và nhập mã lại.</string>
+    <string name="disconnected_reconnecting">Đang thử kết nối lại...</string>
 </resources>
