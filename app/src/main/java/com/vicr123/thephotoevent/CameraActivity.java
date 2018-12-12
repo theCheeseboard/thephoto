@@ -125,6 +125,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1288,6 +1289,26 @@ public class CameraActivity extends AppCompatActivity {
                     if (!soundType.equals("vrabbers")) {
                         if (seconds <= 3) {
                             timerHighBeep.start();
+
+                            //Vibrate all Wear OS devices
+                            Wearable.getCapabilityClient(activity).getCapability("camera_message", CapabilityClient.FILTER_REACHABLE)
+                                    .addOnCompleteListener(new OnCompleteListener<CapabilityInfo>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<CapabilityInfo> task) {
+                                            if (task.isSuccessful()) {
+                                                for (Node n : task.getResult().getNodes()) {
+                                                    if (n.isNearby()) {
+                                                        try {
+                                                            Task<Integer> vibrateTask = wearableMessageClient.sendMessage(n.getId(), "/cameraaction/vibrate", ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN).putLong(100).array());
+                                                        } catch (Exception e) {
+                                                            Log.wtf("TIMER_WEAR_VIBRATE", e);
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
                         } else {
                             timerBeep.start();
                         }
