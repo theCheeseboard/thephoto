@@ -116,13 +116,14 @@ class NetworkWriteThread extends Thread {
             //Do nothing, time to quit!
         }
 
-        try {
-            sock.socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (sock.socket != null) {
+            try {
+                sock.socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
-
 }
 
 public class EventSocket {
@@ -130,6 +131,7 @@ public class EventSocket {
     Context ctx;
     Handler mainHandler;
     boolean authenticated = false;
+    private boolean reconnecting = false;
     SSLSocket socket = null;
     long lastPingReceived = 0;
     Timer pingChecker;
@@ -229,6 +231,10 @@ public class EventSocket {
         onEndOfPhotoQueue = r;
     }
 
+    public boolean isReconnecting() {
+        return reconnecting;
+    }
+
     public void connect(final SocketAddress endpoint, final int timeout, final boolean isReconnect) throws IOException, KeyManagementException, NoSuchAlgorithmException {
         Socket tcpSocket = new Socket();
         tcpSocket.connect(endpoint, timeout);
@@ -281,6 +287,7 @@ public class EventSocket {
                                 authenticated = true;
 
                                 if (isReconnect) {
+                                    reconnecting = false;
                                     mainHandler.post(onReconnect);
                                 } else {
                                     mainHandler.post(onEstablished);
@@ -326,6 +333,16 @@ public class EventSocket {
                                                 mainHandler.post(onUnexpectedDisconnect);
                                                 pingChecker.cancel();
                                                 pingChecker = null;
+                                                reconnecting = true;
+
+                                                //Prepare to reconnect
+                                                setOnErrorHandler(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        //Error occurred, just close
+                                                        close();
+                                                    }
+                                                });
 
                                                 //Attempt to reconnect after 1000 milliseconds
                                                 new Timer().schedule(new TimerTask() {

@@ -24,6 +24,7 @@
     <string name="connected_notification_channel_description">Notifications that show when you\'re connected to thePhoto</string>
 
     <string name="disconnected_notification_title">Disconnected from thePhoto</string>
+    <string name="disconnected_dialog_text">You\'ve been unexpectedly disconnected from thePhoto, and we can\'t seem to reconnect.\n\nMake sure you\'re still connected to the WiFi network and that the server is still running.\n\nYou can try reconnecting by reopening thePhoto Event and entering the code again.</string>
     <string name="disconnected_notification_text">While you were gone, your device was disconnected from thePhoto. To continue taking pictures, you\'ll need to reconnect to thePhoto.</string>
 
     <!-- Strings related to Settings -->

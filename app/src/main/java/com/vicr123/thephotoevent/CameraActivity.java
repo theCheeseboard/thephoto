@@ -335,6 +335,7 @@ public class CameraActivity extends AppCompatActivity {
     int currentCameraOrientation = CameraCharacteristics.LENS_FACING_BACK;
     boolean lockAF = false;
     boolean processingAF = false;
+    AlertDialog reconnectingDialog;
 
     boolean canFlash, canFlip;
 
@@ -544,7 +545,21 @@ public class CameraActivity extends AppCompatActivity {
         sock.setOnClose(new Runnable() {
             @Override
             public void run() {
-                if (!context.hasWindowFocus() && !userRequestedCloseFromNotification) {
+                if (sock.isReconnecting()) {
+                    reconnectingDialog.dismiss();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle(R.string.disconnected_notification_title);
+                    builder.setMessage(R.string.disconnected_dialog_text);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else if (!context.hasWindowFocus() && !userRequestedCloseFromNotification) {
                     Intent intent = new Intent(context, MainActivity.class);
                     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
@@ -559,24 +574,25 @@ public class CameraActivity extends AppCompatActivity {
 
                     NotificationManagerCompat mgr = NotificationManagerCompat.from(context);
                     mgr.notify(1, builder.build());
+                    finish();
                 }
-                finish();
             }
         });
         sock.setOnUnexpectedDisconnect(new Runnable() {
             @Override
             public void run() {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(false);
                 builder.setView(R.layout.dialog_reconnect_needed);
 
-                final AlertDialog d = builder.create();
+                reconnectingDialog = builder.create();
                 sock.setOnReconnect(new Runnable() {
                     @Override
                     public void run() {
-                        d.dismiss();
+                        reconnectingDialog.dismiss();
                     }
                 });
-                d.show();
+                reconnectingDialog.show();
             }
         });
 
