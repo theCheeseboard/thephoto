@@ -10,6 +10,7 @@
 #define Block_hpp
 
 #include <stdio.h>
+#include <functional>
 
 struct BlockListPrivate;
 struct BlockObjC;
@@ -32,12 +33,15 @@ public:
     BlockList();
     ~BlockList();
     
-    void pushBlock(Block b);
-    Block takeBlock();
+    void pushBlock(Block* b);
+    Block* takeBlock();
     unsigned long blockCount();
+    
+    void setNewBlockAvailableCallback(std::function<void()> newBlockAvailableFunction);
     
 private:
     BlockListPrivate* d;
+    std::function<void()> newBlockAvailableFunction;
 };
 
 #endif /* Block_hpp */

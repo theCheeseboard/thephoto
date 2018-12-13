@@ -17,8 +17,8 @@ class BlockObjC {
 public:
     BlockObjC();
     ~BlockObjC();
-    static Block getCommand(NSString* command);
-    static Block getImage(NSData* image);
+    static Block* getCommand(NSString* command);
+    static Block* getImage(NSData* image);
     
     NSData* getData();
     

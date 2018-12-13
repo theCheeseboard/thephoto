@@ -24,17 +24,17 @@ BlockObjC::~BlockObjC() {
     
 }
 
-Block BlockObjC::getCommand(NSString* command) {
+Block* BlockObjC::getCommand(NSString* command) {
     NSData* bytes = [[command stringByAppendingString:@"\n"] dataUsingEncoding:NSUTF8StringEncoding];
     
-    Block b;
-    b.d->data = bytes;
+    Block* b = new Block();
+    b->d->data = bytes;
     
     return b;
 }
 
-Block BlockObjC::getImage(NSData* image) {
-    return Block();
+Block* BlockObjC::getImage(NSData* image) {
+    return new Block();
 }
 
 NSData* BlockObjC::getData() {
