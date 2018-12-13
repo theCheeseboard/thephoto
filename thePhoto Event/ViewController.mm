@@ -112,6 +112,18 @@ enum State {
 }
 
 - (IBAction)sendImageButtonClicked:(UIButton *)sender {
+    if (_currentState != Open) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Connect to a server first", nil) message:NSLocalizedString(@"Before you can send images, you'll need to connect to thePhoto.", nil) preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* action = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+            //Do nothing
+        }];
+        
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.allowsEditing = NO;

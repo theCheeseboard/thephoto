@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="thePhoto Event/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext" target-language="vi">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
+    </header>
+    <body>
+      <trans-unit id="Ahf-e8-cQQ.normalTitle">
+        <source>Connect</source>
+        <target>Kết nối</target>
+        <note>Class = "UIButton"; normalTitle = "Connect"; ObjectID = "Ahf-e8-cQQ";</note>
+      </trans-unit>
+      <trans-unit id="HnE-xF-mpN.placeholder">
+        <source>Code</source>
+        <target>Code</target>
+        <note>Class = "UITextField"; placeholder = "Code"; ObjectID = "HnE-xF-mpN";</note>
+      </trans-unit>
+      <trans-unit id="HnE-xF-mpN.text">
+        <source>32322</source>
+        <target>32322</target>
+        <note>Class = "UITextField"; text = "32322"; ObjectID = "HnE-xF-mpN";</note>
+      </trans-unit>
+      <trans-unit id="s4f-Yd-JIt.text">
+        <source>Connect to a computer</source>
+        <target>Connect to a computer</target>
+        <note>Class = "UILabel"; text = "Connect to a computer"; ObjectID = "s4f-Yd-JIt";</note>
+      </trans-unit>
+      <trans-unit id="ulw-Vl-kXA.normalTitle">
+        <source>Send Image</source>
+        <target>Send Image</target>
+        <note>Class = "UIButton"; normalTitle = "Send Image"; ObjectID = "ulw-Vl-kXA";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="thePhoto Event/en.lproj/InfoPlist.strings" datatype="plaintext" source-language="en" target-language="vi">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+        <note>Bundle name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="thePhoto Event/en.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="vi">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="10.1" build-num="10B61"/>
+    </header>
+    <body>
+      <trans-unit id="OK">
+        <source>OK</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="That didn't work.">
+        <source>That didn't work.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="We can't seem to get to that computer. Check that you've got the code correct and that you're connected to the correct WiFi network.">
+        <source>We can't seem to get to that computer. Check that you've got the code correct and that you're connected to the correct WiFi network.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
