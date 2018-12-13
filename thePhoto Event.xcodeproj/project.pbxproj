@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		577FB5BC21C130DF0081AD39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 577FB5BB21C130DF0081AD39 /* AppDelegate.m */; };
-		577FB5BF21C130DF0081AD39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577FB5BE21C130DF0081AD39 /* ViewController.m */; };
+		577FB5BF21C130DF0081AD39 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 577FB5BE21C130DF0081AD39 /* ViewController.mm */; };
 		577FB5C221C130DF0081AD39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577FB5C021C130DF0081AD39 /* Main.storyboard */; };
 		577FB5C421C130E20081AD39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 577FB5C321C130E20081AD39 /* Assets.xcassets */; };
 		577FB5C721C130E20081AD39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577FB5C521C130E20081AD39 /* LaunchScreen.storyboard */; };
 		577FB5CA21C130E20081AD39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 577FB5C921C130E20081AD39 /* main.m */; };
+		57ACDDE321C1EE0500389539 /* Block.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57ACDDE121C1EE0500389539 /* Block.mm */; };
+		57ACDDE521C1F63200389539 /* BlockObjC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57ACDDE421C1F63200389539 /* BlockObjC.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +22,23 @@
 		577FB5BA21C130DF0081AD39 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		577FB5BB21C130DF0081AD39 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		577FB5BD21C130DF0081AD39 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		577FB5BE21C130DF0081AD39 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		577FB5BE21C130DF0081AD39 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		577FB5C121C130DF0081AD39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		577FB5C321C130E20081AD39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		577FB5C621C130E20081AD39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		577FB5C821C130E20081AD39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		577FB5C921C130E20081AD39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		57ACDDE121C1EE0500389539 /* Block.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Block.mm; sourceTree = "<group>"; };
+		57ACDDE221C1EE0500389539 /* Block.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Block.hpp; sourceTree = "<group>"; };
+		57ACDDE421C1F63200389539 /* BlockObjC.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BlockObjC.mm; sourceTree = "<group>"; };
+		57ACDDE621C1F66800389539 /* BlockObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockObjC.h; sourceTree = "<group>"; };
+		57ACDDE721C26BD300389539 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Main.strings; sourceTree = "<group>"; };
+		57ACDDE821C26BD300389539 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		57ACDDE921C26F4E00389539 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		57ACDDEA21C26F4F00389539 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		57ACDDEB21C26F5500389539 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
+		57ACDDEC21C26F5600389539 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		57ACDDED21C2799700389539 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +55,7 @@
 		577FB5AE21C130DF0081AD39 = {
 			isa = PBXGroup;
 			children = (
+				57ACDDED21C2799700389539 /* LICENSE */,
 				577FB5B921C130DF0081AD39 /* thePhoto Event */,
 				577FB5B821C130DF0081AD39 /* Products */,
 			);
@@ -61,12 +75,16 @@
 				577FB5BA21C130DF0081AD39 /* AppDelegate.h */,
 				577FB5BB21C130DF0081AD39 /* AppDelegate.m */,
 				577FB5BD21C130DF0081AD39 /* ViewController.h */,
-				577FB5BE21C130DF0081AD39 /* ViewController.m */,
+				577FB5BE21C130DF0081AD39 /* ViewController.mm */,
+				57ACDDE121C1EE0500389539 /* Block.mm */,
+				57ACDDE221C1EE0500389539 /* Block.hpp */,
 				577FB5C021C130DF0081AD39 /* Main.storyboard */,
 				577FB5C321C130E20081AD39 /* Assets.xcassets */,
 				577FB5C521C130E20081AD39 /* LaunchScreen.storyboard */,
 				577FB5C821C130E20081AD39 /* Info.plist */,
 				577FB5C921C130E20081AD39 /* main.m */,
+				57ACDDE421C1F63200389539 /* BlockObjC.mm */,
+				57ACDDE621C1F66800389539 /* BlockObjC.h */,
 			);
 			path = "thePhoto Event";
 			sourceTree = "<group>";
@@ -141,8 +159,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				577FB5BF21C130DF0081AD39 /* ViewController.m in Sources */,
+				577FB5BF21C130DF0081AD39 /* ViewController.mm in Sources */,
+				57ACDDE321C1EE0500389539 /* Block.mm in Sources */,
 				577FB5CA21C130E20081AD39 /* main.m in Sources */,
+				57ACDDE521C1F63200389539 /* BlockObjC.mm in Sources */,
 				577FB5BC21C130DF0081AD39 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +174,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				577FB5C121C130DF0081AD39 /* Base */,
+				57ACDDE721C26BD300389539 /* vi */,
+				57ACDDE921C26F4E00389539 /* pt-BR */,
+				57ACDDEB21C26F5500389539 /* nl */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -162,6 +185,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				577FB5C621C130E20081AD39 /* Base */,
+				57ACDDE821C26BD300389539 /* vi */,
+				57ACDDEA21C26F4F00389539 /* pt-BR */,
+				57ACDDEC21C26F5600389539 /* nl */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -173,6 +199,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -232,6 +259,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -286,7 +314,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YX56JUQ72R;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = "thePhoto Event/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,7 +333,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YX56JUQ72R;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = "thePhoto Event/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

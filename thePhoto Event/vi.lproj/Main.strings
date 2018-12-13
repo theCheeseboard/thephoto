@@ -1,0 +1,15 @@
+/* Class = "UIButton"; normalTitle = "Connect"; ObjectID = "Ahf-e8-cQQ"; */
+"Ahf-e8-cQQ.normalTitle" = "Kết nối";
+
+/* Class = "UITextField"; placeholder = "Code"; ObjectID = "HnE-xF-mpN"; */
+"HnE-xF-mpN.placeholder" = "Code";
+
+/* Class = "UITextField"; text = "32322"; ObjectID = "HnE-xF-mpN"; */
+"HnE-xF-mpN.text" = "32322";
+
+/* Class = "UILabel"; text = "Connect to a computer"; ObjectID = "s4f-Yd-JIt"; */
+"s4f-Yd-JIt.text" = "Connect to a computer";
+
+/* Class = "UIButton"; normalTitle = "Send Image"; ObjectID = "ulw-Vl-kXA"; */
+"ulw-Vl-kXA.normalTitle" = "Send Image";
+
