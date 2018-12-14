@@ -39,3 +39,7 @@ unsigned long BlockList::blockCount() {
 void BlockList::setNewBlockAvailableCallback(std::function<void ()> newBlockAvailableFunction) {
     this->newBlockAvailableFunction = newBlockAvailableFunction;
 }
+
+void BlockList::clearBlocks() {
+    d->blocks.clear();
+}

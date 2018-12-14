@@ -36,6 +36,7 @@ public:
     void pushBlock(Block* b);
     Block* takeBlock();
     unsigned long blockCount();
+    void clearBlocks();
     
     void setNewBlockAvailableCallback(std::function<void()> newBlockAvailableFunction);
     

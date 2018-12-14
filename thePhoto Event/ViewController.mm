@@ -35,6 +35,9 @@ enum State {
 @property State currentState;
 @property Boolean writingBlock;
 
+@property NSDate* lastPing;
+@property NSTimer* pingTimer;
+
 @end
 
 @implementation ViewController
@@ -45,6 +48,7 @@ enum State {
     _currentState = Idle;
     _writingBlock = NO;
     _unprocessedData = [NSMutableData data];
+    _pingTimer = nil;
 
     _blockList = new BlockList();
     _blockList->setNewBlockAvailableCallback([=] {
@@ -208,12 +212,21 @@ enum State {
         [_unprocessedData appendBytes:(const void*)buffer length:len];
         
         NSString* data = [[NSString alloc] initWithData:_unprocessedData encoding:NSUTF8StringEncoding];
-        NSLog(data);
+        NSLog(@"%@", data);
         
         NSArray<NSString*>* dataParts = [data componentsSeparatedByString:@"\n"];
         for (NSString* data : dataParts) {
             if (_currentState == Authenticated) {
-                
+                if ([data isEqualToString:@"PING"]) {
+                    //Reply with a ping
+                    _blockList->pushBlock(BlockObjC::getCommand(@"PING"));
+                    _lastPing = [[NSDate alloc] init];
+                    
+                    if (_pingTimer == nil) {
+                        //Set up a new ping timer
+                        _pingTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(ping) userInfo:nil repeats:YES];
+                    }
+                }
             } else if (_currentState == Open) {
                 //Ensure this is a handshake okay message
                 if ([data isEqualToString:@"HANDSHAKE OK"]) {
@@ -222,6 +235,9 @@ enum State {
                     
                     //Send identify command
                     _blockList->pushBlock(BlockObjC::getCommand([@"IDENTIFY " stringByAppendingString:[[UIDevice currentDevice] name]]));
+                    
+                    //Register for pings
+                    _blockList->pushBlock(BlockObjC::getCommand(@"REGISTERPING"));
                 } else {
                     //We've got an error :(
                     [_readStream close];
@@ -261,6 +277,27 @@ enum State {
     [_writeStream write:buf maxLength:[data length]];
     
     //delete b at some point
+    delete b;
+}
+
+- (void) ping {
+    if ([[[NSDate alloc] init] timeIntervalSinceDate:_lastPing] > 30.0) {
+        //We're disconnected folks!
+        [_pingTimer invalidate];
+        _pingTimer = nil;
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Disconnected from the server", nil) message:NSLocalizedString(@"You've been disconnected from the server.", nil) preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* action = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction* action) {
+            //Do nothing
+        }];
+        
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        _blockList->clearBlocks();
+        _currentState = Idle;
+    }
 }
 
 @end
