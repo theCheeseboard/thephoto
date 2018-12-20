@@ -62,4 +62,10 @@
     <string name="help_getting_started_step_2_text1">Depois de abrir thePhoto, vá a Arquivo &gt; Modo Evento</string>
     <string name="help_getting_started_step_3_title">Obtenha o código</string>
     <string name="help_getting_started_step_3_text1">Digite o código que você vai achar no canto inferior direito da segunda tela no thePhoto.</string>
+<string name="disconnected_dialog_text">Você sofreu uma conexão inesperada do thePhoto e não conseguimos reconectar.
+\n
+\nCertifique-se que você ainda está conectado à mesma rede Wi-fi e que o servidor está sendo executado.
+\n
+\nTente reabrir thePhoto Event e inserindo o código novamente.</string>
+    <string name="disconnected_reconnecting">Tentando reconectar…</string>
 </resources>
