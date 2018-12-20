@@ -99,7 +99,7 @@
         android:layout_height="17dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="https://github.com/vicr123/thephoto/releases"
+        android:text="https://thephoto.vicr123.com/download"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
