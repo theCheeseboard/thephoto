@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/thePhotoEvent.iml" filepath="$PROJECT_DIR$/thePhotoEvent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/thephotoeventwear/thephotoeventwear.iml" filepath="$PROJECT_DIR$/thephotoeventwear/thephotoeventwear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../home/victor/AndroidStudioProjects/thePhotoEvent/AndroidStudioProjects-thePhotoEvent.iml" filepath="$PROJECT_DIR$/../../../home/victor/AndroidStudioProjects/thePhotoEvent/AndroidStudioProjects-thePhotoEvent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../home/victor/AndroidStudioProjects/thePhotoEvent/app/thePhotoEvent-app.iml" filepath="$PROJECT_DIR$/../../../home/victor/AndroidStudioProjects/thePhotoEvent/app/thePhotoEvent-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../home/victor/AndroidStudioProjects/thePhotoEvent/thephotoeventwear/thePhotoEvent-thephotoeventwear.iml" filepath="$PROJECT_DIR$/../../../home/victor/AndroidStudioProjects/thePhotoEvent/thephotoeventwear/thePhotoEvent-thephotoeventwear.iml" />
     </modules>
   </component>
 </project>
