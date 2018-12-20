@@ -33,6 +33,8 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
     ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
     ui->openMissionControl->setIcon(QIcon("/Applications/Mission Control.app/Contents/Resources/Expose.icns"));
     ui->monitorNumber->setMaximum(QApplication::desktop()->screenCount());
+    ui->mainStack->setCurrentAnimation(tStackedWidget::SlideHorizontal);
+    ui->closeEventModeButton->setProperty("type", "destructive");
 
     for (QHostAddress addr : QNetworkInterface::allAddresses()) {
         if (addr.isLoopback()) continue;
@@ -59,7 +61,6 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
 
     imagesReceivedLayout = new FlowLayout(ui->imagesReceivedWidget, -1, 0, 0);
     imagesReceivedLayout->setContentsMargins(0, 0, 0, 0);
-    //imagesReceivedLayout->s
     ui->imagesReceivedWidget->setLayout(imagesReceivedLayout);
 
     QScroller::grabGesture(ui->imagesReceivedScrollArea->viewport(), QScroller::LeftMouseButtonGesture);
