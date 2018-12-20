@@ -62,4 +62,10 @@
     <string name="help_getting_started_step_2_text1">Ga naar Bestand &gt; Event Mode zodra je thePhoto opent</string>
     <string name="help_getting_started_step_3_title">Ontvang de code</string>
     <string name="help_getting_started_step_3_text1">Voer de code in de hoek rechtsonder op het tweede scherm in thePhoto.</string>
+<string name="disconnected_dialog_text">Je bent onverwachts niet meer verbonden met thePhoto, het lukt niet om de verbinding te herstellen.
+\n
+\nControleer of je nog steeds met een WiFi-netwerk verbonden bent en dat de server nog steeds draait.
+\n
+\nJe kunt proberen om de verbinding te herstellen door thePhoto Event opnieuw te openen en de code opnieuw in te voeren.</string>
+    <string name="disconnected_reconnecting">Aan het proberen de verbinding te herstellen...</string>
 </resources>
