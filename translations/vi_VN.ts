@@ -114,7 +114,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="429"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
-        <translation type="unfinished"></translation>
+        <translation>Bạn truy cập liên kết này trên điện thoại để đi đến đó: https://thephoto.vicr123.com/download</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="471"/>
@@ -337,12 +337,12 @@
     <message>
         <location filename="../event/eventmodeshow.ui" line="318"/>
         <source>To connect, install</source>
-        <translation type="unfinished"></translation>
+        <translation>Để kết nối, cài đặt</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="337"/>
         <source>and use</source>
-        <translation type="unfinished"></translation>
+        <translation>rồi dùng mã</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.cpp" line="207"/>
