@@ -88,7 +88,7 @@ public class CameraActivity extends WearableActivity {
         layoutParams.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID;
         layoutParams.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID;
 
-        findViewById(R.id.captureButton).setLayoutParams(layoutParams);
+        findViewById(R.id.captureFrame).setLayoutParams(layoutParams);
 
         ViewPager.OnPageChangeListener listener = new ViewPager.OnPageChangeListener() {
             @Override
@@ -170,7 +170,7 @@ public class CameraActivity extends WearableActivity {
                                 public void onComplete(@NonNull Task<CapabilityInfo> task) {
                                     if (task.isSuccessful()) {
                                         for (Node n : task.getResult().getNodes()) {
-                                            if (n.getId() == nodeId) return; //We're still connected so don't do anything
+                                            if (n.getId().equals(nodeId)) return; //We're still connected so don't do anything
                                         }
 
                                         //We're done here

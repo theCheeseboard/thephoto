@@ -154,6 +154,9 @@ public class MainActivity extends WearableActivity {
                                     intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                     intent.putExtra("NODE_ID", n.getId());
                                     startActivity(intent);
+
+                                    //End this activity
+                                    finish();
                                     break;
                                 }
                             }
