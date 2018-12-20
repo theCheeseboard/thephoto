@@ -327,7 +327,7 @@
             </font>
            </property>
            <property name="text">
-            <string>thephoto.vicr123.com/download</string>
+            <string notr="true">thephoto.vicr123.com/download</string>
            </property>
           </widget>
          </item>

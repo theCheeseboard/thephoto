@@ -340,11 +340,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="330"/>
-        <source>thephoto.vicr123.com/download</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../event/eventmodeshow.ui" line="337"/>
         <source>and use</source>
         <translation type="unfinished"></translation>
