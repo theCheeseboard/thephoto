@@ -249,7 +249,7 @@ void EventModeShow::updateBlurredImage() {
 }
 
 bool EventModeShow::eventFilter(QObject *watched, QEvent *event) {
-    if (watched = scrollRedactor) {
+    if (watched == scrollRedactor) {
         if (event->type() == QEvent::Paint) {
             QPainter painter(scrollRedactor);
 

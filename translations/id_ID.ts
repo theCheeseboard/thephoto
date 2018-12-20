@@ -325,22 +325,22 @@
 <context>
     <name>EventModeShow</name>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="186"/>
+        <location filename="../event/eventmodeshow.ui" line="159"/>
         <source>Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="275"/>
+        <location filename="../event/eventmodeshow.ui" line="248"/>
         <source>Preparing Event Mode...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="318"/>
+        <location filename="../event/eventmodeshow.ui" line="291"/>
         <source>To connect, install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="337"/>
+        <location filename="../event/eventmodeshow.ui" line="310"/>
         <source>and use</source>
         <translation type="unfinished"></translation>
     </message>
