@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->graphicsView->installEventFilter(this);
     ui->scrollArea->installEventFilter(this);
 
-    ui->criticalIcon->setPixmap(QIcon::fromTheme("dialog-error").pixmap(32, 32));
+    ui->criticalIcon->setPixmap(QIcon::fromTheme("dialog-error", QApplication::style()->standardIcon(QStyle::SP_MessageBoxCritical)).pixmap(32, 32));
     ui->mainToolBar->addWidget(ui->imageNameLabel);
 
     QStringList arguments = QApplication::arguments();
@@ -239,6 +239,8 @@ void MainWindow::on_actionFit_to_Window_triggered()
 
 void MainWindow::on_actionStart_Slideshow_triggered()
 {
+    if (!ui->scrollArea->isVisible()) return; //No pictures so no point doing a slideshow
+
     this->showFullScreen();
     ui->mainToolBar->setVisible(false);
     ui->menuBar->setVisible(false);
