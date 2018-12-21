@@ -415,7 +415,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="279"/>
-        <location filename="../mainwindow.cpp" line="48"/>
+        <location filename="../mainwindow.cpp" line="49"/>
         <source>Zoom In</source>
         <translation>Mais Zoom</translation>
     </message>
@@ -426,7 +426,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="291"/>
-        <location filename="../mainwindow.cpp" line="54"/>
+        <location filename="../mainwindow.cpp" line="55"/>
         <source>Zoom Out</source>
         <translation>Menos Zoom</translation>
     </message>
@@ -437,7 +437,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="303"/>
-        <location filename="../mainwindow.cpp" line="60"/>
+        <location filename="../mainwindow.cpp" line="61"/>
         <source>Zoom to 100%</source>
         <translation>100% de Zoom</translation>
     </message>
@@ -448,7 +448,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
-        <location filename="../mainwindow.cpp" line="66"/>
+        <location filename="../mainwindow.cpp" line="67"/>
         <source>Fit to Window</source>
         <translation>Encaixar à Janela</translation>
     </message>
@@ -459,7 +459,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="336"/>
-        <location filename="../mainwindow.cpp" line="72"/>
+        <location filename="../mainwindow.cpp" line="73"/>
         <source>Delete</source>
         <translation>Deletar</translation>
     </message>
@@ -480,27 +480,29 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="324"/>
-        <location filename="../mainwindow.cpp" line="78"/>
+        <location filename="../mainwindow.cpp" line="79"/>
         <source>Start Slideshow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="98"/>
+        <location filename="../mainwindow.cpp" line="99"/>
         <source>Reading Library...</source>
         <translation>Lendo Biblioteca…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="99"/>
+        <location filename="../mainwindow.cpp" line="100"/>
         <source>&lt;p&gt;We&apos;re building your library. Please wait while we do this.&lt;/p&gt;&lt;p&gt;You can shorten this process by narrowing your library.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Nós estamos construindo a biblioteca. Por favor espere enquanto fazemos isso.&lt;/p&gt;&lt;p&gt;Você pode encurtar esse processo diminuindo sua biblioteca.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="374"/>
+        <location filename="../mainwindow.cpp" line="377"/>
         <source>Delete Image</source>
         <translation>Deletar Imagem</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="369"/>
+        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="378"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation>Você está prestes a deletar essa imagem para sempre. Tem certeza?</translation>
     </message>

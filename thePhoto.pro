@@ -14,7 +14,7 @@ CONFIG += c++14
 
 macx {
     QT += macextras
-    #ICON = icon.icns
+    ICON = icon.icns
     LIBS += -framework CoreFoundation -framework AppKit
     #QMAKE_INFO_PLIST = Info.plist
 

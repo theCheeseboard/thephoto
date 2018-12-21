@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "aboutdialog.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -366,11 +367,32 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
 
 void MainWindow::on_actionDelete_triggered()
 {
-    if (QMessageBox::warning(this, tr("Delete Image"), tr("You're about to delete this image forever. Are you sure?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
+    QEventLoop loop;
+    QMessageBox* message = new QMessageBox(this);
+    message->setIcon(QMessageBox::Warning);
+#ifdef Q_OS_MAC
+    message->setText(tr("Delete Image"));
+    message->setInformativeText(tr("You're about to delete this image forever. Are you sure?"));
+#else
+    message->setWindowTitle(tr("Delete Image"));
+    message->setText(tr("You're about to delete this image forever. Are you sure?"));
+#endif
+    message->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    message->setDefaultButton(QMessageBox::No);
+    message->setWindowFlag(Qt::Sheet);
+    message->setWindowModality(Qt::WindowModal);
+
+    connect(message, &QMessageBox::finished, &loop, &QEventLoop::quit);
+
+    message->show();
+    loop.exec();
+
+    if (message->result() == QMessageBox::Yes) {
         QFile(FoundImages.at(currentImage)).remove();
         FoundImages.removeAt(currentImage);
         nextImage();
     }
+    message->deleteLater();
 }
 
 void MainWindow::show() {

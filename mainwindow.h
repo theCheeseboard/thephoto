@@ -11,7 +11,6 @@
 #include <QKeyEvent>
 #include <QImageReader>
 #include <QTimer>
-#include <QMessageBox>
 #include "managelibrary.h"
 #include "event/eventmodesettings.h"
 
