@@ -54,7 +54,7 @@
          <x>0</x>
          <y>0</y>
          <width>748</width>
-         <height>177</height>
+         <height>180</height>
         </rect>
        </property>
        <widget class="QLabel" name="imageLabel">
@@ -212,7 +212,7 @@
      <x>0</x>
      <y>0</y>
      <width>748</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -254,8 +254,8 @@
   </widget>
   <action name="actionConnect_to_Phone">
    <property name="icon">
-    <iconset theme="smartphone">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="smartphone" resource="icons.qrc">
+     <normaloff>:/icons/smartphone.svg</normaloff>:/icons/smartphone.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Event Mode</string>
@@ -263,8 +263,8 @@
   </action>
   <action name="actionManage_Library">
    <property name="icon">
-    <iconset theme="configure">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="configure" resource="icons.qrc">
+     <normaloff>:/icons/configure.svg</normaloff>:/icons/configure.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Manage Library</string>
@@ -272,8 +272,8 @@
   </action>
   <action name="actionZoom_In">
    <property name="icon">
-    <iconset theme="zoom-in">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="zoom-in" resource="icons.qrc">
+     <normaloff>:/icons/zoom-in.svg</normaloff>:/icons/zoom-in.svg</iconset>
    </property>
    <property name="text">
     <string>Zoom In</string>
@@ -284,8 +284,8 @@
   </action>
   <action name="actionZoom_Out">
    <property name="icon">
-    <iconset theme="zoom-out">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="zoom-out" resource="icons.qrc">
+     <normaloff>:/icons/zoom-out.svg</normaloff>:/icons/zoom-out.svg</iconset>
    </property>
    <property name="text">
     <string>Zoom Out</string>
@@ -317,17 +317,20 @@
   </action>
   <action name="actionStart_Slideshow">
    <property name="icon">
-    <iconset theme="media-playback-start">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="media-playback-start" resource="icons.qrc">
+     <normaloff>:/icons/media-playback-start.svg</normaloff>:/icons/media-playback-start.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Start Slideshow</string>
    </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
   </action>
   <action name="actionDelete">
    <property name="icon">
-    <iconset theme="edit-delete">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-delete" resource="icons.qrc">
+     <normaloff>:/icons/edit-delete.svg</normaloff>:/icons/edit-delete.svg</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -335,8 +338,8 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="help-about">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="help-about" resource="icons.qrc">
+     <normaloff>:/icons/help-about.svg</normaloff>:/icons/help-about.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
@@ -344,7 +347,8 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="application-exit"/>
+    <iconset theme="application-exit" resource="icons.qrc">
+     <normaloff>:/icons/application-exit.svg</normaloff>:/icons/application-exit.svg</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
@@ -360,6 +364,7 @@
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="resources.qrc"/>
+  <include location="icons.qrc"/>
  </resources>
  <connections/>
 </ui>

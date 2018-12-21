@@ -84,7 +84,8 @@ FORMS    += mainwindow.ui \
     event/eventmodeuserindicator.ui
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    icons.qrc
 
 
 TRANSLATIONS += translations/vi_VN.ts \

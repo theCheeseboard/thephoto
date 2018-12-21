@@ -12,7 +12,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="configure.svg">
+   sodipodi:docname="go-next.svg">
   <metadata
      id="metadata9">
     <rdf:RDF>
@@ -30,13 +30,13 @@
   <sodipodi:namedview
      id="namedview1"
      showgrid="true"
-     inkscape:zoom="29.5"
-     inkscape:cx="8.2766454"
-     inkscape:cy="8.4369995"
-     inkscape:window-width="1280"
-     inkscape:window-height="766"
-     inkscape:window-x="1680"
-     inkscape:window-y="250"
+     inkscape:zoom="20.85965"
+     inkscape:cx="7.1469269"
+     inkscape:cy="7.3152493"
+     inkscape:window-width="1680"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2">
     <inkscape:grid
@@ -51,32 +51,9 @@
        originy="0.5"
        originx="0.5" />
   </sodipodi:namedview>
-  <rect
-     style="opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect4137"
-     width="13"
-     height="5"
-     x="1.5"
-     y="1.5" />
-  <rect
-     style="opacity:0.98999999;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect4139"
-     width="13"
-     height="5"
-     x="1.5"
-     y="9.5" />
-  <rect
+  <path
      style="opacity:0.98999999;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect4141"
-     width="5"
-     height="5"
-     x="9.5"
-     y="1.5" />
-  <rect
-     style="opacity:0.98999999;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     id="rect4143"
-     width="5"
-     height="5"
-     x="1.5"
-     y="9.5" />
+     d="M 4.7500104,1.5000003 4.7500104,14.5 11.25001,8.0000003 Z"
+     id="path4137"
+     inkscape:connector-curvature="0" />
 </svg>
