@@ -365,7 +365,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QStackedWidget" name="mainStack">
+    <widget class="tStackedWidget" name="mainStack">
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -420,6 +420,13 @@
           <widget class="QLabel" name="label_12">
            <property name="text">
             <string>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</string>
            </property>
           </widget>
          </item>
@@ -1109,6 +1116,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>tStackedWidget</class>
+   <extends>QStackedWidget</extends>
+   <header location="global">tstackedwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
   <include location="../icons.qrc"/>

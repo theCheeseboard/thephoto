@@ -58,6 +58,9 @@ void EventSocket::readBuffer() {
                     //Regsiter for pings
                     pingTimer->start();
                     lastPingReceived = QDateTime::currentDateTimeUtc();
+
+                    //Send a ping immediately
+                    ping();
                 } else if (line == "PING") {
                     lastPingReceived = QDateTime::currentDateTimeUtc();
                 } else if (line == "CLOSE") {

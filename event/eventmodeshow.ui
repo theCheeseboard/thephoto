@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>519</width>
-    <height>396</height>
+    <width>949</width>
+    <height>493</height>
    </rect>
   </property>
   <property name="palette">
@@ -222,7 +222,7 @@
       <enum>QFrame::Raised</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -288,7 +288,26 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>To connect, use</string>
+            <string>To connect, install</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string notr="true">thephoto.vicr123.com/download</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>and use</string>
            </property>
           </widget>
          </item>
@@ -386,7 +405,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>187</width>
+            <width>230</width>
             <height>68</height>
            </rect>
           </property>
