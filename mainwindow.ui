@@ -54,7 +54,7 @@
          <x>0</x>
          <y>0</y>
          <width>748</width>
-         <height>180</height>
+         <height>178</height>
         </rect>
        </property>
        <widget class="QLabel" name="imageLabel">
@@ -212,7 +212,7 @@
      <x>0</x>
      <y>0</y>
      <width>748</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -321,7 +321,7 @@
      <normaloff>:/icons/media-playback-start.svg</normaloff>:/icons/media-playback-start.svg</iconset>
    </property>
    <property name="text">
-    <string>&amp;Start Slideshow</string>
+    <string>Start Slideshow</string>
    </property>
    <property name="shortcut">
     <string>F5</string>
@@ -363,8 +363,8 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="resources.qrc"/>
   <include location="icons.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

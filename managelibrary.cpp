@@ -1,6 +1,8 @@
 #include "managelibrary.h"
 #include "ui_managelibrary.h"
 
+#include <QEventLoop>
+
 ManageLibrary::ManageLibrary(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ManageLibrary)
@@ -29,10 +31,18 @@ ManageLibrary::~ManageLibrary()
 
 void ManageLibrary::on_pushButton_3_clicked()
 {
+    QEventLoop loop;
     QFileDialog* folderPicker = new QFileDialog(this);
     folderPicker->setFileMode(QFileDialog::DirectoryOnly);
     folderPicker->setOption(QFileDialog::ShowDirsOnly);
-    if (folderPicker->exec() == QDialog::Accepted) {
+    folderPicker->setWindowModality(Qt::WindowModal);
+
+    connect(folderPicker, &QFileDialog::finished, &loop, &QEventLoop::quit);
+
+    folderPicker->show();
+    loop.exec(); //Block until folder picker is done
+
+    if (folderPicker->result() == QDialog::Accepted) {
         libraryItems.append(folderPicker->selectedFiles().at(0));
 
         QListWidgetItem* item = new QListWidgetItem();

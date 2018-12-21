@@ -36,6 +36,55 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
+#ifdef Q_OS_MAC
+    //Set up Mac toolbar
+    ui->mainToolBar->setVisible(false);
+    ui->mainToolBar->setParent(nullptr);
+
+    QList<QMacToolBarItem*> allowedItems;
+    macToolbar = new QMacToolBar();
+
+    QMacToolBarItem* zoomIn = new QMacToolBarItem();
+    zoomIn->setText(tr("Zoom In"));
+    zoomIn->setIcon(QIcon(":/icons/zoom-in.svg"));
+    connect(zoomIn, SIGNAL(activated()), this, SLOT(on_actionZoom_In_triggered()));
+    allowedItems.append(zoomIn);
+
+    QMacToolBarItem* zoomOut = new QMacToolBarItem();
+    zoomOut->setText(tr("Zoom Out"));
+    zoomOut->setIcon(QIcon(":/icons/zoom-out.svg"));
+    connect(zoomOut, SIGNAL(activated()), this, SLOT(on_actionZoom_Out_triggered()));
+    allowedItems.append(zoomOut);
+
+    QMacToolBarItem* zoom100 = new QMacToolBarItem();
+    zoom100->setText(tr("Zoom to 100%"));
+    zoom100->setIcon(QIcon(":/icons/zoom-out.svg")); //TODO: Create icon for zoom to 100
+    connect(zoom100, SIGNAL(activated()), this, SLOT(on_actionZoom_to_100_triggered()));
+    allowedItems.append(zoom100);
+
+    QMacToolBarItem* zoomFit = new QMacToolBarItem();
+    zoomFit->setText(tr("Fit to Window"));
+    zoomFit->setIcon(QIcon(":/icons/zoom-out.svg")); //TODO: Create icon for zoom to fit
+    connect(zoomFit, SIGNAL(activated()), this, SLOT(on_actionFit_to_Window_triggered()));
+    allowedItems.append(zoomFit);
+
+    QMacToolBarItem* del = new QMacToolBarItem();
+    del->setText(tr("Delete"));
+    del->setIcon(QIcon(":/icons/edit-delete.svg"));
+    connect(del, SIGNAL(activated()), this, SLOT(on_actionDelete_triggered()));
+    allowedItems.append(del);
+
+    QMacToolBarItem* slideshow = new QMacToolBarItem();
+    slideshow->setText(tr("Start Slideshow"));
+    slideshow->setIcon(QIcon(":/icons/media-playback-start.svg"));
+    connect(slideshow, SIGNAL(activated()), this, SLOT(on_actionStart_Slideshow_triggered()));
+    allowedItems.append(slideshow);
+
+    macToolbar->setItems(allowedItems);
+    macToolbar->setAllowedItems(allowedItems);
+    macToolbar->attachToWindow(this->windowHandle());
+
+#endif
 }
 
 MainWindow::~MainWindow()
@@ -100,8 +149,15 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_actionManage_Library_triggered()
 {
+    QEventLoop loop;
     ManageLibrary* libWindow = new ManageLibrary(this);
-    if (libWindow->exec() == QDialog::Accepted) {
+    libWindow->setWindowModality(Qt::WindowModal);
+    connect(libWindow, &ManageLibrary::finished, &loop, &QEventLoop::quit);
+
+    libWindow->show();
+    loop.exec();
+
+    if (libWindow->result() == QDialog::Accepted) {
         reloadLibrary(true);
     }
 }
@@ -135,13 +191,7 @@ bool MainWindow::eventFilter(QObject *, QEvent *event) {
                 loadImage(currentImage - 1);
             }
         } else if (keyEvent->key() == Qt::Key_Escape) {
-            this->showNormal();
-            ui->mainToolBar->setVisible(true);
-            ui->menuBar->setVisible(true);
-
-            slideshowTimer->stop();
-            slideshowTimer->deleteLater();
-            slideshowTimer = NULL;
+            if (this->isFullScreen()) ui->actionStart_Slideshow->trigger();
         }
     }
     return false;
@@ -241,14 +291,37 @@ void MainWindow::on_actionStart_Slideshow_triggered()
 {
     if (!ui->scrollArea->isVisible()) return; //No pictures so no point doing a slideshow
 
-    this->showFullScreen();
-    ui->mainToolBar->setVisible(false);
-    ui->menuBar->setVisible(false);
+    if (this->isFullScreen()) {
+        //Exit slideshow
+#ifdef Q_OS_MAC
+        macToolbar->attachToWindow(this->windowHandle());
+#else
+        ui->mainToolBar->setVisible(true);
+#endif
+        this->showNormal();
+        ui->menuBar->setVisible(true);
 
-    slideshowTimer = new QTimer(this);
-    slideshowTimer->setInterval(10000);
-    connect(slideshowTimer, SIGNAL(timeout()), this, SLOT(nextImage()));
-    slideshowTimer->start();
+        if (slideshowTimer != nullptr) {
+            slideshowTimer->stop();
+            slideshowTimer->deleteLater();
+            slideshowTimer = nullptr;
+        }
+    } else {
+        //Enter slideshow
+
+        this->showFullScreen();
+#ifdef Q_OS_MAC
+        macToolbar->detachFromWindow();
+#elif
+        ui->mainToolBar->setVisible(false);
+#endif
+        ui->menuBar->setVisible(false);
+
+        slideshowTimer = new QTimer(this);
+        slideshowTimer->setInterval(10000);
+        connect(slideshowTimer, SIGNAL(timeout()), this, SLOT(nextImage()));
+        slideshowTimer->start();
+    }
 }
 
 void MainWindow::on_actionConnect_to_Phone_triggered()

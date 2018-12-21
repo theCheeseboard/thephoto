@@ -47,167 +47,167 @@
 <context>
     <name>EventModeSettings</name>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="294"/>
+        <location filename="../event/eventmodesettings.ui" line="267"/>
         <source>Event Mode</source>
         <translation>Modo Evento</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="745"/>
+        <location filename="../event/eventmodesettings.ui" line="718"/>
         <source>Show Wi-Fi details</source>
         <translation>Mostrar detalhes do WiFi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="752"/>
+        <location filename="../event/eventmodesettings.ui" line="725"/>
         <source>SSID</source>
         <translation>SSID</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="347"/>
+        <location filename="../event/eventmodesettings.ui" line="320"/>
         <source>Backstage</source>
         <translation>Backstage</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="491"/>
+        <location filename="../event/eventmodesettings.ui" line="464"/>
         <source>SESSION</source>
         <translation>SESSÃO</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="498"/>
+        <location filename="../event/eventmodesettings.ui" line="471"/>
         <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
         <translation>Nós salvaremos todas as imagens recebidas dentro de uma pasta com esse nome. Se não tiver nada aqui, salvaremos as fotos em uma pasta chamada &quot;Não categorizada&quot;</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="543"/>
+        <location filename="../event/eventmodesettings.ui" line="516"/>
         <source>DISPLAYS</source>
         <translation>TELAS</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="772"/>
+        <location filename="../event/eventmodesettings.ui" line="745"/>
         <source>Key</source>
         <translation>Chave</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="785"/>
+        <location filename="../event/eventmodesettings.ui" line="758"/>
         <source>WI-FI</source>
         <translation>WIFI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="581"/>
+        <location filename="../event/eventmodesettings.ui" line="554"/>
         <source>Use Monitor</source>
         <translation>Usar Monitor</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="319"/>
+        <location filename="../event/eventmodesettings.ui" line="292"/>
         <source>thePhoto Event Mode</source>
         <translation>Modo Evento thePhoto</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="415"/>
+        <location filename="../event/eventmodesettings.ui" line="388"/>
         <source>APP</source>
         <translation>APLICATIVO</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="422"/>
+        <location filename="../event/eventmodesettings.ui" line="395"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
         <translation>Para conectar ao Modo Evento thePhoto, baixe o applicativo para Android™ na Google Play™.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="429"/>
+        <location filename="../event/eventmodesettings.ui" line="402"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="471"/>
+        <location filename="../event/eventmodesettings.ui" line="444"/>
         <source>Session Name</source>
         <translation>Nome da sessão</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="478"/>
+        <location filename="../event/eventmodesettings.ui" line="451"/>
         <source>Store users in subfolders</source>
         <translation>Guardar usuários em subpastas</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="632"/>
+        <location filename="../event/eventmodesettings.ui" line="605"/>
         <source>Use Mission Control to adjust monitors.</source>
         <translation>Use Mission Control para ajustar monitores.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="639"/>
+        <location filename="../event/eventmodesettings.ui" line="612"/>
         <source>Open Mission Control</source>
         <translation>Abrir Mission Control</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="662"/>
+        <location filename="../event/eventmodesettings.ui" line="635"/>
         <source>There&apos;s only one display on this computer.</source>
         <translation>Só há uma tela nesse computador.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="691"/>
+        <location filename="../event/eventmodesettings.ui" line="664"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
         <translation>Se o Backstage está aparencendo na tela errada, você pode trocar as telas.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="698"/>
+        <location filename="../event/eventmodesettings.ui" line="671"/>
         <source>Swap Displays</source>
         <translation>Trocar Telas</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="799"/>
+        <location filename="../event/eventmodesettings.ui" line="772"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
         <translation>Mostrar os detalhes do WiFi na tela próxima ao código para que convidados possam entrar na rede</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="847"/>
+        <location filename="../event/eventmodesettings.ui" line="820"/>
         <source>INFORMATION DISPLAY</source>
         <translation>MOSTRAR INFORMAÇÕES</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="854"/>
+        <location filename="../event/eventmodesettings.ui" line="827"/>
         <source>Show Information Display</source>
         <translation>Mostrar Informações</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="864"/>
+        <location filename="../event/eventmodesettings.ui" line="837"/>
         <source>Show Author</source>
         <translation>Mostrar Autor</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="874"/>
+        <location filename="../event/eventmodesettings.ui" line="847"/>
         <source>Show Clock</source>
         <translation>Mostrar Relógio</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="884"/>
+        <location filename="../event/eventmodesettings.ui" line="857"/>
         <source>Show Audio Information</source>
         <translation>Mostrar Informações de Audio</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="928"/>
+        <location filename="../event/eventmodesettings.ui" line="901"/>
         <source>Here are all the users currently connected to your computer.</source>
         <translation>Aqui estão todos os usuários conectados ao seu computador.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1027"/>
+        <location filename="../event/eventmodesettings.ui" line="1000"/>
         <source>Session Settings</source>
         <translation>Configurações da Sessão</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1047"/>
+        <location filename="../event/eventmodesettings.ui" line="1020"/>
         <source>Connected Users</source>
         <translation>Usuários Conectados</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1064"/>
+        <location filename="../event/eventmodesettings.ui" line="1037"/>
         <source>Exchanged Images</source>
         <translation>Imagens Trocadas</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1094"/>
+        <location filename="../event/eventmodesettings.ui" line="1067"/>
         <source>Back to Event Mode</source>
         <translation>Voltar ao Modo Evento</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1105"/>
+        <location filename="../event/eventmodesettings.ui" line="1078"/>
         <source>End Event Mode</source>
         <translation>Terminar Modo Evento</translation>
     </message>
@@ -377,44 +377,6 @@
     </message>
 </context>
 <context>
-    <name>MAC_APPLICATION_MENU</name>
-    <message>
-        <location filename="../main.cpp" line="17"/>
-        <source>Services</source>
-        <translation>Serviços</translation>
-    </message>
-    <message>
-        <location filename="../main.cpp" line="18"/>
-        <source>Hide %1</source>
-        <translation>Esconder %1</translation>
-    </message>
-    <message>
-        <location filename="../main.cpp" line="19"/>
-        <source>Hide Others</source>
-        <translation>Esconder Outros</translation>
-    </message>
-    <message>
-        <location filename="../main.cpp" line="20"/>
-        <source>Show All</source>
-        <translation>Mostrar Todos</translation>
-    </message>
-    <message>
-        <location filename="../main.cpp" line="21"/>
-        <source>Preferences...</source>
-        <translation>Preferências…</translation>
-    </message>
-    <message>
-        <location filename="../main.cpp" line="22"/>
-        <source>About %1</source>
-        <translation>Sobre %1</translation>
-    </message>
-    <message>
-        <location filename="../main.cpp" line="23"/>
-        <source>Quit %1</source>
-        <translation>Sair de %1</translation>
-    </message>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
@@ -453,6 +415,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="279"/>
+        <location filename="../mainwindow.cpp" line="48"/>
         <source>Zoom In</source>
         <translation>Mais Zoom</translation>
     </message>
@@ -463,6 +426,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="291"/>
+        <location filename="../mainwindow.cpp" line="54"/>
         <source>Zoom Out</source>
         <translation>Menos Zoom</translation>
     </message>
@@ -473,6 +437,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="303"/>
+        <location filename="../mainwindow.cpp" line="60"/>
         <source>Zoom to 100%</source>
         <translation>100% de Zoom</translation>
     </message>
@@ -483,13 +448,9 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.cpp" line="66"/>
         <source>Fit to Window</source>
         <translation>Encaixar à Janela</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="324"/>
-        <source>&amp;Start Slideshow</source>
-        <translation>Começar Slideshow</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="327"/>
@@ -498,6 +459,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="336"/>
+        <location filename="../mainwindow.cpp" line="72"/>
         <source>Delete</source>
         <translation>Deletar</translation>
     </message>
@@ -517,22 +479,28 @@
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="49"/>
+        <location filename="../mainwindow.ui" line="324"/>
+        <location filename="../mainwindow.cpp" line="78"/>
+        <source>Start Slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="98"/>
         <source>Reading Library...</source>
         <translation>Lendo Biblioteca…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="50"/>
+        <location filename="../mainwindow.cpp" line="99"/>
         <source>&lt;p&gt;We&apos;re building your library. Please wait while we do this.&lt;/p&gt;&lt;p&gt;You can shorten this process by narrowing your library.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Nós estamos construindo a biblioteca. Por favor espere enquanto fazemos isso.&lt;/p&gt;&lt;p&gt;Você pode encurtar esse processo diminuindo sua biblioteca.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>Delete Image</source>
         <translation>Deletar Imagem</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="369"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation>Você está prestes a deletar essa imagem para sempre. Tem certeza?</translation>
     </message>
