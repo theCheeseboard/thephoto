@@ -505,14 +505,14 @@
         <translation>&lt;p&gt;Chúng tôi đang xây thư viện ảnh. Xin chờ trong khi giờ chúng tôi làm việc này.&lt;/p&gt;&lt;p&gt;Nếu bạn có ít ảnh hơn, chúng tôi có thể xong nhanh hơn.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
         <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Delete Image</source>
         <translation>Xóa ảnh</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
         <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation>Bạn có chắc chắn muốn xóa ảnh này cho thời gian mãi mãi không?</translation>
     </message>

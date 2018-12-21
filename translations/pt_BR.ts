@@ -505,14 +505,14 @@
         <translation>&lt;p&gt;Nós estamos construindo a biblioteca. Por favor espere enquanto fazemos isso.&lt;/p&gt;&lt;p&gt;Você pode encurtar esse processo diminuindo sua biblioteca.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="375"/>
         <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Delete Image</source>
         <translation>Deletar Imagem</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
         <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation>Você está prestes a deletar essa imagem para sempre. Tem certeza?</translation>
     </message>

@@ -314,7 +314,7 @@ void MainWindow::on_actionStart_Slideshow_triggered()
         this->showFullScreen();
 #ifdef Q_OS_MAC
         macToolbar->detachFromWindow();
-#elif
+#else
         ui->mainToolBar->setVisible(false);
 #endif
         ui->menuBar->setVisible(false);
@@ -336,7 +336,7 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
     } else {*/
         this->hide();
 
-        if (QStyleFactory::keys().contains("Contemporary")) {
+        if (QStyleFactory::keys().contains("Contemporary") || QStyleFactory::keys().contains("contemporary")) {
             QApplication::setStyle("Contemporary");
         }
 
@@ -353,7 +353,7 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
             QApplication::setPalette(oldPal);
             this->setPalette(oldPal);
 
-            if (QStyleFactory::keys().contains("Contemporary")) {
+            if (QStyleFactory::keys().contains("Contemporary") || QStyleFactory::keys().contains("contemporary")) {
                 #ifdef Q_OS_WIN
                     QApplication::setStyle("windowsvista");
                 #elif defined(Q_OS_MAC)
@@ -368,6 +368,9 @@ void MainWindow::on_actionConnect_to_Phone_triggered()
 
 void MainWindow::on_actionDelete_triggered()
 {
+
+    if (!ui->scrollArea->isVisible()) return; //No pictures so no point trying to delete
+
     QEventLoop loop;
     QMessageBox* message = new QMessageBox(this);
     message->setIcon(QMessageBox::Warning);
