@@ -455,7 +455,7 @@
     <message>
         <location filename="../mainwindow.ui" line="359"/>
         <source>F5</source>
-        <translation type="unfinished"></translation>
+        <translation>F5</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="368"/>
@@ -481,18 +481,18 @@
     <message>
         <location filename="../mainwindow.ui" line="404"/>
         <source>File Bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Báo cáo lỗi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="413"/>
         <source>Sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Mã nguồn</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
         <location filename="../mainwindow.cpp" line="80"/>
         <source>Start Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Bắt đầu trình chiếu</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="100"/>
