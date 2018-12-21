@@ -3,6 +3,7 @@
 
 #include "aboutdialog.h"
 #include <QMessageBox>
+#include <QDesktopServices>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -409,4 +410,14 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_actionExit_triggered()
 {
     QApplication::exit();
+}
+
+void MainWindow::on_actionFile_Bug_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thephoto/issues"));
+}
+
+void MainWindow::on_actionSources_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thephoto"));
 }

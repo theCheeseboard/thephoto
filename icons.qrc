@@ -14,5 +14,7 @@
         <file>icons/zoom-in.svg</file>
         <file>icons/zoom-out.svg</file>
         <file>icons/configure-dark.svg</file>
+        <file>icons/commit.svg</file>
+        <file>icons/tools-report-bug.svg</file>
     </qresource>
 </RCC>

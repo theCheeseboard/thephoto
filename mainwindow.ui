@@ -14,7 +14,7 @@
    <string>thePhoto</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset>
     <normaloff>:/icons/thephoto.svg</normaloff>:/icons/thephoto.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -141,6 +141,19 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QLabel" name="criticalIcon">
              <property name="text">
               <string notr="true">icon</string>
@@ -159,6 +172,19 @@
               <string>There are no images in your library.</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -230,6 +256,9 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionFile_Bug"/>
+    <addaction name="actionSources"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
@@ -254,7 +283,7 @@
   </widget>
   <action name="actionConnect_to_Phone">
    <property name="icon">
-    <iconset theme="smartphone" resource="icons.qrc">
+    <iconset theme="smartphone">
      <normaloff>:/icons/smartphone.svg</normaloff>:/icons/smartphone.svg</iconset>
    </property>
    <property name="text">
@@ -263,16 +292,19 @@
   </action>
   <action name="actionManage_Library">
    <property name="icon">
-    <iconset theme="configure" resource="icons.qrc">
+    <iconset theme="configure" resource="../theSlate/slate/icons.qrc">
      <normaloff>:/icons/configure.svg</normaloff>:/icons/configure.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Manage Library</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
   </action>
   <action name="actionZoom_In">
    <property name="icon">
-    <iconset theme="zoom-in" resource="icons.qrc">
+    <iconset theme="zoom-in">
      <normaloff>:/icons/zoom-in.svg</normaloff>:/icons/zoom-in.svg</iconset>
    </property>
    <property name="text">
@@ -284,7 +316,7 @@
   </action>
   <action name="actionZoom_Out">
    <property name="icon">
-    <iconset theme="zoom-out" resource="icons.qrc">
+    <iconset theme="zoom-out">
      <normaloff>:/icons/zoom-out.svg</normaloff>:/icons/zoom-out.svg</iconset>
    </property>
    <property name="text">
@@ -317,7 +349,7 @@
   </action>
   <action name="actionStart_Slideshow">
    <property name="icon">
-    <iconset theme="media-playback-start" resource="icons.qrc">
+    <iconset theme="media-playback-start">
      <normaloff>:/icons/media-playback-start.svg</normaloff>:/icons/media-playback-start.svg</iconset>
    </property>
    <property name="text">
@@ -329,7 +361,7 @@
   </action>
   <action name="actionDelete">
    <property name="icon">
-    <iconset theme="edit-delete" resource="icons.qrc">
+    <iconset theme="edit-delete">
      <normaloff>:/icons/edit-delete.svg</normaloff>:/icons/edit-delete.svg</iconset>
    </property>
    <property name="text">
@@ -338,16 +370,19 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="help-about" resource="icons.qrc">
+    <iconset theme="help-about" resource="../theSlate/slate/icons.qrc">
      <normaloff>:/icons/help-about.svg</normaloff>:/icons/help-about.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="application-exit" resource="icons.qrc">
+    <iconset theme="application-exit" resource="../theSlate/slate/icons.qrc">
      <normaloff>:/icons/application-exit.svg</normaloff>:/icons/application-exit.svg</iconset>
    </property>
    <property name="text">
@@ -360,11 +395,26 @@
     <enum>QAction::QuitRole</enum>
    </property>
   </action>
+  <action name="actionFile_Bug">
+   <property name="icon">
+    <iconset theme="tools-report-bug" resource="../theSlate/slate/icons.qrc">
+     <normaloff>:/icons/tools-report-bug.svg</normaloff>:/icons/tools-report-bug.svg</iconset>
+   </property>
+   <property name="text">
+    <string>File Bug</string>
+   </property>
+  </action>
+  <action name="actionSources">
+   <property name="icon">
+    <iconset theme="commit" resource="../theSlate/slate/icons.qrc">
+     <normaloff>:/icons/commit.svg</normaloff>:/icons/commit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Sources</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="icons.qrc"/>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
