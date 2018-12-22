@@ -57,7 +57,7 @@ if [ $STAGE = "script" ]; then
     macdeployqt thePhoto.app
     echo "[TRAVIS] Embedding QtDBus"
     cp -r /usr/local/opt/qt/lib/QtDBus.framework thePhoto.app/Contents/Frameworks/
-    install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore thePhoto.app/Contents/Frameworks/QtDBus.framework/Versions/5/QtDBus
+    install_name_tool -change /usr/local/Cellar/qt/5.12.0/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore thePhoto.app/Contents/Frameworks/QtDBus.framework/Versions/5/QtDBus
     echo "[TRAVIS] Deploying Contemporary"
     cp ../contemporary-theme/libContemporary.dylib thePhoto.app/Contents/Plugins/styles/
     install_name_tool -change libthe-libs.1.dylib @executable_path/../Libraries/libthe-libs.1.dylib thePhoto.app/Contents/Plugins/styles/libContemporary.dylib
