@@ -473,6 +473,11 @@ public class CameraActivity extends AppCompatActivity {
             captureSession.setRepeatingRequest(previewRequestBuilder.build(), captureCallback, background);
         } catch (CameraAccessException e) {
             e.printStackTrace();
+        } catch (IllegalStateException e) {
+            //Recreate the camera session
+            //createCameraPreviewSession();
+            closeCamera();
+            openCamera(txView.getWidth(), txView.getHeight());
         }
     }
 
