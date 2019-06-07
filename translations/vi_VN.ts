@@ -325,27 +325,32 @@
 <context>
     <name>EventModeShow</name>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="159"/>
+        <location filename="../event/eventmodeshow.ui" line="186"/>
         <source>Event Mode</source>
         <translation>Chế độ biến cố</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="248"/>
+        <location filename="../event/eventmodeshow.ui" line="275"/>
         <source>Preparing Event Mode...</source>
         <translation>Đang chuẩn bị Chế độ biến cố...</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="291"/>
-        <source>To connect, install</source>
-        <translation>Để kết nối, cài đặt</translation>
+        <location filename="../event/eventmodeshow.ui" line="318"/>
+        <source>To connect, go to</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="310"/>
+        <location filename="../event/eventmodeshow.ui" line="344"/>
         <source>and use</source>
-        <translation>rồi dùng mã</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="207"/>
+        <location filename="../event/eventmodeshow.ui" line="363"/>
+        <source>when asked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodeshow.cpp" line="208"/>
         <source>by %1</source>
         <translation>bởi %1</translation>
     </message>
@@ -374,6 +379,63 @@
         <location filename="../event/eventsocket.h" line="42"/>
         <source>An unknown person</source>
         <translation>Người</translation>
+    </message>
+</context>
+<context>
+    <name>ImageView</name>
+    <message>
+        <location filename="../library/imageview.ui" line="16"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LibraryWindow</name>
+    <message>
+        <location filename="../librarywindow.ui" line="14"/>
+        <source>thePhoto</source>
+        <translation type="unfinished">thePhoto</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="41"/>
+        <source>Library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="167"/>
+        <source>Let&apos;s get started!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="177"/>
+        <source>Where should we search for images?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="270"/>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="286"/>
+        <source>Exit</source>
+        <translation type="unfinished">Thoát</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="289"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished">Ctrl+Q</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="299"/>
+        <source>Event Mode</source>
+        <translation type="unfinished">Chế độ biến cố</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="202"/>
+        <location filename="../librarywindow.ui" line="294"/>
+        <source>Manage Library</source>
+        <translation type="unfinished">Quản lý thư viện ảnh</translation>
     </message>
 </context>
 <context>
@@ -505,14 +567,14 @@
         <translation>&lt;p&gt;Chúng tôi đang xây thư viện ảnh. Xin chờ trong khi giờ chúng tôi làm việc này.&lt;/p&gt;&lt;p&gt;Nếu bạn có ít ảnh hơn, chúng tôi có thể xong nhanh hơn.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
-        <location filename="../mainwindow.cpp" line="382"/>
+        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Delete Image</source>
         <translation>Xóa ảnh</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="380"/>
-        <location filename="../mainwindow.cpp" line="383"/>
+        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation>Bạn có chắc chắn muốn xóa ảnh này cho thời gian mãi mãi không?</translation>
     </message>

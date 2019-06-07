@@ -28,6 +28,7 @@ EventModeShow::EventModeShow(QWidget *parent) :
     ui->spinner->setMaximumSize(ui->spinner->maximumSize() * theLibsGlobal::getDPIScaling());
     ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(16, 16));
     ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
+    ui->phoneIcon->setPixmap(QIcon::fromTheme("smartphone", QIcon(":/icons/smartphone-dark.svg")).pixmap(16, 16));
 
     animationTimerPx = new tVariantAnimation();
     animationTimerPxOpacity = new tVariantAnimation();

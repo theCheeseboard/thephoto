@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "librarywindow.h"
 #include <tapplication.h>
 #include <QTranslator>
 
@@ -40,8 +41,13 @@ int main(int argc, char *argv[])
 
     a.installTranslator(&localTranslator);
 
-    MainWindow w;
-    w.show();
+    if (a.arguments().contains("--old-library")) {
+        MainWindow* w = new MainWindow;
+        w->show();
+    } else {
+        LibraryWindow* w = new LibraryWindow();
+        w->show();
+    }
 
     return a.exec();
 }

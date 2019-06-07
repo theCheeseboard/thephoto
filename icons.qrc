@@ -16,5 +16,6 @@
         <file>icons/configure-dark.svg</file>
         <file>icons/commit.svg</file>
         <file>icons/tools-report-bug.svg</file>
+        <file>icons/smartphone-dark.svg</file>
     </qresource>
 </RCC>

@@ -14,7 +14,7 @@
    <string>thePhoto</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="resources.qrc">
     <normaloff>:/icons/thephoto.svg</normaloff>:/icons/thephoto.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -283,7 +283,7 @@
   </widget>
   <action name="actionConnect_to_Phone">
    <property name="icon">
-    <iconset theme="smartphone">
+    <iconset theme="smartphone" resource="icons.qrc">
      <normaloff>:/icons/smartphone.svg</normaloff>:/icons/smartphone.svg</iconset>
    </property>
    <property name="text">
@@ -292,7 +292,7 @@
   </action>
   <action name="actionManage_Library">
    <property name="icon">
-    <iconset theme="configure" resource="../theSlate/slate/icons.qrc">
+    <iconset theme="configure" resource="icons.qrc">
      <normaloff>:/icons/configure.svg</normaloff>:/icons/configure.svg</iconset>
    </property>
    <property name="text">
@@ -304,7 +304,7 @@
   </action>
   <action name="actionZoom_In">
    <property name="icon">
-    <iconset theme="zoom-in">
+    <iconset theme="zoom-in" resource="icons.qrc">
      <normaloff>:/icons/zoom-in.svg</normaloff>:/icons/zoom-in.svg</iconset>
    </property>
    <property name="text">
@@ -316,7 +316,7 @@
   </action>
   <action name="actionZoom_Out">
    <property name="icon">
-    <iconset theme="zoom-out">
+    <iconset theme="zoom-out" resource="icons.qrc">
      <normaloff>:/icons/zoom-out.svg</normaloff>:/icons/zoom-out.svg</iconset>
    </property>
    <property name="text">
@@ -349,7 +349,7 @@
   </action>
   <action name="actionStart_Slideshow">
    <property name="icon">
-    <iconset theme="media-playback-start">
+    <iconset theme="media-playback-start" resource="icons.qrc">
      <normaloff>:/icons/media-playback-start.svg</normaloff>:/icons/media-playback-start.svg</iconset>
    </property>
    <property name="text">
@@ -361,7 +361,7 @@
   </action>
   <action name="actionDelete">
    <property name="icon">
-    <iconset theme="edit-delete">
+    <iconset theme="edit-delete" resource="icons.qrc">
      <normaloff>:/icons/edit-delete.svg</normaloff>:/icons/edit-delete.svg</iconset>
    </property>
    <property name="text">
@@ -370,7 +370,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="help-about" resource="../theSlate/slate/icons.qrc">
+    <iconset theme="help-about" resource="icons.qrc">
      <normaloff>:/icons/help-about.svg</normaloff>:/icons/help-about.svg</iconset>
    </property>
    <property name="text">
@@ -382,7 +382,7 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="application-exit" resource="../theSlate/slate/icons.qrc">
+    <iconset theme="application-exit" resource="icons.qrc">
      <normaloff>:/icons/application-exit.svg</normaloff>:/icons/application-exit.svg</iconset>
    </property>
    <property name="text">
@@ -397,7 +397,7 @@
   </action>
   <action name="actionFile_Bug">
    <property name="icon">
-    <iconset theme="tools-report-bug" resource="../theSlate/slate/icons.qrc">
+    <iconset theme="tools-report-bug" resource="icons.qrc">
      <normaloff>:/icons/tools-report-bug.svg</normaloff>:/icons/tools-report-bug.svg</iconset>
    </property>
    <property name="text">
@@ -406,7 +406,7 @@
   </action>
   <action name="actionSources">
    <property name="icon">
-    <iconset theme="commit" resource="../theSlate/slate/icons.qrc">
+    <iconset theme="commit" resource="icons.qrc">
      <normaloff>:/icons/commit.svg</normaloff>:/icons/commit.svg</iconset>
    </property>
    <property name="text">
@@ -415,6 +415,9 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

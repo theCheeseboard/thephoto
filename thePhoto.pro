@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network concurrent
+QT       += core gui network concurrent multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,6 +35,11 @@ win32 {
 }
 
 SOURCES += main.cpp\
+    library/imagedescriptor.cpp \
+    library/imagedescriptormanager.cpp \
+    library/imagegrid.cpp \
+    library/imageview.cpp \
+    librarywindow.cpp \
         mainwindow.cpp \
     managelibrary.cpp \
     #phonedialog.cpp \
@@ -48,6 +53,11 @@ SOURCES += main.cpp\
     flowlayout.cpp
 
 HEADERS  += mainwindow.h \
+    library/imagedescriptor.h \
+    library/imagedescriptormanager.h \
+    library/imagegrid.h \
+    library/imageview.h \
+    librarywindow.h \
     managelibrary.h \
     #phonedialog.h \
     event/eventmodeshow.h \
@@ -75,6 +85,8 @@ win32 {
 }
 
 FORMS    += mainwindow.ui \
+    library/imageview.ui \
+    librarywindow.ui \
     managelibrary.ui \
     #phonedialog.ui \
     event/eventmodeshow.ui \

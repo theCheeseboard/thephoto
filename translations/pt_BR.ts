@@ -325,27 +325,32 @@
 <context>
     <name>EventModeShow</name>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="159"/>
+        <location filename="../event/eventmodeshow.ui" line="186"/>
         <source>Event Mode</source>
         <translation>Modo Evento</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="248"/>
+        <location filename="../event/eventmodeshow.ui" line="275"/>
         <source>Preparing Event Mode...</source>
         <translation>Preparando Modo Evento…</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="291"/>
-        <source>To connect, install</source>
+        <location filename="../event/eventmodeshow.ui" line="318"/>
+        <source>To connect, go to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.ui" line="310"/>
+        <location filename="../event/eventmodeshow.ui" line="344"/>
         <source>and use</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="207"/>
+        <location filename="../event/eventmodeshow.ui" line="363"/>
+        <source>when asked.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodeshow.cpp" line="208"/>
         <source>by %1</source>
         <translation>por %1</translation>
     </message>
@@ -374,6 +379,63 @@
         <location filename="../event/eventsocket.h" line="42"/>
         <source>An unknown person</source>
         <translation>Uma pessoa desconhecida</translation>
+    </message>
+</context>
+<context>
+    <name>ImageView</name>
+    <message>
+        <location filename="../library/imageview.ui" line="16"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LibraryWindow</name>
+    <message>
+        <location filename="../librarywindow.ui" line="14"/>
+        <source>thePhoto</source>
+        <translation type="unfinished">thePhoto</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="41"/>
+        <source>Library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="167"/>
+        <source>Let&apos;s get started!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="177"/>
+        <source>Where should we search for images?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="270"/>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="286"/>
+        <source>Exit</source>
+        <translation type="unfinished">Sair</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="289"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished">Ctrl+Q</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="299"/>
+        <source>Event Mode</source>
+        <translation type="unfinished">Modo Evento</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="202"/>
+        <location filename="../librarywindow.ui" line="294"/>
+        <source>Manage Library</source>
+        <translation type="unfinished">Gerenciar Biblioteca</translation>
     </message>
 </context>
 <context>
@@ -505,14 +567,14 @@
         <translation>&lt;p&gt;Nós estamos construindo a biblioteca. Por favor espere enquanto fazemos isso.&lt;/p&gt;&lt;p&gt;Você pode encurtar esse processo diminuindo sua biblioteca.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
-        <location filename="../mainwindow.cpp" line="382"/>
+        <location filename="../mainwindow.cpp" line="378"/>
+        <location filename="../mainwindow.cpp" line="381"/>
         <source>Delete Image</source>
         <translation>Deletar Imagem</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="380"/>
-        <location filename="../mainwindow.cpp" line="383"/>
+        <location filename="../mainwindow.cpp" line="379"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation>Você está prestes a deletar essa imagem para sempre. Tem certeza?</translation>
     </message>
