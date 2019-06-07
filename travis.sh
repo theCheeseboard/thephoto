@@ -1,7 +1,7 @@
 if [ $STAGE = "script" ]; then
   if [ $TRAVIS_OS_NAME = "linux" ]; then
     echo "[TRAVIS] Preparing build environment"
-    source /opt/qt511/bin/qt511-env.sh
+    source /opt/qt512/bin/qt512-env.sh
     echo "[TRAVIS] Building and installing the-libs"
     git clone https://github.com/vicr123/the-libs.git
     cd the-libs
@@ -81,7 +81,8 @@ elif [ $STAGE = "before_install" ]; then
   else
     echo "[TRAVIS] Preparing to build for macOS"
     brew update
-    brew install qt5 node
+    brew install qt5
+    brew upgrade node
   fi
 elif [ $STAGE = "after_success" ]; then
   if [ $TRAVIS_OS_NAME = "linux" ]; then

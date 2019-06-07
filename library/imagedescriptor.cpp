@@ -19,7 +19,6 @@ ImageDescriptor::~ImageDescriptor() {
 
 tPromise<void>* ImageDescriptor::load() {
     d->loaded = true;
-    QEventLoop* loop = new QEventLoop();
 
     (new tPromise<QImage>([=](QString& error) {
         QImageReader reader(d->filename);
@@ -28,12 +27,13 @@ tPromise<void>* ImageDescriptor::load() {
         return image;
     }))->then([=](QImage image) {
         d->data = image;
-        loop->quit();
         emit loaded();
     });
 
     return new tPromise<void>([=](QString& error) {
-        loop->exec();
+        QEventLoop loop;
+        connect(this, &ImageDescriptor::loaded, &loop, &QEventLoop::quit);
+        loop.exec();
     });
 }
 

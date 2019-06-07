@@ -84,12 +84,12 @@ struct ImageLocation {
             anim->setEndValue(1.0);
             anim->setDuration(500);
             anim->setEasingCurve(QEasingCurve::OutCubic);
-            anim->start();
             QObject::connect(anim, &tVariantAnimation::valueChanged, assuranceObject, [=](QVariant value) {
                 opacity = value.toReal();
                 parent->update();
             });
             QObject::connect(anim, &tVariantAnimation::finished, anim, &tVariantAnimation::deleteLater);
+            anim->start();
         });
     }
 
