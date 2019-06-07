@@ -23,7 +23,7 @@ ImageView::ImageView(QWidget *parent) :
     d->opacityAnimation = new tVariantAnimation();
     d->opacityAnimation->setStartValue(0.0);
     d->opacityAnimation->setEndValue(1.0);
-    d->opacityAnimation->setDuration(500);
+    d->opacityAnimation->setDuration(250);
     d->opacityAnimation->setEasingCurve(QEasingCurve::OutCubic);
     connect(d->opacityAnimation, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
         this->update();
@@ -60,7 +60,7 @@ void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image
     d->locationAnimation = new tVariantAnimation();
     d->locationAnimation->setStartValue(location);
     d->locationAnimation->setEndValue(calculateEndRect());
-    d->locationAnimation->setDuration(500);
+    d->locationAnimation->setDuration(250);
     d->locationAnimation->setEasingCurve(QEasingCurve::OutCubic);
     connect(d->locationAnimation, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
         this->update();
@@ -70,7 +70,7 @@ void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image
     d->sourceRectAnimation = new tVariantAnimation();
     d->sourceRectAnimation->setStartValue(sourceRect);
     d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
-    d->sourceRectAnimation->setDuration(500);
+    d->sourceRectAnimation->setDuration(250);
     d->sourceRectAnimation->setEasingCurve(QEasingCurve::OutCubic);
     connect(d->sourceRectAnimation, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
         this->update();
@@ -93,7 +93,7 @@ void ImageView::close() {
     tPropertyAnimation* opacityAnimation = new tPropertyAnimation(effect, "opacity");
     opacityAnimation->setStartValue(1.0);
     opacityAnimation->setEndValue(0.0);
-    opacityAnimation->setDuration(500);
+    opacityAnimation->setDuration(250);
     opacityAnimation->setEasingCurve(QEasingCurve::InCubic);
     connect(opacityAnimation, &tPropertyAnimation::finished, opacityAnimation, &tPropertyAnimation::deleteLater);
     connect(opacityAnimation, &tPropertyAnimation::finished, this, &ImageView::deleteLater);

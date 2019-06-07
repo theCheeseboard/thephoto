@@ -75,13 +75,13 @@ elif [ $STAGE = "before_install" ]; then
     wget -O ~/vicr12345.gpg.key https://vicr123.com/repo/apt/vicr12345.gpg.key
     sudo apt-key add ~/vicr12345.gpg.key
     sudo add-apt-repository 'deb https://vicr123.com/repo/apt/ubuntu bionic main'
-    sudo add-apt-repository -y ppa:beineri/opt-qt-5.11.0-xenial
+    sudo add-apt-repository -y ppa:beineri/opt-qt-5.12.3-xenial
     sudo apt-get update -qq
-    sudo apt-get install qt511-meta-minimal qt511x11extras qt511tools qt511translations qt511svg qt511websockets xorg-dev libxcb-util0-dev libgl1-mesa-dev
+    sudo apt-get install qt512-meta-minimal qt512x11extras qt512tools qt512translations qt512svg qt512websockets qt512multimedia xorg-dev libxcb-util0-dev libgl1-mesa-dev
   else
     echo "[TRAVIS] Preparing to build for macOS"
     brew update
-    brew install qt5
+    brew install qt5 node
   fi
 elif [ $STAGE = "after_success" ]; then
   if [ $TRAVIS_OS_NAME = "linux" ]; then
