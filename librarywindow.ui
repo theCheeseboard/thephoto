@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>thePhoto</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
@@ -31,18 +34,71 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <pointsize>15</pointsize>
-       </font>
+     <widget class="QWidget" name="headerWidget" native="true">
+      <property name="autoFillBackground">
+       <bool>true</bool>
       </property>
-      <property name="text">
-       <string>Library</string>
-      </property>
-      <property name="margin">
-       <number>9</number>
-      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QToolButton" name="menuButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="thephoto" resource="resources.qrc">
+           <normaloff>:/icons/thephoto.svg</normaloff>:/icons/thephoto.svg</iconset>
+         </property>
+         <property name="popupMode">
+          <enum>QToolButton::InstantPopup</enum>
+         </property>
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Library</string>
+         </property>
+         <property name="margin">
+          <number>9</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
@@ -262,7 +318,7 @@
      <x>0</x>
      <y>0</y>
      <width>815</width>
-     <height>22</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -324,6 +380,7 @@
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="resources.qrc"/>
   <include location="icons.qrc"/>
  </resources>
  <connections/>

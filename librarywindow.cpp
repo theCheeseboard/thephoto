@@ -30,9 +30,30 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
 
     d = new LibraryWindowPrivate();
     d->csdBox = d->csd.csdBoxForWidget(this);
-    d->csd.installMoveAction(this);
+    if (tCsdGlobal::windowControlsEdge() == tCsdGlobal::Right) {
+        static_cast<QBoxLayout*>(ui->headerWidget->layout())->addWidget(d->csdBox);
+    } else {
+        static_cast<QBoxLayout*>(ui->headerWidget->layout())->insertWidget(0, d->csdBox);
+    }
 
-    d->csdBox->setParent(this);
+    d->csd.installResizeAction(this);
+    d->csd.installMoveAction(ui->headerWidget);
+
+
+    #ifdef Q_OS_MAC
+        ui->menuButton->setVisible(false);
+    #else
+        ui->menubar->setVisible(false);
+        ui->menuButton->setIconSize(SC_DPI_T(QSize(24, 24), QSize));
+
+        QMenu* menu = new QMenu();
+        menu->addAction(ui->actionManage_Library);
+        menu->addSeparator();
+        menu->addAction(ui->actionEvent_Mode);
+        menu->addSeparator();
+        menu->addAction(ui->actionExit);
+        ui->menuButton->setMenu(menu);
+    #endif
 
     loadLibrary();
 }
@@ -49,14 +70,9 @@ void LibraryWindow::on_actionExit_triggered()
 }
 
 void LibraryWindow::resizeEvent(QResizeEvent *event) {
-    QRect geom = d->csdBox->geometry();
-    if (tCsdGlobal::windowControlsEdge() == tCsdGlobal::Right) {
-        geom.moveTopRight(QPoint(0, this->width()));
-    } else {
-        geom.moveTopLeft(QPoint(0, 0));
-    }
-    d->csdBox->setGeometry(geom);
+
 }
+
 
 void LibraryWindow::on_actionManage_Library_triggered()
 {
