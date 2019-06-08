@@ -4,8 +4,12 @@
 #include <QPainter>
 #include <tpropertyanimation.h>
 #include <QGraphicsOpacityEffect>
+#include <QShortcut>
+#include "imagegrid.h"
 
 struct ImageViewPrivate {
+    ImageGrid* grid = nullptr;
+
     tVariantAnimation* opacityAnimation = nullptr;
     tVariantAnimation* locationAnimation = nullptr;
     tVariantAnimation* sourceRectAnimation = nullptr;
@@ -28,6 +32,12 @@ ImageView::ImageView(QWidget *parent) :
     connect(d->opacityAnimation, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
         this->update();
     });
+
+    QShortcut* escShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(close()));
+    escShortcut->setAutoRepeat(false);
+
+    QShortcut* nextShortcut = new QShortcut(QKeySequence(Qt::Key_Right), this, SLOT(nextImage()));
+    QShortcut* prevShortcut = new QShortcut(QKeySequence(Qt::Key_Left), this, SLOT(previousImage()));
 }
 
 ImageView::~ImageView()
@@ -37,6 +47,10 @@ ImageView::~ImageView()
     if (d->sourceRectAnimation != nullptr) d->sourceRectAnimation->deleteLater();
     delete ui;
     delete d;
+}
+
+void ImageView::setImageGrid(ImageGrid *grid) {
+    d->grid = grid;
 }
 
 void ImageView::paintEvent(QPaintEvent *event) {
@@ -91,6 +105,8 @@ void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image
 }
 
 void ImageView::close() {
+    emit closed();
+
     QRectF endRect = calculateEndRect();
     endRect.moveTop(endRect.top() + this->height() / 8);
     d->locationAnimation->setStartValue(d->locationAnimation->currentValue());
@@ -119,7 +135,7 @@ void ImageView::resizeEvent(QResizeEvent *event) {
 }
 
 void ImageView::mousePressEvent(QMouseEvent *event) {
-    close();
+
 }
 
 QRectF ImageView::calculateEndRect() {
@@ -128,4 +144,44 @@ QRectF ImageView::calculateEndRect() {
     endRect.setSize(endSize);
     endRect.moveCenter(QPointF(this->width() / 2, this->height() / 2));
     return endRect;
+}
+
+void ImageView::nextImage() {
+    ImgDesc newImage = d->grid->nextImage(d->image);
+    if (newImage != nullptr) {
+        d->image = newImage;
+
+        if (d->image->isLoaded() == ImageDescriptor::NotLoaded) {
+            //Load the full image
+            d->image->load(false)->then([=] {
+                d->locationAnimation->setEndValue(calculateEndRect());
+                d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
+                this->update();
+            });
+        }
+
+        d->locationAnimation->setEndValue(calculateEndRect());
+        d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
+        this->update();
+    }
+}
+
+void ImageView::previousImage() {
+    ImgDesc newImage = d->grid->prevImage(d->image);
+    if (newImage != nullptr) {
+        d->image = newImage;
+
+        if (d->image->isLoaded() == ImageDescriptor::NotLoaded) {
+            //Load the full image
+            d->image->load(false)->then([=] {
+                d->locationAnimation->setEndValue(calculateEndRect());
+                d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
+                this->update();
+            });
+        }
+
+        d->locationAnimation->setEndValue(calculateEndRect());
+        d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
+        this->update();
+    }
 }

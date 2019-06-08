@@ -281,3 +281,39 @@ void ImageGrid::setOverlayWidget(QWidget* widget) {
         d->layout->removeWidget(widget);
     });
 }
+
+ImgDesc ImageGrid::nextImage(ImgDesc image) {
+    for (auto i = d->images.begin(); i != d->images.end(); i++) {
+        if ((*i)->image == image) {
+            //Return the next one
+            do {
+                i++;
+            } while (i != d->images.end() && (*i)->type != ImageLocation::Image);
+
+            if (i == d->images.end()) {
+                return nullptr;
+            } else {
+                return (*i)->image;
+            }
+        }
+    }
+    return nullptr;
+}
+
+ImgDesc ImageGrid::prevImage(ImgDesc image) {
+    for (auto i = d->images.rbegin(); i != d->images.rend(); i++) {
+        if ((*i)->image == image) {
+            //Return the previous one
+            do {
+                i++; //Using a reverse iterator here
+            } while (i != d->images.rend() && (*i)->type != ImageLocation::Image);
+
+            if (i == d->images.rend()) {
+                return nullptr;
+            } else {
+                return (*i)->image;
+            }
+        }
+    }
+    return nullptr;
+}

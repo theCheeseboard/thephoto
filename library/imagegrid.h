@@ -12,6 +12,9 @@ class ImageGrid : public QWidget
         explicit ImageGrid(QWidget *parent = nullptr);
         ~ImageGrid();
 
+        ImgDesc nextImage(ImgDesc image);
+        ImgDesc prevImage(ImgDesc image);
+
     signals:
         void imageClicked(QRectF location, QRectF sourceRect, ImgDesc image);
 

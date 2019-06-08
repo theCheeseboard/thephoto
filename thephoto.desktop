@@ -7,4 +7,4 @@ GenericName=Photo Manager
 Exec=thephoto
 Icon=thephoto
 MimeType=image/jpeg;image/png;image/gif;image/exif;
-Categories=Graphics
+Categories=Graphics;

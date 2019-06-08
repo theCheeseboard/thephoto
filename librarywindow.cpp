@@ -15,6 +15,7 @@
 struct LibraryWindowPrivate {
     tCsdTools csd;
     QWidget* csdBox;
+    QPointer<ImageView> overlayView;
 
     QStringList imageLibrary;
 };
@@ -26,6 +27,7 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->stackedWidget->setCurrentAnimation(tStackedWidget::Fade);
+    ui->headerBar->setCurrentAnimation(tStackedWidget::Fade);
     ui->loaderSpinner->setFixedSize(SC_DPI_T(QSize(32, 32), QSize));
 
     d = new LibraryWindowPrivate();
@@ -177,10 +179,23 @@ void LibraryWindow::on_actionEvent_Mode_triggered()
 
 void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QRectF& sourceRect, const ImgDesc& image)
 {
-    ImageView* view = new ImageView();
-    ui->libraryPage->setOverlayWidget(view);
+    d->overlayView = new ImageView();
+    d->overlayView->setImageGrid(ui->libraryPage);
+    ui->libraryPage->setOverlayWidget(d->overlayView);
+    ui->headerBar->setCurrentWidget(ui->imageHeader);
+
+    connect(d->overlayView.data(), &ImageView::closed, this, [=] {
+        ui->headerBar->setCurrentWidget(ui->mainHeader);
+    });
 
     QTimer::singleShot(0, [=] {
-        view->animateImageIn(location, sourceRect, image);
+        d->overlayView->animateImageIn(location, sourceRect, image);
     });
+}
+
+void LibraryWindow::on_backButton_clicked()
+{
+    if (!d->overlayView.isNull()) {
+        d->overlayView->close();
+    }
 }

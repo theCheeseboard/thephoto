@@ -30,6 +30,8 @@ class LibraryWindow : public QMainWindow
 
         void on_libraryPage_imageClicked(const QRectF& location, const QRectF& sourceRect, const ImgDesc& image);
 
+        void on_backButton_clicked();
+
     private:
         Ui::LibraryWindow *ui;
 

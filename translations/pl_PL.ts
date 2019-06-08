@@ -397,43 +397,48 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="119"/>
+        <location filename="../librarywindow.ui" line="122"/>
         <source>Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="259"/>
+        <location filename="../librarywindow.ui" line="182"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="321"/>
         <source>Let&apos;s get started!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="269"/>
+        <location filename="../librarywindow.ui" line="331"/>
         <source>Where should we search for images?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="362"/>
+        <location filename="../librarywindow.ui" line="424"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="378"/>
+        <location filename="../librarywindow.ui" line="440"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="381"/>
+        <location filename="../librarywindow.ui" line="443"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="391"/>
+        <location filename="../librarywindow.ui" line="453"/>
         <source>Event Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="294"/>
-        <location filename="../librarywindow.ui" line="386"/>
+        <location filename="../librarywindow.ui" line="356"/>
+        <location filename="../librarywindow.ui" line="448"/>
         <source>Manage Library</source>
         <translation type="unfinished"></translation>
     </message>
