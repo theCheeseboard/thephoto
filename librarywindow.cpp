@@ -211,4 +211,5 @@ bool LibraryWindow::eventFilter(QObject *watched, QEvent *event) {
         }
     }
 #endif
+    return false;
 }

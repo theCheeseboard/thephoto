@@ -66,7 +66,7 @@ if [ $STAGE = "script" ]; then
     install_name_tool -change /usr/local/opt/qt/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore thePhoto.app/Contents/Plugins/styles/libContemporary.dylib
     install_name_tool -change /usr/local/opt/qt/lib/QtDBus.framework/Versions/5/QtDBus @executable_path/../Frameworks/QtDBus.framework/Versions/5/QtDBus thePhoto.app/Contents/Plugins/styles/libContemporary.dylib
     echo "[TRAVIS] Preparing Disk Image creator"
-    npm install appdmg
+    npm install appdmg@0.5.2
     echo "[TRAVIS] Building Disk Image"
     ./node_modules/appdmg/bin/appdmg.js ./node-appdmg-config.json ~/thePhoto-macOS.dmg
   fi
