@@ -39,6 +39,7 @@ class ImageView : public QWidget
         void mousePressEvent(QMouseEvent* event);
 
         QRectF calculateEndRect();
+        void loadImage(ImgDesc image);
 };
 
 #endif // IMAGEVIEW_H

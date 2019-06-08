@@ -20,7 +20,7 @@ class ImageDescriptor : public QObject
         ~ImageDescriptor();
 
         ImageDescriptor::LoadStatus isLoaded();
-        bool isCompactLoaded();
+        ImageDescriptor::LoadStatus isCompactLoaded();
 
         tPromise<void>* load(bool compactData);
         void unload(bool compactData);

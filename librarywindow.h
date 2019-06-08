@@ -35,8 +35,14 @@ class LibraryWindow : public QMainWindow
     private:
         Ui::LibraryWindow *ui;
 
+#ifdef Q_OS_MAC
+        void setupMacOS();
+        void macOSDrag(QMouseEvent* event);
+#endif
+
         LibraryWindowPrivate* d;
         void resizeEvent(QResizeEvent* event);
+        bool eventFilter(QObject* watched, QEvent* event);
 };
 
 #endif // LIBRARYWINDOW_H

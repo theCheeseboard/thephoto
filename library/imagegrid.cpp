@@ -44,7 +44,7 @@ struct ImageLocation {
         painter->drawRect(realRect);
 
         if (type == Image) {
-            if (image->isLoaded() == ImageDescriptor::NotLoaded && !image->isCompactLoaded()) load();
+            if (image->isLoaded() == ImageDescriptor::NotLoaded && image->isCompactLoaded() == ImageDescriptor::NotLoaded) load();
 
             painter->setOpacity(opacity);
             painter->drawPixmap(realRect, image->image(), sourceRect());

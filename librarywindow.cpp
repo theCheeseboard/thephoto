@@ -44,6 +44,9 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
 
     #ifdef Q_OS_MAC
         ui->menuButton->setVisible(false);
+        ui->headerBar->installEventFilter(this);
+
+        setupMacOS();
     #else
         ui->menubar->setVisible(false);
         ui->menuButton->setIconSize(SC_DPI_T(QSize(24, 24), QSize));
@@ -198,4 +201,14 @@ void LibraryWindow::on_backButton_clicked()
     if (!d->overlayView.isNull()) {
         d->overlayView->close();
     }
+}
+
+bool LibraryWindow::eventFilter(QObject *watched, QEvent *event) {
+#ifdef Q_OS_MAC
+    if (watched == ui->headerBar) {
+        if (event->type() == QEvent::MouseButtonPress) {
+            macOSDrag(static_cast<QMouseEvent*>(event));
+        }
+    }
+#endif
 }

@@ -149,39 +149,38 @@ QRectF ImageView::calculateEndRect() {
 void ImageView::nextImage() {
     ImgDesc newImage = d->grid->nextImage(d->image);
     if (newImage != nullptr) {
-        d->image = newImage;
-
-        if (d->image->isLoaded() == ImageDescriptor::NotLoaded) {
-            //Load the full image
-            d->image->load(false)->then([=] {
-                d->locationAnimation->setEndValue(calculateEndRect());
-                d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
-                this->update();
-            });
-        }
-
-        d->locationAnimation->setEndValue(calculateEndRect());
-        d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
-        this->update();
+        loadImage(newImage);
     }
 }
 
 void ImageView::previousImage() {
     ImgDesc newImage = d->grid->prevImage(d->image);
     if (newImage != nullptr) {
-        d->image = newImage;
+        loadImage(newImage);
+    }
+}
 
-        if (d->image->isLoaded() == ImageDescriptor::NotLoaded) {
-            //Load the full image
-            d->image->load(false)->then([=] {
-                d->locationAnimation->setEndValue(calculateEndRect());
-                d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
-                this->update();
-            });
-        }
+void ImageView::loadImage(ImgDesc image) {
+    d->image = image;
 
-        d->locationAnimation->setEndValue(calculateEndRect());
-        d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().width(), d->image->image().height()));
-        this->update();
+    if (image->isLoaded() == ImageDescriptor::NotLoaded) {
+        //Load the full image
+        image->load(false)->then([=] {
+            d->locationAnimation->setEndValue(calculateEndRect());
+            d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
+            this->update();
+        });
+    }
+
+    d->locationAnimation->setEndValue(calculateEndRect());
+    d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
+    this->update();
+
+    if (d->grid != nullptr) {
+        //Preload the next and previous image
+        ImgDesc nextImage = d->grid->nextImage(image);
+        if (nextImage->isLoaded() == ImageDescriptor::NotLoaded) nextImage->load(false);
+        ImgDesc prevImage = d->grid->prevImage(image);
+        if (prevImage->isLoaded() == ImageDescriptor::NotLoaded) prevImage->load(false);
     }
 }

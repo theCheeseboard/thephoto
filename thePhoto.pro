@@ -18,6 +18,8 @@ macx {
     LIBS += -framework CoreFoundation -framework AppKit
     #QMAKE_INFO_PLIST = Info.plist
 
+    SOURCES += librarywindow-objc.mm
+
     INCLUDEPATH += "/usr/local/include/the-libs"
     LIBS += -L/usr/local/lib -lthe-libs
 }
