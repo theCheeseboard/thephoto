@@ -179,8 +179,8 @@ void ImageView::loadImage(ImgDesc image) {
     if (d->grid != nullptr) {
         //Preload the next and previous image
         ImgDesc nextImage = d->grid->nextImage(image);
-        if (nextImage->isLoaded() == ImageDescriptor::NotLoaded) nextImage->load(false);
+        if (!nextImage.isNull() && nextImage->isLoaded() == ImageDescriptor::NotLoaded) nextImage->load(false);
         ImgDesc prevImage = d->grid->prevImage(image);
-        if (prevImage->isLoaded() == ImageDescriptor::NotLoaded) prevImage->load(false);
+        if (!nextImage.isNull() && prevImage->isLoaded() == ImageDescriptor::NotLoaded) prevImage->load(false);
     }
 }
