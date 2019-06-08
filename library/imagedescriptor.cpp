@@ -52,6 +52,20 @@ tPromise<void>* ImageDescriptor::load(bool compactData) {
     });
 }
 
+void ImageDescriptor::unload(bool compactData) {
+    //Always unload the full data
+    d->data = QPixmap();
+    d->loaded = ImageDescriptor::NotLoaded;
+    emit unloaded(false);
+
+    if (compactData) {
+        //Unload the compact data
+        d->compact = QPixmap();
+        d->compactLoaded = false;
+        emit unloaded(true);
+    }
+}
+
 ImageDescriptor::LoadStatus ImageDescriptor::isLoaded() {
     return d->loaded;
 }

@@ -384,7 +384,7 @@
 <context>
     <name>ImageView</name>
     <message>
-        <location filename="../library/imageview.ui" line="16"/>
+        <location filename="../library/imageview.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>

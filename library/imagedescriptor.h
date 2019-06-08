@@ -21,7 +21,9 @@ class ImageDescriptor : public QObject
 
         ImageDescriptor::LoadStatus isLoaded();
         bool isCompactLoaded();
+
         tPromise<void>* load(bool compactData);
+        void unload(bool compactData);
 
         QPixmap image();
         QPixmap compactImage();
@@ -29,6 +31,7 @@ class ImageDescriptor : public QObject
 
     signals:
         void loaded(bool compactData);
+        void unloaded(bool compactData);
 
     private:
         ImageDescriptorPrivate* d;
