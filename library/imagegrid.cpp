@@ -44,10 +44,10 @@ struct ImageLocation {
         painter->drawRect(realRect);
 
         if (type == Image) {
-            if (!image->isLoaded()) load();
+            if (image->isLoaded() == ImageDescriptor::NotLoaded && !image->isCompactLoaded()) load();
 
             painter->setOpacity(opacity);
-            painter->drawImage(realRect, image->image(), sourceRect());
+            painter->drawPixmap(realRect, image->image(), sourceRect());
         } else if (type == DateMarker) {
             QFont font = parent->font();
             font.setPixelSize(realRect.height() / 3);
@@ -78,7 +78,8 @@ struct ImageLocation {
     }
 
     void load() {
-        image->load()->then([=]() {
+        //Load the compact image
+        image->load(true)->then([=] {
             tVariantAnimation* anim = new tVariantAnimation();
             anim->setStartValue(0.0);
             anim->setEndValue(1.0);

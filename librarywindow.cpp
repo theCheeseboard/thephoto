@@ -117,7 +117,7 @@ void LibraryWindow::loadLibrary() {
                 while (iterator.hasNext()) {
                     QFile file(iterator.next());
                     QFileInfo fileinfo(file);
-                    if (mimedb.mimeTypeForFile(fileinfo).name().startsWith("image")) { //This is an image file
+                    if (QImageReader::supportedMimeTypes().contains(mimedb.mimeTypeForFile(fileinfo).name().toUtf8())) { //This is an image file
                         imageLibrary.append(file.fileName());
                     }
                 }

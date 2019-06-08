@@ -4,8 +4,10 @@
 
 struct ImageDescriptorPrivate {
     QString filename;
-    QImage data;
-    bool loaded = false;
+    QPixmap data;
+    QPixmap compact;
+    ImageDescriptor::LoadStatus loaded = ImageDescriptor::NotLoaded;
+    bool compactLoaded = false;
 };
 
 ImageDescriptor::ImageDescriptor(QString filename) : QObject(nullptr) {
@@ -17,17 +19,30 @@ ImageDescriptor::~ImageDescriptor() {
     delete d;
 }
 
-tPromise<void>* ImageDescriptor::load() {
-    d->loaded = true;
+tPromise<void>* ImageDescriptor::load(bool compactData) {
+    if (compactData) {
+        d->compactLoaded = true;
+    } else {
+        d->loaded = ImageDescriptor::Loading;
+    }
 
     (new tPromise<QImage>([=](QString& error) {
         QImageReader reader(d->filename);
         reader.setAutoTransform(true);
         const QImage image = reader.read();
-        return image;
+        if (compactData) {
+            return image.scaledToWidth(500);
+        } else {
+            return image;
+        }
     }))->then([=](QImage image) {
-        d->data = image;
-        emit loaded();
+        if (compactData) {
+            d->compact = QPixmap::fromImage(image);
+        } else {
+            d->data = QPixmap::fromImage(image);
+            d->loaded = ImageDescriptor::Loaded;
+        }
+        emit loaded(compactData);
     });
 
     return new tPromise<void>([=](QString& error) {
@@ -37,8 +52,12 @@ tPromise<void>* ImageDescriptor::load() {
     });
 }
 
-bool ImageDescriptor::isLoaded() {
+ImageDescriptor::LoadStatus ImageDescriptor::isLoaded() {
     return d->loaded;
+}
+
+bool ImageDescriptor::isCompactLoaded() {
+    return d->compactLoaded;
 }
 
 QDateTime ImageDescriptor::dateTaken() {
@@ -46,6 +65,14 @@ QDateTime ImageDescriptor::dateTaken() {
     return info.created();
 }
 
-QImage ImageDescriptor::image() {
-    return d->data;
+QPixmap ImageDescriptor::image() {
+    if (isLoaded() == ImageDescriptor::Loaded) {
+        return d->data;
+    } else {
+        return d->compact;
+    }
+}
+
+QPixmap ImageDescriptor::compactImage() {
+    return d->compact;
 }

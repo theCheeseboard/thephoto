@@ -397,43 +397,43 @@
         <translation type="unfinished">thePhoto</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="113"/>
+        <location filename="../librarywindow.ui" line="119"/>
         <source>Library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="247"/>
+        <location filename="../librarywindow.ui" line="259"/>
         <source>Let&apos;s get started!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="257"/>
+        <location filename="../librarywindow.ui" line="269"/>
         <source>Where should we search for images?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="350"/>
+        <location filename="../librarywindow.ui" line="362"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="366"/>
+        <location filename="../librarywindow.ui" line="378"/>
         <source>Exit</source>
         <translation type="unfinished">Thoát</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="369"/>
+        <location filename="../librarywindow.ui" line="381"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="379"/>
+        <location filename="../librarywindow.ui" line="391"/>
         <source>Event Mode</source>
         <translation type="unfinished">Chế độ biến cố</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="282"/>
-        <location filename="../librarywindow.ui" line="374"/>
+        <location filename="../librarywindow.ui" line="294"/>
+        <location filename="../librarywindow.ui" line="386"/>
         <source>Manage Library</source>
         <translation type="unfinished">Quản lý thư viện ảnh</translation>
     </message>

@@ -48,12 +48,24 @@ void ImageView::paintEvent(QPaintEvent *event) {
     painter.setOpacity(1);
 
     if (!d->image.isNull()) {
-        painter.drawImage(d->locationAnimation->currentValue().toRectF(), d->image->image(), d->sourceRectAnimation->currentValue().toRectF());
+        painter.drawPixmap(d->locationAnimation->currentValue().toRectF(), d->image->image(), d->sourceRectAnimation->currentValue().toRectF());
     }
 }
 
 void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image) {
     d->image = image;
+    if (image->isLoaded() == ImageDescriptor::NotLoaded) {
+        //Load the full image
+        image->load(false)->then([=] {
+            d->locationAnimation->setStartValue(location);
+            d->locationAnimation->setEndValue(calculateEndRect());
+
+            d->sourceRectAnimation->setStartValue(sourceRect);
+            d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
+
+            this->update();
+        });
+    }
 
     d->opacityAnimation->start();
 

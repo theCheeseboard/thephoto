@@ -35,6 +35,12 @@
     </property>
     <item>
      <widget class="QWidget" name="headerWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="autoFillBackground">
        <bool>true</bool>
       </property>
@@ -140,6 +146,12 @@
     </item>
     <item>
      <widget class="tStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="currentIndex">
        <number>2</number>
       </property>

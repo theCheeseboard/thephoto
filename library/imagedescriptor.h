@@ -10,17 +10,25 @@ class ImageDescriptor : public QObject
 {
         Q_OBJECT
     public:
+        enum LoadStatus {
+            NotLoaded,
+            Loading,
+            Loaded
+        };
+
         explicit ImageDescriptor(QString filename);
         ~ImageDescriptor();
 
-        bool isLoaded();
-        tPromise<void>* load();
+        ImageDescriptor::LoadStatus isLoaded();
+        bool isCompactLoaded();
+        tPromise<void>* load(bool compactData);
 
-        QImage image();
+        QPixmap image();
+        QPixmap compactImage();
         QDateTime dateTaken();
 
     signals:
-        void loaded();
+        void loaded(bool compactData);
 
     private:
         ImageDescriptorPrivate* d;
