@@ -389,57 +389,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="195"/>
+        <location filename="../library/imageview.cpp" line="212"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="196"/>
+        <location filename="../library/imageview.cpp" line="213"/>
         <source>Filename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="197"/>
+        <location filename="../library/imageview.cpp" line="214"/>
         <source>Dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="202"/>
+        <location filename="../library/imageview.cpp" line="219"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="204"/>
+        <location filename="../library/imageview.cpp" line="221"/>
         <source>ISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="206"/>
+        <location filename="../library/imageview.cpp" line="223"/>
         <source>Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="207"/>
+        <location filename="../library/imageview.cpp" line="224"/>
         <source>Camera Make</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="208"/>
+        <location filename="../library/imageview.cpp" line="225"/>
         <source>Camera Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="203"/>
+        <location filename="../library/imageview.cpp" line="220"/>
         <source>Flash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="203"/>
+        <location filename="../library/imageview.cpp" line="220"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="203"/>
+        <location filename="../library/imageview.cpp" line="220"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
@@ -462,40 +462,50 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="321"/>
+        <location filename="../librarywindow.ui" line="344"/>
         <source>Let&apos;s get started!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="331"/>
+        <location filename="../librarywindow.ui" line="354"/>
         <source>Where should we search for images?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="424"/>
+        <location filename="../librarywindow.ui" line="447"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="440"/>
+        <location filename="../librarywindow.ui" line="463"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="443"/>
+        <location filename="../librarywindow.ui" line="466"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="453"/>
+        <location filename="../librarywindow.ui" line="476"/>
         <source>Event Mode</source>
         <translation type="unfinished">Evenementenmodus</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="356"/>
-        <location filename="../librarywindow.ui" line="448"/>
+        <location filename="../librarywindow.ui" line="379"/>
+        <location filename="../librarywindow.ui" line="471"/>
         <source>Manage Library</source>
         <translation type="unfinished">Beheer bibliotheek</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="64"/>
+        <source>Delete Image?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="65"/>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijder</translation>
     </message>
 </context>
 <context>
@@ -537,7 +547,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="311"/>
-        <location filename="../mainwindow.cpp" line="50"/>
+        <location filename="../mainwindow.cpp" line="39"/>
         <source>Zoom In</source>
         <translation>Zoom in</translation>
     </message>
@@ -548,7 +558,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="323"/>
-        <location filename="../mainwindow.cpp" line="56"/>
+        <location filename="../mainwindow.cpp" line="45"/>
         <source>Zoom Out</source>
         <translation>Zoom uit</translation>
     </message>
@@ -559,7 +569,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
-        <location filename="../mainwindow.cpp" line="62"/>
+        <location filename="../mainwindow.cpp" line="51"/>
         <source>Zoom to 100%</source>
         <translation>Zoom naar 100%</translation>
     </message>
@@ -570,7 +580,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
-        <location filename="../mainwindow.cpp" line="68"/>
+        <location filename="../mainwindow.cpp" line="57"/>
         <source>Fit to Window</source>
         <translation>Pas aan op venster</translation>
     </message>
@@ -581,7 +591,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="368"/>
-        <location filename="../mainwindow.cpp" line="74"/>
+        <location filename="../mainwindow.cpp" line="63"/>
         <source>Delete</source>
         <translation>Verwijder</translation>
     </message>
@@ -612,29 +622,29 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
-        <location filename="../mainwindow.cpp" line="80"/>
+        <location filename="../mainwindow.cpp" line="69"/>
         <source>Start Slideshow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="89"/>
         <source>Reading Library...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="101"/>
+        <location filename="../mainwindow.cpp" line="90"/>
         <source>&lt;p&gt;We&apos;re building your library. Please wait while we do this.&lt;/p&gt;&lt;p&gt;You can shorten this process by narrowing your library.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="378"/>
-        <location filename="../mainwindow.cpp" line="381"/>
+        <location filename="../mainwindow.cpp" line="367"/>
+        <location filename="../mainwindow.cpp" line="370"/>
         <source>Delete Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="379"/>
-        <location filename="../mainwindow.cpp" line="382"/>
+        <location filename="../mainwindow.cpp" line="368"/>
+        <location filename="../mainwindow.cpp" line="371"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>

@@ -44,9 +44,14 @@ class ImageDescriptor : public QObject
 
         QMap<MetadataKeys, QVariant> metadata();
 
+    public slots:
+        bool deleteFromDisk();
+
     signals:
         void loaded(bool compactData);
         void unloaded(bool compactData);
+
+        void deleted();
 
     private:
         ImageDescriptorPrivate* d;

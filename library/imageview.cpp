@@ -18,6 +18,8 @@ struct ImageViewPrivate {
     ImgDesc image;
 
     bool closing = false;
+
+    QMetaObject::Connection imageDeleteConnection;
 };
 
 ImageView::ImageView(QWidget *parent) :
@@ -151,22 +153,37 @@ QRectF ImageView::calculateEndRect() {
     return endRect;
 }
 
-void ImageView::nextImage() {
+bool ImageView::nextImage() {
+    if (d->grid == nullptr) return false;
     ImgDesc newImage = d->grid->nextImage(d->image);
     if (newImage != nullptr) {
         loadImage(newImage);
+        return true;
     }
+    return false;
 }
 
-void ImageView::previousImage() {
+bool ImageView::previousImage() {
+    if (d->grid == nullptr) return false;
     ImgDesc newImage = d->grid->prevImage(d->image);
     if (newImage != nullptr) {
         loadImage(newImage);
+        return true;
     }
+    return false;
 }
 
 void ImageView::loadImage(ImgDesc image) {
+    if (d->imageDeleteConnection) disconnect(d->imageDeleteConnection);
     d->image = image;
+    d->imageDeleteConnection = connect(d->image.data(), &ImageDescriptor::deleted, this, [=] {
+        //Try to move to the next image or the previous image
+        if (nextImage()) return;
+        if (previousImage()) return;
+
+        //No images left; close the image viewer
+        close();
+    });
 
     if (image->isLoaded() == ImageDescriptor::NotLoaded) {
         //Load the full image
@@ -186,7 +203,7 @@ void ImageView::loadImage(ImgDesc image) {
         ImgDesc nextImage = d->grid->nextImage(image);
         if (!nextImage.isNull() && nextImage->isLoaded() == ImageDescriptor::NotLoaded) nextImage->load(false);
         ImgDesc prevImage = d->grid->prevImage(image);
-        if (!nextImage.isNull() && prevImage->isLoaded() == ImageDescriptor::NotLoaded) prevImage->load(false);
+        if (!prevImage.isNull() && prevImage->isLoaded() == ImageDescriptor::NotLoaded) prevImage->load(false);
     }
 
     //Update sidebar metadata
@@ -208,4 +225,8 @@ void ImageView::loadImage(ImgDesc image) {
                          {tr("Camera Model"), image->metadata().value(ImageDescriptor::CameraModel).toString()}
                      }});
     d->sidebar->setSections(sections);
+}
+
+void ImageView::deleteCurrentImage() {
+    d->image->deleteFromDisk();
 }

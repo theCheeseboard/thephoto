@@ -170,6 +170,13 @@ void ImageGrid::loadImages(QStringList images) {
     for (QString image : images) {
         ImgLoc loc(new ImageLocation(this));
         loc->image = d->mgr->descriptorForFile(image);
+        connect(loc->image.data(), &ImageDescriptor::deleted, loc->assuranceObject, [=] {
+            QTimer::singleShot(0, [=] {
+                //Remove the image from the grid
+                d->images.removeAll(loc);
+                relocate();
+            });
+        });
         d->images.append(loc);
     }
 

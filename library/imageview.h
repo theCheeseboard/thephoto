@@ -24,8 +24,10 @@ class ImageView : public QWidget
     public slots:
         void animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image);
         void close();
-        void nextImage();
-        void previousImage();
+        bool nextImage();
+        bool previousImage();
+
+        void deleteCurrentImage();
 
     signals:
         void closed();

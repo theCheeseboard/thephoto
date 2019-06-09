@@ -19,23 +19,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QStringList arguments = QApplication::arguments();
     arguments.removeFirst();
-    if (arguments.count() == 0) {
+    if (arguments.count() == 1) {
         reloadLibrary();
         loadImage(0);
     } else {
         ui->noItemsInLibFrame->setVisible(false);
         ui->scrollArea->setVisible(true);
-
-        for (QString argument : arguments) {
-            QDir argDir(QFileInfo(argument).absoluteDir());
-            for (QString file : argDir.entryList()){
-                if (file != "." && file != "..") {
-                    FoundImages.append(argDir.path() + "/" + file);
-                }
-            }
-
-            loadImage(FoundImages.indexOf(argument));
-        }
     }
 
 #ifdef Q_OS_MAC

@@ -20,6 +20,7 @@ ImgDesc ImageDescriptorManager::descriptorForFile(QString filename) {
         return d->descriptors.value(cleaned);
     } else {
         ImgDesc descriptor(new ImageDescriptor(cleaned));
+        d->descriptors.insert(cleaned, descriptor);
         connect(descriptor.data(), &ImageDescriptor::loaded, this, [=](bool compactData) {
             if (compactData) {
                 d->compactlyLoaded.append(descriptor);
@@ -39,6 +40,10 @@ ImgDesc ImageDescriptorManager::descriptorForFile(QString filename) {
             } else {
                 d->loaded.removeOne(descriptor);
             }
+        });
+        connect(descriptor.data(), &ImageDescriptor::deleted, this, [=] {
+            //Remove this descriptor from the database
+            d->descriptors.remove(cleaned);
         });
         return descriptor;
     }

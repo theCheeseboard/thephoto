@@ -2,6 +2,7 @@
 #include <QEventLoop>
 #include <QImageReader>
 #include "easyexif/exif.h"
+#include <QFileSystemWatcher>
 
 struct ImageDescriptorPrivate {
     QString filename;
@@ -10,11 +11,24 @@ struct ImageDescriptorPrivate {
     ImageDescriptor::LoadStatus loaded = ImageDescriptor::NotLoaded;
     ImageDescriptor::LoadStatus compactLoaded = ImageDescriptor::NotLoaded;
     QMap<ImageDescriptor::MetadataKeys, QVariant> metadata;
+
+    QFileSystemWatcher watcher;
 };
 
 ImageDescriptor::ImageDescriptor(QString filename) : QObject(nullptr) {
     d = new ImageDescriptorPrivate();
     d->filename = filename;
+
+    d->watcher.addPath(d->filename);
+    connect(&d->watcher, &QFileSystemWatcher::fileChanged, this, [=] {
+        if (!QFile::exists(d->filename)) {
+            //Unload everything
+            unload(false);
+
+            //Tell everyone this image is deleted
+            emit deleted();
+        }
+    });
 }
 
 ImageDescriptor::~ImageDescriptor() {
@@ -135,4 +149,8 @@ QPixmap ImageDescriptor::compactImage() {
 
 QMap<ImageDescriptor::MetadataKeys, QVariant> ImageDescriptor::metadata() {
     return d->metadata;
+}
+
+bool ImageDescriptor::deleteFromDisk() {
+    return QFile::remove(d->filename);
 }

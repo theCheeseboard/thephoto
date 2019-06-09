@@ -60,6 +60,13 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
         ui->menuButton->setMenu(menu);
     #endif
 
+    QMenu* deleteMenu = new QMenu();
+    deleteMenu->addSection(tr("Delete Image?"));
+    deleteMenu->addAction(QIcon::fromTheme("edit-delete", QIcon(":/icons/edit-delete.svg")), tr("Delete"), [=] {
+        d->overlayView->deleteCurrentImage();
+    });
+    ui->deleteButton->setMenu(deleteMenu);
+
     loadLibrary();
 }
 
