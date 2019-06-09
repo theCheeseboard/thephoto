@@ -16,6 +16,19 @@ class ImageDescriptor : public QObject
             Loaded
         };
 
+        enum MetadataKeys {
+            FileName,
+            Dimensions,
+            CameraMake,
+            CameraModel,
+            Software,
+            BitsPerSample,
+            Description,
+            Flash,
+            FlashMode,
+            ISO
+        };
+
         explicit ImageDescriptor(QString filename);
         ~ImageDescriptor();
 
@@ -28,6 +41,8 @@ class ImageDescriptor : public QObject
         QPixmap image();
         QPixmap compactImage();
         QDateTime dateTaken();
+
+        QMap<MetadataKeys, QVariant> metadata();
 
     signals:
         void loaded(bool compactData);

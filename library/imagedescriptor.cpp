@@ -1,6 +1,7 @@
 #include "imagedescriptor.h"
 #include <QEventLoop>
 #include <QImageReader>
+#include "easyexif/exif.h"
 
 struct ImageDescriptorPrivate {
     QString filename;
@@ -8,6 +9,7 @@ struct ImageDescriptorPrivate {
     QPixmap compact;
     ImageDescriptor::LoadStatus loaded = ImageDescriptor::NotLoaded;
     ImageDescriptor::LoadStatus compactLoaded = ImageDescriptor::NotLoaded;
+    QMap<ImageDescriptor::MetadataKeys, QVariant> metadata;
 };
 
 ImageDescriptor::ImageDescriptor(QString filename) : QObject(nullptr) {
@@ -23,21 +25,63 @@ tPromise<void>* ImageDescriptor::load(bool compactData) {
     if (d->compactLoaded == ImageDescriptor::NotLoaded) d->compactLoaded = ImageDescriptor::Loading;
     if (!compactData) d->loaded = ImageDescriptor::Loading;
 
-    (new tPromise<QImage>([=](QString& error) {
-        QImageReader reader(d->filename);
+    struct LoadReturn {
+        QImage image;
+        QMap<MetadataKeys, QVariant> metadata;
+    };
+
+    (new tPromise<LoadReturn>([=](QString& error) {
+        LoadReturn retVal;
+
+        //Read in file contents
+        QFile file(d->filename);
+        file.open(QFile::ReadOnly);
+        QByteArray imageData = file.readAll();
+        file.close();
+
+        //Load in image
+        QBuffer buffer(&imageData);
+        QImageReader reader(&buffer);
         reader.setAutoTransform(true);
-        const QImage image = reader.read();
-        return image;
-    }))->then([=](QImage image) {
+        retVal.image = reader.read();
+
+        //Load image metadata
+        easyexif::EXIFInfo exif;
+        int failure = exif.parseFrom(reinterpret_cast<const unsigned char*>(imageData.constData()), imageData.length());
+        if (!failure) {
+            auto insertString = [=, &retVal](MetadataKeys key, std::string string) {
+                QString value = QString::fromStdString(string);
+                if (value != "") {
+                    retVal.metadata.insert(key, value);
+                }
+            };
+
+            insertString(CameraMake, exif.Make);
+            insertString(CameraModel, exif.Model);
+            insertString(Software, exif.Software);
+            retVal.metadata.insert(BitsPerSample, exif.BitsPerSample);
+            insertString(Description, exif.ImageDescription);
+            retVal.metadata.insert(Flash, exif.Flash);
+            retVal.metadata.insert(ISO, exif.ISOSpeedRatings);
+        }
+
+        retVal.metadata.insert(FileName, QFileInfo(d->filename).fileName());
+        retVal.metadata.insert(Dimensions, retVal.image.size());
+
+        return retVal;
+    }))->then([=](LoadReturn retval) {
+        //Update the metadata
+        d->metadata = retval.metadata;
+
         //Always load the compact data if needed
         if (d->compactLoaded == ImageDescriptor::Loading) {
-            d->compact = QPixmap::fromImage(image.scaledToWidth(300));
+            d->compact = QPixmap::fromImage(retval.image.scaledToWidth(300));
             d->compactLoaded = ImageDescriptor::Loaded;
             emit loaded(true);
         }
 
         if (!compactData) {
-            d->data = QPixmap::fromImage(image);
+            d->data = QPixmap::fromImage(retval.image);
             d->loaded = ImageDescriptor::Loaded;
             emit loaded(false);
         }
@@ -87,4 +131,8 @@ QPixmap ImageDescriptor::image() {
 
 QPixmap ImageDescriptor::compactImage() {
     return d->compact;
+}
+
+QMap<ImageDescriptor::MetadataKeys, QVariant> ImageDescriptor::metadata() {
+    return d->metadata;
 }

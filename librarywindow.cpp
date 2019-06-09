@@ -182,9 +182,20 @@ void LibraryWindow::on_actionEvent_Mode_triggered()
 
 void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QRectF& sourceRect, const ImgDesc& image)
 {
+    QWidget* overlayWidget = new QWidget();
+    QBoxLayout* overlayLayout = new QBoxLayout(QBoxLayout::LeftToRight);
+    overlayLayout->setContentsMargins(0, 0, 0, 0);
+    overlayLayout->setSpacing(0);
+    overlayWidget->setLayout(overlayLayout);
+
     d->overlayView = new ImageView();
     d->overlayView->setImageGrid(ui->libraryPage);
-    ui->libraryPage->setOverlayWidget(d->overlayView);
+    connect(d->overlayView.data(), &ImageView::destroyed, overlayWidget, &QWidget::deleteLater);
+    overlayLayout->addWidget(d->overlayView);
+    overlayLayout->addWidget(d->overlayView->sidebar());
+
+    ui->libraryPage->setOverlayWidget(overlayWidget);
+
     ui->headerBar->setCurrentWidget(ui->imageHeader);
 
     connect(d->overlayView.data(), &ImageView::closed, this, [=] {

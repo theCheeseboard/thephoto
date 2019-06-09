@@ -4,6 +4,7 @@ Type=Application
 Version=1.0
 Name=thePhoto
 GenericName=Photo Manager
+GenericName=Menedżer zdjęć
 Exec=thephoto
 Icon=thephoto
 MimeType=image/jpeg;image/png;image/gif;image/exif;

@@ -388,6 +388,61 @@
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="195"/>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="196"/>
+        <source>Filename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="197"/>
+        <source>Dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="202"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="204"/>
+        <source>ISO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="206"/>
+        <source>Camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="207"/>
+        <source>Camera Make</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="208"/>
+        <source>Camera Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="203"/>
+        <source>Flash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="203"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="203"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LibraryWindow</name>

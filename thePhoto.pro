@@ -37,10 +37,12 @@ win32 {
 }
 
 SOURCES += main.cpp\
+    easyexif/exif.cpp \
     library/imagedescriptor.cpp \
     library/imagedescriptormanager.cpp \
     library/imagegrid.cpp \
     library/imageview.cpp \
+    library/imageviewsidebar.cpp \
     librarywindow.cpp \
         mainwindow.cpp \
     managelibrary.cpp \
@@ -55,10 +57,12 @@ SOURCES += main.cpp\
     flowlayout.cpp
 
 HEADERS  += mainwindow.h \
+    easyexif/exif.h \
     library/imagedescriptor.h \
     library/imagedescriptormanager.h \
     library/imagegrid.h \
     library/imageview.h \
+    library/imageviewsidebar.h \
     librarywindow.h \
     managelibrary.h \
     #phonedialog.h \
@@ -88,6 +92,7 @@ win32 {
 
 FORMS    += mainwindow.ui \
     library/imageview.ui \
+    library/imageviewsidebar.ui \
     librarywindow.ui \
     managelibrary.ui \
     #phonedialog.ui \

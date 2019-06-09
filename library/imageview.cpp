@@ -6,14 +6,18 @@
 #include <QGraphicsOpacityEffect>
 #include <QShortcut>
 #include "imagegrid.h"
+#include "imageviewsidebar.h"
 
 struct ImageViewPrivate {
     ImageGrid* grid = nullptr;
+    ImageViewSidebar* sidebar;
 
     tVariantAnimation* opacityAnimation = nullptr;
     tVariantAnimation* locationAnimation = nullptr;
     tVariantAnimation* sourceRectAnimation = nullptr;
     ImgDesc image;
+
+    bool closing = false;
 };
 
 ImageView::ImageView(QWidget *parent) :
@@ -33,6 +37,8 @@ ImageView::ImageView(QWidget *parent) :
         this->update();
     });
 
+    d->sidebar = new ImageViewSidebar(this);
+
     QShortcut* escShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(close()));
     escShortcut->setAutoRepeat(false);
 
@@ -47,6 +53,10 @@ ImageView::~ImageView()
     if (d->sourceRectAnimation != nullptr) d->sourceRectAnimation->deleteLater();
     delete ui;
     delete d;
+}
+
+QWidget* ImageView::sidebar() {
+    return d->sidebar;
 }
 
 void ImageView::setImageGrid(ImageGrid *grid) {
@@ -67,45 +77,38 @@ void ImageView::paintEvent(QPaintEvent *event) {
 }
 
 void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image) {
-    d->image = image;
-    if (image->isLoaded() == ImageDescriptor::NotLoaded) {
-        //Load the full image
-        image->load(false)->then([=] {
-            d->locationAnimation->setStartValue(location);
-            d->locationAnimation->setEndValue(calculateEndRect());
+    d->locationAnimation = new tVariantAnimation();
+    d->locationAnimation->setDuration(250);
+    d->locationAnimation->setEasingCurve(QEasingCurve::OutCubic);
 
-            d->sourceRectAnimation->setStartValue(sourceRect);
-            d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
+    d->sourceRectAnimation = new tVariantAnimation();
+    d->sourceRectAnimation->setDuration(250);
+    d->sourceRectAnimation->setEasingCurve(QEasingCurve::OutCubic);
 
-            this->update();
-        });
-    }
+    loadImage(image);
 
     d->opacityAnimation->start();
 
-    d->locationAnimation = new tVariantAnimation();
     d->locationAnimation->setStartValue(location);
     d->locationAnimation->setEndValue(calculateEndRect());
-    d->locationAnimation->setDuration(250);
-    d->locationAnimation->setEasingCurve(QEasingCurve::OutCubic);
     connect(d->locationAnimation, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
         this->update();
     });
     d->locationAnimation->start();
 
-    d->sourceRectAnimation = new tVariantAnimation();
     d->sourceRectAnimation->setStartValue(sourceRect);
     d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
-    d->sourceRectAnimation->setDuration(250);
-    d->sourceRectAnimation->setEasingCurve(QEasingCurve::OutCubic);
     connect(d->sourceRectAnimation, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
         this->update();
     });
     d->sourceRectAnimation->start();
+
+    d->sidebar->show();
 }
 
 void ImageView::close() {
     emit closed();
+    d->closing = true;
 
     QRectF endRect = calculateEndRect();
     endRect.moveTop(endRect.top() + this->height() / 8);
@@ -126,10 +129,12 @@ void ImageView::close() {
     connect(opacityAnimation, &tPropertyAnimation::finished, opacityAnimation, &tPropertyAnimation::deleteLater);
     connect(opacityAnimation, &tPropertyAnimation::finished, this, &ImageView::deleteLater);
     opacityAnimation->start();
+
+    d->sidebar->hide();
 }
 
 void ImageView::resizeEvent(QResizeEvent *event) {
-    if (!d->image.isNull()) {
+    if (!d->image.isNull() && !d->closing) {
         d->locationAnimation->setEndValue(calculateEndRect());
     }
 }
@@ -183,4 +188,24 @@ void ImageView::loadImage(ImgDesc image) {
         ImgDesc prevImage = d->grid->prevImage(image);
         if (!nextImage.isNull() && prevImage->isLoaded() == ImageDescriptor::NotLoaded) prevImage->load(false);
     }
+
+    //Update sidebar metadata
+    QLocale locale;
+    QList<ImageViewSidebarSection> sections;
+    sections.append({tr("File"), {
+                         {tr("Filename"), image->metadata().value(ImageDescriptor::FileName).toString()},
+                         {tr("Dimensions"), ([=] {
+                              QSize size = image->metadata().value(ImageDescriptor::Dimensions).toSize();
+                              return QString("%1×%2").arg(size.width()).arg(size.height());
+                          })()},
+                     }});
+    sections.append({tr("Image"), {
+                         {tr("Flash"), image->metadata().value(ImageDescriptor::Flash).toBool() ? tr("Yes") : tr("No")},
+                         {tr("ISO"), locale.toString(image->metadata().value(ImageDescriptor::ISO).toInt())}
+                     }});
+    sections.append({tr("Camera"), {
+                         {tr("Camera Make"), image->metadata().value(ImageDescriptor::CameraMake).toString()},
+                         {tr("Camera Model"), image->metadata().value(ImageDescriptor::CameraModel).toString()}
+                     }});
+    d->sidebar->setSections(sections);
 }

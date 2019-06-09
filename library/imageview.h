@@ -19,6 +19,7 @@ class ImageView : public QWidget
         ~ImageView();
 
         void setImageGrid(ImageGrid* grid);
+        QWidget* sidebar();
 
     public slots:
         void animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image);
