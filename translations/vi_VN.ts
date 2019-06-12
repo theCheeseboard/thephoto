@@ -337,17 +337,17 @@
     <message>
         <location filename="../event/eventmodeshow.ui" line="318"/>
         <source>To connect, go to</source>
-        <translation type="unfinished"></translation>
+        <translation>Để kết nối, truy cập</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="344"/>
         <source>and use</source>
-        <translation type="unfinished"></translation>
+        <translation>và sử dụng</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="363"/>
         <source>when asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>khi hỏi.</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.cpp" line="208"/>
@@ -391,57 +391,57 @@
     <message>
         <location filename="../library/imageview.cpp" line="212"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Tệp</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="213"/>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Tên tệp</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="214"/>
         <source>Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Kích thước</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="219"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Ảnh</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="221"/>
         <source>ISO</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="223"/>
         <source>Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Máy ảnh</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="224"/>
         <source>Camera Make</source>
-        <translation type="unfinished"></translation>
+        <translation>Nhà xuất máy ảnh</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="225"/>
         <source>Camera Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Mẫu máy ảnh</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="220"/>
         <source>Flash</source>
-        <translation type="unfinished"></translation>
+        <translation>Đèn flash</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="220"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Có</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="220"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Không</translation>
     </message>
 </context>
 <context>
@@ -449,63 +449,63 @@
     <message>
         <location filename="../librarywindow.ui" line="14"/>
         <source>thePhoto</source>
-        <translation type="unfinished">thePhoto</translation>
+        <translation>thePhoto</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="122"/>
         <source>Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Thư viện</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="182"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Ảnh</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="344"/>
         <source>Let&apos;s get started!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hãy bắt đầu!</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="354"/>
         <source>Where should we search for images?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chúng tôi sẽ tìm ảnh ở đâu?</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="447"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Tệp</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="463"/>
         <source>Exit</source>
-        <translation type="unfinished">Thoát</translation>
+        <translation>Thoát</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="466"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished">Ctrl+Q</translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="476"/>
         <source>Event Mode</source>
-        <translation type="unfinished">Chế độ biến cố</translation>
+        <translation>Chế độ biến cố</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="379"/>
         <location filename="../librarywindow.ui" line="471"/>
         <source>Manage Library</source>
-        <translation type="unfinished">Quản lý thư viện ảnh</translation>
+        <translation>Quản lý thư viện ảnh</translation>
     </message>
     <message>
         <location filename="../librarywindow.cpp" line="64"/>
         <source>Delete Image?</source>
-        <translation type="unfinished"></translation>
+        <translation>Xóa ảnh?</translation>
     </message>
     <message>
         <location filename="../librarywindow.cpp" line="65"/>
         <source>Delete</source>
-        <translation type="unfinished">Xóa</translation>
+        <translation>Xóa</translation>
     </message>
 </context>
 <context>
