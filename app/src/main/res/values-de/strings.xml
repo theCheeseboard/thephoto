@@ -8,4 +8,64 @@
 
     <string name="title_activity_camera">Kamera</string>
     <string name="keep_copy_prompt">Behalte eine Kopie von den Bildern auf diesem Gerät</string>
+<string name="invalid_code_title">Das hat nicht geklappt.</string>
+    <string name="invalid_code_message">Es scheint so, als wäre es nicht möglich, dass wir uns mit dem Computer verbinden können. Überprüfen Sie, ob der Sitzungscode korrekt eingegeben wurde und Sie mit dem richtigen Drahtlosnetzwerk verbunden sind.</string>
+    <string name="ENTER_NAME_TO_IDENTIFY">Geben Sie einen Namen ein, um sich zu identifizieren</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="STRING_SETTINGS">Einstellungen</string>
+
+    <string name="ERROR_DISCONNECTED_TITLE">Die Verbindung zum Server wurde getrennt</string>
+    <string name="ERROR_DISCONNECTED">Sie wurden unerwartet vom Server getrennt. Verbinden Sie sich mit dem Server erneut, um fortzufahren.</string>
+
+    <string name="connected_notification_title">Verbindung mit thePhoto aufgebaut</string>
+    <string name="connected_notification_text">Sie sind momentan mit thePhoto verbunden.</string>
+    <string name="connected_notification_disconnect_button">Trennen</string>
+    <string name="connected_notification_channel_name">Verbunden</string>
+    <string name="connected_notification_channel_description">Benachrichtigungen, die angezeigt werden, wenn sie mit thePhoto verbunden sind</string>
+
+    <string name="disconnected_notification_title">Von thePhoto getrennt</string>
+    <string name="disconnected_dialog_text">Sie wurden unerwartet von thePhoto getrennt, und es scheint so, als könnten wir uns nicht erneut mit dem Programm verbinden.
+\n
+\nGehen Sie sicher, dass Sie nach wie vor mit dem Drahtlosnetzwerk verbunden sind, und, dass der Server immer noch aktiv ist.
+\n
+\nSie können versuchen, sich erneut zu verbinden, indem Sie den thePhoto-Eventmodus erneut öffnen und den Code eingeben.</string>
+    <string name="disconnected_notification_text">Während Sie weg waren, hat sich Ihr Gerät von thePhoto getrennt. Um weiter fotografieren zu können, müssen sie sich mit thePhoto erneut verbinden.</string>
+
+    <string name="pref_header_general">Allgemein</string>
+    <string name="pref_title_display_name">Bildschirmname</string>
+
+    <string name="flash_value_automatic">Automatisch</string>
+    <string name="flash_value_on">Ein</string>
+    <string name="flash_value_off">Aus</string>
+    <string name="flash_dialog_title">Blitz</string>
+    <string name="timer_dialog_title">Timer</string>
+    <string name="timer_value_0sec">Aus</string>
+    <string name="timer_value_3sec">3 Sekunden</string>
+    <string name="timer_value_10sec">10 Sekunden</string>
+
+    <string name="pref_sound_type_entries_1">Ping</string>
+    <string name="pref_sound_type_entries_2">turtleTimer</string>
+
+    <string name="onboarding_welcome">Willkommen zu thePhoto!</string>
+    <string name="onboarding_welcome_description">Lassen wir uns Fotos machen, um sie dann am großen Bildschirm zu sehen!</string>
+    <string name="onboarding_skip">Überspringen</string>
+    <string name="onboarding_finish">Fertigstellen</string>
+    <string name="onboarding_identify_title">Wer sind Sie\?</string>
+    <string name="onboarding_identify_why">Dies wird verwendet, sodass Sie sich am großen Bildschirm identifizieren können. Sie können das jederzeit in den Einstellungen ändern.</string>
+    <string name="onboarding_identify_display_name">Bildschirmname</string>
+    <string name="open_wifi_settings">Wi-Fi-Einstellungen öffnen</string>
+    <string name="menu_options_help">Hilfe</string>
+    <string name="main_more_button">Mehr</string>
+    <string name="help_title">Worin können wir Ihnen behilflich sein\?</string>
+    <string name="help_activity_title">Hilfe</string>
+
+    <string name="help_getting_started">Erste Schritte</string>
+    <string name="help_getting_started_step">Schritt</string>
+    <string name="help_getting_started_step_1_title">Auf ihrem Computer holen Sie sich die thePhoto Event Client App.</string>
+    <string name="help_getting_started_step_1_text1">Besuchen Sie diesen Link auf Ihrem Computer:</string>
+    <string name="help_getting_started_step_2_title">Eventmodus starten</string>
+    <string name="help_getting_started_step_2_text1">Nachdem Sie thePhoto geöffnet haben, gehen Sie zu Datei &gt; Eventmodus</string>
+    <string name="help_getting_started_step_3_title">Den Code besorgen</string>
+    <string name="help_getting_started_step_3_text1">Geben Sie den Code aus der unteren rechten Ecke des zweiten Bildschirms in thePhoto ein.</string>
+    <string name="disconnected_reconnecting">Es wird gerade versucht, eine Verbindung wieder aufzubauen. Bitte warten...</string>
 </resources>
