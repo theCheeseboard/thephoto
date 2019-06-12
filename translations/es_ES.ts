@@ -384,11 +384,6 @@
 <context>
     <name>ImageView</name>
     <message>
-        <location filename="../library/imageview.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../library/imageview.cpp" line="212"/>
         <source>File</source>
         <translation type="unfinished"></translation>
