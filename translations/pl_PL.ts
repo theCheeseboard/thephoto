@@ -384,57 +384,67 @@
 <context>
     <name>ImageView</name>
     <message>
-        <location filename="../library/imageview.cpp" line="238"/>
+        <location filename="../library/imageview.cpp" line="239"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="239"/>
+        <location filename="../library/imageview.cpp" line="240"/>
         <source>Filename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="240"/>
+        <location filename="../library/imageview.cpp" line="241"/>
         <source>Dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="245"/>
+        <location filename="../library/imageview.cpp" line="246"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="247"/>
+        <location filename="../library/imageview.cpp" line="248"/>
         <source>ISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="249"/>
+        <location filename="../library/imageview.cpp" line="250"/>
         <source>Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="250"/>
+        <location filename="../library/imageview.cpp" line="251"/>
         <source>Camera Make</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="251"/>
+        <location filename="../library/imageview.cpp" line="252"/>
         <source>Camera Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="246"/>
+        <location filename="../library/imageview.cpp" line="271"/>
+        <source>Starting Slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="272"/>
+        <source>Hit ESC to exit slideshow mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="247"/>
         <source>Flash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="246"/>
+        <location filename="../library/imageview.cpp" line="247"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="246"/>
+        <location filename="../library/imageview.cpp" line="247"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>

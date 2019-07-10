@@ -5,6 +5,7 @@
 #include <tpropertyanimation.h>
 #include <QGraphicsOpacityEffect>
 #include <QShortcut>
+#include <ttoast.h>
 #include "imagegrid.h"
 #include "imageviewsidebar.h"
 
@@ -260,17 +261,23 @@ void ImageView::deleteCurrentImage() {
 void ImageView::beginSlideshow() {
     if (d->inSlideshow) return;
 
-    //Hide the sidebar
+    this->setCursor(QCursor(Qt::BlankCursor));
     d->sidebar->hide();
     d->slideshowTimer->start();
     d->inSlideshow = true;
     emit slideshowModeChanged(true);
+
+    tToast* toast = new tToast();
+    toast->setTitle(tr("Starting Slideshow"));
+    toast->setText(tr("Hit ESC to exit slideshow mode."));
+    connect(toast, &tToast::dismissed, toast, &tToast::deleteLater);
+    toast->show(this->window());
 }
 
 void ImageView::endSlideshow() {
     if (!d->inSlideshow) return;
 
-    //Show the sidebar again
+    this->setCursor(QCursor(Qt::ArrowCursor));
     d->sidebar->show();
     d->slideshowTimer->stop();
     d->inSlideshow = false;
