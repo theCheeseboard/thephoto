@@ -29,8 +29,13 @@ class ImageView : public QWidget
 
         void deleteCurrentImage();
 
+        void beginSlideshow();
+        void endSlideshow();
+        bool inSlideshow();
+
     signals:
         void closed();
+        void slideshowModeChanged(bool inSlideshow);
 
     private:
         Ui::ImageView *ui;

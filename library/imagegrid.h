@@ -14,6 +14,8 @@ class ImageGrid : public QWidget
 
         ImgDesc nextImage(ImgDesc image);
         ImgDesc prevImage(ImgDesc image);
+        ImgDesc firstImage();
+        ImgDesc lastImage();
 
     signals:
         void imageClicked(QRectF location, QRectF sourceRect, ImgDesc image);

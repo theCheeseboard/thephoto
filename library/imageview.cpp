@@ -18,8 +18,11 @@ struct ImageViewPrivate {
     ImgDesc image;
 
     bool closing = false;
+    bool inSlideshow = false;
 
     QMetaObject::Connection imageDeleteConnection;
+
+    QTimer* slideshowTimer;
 };
 
 ImageView::ImageView(QWidget *parent) :
@@ -46,6 +49,10 @@ ImageView::ImageView(QWidget *parent) :
 
     QShortcut* nextShortcut = new QShortcut(QKeySequence(Qt::Key_Right), this, SLOT(nextImage()));
     QShortcut* prevShortcut = new QShortcut(QKeySequence(Qt::Key_Left), this, SLOT(previousImage()));
+
+    d->slideshowTimer = new QTimer();
+    d->slideshowTimer->setInterval(5000);
+    connect(d->slideshowTimer, &QTimer::timeout, this, &ImageView::nextImage);
 }
 
 ImageView::~ImageView()
@@ -109,30 +116,35 @@ void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image
 }
 
 void ImageView::close() {
-    emit closed();
-    d->closing = true;
+    if (d->inSlideshow) {
+        //Exit slideshow
+        this->endSlideshow();
+    } else {
+        emit closed();
+        d->closing = true;
 
-    QRectF endRect = calculateEndRect();
-    endRect.moveTop(endRect.top() + this->height() / 8);
-    d->locationAnimation->setStartValue(d->locationAnimation->currentValue());
-    d->locationAnimation->setEndValue(endRect);
-    d->locationAnimation->setEasingCurve(QEasingCurve::InCubic);
-    d->locationAnimation->start();
+        QRectF endRect = calculateEndRect();
+        endRect.moveTop(endRect.top() + this->height() / 8);
+        d->locationAnimation->setStartValue(d->locationAnimation->currentValue());
+        d->locationAnimation->setEndValue(endRect);
+        d->locationAnimation->setEasingCurve(QEasingCurve::InCubic);
+        d->locationAnimation->start();
 
-    QGraphicsOpacityEffect* effect = new QGraphicsOpacityEffect();
-    effect->setOpacity(1);
-    this->setGraphicsEffect(effect);
+        QGraphicsOpacityEffect* effect = new QGraphicsOpacityEffect();
+        effect->setOpacity(1);
+        this->setGraphicsEffect(effect);
 
-    tPropertyAnimation* opacityAnimation = new tPropertyAnimation(effect, "opacity");
-    opacityAnimation->setStartValue(1.0);
-    opacityAnimation->setEndValue(0.0);
-    opacityAnimation->setDuration(250);
-    opacityAnimation->setEasingCurve(QEasingCurve::InCubic);
-    connect(opacityAnimation, &tPropertyAnimation::finished, opacityAnimation, &tPropertyAnimation::deleteLater);
-    connect(opacityAnimation, &tPropertyAnimation::finished, this, &ImageView::deleteLater);
-    opacityAnimation->start();
+        tPropertyAnimation* opacityAnimation = new tPropertyAnimation(effect, "opacity");
+        opacityAnimation->setStartValue(1.0);
+        opacityAnimation->setEndValue(0.0);
+        opacityAnimation->setDuration(250);
+        opacityAnimation->setEasingCurve(QEasingCurve::InCubic);
+        connect(opacityAnimation, &tPropertyAnimation::finished, opacityAnimation, &tPropertyAnimation::deleteLater);
+        connect(opacityAnimation, &tPropertyAnimation::finished, this, &ImageView::deleteLater);
+        opacityAnimation->start();
 
-    d->sidebar->hide();
+        d->sidebar->hide();
+    }
 }
 
 void ImageView::resizeEvent(QResizeEvent *event) {
@@ -155,8 +167,15 @@ QRectF ImageView::calculateEndRect() {
 
 bool ImageView::nextImage() {
     if (d->grid == nullptr) return false;
+
+    if (d->slideshowTimer->isActive()) {
+        d->slideshowTimer->stop();
+        d->slideshowTimer->start();
+    }
+
     ImgDesc newImage = d->grid->nextImage(d->image);
-    if (newImage != nullptr) {
+    if (newImage.isNull()) newImage = d->grid->firstImage();
+    if (!newImage.isNull()) {
         loadImage(newImage);
         return true;
     }
@@ -165,8 +184,15 @@ bool ImageView::nextImage() {
 
 bool ImageView::previousImage() {
     if (d->grid == nullptr) return false;
+
+    if (d->slideshowTimer->isActive()) {
+        d->slideshowTimer->stop();
+        d->slideshowTimer->start();
+    }
+
     ImgDesc newImage = d->grid->prevImage(d->image);
-    if (newImage != nullptr) {
+    if (newImage.isNull()) newImage = d->grid->lastImage();
+    if (!newImage.isNull()) {
         loadImage(newImage);
         return true;
     }
@@ -229,4 +255,28 @@ void ImageView::loadImage(ImgDesc image) {
 
 void ImageView::deleteCurrentImage() {
     d->image->deleteFromDisk();
+}
+
+void ImageView::beginSlideshow() {
+    if (d->inSlideshow) return;
+
+    //Hide the sidebar
+    d->sidebar->hide();
+    d->slideshowTimer->start();
+    d->inSlideshow = true;
+    emit slideshowModeChanged(true);
+}
+
+void ImageView::endSlideshow() {
+    if (!d->inSlideshow) return;
+
+    //Show the sidebar again
+    d->sidebar->show();
+    d->slideshowTimer->stop();
+    d->inSlideshow = false;
+    emit slideshowModeChanged(false);
+}
+
+bool ImageView::inSlideshow() {
+    return d->inSlideshow;
 }

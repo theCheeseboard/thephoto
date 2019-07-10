@@ -187,6 +187,26 @@
             </widget>
            </item>
            <item>
+            <widget class="QToolButton" name="startSlideshowFromImage">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="icons.qrc">
+               <normaloff>:/icons/media-playback-start.svg</normaloff>:/icons/media-playback-start.svg</iconset>
+             </property>
+             <property name="autoRaise">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QToolButton" name="deleteButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -465,6 +485,9 @@
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
   </action>
   <action name="actionManage_Library">
    <property name="text">
@@ -479,13 +502,10 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ImageGrid</class>
+   <class>tCircularSpinner</class>
    <extends>QWidget</extends>
-   <header>library/imagegrid.h</header>
+   <header location="global">tcircularspinner.h</header>
    <container>1</container>
-   <slots>
-    <signal>imageClicked(QRectF,QRectF,ImgDesc)</signal>
-   </slots>
   </customwidget>
   <customwidget>
    <class>tStackedWidget</class>
@@ -494,15 +514,18 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>tCircularSpinner</class>
+   <class>ImageGrid</class>
    <extends>QWidget</extends>
-   <header location="global">tcircularspinner.h</header>
+   <header>library/imagegrid.h</header>
    <container>1</container>
+   <slots>
+    <signal>imageClicked(QRectF,QRectF,ImgDesc)</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="icons.qrc"/>
   <include location="resources.qrc"/>
+  <include location="icons.qrc"/>
  </resources>
  <connections/>
 </ui>

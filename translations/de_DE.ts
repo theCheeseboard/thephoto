@@ -384,57 +384,57 @@
 <context>
     <name>ImageView</name>
     <message>
-        <location filename="../library/imageview.cpp" line="212"/>
+        <location filename="../library/imageview.cpp" line="238"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="213"/>
+        <location filename="../library/imageview.cpp" line="239"/>
         <source>Filename</source>
         <translation>Dateiname</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="214"/>
+        <location filename="../library/imageview.cpp" line="240"/>
         <source>Dimensions</source>
         <translation>Maße</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="219"/>
+        <location filename="../library/imageview.cpp" line="245"/>
         <source>Image</source>
         <translation>Bild</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="221"/>
+        <location filename="../library/imageview.cpp" line="247"/>
         <source>ISO</source>
         <translation>ISO</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="223"/>
+        <location filename="../library/imageview.cpp" line="249"/>
         <source>Camera</source>
         <translation>Kamera</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="224"/>
+        <location filename="../library/imageview.cpp" line="250"/>
         <source>Camera Make</source>
         <translation>Kameramarke</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="225"/>
+        <location filename="../library/imageview.cpp" line="251"/>
         <source>Camera Model</source>
         <translation>Kameramodell</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="220"/>
+        <location filename="../library/imageview.cpp" line="246"/>
         <source>Flash</source>
         <translation>Blitz</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="220"/>
+        <location filename="../library/imageview.cpp" line="246"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="220"/>
+        <location filename="../library/imageview.cpp" line="246"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
@@ -457,48 +457,48 @@
         <translation>Bild</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="344"/>
+        <location filename="../librarywindow.ui" line="364"/>
         <source>Let&apos;s get started!</source>
         <translation>Sie können jetzt durchstarten!</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="354"/>
+        <location filename="../librarywindow.ui" line="374"/>
         <source>Where should we search for images?</source>
         <translation>Wo sollen wir nach Bildern suchen?</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="447"/>
+        <location filename="../librarywindow.ui" line="467"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="463"/>
+        <location filename="../librarywindow.ui" line="483"/>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="466"/>
+        <location filename="../librarywindow.ui" line="486"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="476"/>
+        <location filename="../librarywindow.ui" line="499"/>
         <source>Event Mode</source>
         <translation>Eventmodus</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="379"/>
-        <location filename="../librarywindow.ui" line="471"/>
+        <location filename="../librarywindow.ui" line="399"/>
+        <location filename="../librarywindow.ui" line="494"/>
         <source>Manage Library</source>
         <translation>Bibliothek verwalten</translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="64"/>
+        <location filename="../librarywindow.cpp" line="65"/>
         <source>Delete Image?</source>
         <translation>Wollen Sie dieses Bild löschen?</translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="65"/>
+        <location filename="../librarywindow.cpp" line="66"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>

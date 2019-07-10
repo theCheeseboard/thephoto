@@ -18,6 +18,7 @@ struct LibraryWindowPrivate {
     QPointer<ImageView> overlayView;
 
     QStringList imageLibrary;
+    Qt::WindowStates stateBeforeFullScreen;
 };
 
 LibraryWindow::LibraryWindow(QWidget *parent) :
@@ -208,6 +209,17 @@ void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QR
     connect(d->overlayView.data(), &ImageView::closed, this, [=] {
         ui->headerBar->setCurrentWidget(ui->mainHeader);
     });
+    connect(d->overlayView.data(), &ImageView::slideshowModeChanged, this, [=](bool inSlideshow) {
+        this->setSlideshowMode(inSlideshow);
+
+        //Change the window state
+        if (inSlideshow) {
+            d->stateBeforeFullScreen = this->windowState();
+            this->showFullScreen();
+        } else {
+            this->setWindowState(d->stateBeforeFullScreen);
+        }
+    });
 
     QTimer::singleShot(0, [=] {
         d->overlayView->animateImageIn(location, sourceRect, image);
@@ -230,4 +242,37 @@ bool LibraryWindow::eventFilter(QObject *watched, QEvent *event) {
     }
 #endif
     return false;
+}
+
+void LibraryWindow::on_startSlideshowFromImage_clicked()
+{
+    d->overlayView->beginSlideshow();
+}
+
+void LibraryWindow::setSlideshowMode(bool slideshow) {
+    tVariantAnimation* anim = new tVariantAnimation();
+    anim->setStartValue(ui->headerWidget->height());
+    if (slideshow) {
+        anim->setEndValue(0);
+    } else {
+        anim->setEndValue(ui->headerWidget->sizeHint().height());
+    }
+    anim->setDuration(500);
+    anim->setEasingCurve(QEasingCurve::OutCubic);
+    connect(anim, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
+        ui->headerWidget->setFixedHeight(value.toInt());
+    });
+    connect(anim, &tVariantAnimation::finished, anim, &tVariantAnimation::deleteLater);
+    anim->start();
+}
+
+void LibraryWindow::changeEvent(QEvent *event) {
+    if (event->type() == QEvent::WindowStateChange) {
+        if ((this->windowState() & Qt::WindowFullScreen) == 0 && !d->overlayView.isNull() && d->overlayView->inSlideshow()) {
+            //We're leaving full screen mode so end the slideshow
+            //Don't re-enter full screen after we end the slideshow
+            d->stateBeforeFullScreen &= ~Qt::WindowFullScreen;
+            d->overlayView->endSlideshow();
+        }
+    }
 }
