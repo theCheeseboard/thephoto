@@ -11,7 +11,7 @@
     <message>
         <location filename="../aboutdialog.ui" line="25"/>
         <source>thePhoto 2.0</source>
-        <translation type="unfinished">thePhoto 2.0</translation>
+        <translation>thePhoto 2.0</translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="32"/>
@@ -41,7 +41,7 @@
     <message>
         <location filename="../aboutdialog.ui" line="104"/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>Oké</translation>
     </message>
 </context>
 <context>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="320"/>
         <source>Backstage</source>
-        <translation type="unfinished"></translation>
+        <translation>Achter de schermen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="718"/>
@@ -64,97 +64,98 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="605"/>
         <source>Use Mission Control to adjust monitors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik Missiebeheer om monitors bij te stellen.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="292"/>
         <source>thePhoto Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>thePhoto Evenementmodus</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="388"/>
         <source>APP</source>
-        <translation type="unfinished"></translation>
+        <translation>APP</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="395"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
-        <translation type="unfinished"></translation>
+        <translation>Haal om met thePhoto Evenementmodus te verbinden de app voor Android™ op in de Google Play™ Store.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="402"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kunt naar deze link gaan op je telefoon om er te komen:
+https://thephoto.vicr123.com/download</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="444"/>
         <source>Session Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessienaam</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="451"/>
         <source>Store users in subfolders</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers in submappen opslaan</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="612"/>
         <source>Open Mission Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Missiebeheer Openen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="635"/>
         <source>There&apos;s only one display on this computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is maar een scherm op deze computer.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="664"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als Achter de schermen op het verkeerde scherm wordt weergeegeven, kun je de schermen omwisselen.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="671"/>
         <source>Swap Displays</source>
-        <translation type="unfinished"></translation>
+        <translation>Schermen Omwisselen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="772"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef Wi-Fi-details weer op het scherm naast de code zodat gasten met het netwerk kunnen verbinden</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="837"/>
         <source>Show Author</source>
-        <translation type="unfinished"></translation>
+        <translation>Auteur Weergeven</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="847"/>
         <source>Show Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Klok Weergeven</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="857"/>
         <source>Show Audio Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio-informatie Weergeven</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="901"/>
         <source>Here are all the users currently connected to your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit zijn alle gebruikers die op dit moment met je computer verbonden zijn.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="1000"/>
         <source>Session Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sessie-instellingen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="1020"/>
         <source>Connected Users</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbonden Gebruikers</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="1037"/>
         <source>Exchanged Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgewisselde Afbeeldingen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="725"/>
@@ -174,152 +175,152 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="464"/>
         <source>SESSION</source>
-        <translation type="unfinished"></translation>
+        <translation>SESSIE</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="471"/>
         <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>We zullen alle ontvangen afbeeldingen in een map met deze naam zetten. Als hier niets staat, zullen we de afbeeldingen plaatsen in een map genaamd &quot;Niet gecategoriseerd&quot;</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="516"/>
         <source>DISPLAYS</source>
-        <translation type="unfinished"></translation>
+        <translation>SCHERMEN</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="758"/>
         <source>WI-FI</source>
-        <translation type="unfinished"></translation>
+        <translation>WI-FI</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="820"/>
         <source>INFORMATION DISPLAY</source>
-        <translation type="unfinished"></translation>
+        <translation>INFORMATIESCHERM</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="827"/>
         <source>Show Information Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatiescherm Weergeven</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="1067"/>
         <source>Back to Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Terug naar Evenementmodus</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="1078"/>
         <source>End Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Evenementmodus Beëindigen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="101"/>
         <source>End Event Mode?</source>
-        <translation type="unfinished"></translation>
+        <translation>Evenementmodus Beëindigen?</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="101"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindingen met alle verbonden apparaten sluiten en Evenementmodus beëindigen?</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="154"/>
         <source>Unidentified User</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-geïdentificeerde Gebruiker</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="164"/>
         <source>Uncategorized</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-gecategoriseerd</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="207"/>
         <source>About this picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Over deze afbeelding</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="210"/>
         <source>By %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Door %1</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="215"/>
         <source>For this picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Voor deze afbeelding</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="216"/>
         <source>Enqueue for show</source>
-        <translation type="unfinished"></translation>
+        <translation>In wachtrij voor voorstelling zetten</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="219"/>
         <source>Delete</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="223"/>
         <source>Image Deleted</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding Verwijderd</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="224"/>
         <source>The image was deleted from your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>De afbeelding is verwijderd van je computer.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="247"/>
         <source>User Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiker Verbonden</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="252"/>
         <source>User Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiker Niet Meer Verbonden</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="298"/>
         <source>For %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voor %1</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="299"/>
         <source>Kick</source>
-        <translation type="unfinished"></translation>
+        <translation>Eruit schoppen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="300"/>
         <source>Kick?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eruit schoppen?</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="300"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 eruit schoppen? Hij kan opnieuw meedoen aan de sessie door de sessiecode opnieuw in te voeren.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="305"/>
         <source>Ban</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbannen</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="306"/>
         <source>Ban?</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbannen?</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="306"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 verbannen? Hij kan dan niet meer aan deze sessie meedoen.</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="323"/>
         <source>Welcome to Event Mode!</source>
-        <translation type="unfinished"></translation>
+        <translation>Welkom in Evenementmodus!</translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="323"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk om terug Achter de schermen te gaan, de TAB-toets in.</translation>
     </message>
 </context>
 <context>
@@ -327,32 +328,32 @@
     <message>
         <location filename="../event/eventmodeshow.ui" line="186"/>
         <source>Event Mode</source>
-        <translation type="unfinished">Evenementenmodus</translation>
+        <translation>Evenementmodus</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="275"/>
         <source>Preparing Event Mode...</source>
-        <translation type="unfinished"></translation>
+        <translation>Evenementmodus Aan Het Voorbereiden...</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="318"/>
         <source>To connect, go to</source>
-        <translation type="unfinished"></translation>
+        <translation>Ga om te verbinden naar</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="344"/>
         <source>and use</source>
-        <translation type="unfinished"></translation>
+        <translation>en gebruik</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="363"/>
         <source>when asked.</source>
-        <translation type="unfinished"></translation>
+        <translation>als dat gevraagd wordt.</translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.cpp" line="208"/>
         <source>by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>door %1</translation>
     </message>
 </context>
 <context>
@@ -361,7 +362,7 @@
         <location filename="../event/eventmodeuserindicator.cpp" line="67"/>
         <location filename="../event/eventmodeuserindicator.cpp" line="233"/>
         <source>Camera Timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Camera-timer</translation>
     </message>
 </context>
 <context>
@@ -369,7 +370,7 @@
     <message>
         <location filename="../event/eventserver.cpp" line="39"/>
         <source>Can&apos;t create X509 certificate. Event Mode cannot start.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen X509-certificaat maken. Evenementmodus kan niet starten.</translation>
     </message>
 </context>
 <context>
@@ -378,7 +379,7 @@
         <location filename="../event/eventsocket.cpp" line="53"/>
         <location filename="../event/eventsocket.h" line="42"/>
         <source>An unknown person</source>
-        <translation type="unfinished"></translation>
+        <translation>Een onbekende persoon</translation>
     </message>
 </context>
 <context>
@@ -386,67 +387,67 @@
     <message>
         <location filename="../library/imageview.cpp" line="239"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="240"/>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsnaam</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="241"/>
         <source>Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Afmetingen</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="246"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="248"/>
         <source>ISO</source>
-        <translation type="unfinished"></translation>
+        <translation>ISO-waarde</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="250"/>
         <source>Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Camera</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="251"/>
         <source>Camera Make</source>
-        <translation type="unfinished"></translation>
+        <translation>Cameramaak</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="252"/>
         <source>Camera Model</source>
-        <translation type="unfinished"></translation>
+        <translation>Cameramodel</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="271"/>
         <source>Starting Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow Aan Het Starten</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="272"/>
         <source>Hit ESC to exit slideshow mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk op ESC om slideshowmodus te verlaten.</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="247"/>
         <source>Flash</source>
-        <translation type="unfinished"></translation>
+        <translation>Flitsen</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="247"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="247"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
 </context>
 <context>
@@ -454,63 +455,63 @@
     <message>
         <location filename="../librarywindow.ui" line="14"/>
         <source>thePhoto</source>
-        <translation type="unfinished">thePhoto</translation>
+        <translation>thePhoto</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="122"/>
         <source>Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Bibliotheek</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="182"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="364"/>
         <source>Let&apos;s get started!</source>
-        <translation type="unfinished"></translation>
+        <translation>Laten we beginnen!</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="374"/>
         <source>Where should we search for images?</source>
-        <translation type="unfinished"></translation>
+        <translation>Waar moeten we zoeken naar afbeeldingen?</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="467"/>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="483"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="486"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="499"/>
         <source>Event Mode</source>
-        <translation type="unfinished">Evenementenmodus</translation>
+        <translation>Evenementmodus</translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="399"/>
         <location filename="../librarywindow.ui" line="494"/>
         <source>Manage Library</source>
-        <translation type="unfinished">Beheer bibliotheek</translation>
+        <translation>Bibliotheek Beheren</translation>
     </message>
     <message>
         <location filename="../librarywindow.cpp" line="65"/>
         <source>Delete Image?</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding Verwijderen?</translation>
     </message>
     <message>
         <location filename="../librarywindow.cpp" line="66"/>
         <source>Delete</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
@@ -533,22 +534,22 @@
     <message>
         <location filename="../mainwindow.ui" line="246"/>
         <source>Fi&amp;le</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bestand</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="257"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hulp</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
         <source>&amp;Event Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Evenementmodus</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="299"/>
         <source>&amp;Manage Library</source>
-        <translation type="unfinished"></translation>
+        <translation>B&amp;eheer Bibliotheek</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="311"/>
@@ -559,7 +560,7 @@
     <message>
         <location filename="../mainwindow.ui" line="314"/>
         <source>Ctrl+=</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+=</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="323"/>
@@ -570,7 +571,7 @@
     <message>
         <location filename="../mainwindow.ui" line="326"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+-</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
@@ -581,7 +582,7 @@
     <message>
         <location filename="../mainwindow.ui" line="338"/>
         <source>Ctrl+0</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+0</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
@@ -592,7 +593,7 @@
     <message>
         <location filename="../mainwindow.ui" line="359"/>
         <source>F5</source>
-        <translation type="unfinished"></translation>
+        <translation>F5</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="368"/>
@@ -603,55 +604,55 @@
     <message>
         <location filename="../mainwindow.ui" line="377"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Over</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="389"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="404"/>
         <source>File Bug</source>
-        <translation type="unfinished"></translation>
+        <translation>Een Bug Rapporteren</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="413"/>
         <source>Sources</source>
-        <translation type="unfinished"></translation>
+        <translation>Bronnen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
         <location filename="../mainwindow.cpp" line="69"/>
         <source>Start Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Slideshow Starten</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="89"/>
         <source>Reading Library...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bibliotheek Aan Het Uitlezen...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="90"/>
         <source>&lt;p&gt;We&apos;re building your library. Please wait while we do this.&lt;/p&gt;&lt;p&gt;You can shorten this process by narrowing your library.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;We zijn je bibliotheek aan het opbouwen. Wacht alsjeblieft terwijl we dit doen.&lt;/p&gt;&lt;p&gt;Je kunt dit proces verkorten door je bibliotheek te verkleinen.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="367"/>
         <location filename="../mainwindow.cpp" line="370"/>
         <source>Delete Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding Verwijderen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="368"/>
         <location filename="../mainwindow.cpp" line="371"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Je staat op het punt deze afbeelding voor altijd te verwijderen. Weet je het zeker?</translation>
     </message>
 </context>
 <context>
