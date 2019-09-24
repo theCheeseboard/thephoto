@@ -57,7 +57,7 @@ if [ $STAGE = "script" ]; then
     echo "[TRAVIS] Embedding the-libs"
     mkdir "$THEPHOTO_APPPATH/Contents/Libraries"
     cp /usr/local/lib/libthe-libs*.dylib "$THEPHOTO_APPPATH/Contents/Libraries/"
-    install_name_tool -change libthe-libs.1.dylib @executable_path/../Libraries/libthe-libs.1.dylib "$THEPHOTO_APPPATH/Contents/MacOS/thePhoto"
+    install_name_tool -change libthe-libs.1.dylib @executable_path/../Libraries/libthe-libs.1.dylib "$THEPHOTO_APPPATH/Contents/MacOS/thePhoto"*
     install_name_tool -change @rpath/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets "$THEPHOTO_APPPATH/Libraries/libthe-libs.1.dylib"
     install_name_tool -change @rpath/QtWidgets.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui "$THEPHOTO_APPPATH/Libraries/libthe-libs.1.dylib"
     install_name_tool -change @rpath/QtWidgets.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore "$THEPHOTO_APPPATH/Libraries/libthe-libs.1.dylib"
@@ -76,7 +76,7 @@ if [ $STAGE = "script" ]; then
     echo "[TRAVIS] Preparing Disk Image creator"
     npm install appdmg@0.5.2
     echo "[TRAVIS] Building Disk Image"
-    ./node_modules/appdmg/bin/appdmg.js ./node-appdmg-config.json ~/thePhoto-macOS.dmg
+    ./node_modules/appdmg/bin/appdmg.js $CONFIG_JSON ~/thePhoto-macOS.dmg
   fi
 elif [ $STAGE = "before_install" ]; then
   if [ $TRAVIS_OS_NAME = "linux" ]; then
