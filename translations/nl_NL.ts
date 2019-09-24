@@ -761,27 +761,12 @@
     <name>ManageLibrary</name>
     <message>
         <location filename="../managelibrary.ui" line="14"/>
-        <location filename="../managelibrary.ui" line="25"/>
+        <location filename="../managelibrary.ui" line="67"/>
         <source>Manage Library</source>
         <translation>Beheer bibliotheek</translation>
     </message>
     <message>
-        <location filename="../managelibrary.ui" line="41"/>
-        <source>Add Folder</source>
-        <translation>Voeg een map toe</translation>
-    </message>
-    <message>
-        <location filename="../managelibrary.ui" line="52"/>
-        <source>Remove Folder</source>
-        <translation>Verwijder map</translation>
-    </message>
-    <message>
-        <location filename="../managelibrary.ui" line="76"/>
-        <source>Cancel</source>
-        <translation>Annuleer</translation>
-    </message>
-    <message>
-        <location filename="../managelibrary.ui" line="87"/>
+        <location filename="../managelibrary.ui" line="167"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>

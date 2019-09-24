@@ -761,27 +761,12 @@
     <name>ManageLibrary</name>
     <message>
         <location filename="../managelibrary.ui" line="14"/>
-        <location filename="../managelibrary.ui" line="25"/>
+        <location filename="../managelibrary.ui" line="67"/>
         <source>Manage Library</source>
         <translation>Gerenciar Biblioteca</translation>
     </message>
     <message>
-        <location filename="../managelibrary.ui" line="41"/>
-        <source>Add Folder</source>
-        <translation>Adicionar Pasta</translation>
-    </message>
-    <message>
-        <location filename="../managelibrary.ui" line="52"/>
-        <source>Remove Folder</source>
-        <translation>Remover Pasta</translation>
-    </message>
-    <message>
-        <location filename="../managelibrary.ui" line="76"/>
-        <source>Cancel</source>
-        <translation>Cancelar</translation>
-    </message>
-    <message>
-        <location filename="../managelibrary.ui" line="87"/>
+        <location filename="../managelibrary.ui" line="167"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>

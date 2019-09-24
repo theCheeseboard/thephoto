@@ -9,6 +9,12 @@ ManageLibrary::ManageLibrary(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef Q_OS_MAC
+    ui->backButton->setVisible(false);
+#else
+    ui->windowControlsMac->setVisible(false);
+#endif
+
     QSettings settings;
     settings.beginGroup("Library");
     int itemsInLibrary = settings.beginReadArray("library");
@@ -29,7 +35,23 @@ ManageLibrary::~ManageLibrary()
     delete ui;
 }
 
-void ManageLibrary::on_pushButton_3_clicked()
+void ManageLibrary::on_backButton_clicked()
+{
+    QSettings settings;
+    settings.beginGroup("Library");
+    settings.beginWriteArray("library");
+    int i = 0;
+    for (QString item : libraryItems) {
+        settings.setArrayIndex(i);
+        settings.setValue("path", item);
+        i++;
+    }
+    settings.endArray();
+
+    this->accept();
+}
+
+void ManageLibrary::on_addButton_clicked()
 {
     QEventLoop loop;
     QFileDialog* folderPicker = new QFileDialog(this);
@@ -52,28 +74,7 @@ void ManageLibrary::on_pushButton_3_clicked()
     }
 }
 
-void ManageLibrary::on_pushButton_2_clicked()
-{
-    this->reject();
-}
-
-void ManageLibrary::on_pushButton_clicked()
-{
-    QSettings settings;
-    settings.beginGroup("Library");
-    settings.beginWriteArray("library");
-    int i = 0;
-    for (QString item : libraryItems) {
-        settings.setArrayIndex(i);
-        settings.setValue("path", item);
-        i++;
-    }
-    settings.endArray();
-
-    this->accept();
-}
-
-void ManageLibrary::on_pushButton_4_clicked()
+void ManageLibrary::on_removeButton_clicked()
 {
     for (QListWidgetItem* item : ui->listWidget->selectedItems()) {
         int index = ui->listWidget->row(item);

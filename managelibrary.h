@@ -18,15 +18,13 @@ public:
     ~ManageLibrary();
 
 private slots:
-    void on_pushButton_3_clicked();
+    void on_backButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_addButton_clicked();
 
-    void on_pushButton_clicked();
+    void on_removeButton_clicked();
 
-    void on_pushButton_4_clicked();
-
-private:
+    private:
     Ui::ManageLibrary *ui;
 
     QStringList libraryItems;
