@@ -64,6 +64,8 @@ class ImageViewSidebar : public QWidget
 
         void on_grayscaleButton_clicked();
 
+        void on_invertButton_clicked();
+
     private:
         Ui::ImageViewSidebar *ui;
 

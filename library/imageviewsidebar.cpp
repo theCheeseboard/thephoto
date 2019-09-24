@@ -252,3 +252,15 @@ void ImageViewSidebar::on_grayscaleButton_clicked()
     }
     d->parentView->editImage(d->editingImage);
 }
+
+void ImageViewSidebar::on_invertButton_clicked()
+{
+    for (int y = 0; y < d->editingImage.height(); y++) {
+        uchar* line = d->editingImage.scanLine(y);
+        for (int x = 0; x < d->editingImage.width(); x++) {
+            QRgb* px = reinterpret_cast<QRgb*>(line + x * 4);
+            *px = QColor(255 - qRed(*px), 255 - qGreen(*px), 255 - qBlue(*px)).rgb();
+        }
+    }
+    d->parentView->editImage(d->editingImage);
+}

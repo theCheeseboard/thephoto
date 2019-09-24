@@ -38,6 +38,9 @@ class ImageView : public QWidget
         void endSlideshow();
         bool inSlideshow();
 
+    private slots:
+        void escPressed();
+
     signals:
         void closed();
         void slideshowModeChanged(bool inSlideshow);

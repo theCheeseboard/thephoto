@@ -50,7 +50,7 @@ ImageView::ImageView(QWidget *parent) :
     connect(this, &ImageView::editStarted, d->sidebar, &ImageViewSidebar::startEdit);
     connect(this, &ImageView::editEnded, d->sidebar, &ImageViewSidebar::endEdit);
 
-    QShortcut* escShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(close()));
+    QShortcut* escShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(escPressed()));
     escShortcut->setAutoRepeat(false);
 
     QShortcut* nextShortcut = new QShortcut(QKeySequence(Qt::Key_Right), this, SLOT(nextImage()));
@@ -353,4 +353,13 @@ void ImageView::endSlideshow() {
 
 bool ImageView::inSlideshow() {
     return d->inSlideshow;
+}
+
+void ImageView::escPressed()
+{
+    if (d->editing) {
+        endEdit("");
+    } else {
+        close();
+    }
 }

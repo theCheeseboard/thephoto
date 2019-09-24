@@ -75,7 +75,7 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
     });
     saveMenu->addAction(tr("Save As New"), [=] {
 
-    });
+    })->setEnabled(false); //TODO: Implement this
     saveMenu->addSeparator();
     saveMenu->addAction(QIcon::fromTheme("document-save-as", QIcon(":/icons/document-save-as.svg")), tr("Save As..."), [=] {
         QFileDialog* fileDialog = new QFileDialog(this);

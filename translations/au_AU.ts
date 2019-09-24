@@ -491,6 +491,11 @@
         <source>Grayscale</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../library/imageviewsidebar.ui" line="427"/>
+        <source>Invert</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LibraryWindow</name>
