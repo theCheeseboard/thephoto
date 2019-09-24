@@ -324,6 +324,9 @@
               <iconset theme="document-save">
                <normaloff>.</normaloff>.</iconset>
              </property>
+             <property name="popupMode">
+              <enum>QToolButton::InstantPopup</enum>
+             </property>
              <property name="autoRaise">
               <bool>true</bool>
              </property>
@@ -602,15 +605,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>tCircularSpinner</class>
-   <extends>QWidget</extends>
-   <header location="global">tcircularspinner.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>tStackedWidget</class>
    <extends>QStackedWidget</extends>
    <header location="global">tstackedwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>tCircularSpinner</class>
+   <extends>QWidget</extends>
+   <header location="global">tcircularspinner.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

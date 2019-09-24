@@ -48,11 +48,21 @@ class ImageViewSidebar : public QWidget
 
         void setSections(QList<ImageViewSidebarSection> sections);
 
-        void startEdit(QSize imageSize);
+        void startEdit(QImage originalImage);
         void endEdit();
 
     private slots:
         void on_rotateClockwiseButton_clicked();
+
+        void on_rotateAnticlockwiseButton_clicked();
+
+        void on_flipHorizontally_clicked();
+
+        void on_flipVertically_clicked();
+
+        void on_straightenSlider_valueChanged(int value);
+
+        void on_grayscaleButton_clicked();
 
     private:
         Ui::ImageViewSidebar *ui;
@@ -62,6 +72,9 @@ class ImageViewSidebar : public QWidget
         void mousePressEvent(QMouseEvent *event);
         void mouseMoveEvent(QMouseEvent *event);
         void mouseReleaseEvent(QMouseEvent *event);
+
+        void animateNewTransform();
+        QTransform transformFromCurrentMatrix();
 };
 
 #endif // IMAGEVIEWSIDEBAR_H

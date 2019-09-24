@@ -34,8 +34,6 @@ class LibraryWindow : public QMainWindow
 
         void on_editButton_clicked();
 
-        void on_editSaveButton_clicked();
-
         void on_editBackButton_clicked();
 
         void on_startSlideshowFromImage_clicked();

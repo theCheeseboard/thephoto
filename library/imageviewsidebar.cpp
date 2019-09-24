@@ -24,13 +24,17 @@
 #include <QLabel>
 #include "imageview.h"
 #include <tvariantanimation.h>
+#include <QGenericMatrix>
 
 struct ImageViewSidebarPrivate {
     tVariantAnimation* preferredWidth;
     QWidget* infoContainer = nullptr;
     ImageView* parentView;
 
-    QSharedPointer<tVariantAnimation> matrices[9];
+    QImage editingImage;
+    QGenericMatrix<3,3,qreal> currentTransform;
+    int rightTransformAngle = 0;
+    int scaleX = 1, scaleY = 1;
 };
 
 ImageViewSidebar::ImageViewSidebar(ImageView *parent) :
@@ -133,31 +137,11 @@ void ImageViewSidebar::setSections(QList<ImageViewSidebarSection> sections) {
     mainLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Preferred, QSizePolicy::Expanding));
 }
 
-void ImageViewSidebar::startEdit(QSize imageSize)
+void ImageViewSidebar::startEdit(QImage originalImage)
 {
-    //Set up matrix
-    const qreal defaultValues[] = {1.0, 0.0, 0.0,
-                                   0.0, 1.0, 0.0,
-                                   0.0, 0.0, 1.0};
-
-    for (int i = 0; i < 9; i++) {
-        tVariantAnimation* anim = new tVariantAnimation();
-        anim->setStartValue(defaultValues[i]);
-        anim->setEndValue(defaultValues[i]);
-        anim->setDuration(500);
-        anim->setEasingCurve(QEasingCurve::OutCubic);
-        connect(anim, &tVariantAnimation::valueChanged, this, [=] {
-            auto m = [=](int index) {
-                return d->matrices[index]->currentValue().toReal();
-            };
-
-            QTransform transform(m(0), m(1), m(2), m(3), m(4), m(5), m(6), m(7), m(8));
-            QPolygon poly = transform.mapToPolygon(QRect(QPoint(0, 0), imageSize));
-            d->parentView->editTransform(transform, poly.boundingRect().size());
-
-        });
-        d->matrices[i] = QSharedPointer<tVariantAnimation>(anim);
-    }
+    d->currentTransform.setToIdentity();
+    d->editingImage = originalImage.copy();
+    ui->straightenSlider->setValue(0);
 
     ui->stackedWidget->setCurrentIndex(1);
 }
@@ -181,10 +165,90 @@ void ImageViewSidebar::mouseReleaseEvent(QMouseEvent *event) {
     event->accept();
 }
 
+void ImageViewSidebar::animateNewTransform()
+{
+    QTransform newTransform;
+    newTransform.reset();
+    newTransform.rotate(d->rightTransformAngle + ui->straightenSlider->value());
+    newTransform.scale(d->scaleX, d->scaleY);
+
+    for (int i = 0; i < 9; i++) {
+        //Ugly :(
+        qreal matrixData = 0;
+        switch (i) {
+            case 0: matrixData = newTransform.m11(); break;
+            case 1: matrixData = newTransform.m12(); break;
+            case 2: matrixData = newTransform.m13(); break;
+            case 3: matrixData = newTransform.m21(); break;
+            case 4: matrixData = newTransform.m22(); break;
+            case 5: matrixData = newTransform.m23(); break;
+            case 6: matrixData = newTransform.m31(); break;
+            case 7: matrixData = newTransform.m32(); break;
+            case 8: matrixData = newTransform.m33(); break;
+        }
+        if (!qFuzzyCompare(matrixData, d->currentTransform.data()[i])) {
+            qreal* valueToChange = &d->currentTransform.data()[i];
+            tVariantAnimation* anim = new tVariantAnimation();
+            anim->setStartValue(d->currentTransform.data()[i]);
+            anim->setEndValue(matrixData);
+            anim->setDuration(500);
+            anim->setEasingCurve(QEasingCurve::OutCubic);
+            connect(anim, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
+                *valueToChange = value.toReal();
+                d->parentView->editTransform(transformFromCurrentMatrix());
+            });
+            connect(anim, &tVariantAnimation::finished, anim, &tVariantAnimation::deleteLater);
+            anim->start();
+        }
+    }
+}
+
+QTransform ImageViewSidebar::transformFromCurrentMatrix()
+{
+    QTransform transform(d->currentTransform(0,0), d->currentTransform(0,1), d->currentTransform(0,2),
+                         d->currentTransform(1,0), d->currentTransform(1,1), d->currentTransform(1,2),
+                         d->currentTransform(2,0), d->currentTransform(2,1), d->currentTransform(2,2));
+    return transform;
+}
+
 void ImageViewSidebar::on_rotateClockwiseButton_clicked()
 {
-    d->matrices[3]->setEndValue(1.0);
-    d->matrices[3]->start();
-    d->matrices[1]->setEndValue(-1.0);
-    d->matrices[1]->start();
+    d->rightTransformAngle += 90;
+    this->animateNewTransform();
+}
+
+void ImageViewSidebar::on_rotateAnticlockwiseButton_clicked()
+{
+    d->rightTransformAngle -= 90;
+    this->animateNewTransform();
+}
+
+void ImageViewSidebar::on_flipHorizontally_clicked()
+{
+    d->scaleX *= -1;
+    this->animateNewTransform();
+}
+
+void ImageViewSidebar::on_flipVertically_clicked()
+{
+    d->scaleY *= -1;
+    this->animateNewTransform();
+}
+
+void ImageViewSidebar::on_straightenSlider_valueChanged(int value)
+{
+    this->animateNewTransform();
+}
+
+void ImageViewSidebar::on_grayscaleButton_clicked()
+{
+    for (int y = 0; y < d->editingImage.height(); y++) {
+        uchar* line = d->editingImage.scanLine(y);
+        for (int x = 0; x < d->editingImage.width(); x++) {
+            QRgb* px = reinterpret_cast<QRgb*>(line + x * 4);
+            int gray = qGray(*px);
+            *px = QColor(gray, gray, gray).rgb();
+        }
+    }
+    d->parentView->editImage(d->editingImage);
 }

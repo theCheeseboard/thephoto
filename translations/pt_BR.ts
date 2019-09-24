@@ -384,67 +384,67 @@
 <context>
     <name>ImageView</name>
     <message>
-        <location filename="../library/imageview.cpp" line="265"/>
+        <location filename="../library/imageview.cpp" line="272"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="266"/>
+        <location filename="../library/imageview.cpp" line="273"/>
         <source>Filename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="267"/>
+        <location filename="../library/imageview.cpp" line="274"/>
         <source>Dimensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="272"/>
+        <location filename="../library/imageview.cpp" line="279"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="274"/>
+        <location filename="../library/imageview.cpp" line="281"/>
         <source>ISO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="276"/>
+        <location filename="../library/imageview.cpp" line="283"/>
         <source>Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="277"/>
+        <location filename="../library/imageview.cpp" line="284"/>
         <source>Camera Make</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="278"/>
+        <location filename="../library/imageview.cpp" line="285"/>
         <source>Camera Model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="316"/>
+        <location filename="../library/imageview.cpp" line="338"/>
         <source>Starting Slideshow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="317"/>
+        <location filename="../library/imageview.cpp" line="339"/>
         <source>Hit ESC to exit slideshow mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="273"/>
+        <location filename="../library/imageview.cpp" line="280"/>
         <source>Flash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="273"/>
+        <location filename="../library/imageview.cpp" line="280"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageview.cpp" line="273"/>
+        <location filename="../library/imageview.cpp" line="280"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
@@ -452,28 +452,43 @@
 <context>
     <name>ImageViewSidebar</name>
     <message>
-        <location filename="../library/imageviewsidebar.ui" line="185"/>
+        <location filename="../library/imageviewsidebar.ui" line="188"/>
         <source>TRANSFORM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageviewsidebar.ui" line="200"/>
+        <location filename="../library/imageviewsidebar.ui" line="203"/>
         <source>Rotate Clockwise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageviewsidebar.ui" line="222"/>
+        <location filename="../library/imageviewsidebar.ui" line="226"/>
         <source>Rotate Withershins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageviewsidebar.ui" line="244"/>
+        <location filename="../library/imageviewsidebar.ui" line="249"/>
         <source>Flip Horizontally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../library/imageviewsidebar.ui" line="266"/>
+        <location filename="../library/imageviewsidebar.ui" line="272"/>
         <source>Flip Vertically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageviewsidebar.ui" line="325"/>
+        <source>STRAIGHTEN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageviewsidebar.ui" line="389"/>
+        <source>EFFECTS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageviewsidebar.ui" line="404"/>
+        <source>Grayscale</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -500,38 +515,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="464"/>
+        <location filename="../librarywindow.ui" line="467"/>
         <source>Let&apos;s get started!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="474"/>
+        <location filename="../librarywindow.ui" line="477"/>
         <source>Where should we search for images?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="567"/>
+        <location filename="../librarywindow.ui" line="570"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="583"/>
+        <location filename="../librarywindow.ui" line="586"/>
         <source>Exit</source>
         <translation type="unfinished">Sair</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="586"/>
+        <location filename="../librarywindow.ui" line="589"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished">Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="599"/>
+        <location filename="../librarywindow.ui" line="602"/>
         <source>Event Mode</source>
         <translation type="unfinished">Modo Evento</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="499"/>
-        <location filename="../librarywindow.ui" line="594"/>
+        <location filename="../librarywindow.ui" line="502"/>
+        <location filename="../librarywindow.ui" line="597"/>
         <source>Manage Library</source>
         <translation type="unfinished">Gerenciar Biblioteca</translation>
     </message>
@@ -544,6 +559,36 @@
         <location filename="../librarywindow.cpp" line="66"/>
         <source>Delete</source>
         <translation type="unfinished">Deletar</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="72"/>
+        <source>Save Edits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="73"/>
+        <source>Save In Place</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="76"/>
+        <source>Save As New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="80"/>
+        <source>Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="84"/>
+        <source>PNG image (*.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.cpp" line="85"/>
+        <source>JPEG image (*.jpg)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

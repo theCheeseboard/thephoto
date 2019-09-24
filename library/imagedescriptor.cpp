@@ -108,6 +108,13 @@ tPromise<void>* ImageDescriptor::load(bool compactData) {
     });
 }
 
+tPromise<void>* ImageDescriptor::reload(bool compactData)
+{
+    if (!compactData) d->loaded = ImageDescriptor::NotLoaded;
+    d->compactLoaded = ImageDescriptor::NotLoaded;
+    return load(compactData);
+}
+
 void ImageDescriptor::unload(bool compactData) {
     //Always unload the full data
     d->data = QPixmap();
@@ -133,6 +140,11 @@ ImageDescriptor::LoadStatus ImageDescriptor::isCompactLoaded() {
 QDateTime ImageDescriptor::dateTaken() {
     QFileInfo info(d->filename);
     return info.created();
+}
+
+QString ImageDescriptor::fileName()
+{
+    return d->filename;
 }
 
 QPixmap ImageDescriptor::image() {

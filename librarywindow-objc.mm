@@ -73,7 +73,7 @@ void LibraryWindow::setupMacOS() {
     [view.window setTitlebarAppearsTransparent:YES];
     [view.window setTitleVisibility:NSWindowTitleHidden];
     [view.window setStyleMask:styleMask];
-    [view.window setMovableByWindowBackground:YES];
+//    [view.window setMovableByWindowBackground:YES];
 
     QBoxLayout* windowControlsLayout = new QBoxLayout(QBoxLayout::LeftToRight);
     windowControlsLayout->setContentsMargins(6, 0, 0, 0);
@@ -98,9 +98,10 @@ void LibraryWindow::setupMacOS() {
 }
 
 void LibraryWindow::macOSDrag(QMouseEvent* event) {
-    CGEventRef cgEvent = CGEventCreateMouseEvent(nullptr, kCGEventLeftMouseDown, ui->headerBar->mapTo(this, event->pos()).toCGPoint(), kCGMouseButtonLeft);
+    CGEventRef cgEvent = CGEventCreateMouseEvent(nullptr, kCGEventLeftMouseDown, ui->headerBar->mapToGlobal(event->pos()).toCGPoint(), kCGMouseButtonLeft);
     NSEvent* nsEvent = [NSEvent eventWithCGEvent:cgEvent];
 
     NSView *view = reinterpret_cast<NSView *>(this->winId());
     [view.window performWindowDragWithEvent:nsEvent];
+    CFRelease(cgEvent);
 }

@@ -21,8 +21,8 @@ class ImageView : public QWidget
         void setImageGrid(ImageGrid* grid);
         QWidget* sidebar();
 
-        void editTransform(QTransform transform, QSize newSize);
-
+        void editImage(QImage image);
+        void editTransform(QTransform transform);
 
     public slots:
         void animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image);
@@ -32,7 +32,7 @@ class ImageView : public QWidget
 
         void deleteCurrentImage();
         void editCurrentImage();
-        void endEdit(bool save);
+        void endEdit(QString filename);
 
         void beginSlideshow();
         void endSlideshow();
@@ -42,7 +42,7 @@ class ImageView : public QWidget
         void closed();
         void slideshowModeChanged(bool inSlideshow);
 
-        void editStarted(QSize imageSize);
+        void editStarted(QImage originalImage);
         void editEnded();
 
     private:
@@ -54,7 +54,7 @@ class ImageView : public QWidget
         void resizeEvent(QResizeEvent* event);
         void mousePressEvent(QMouseEvent* event);
 
-        QRectF calculateEndRect();
+        QRectF calculateEndRect(QSize size);
         void loadImage(ImgDesc image);
 };
 

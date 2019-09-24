@@ -18,5 +18,6 @@
         <file>icons/tools-report-bug.svg</file>
         <file>icons/smartphone-dark.svg</file>
         <file>icons/go-previous.svg</file>
+        <file>icons/transparent.png</file>
     </qresource>
 </RCC>

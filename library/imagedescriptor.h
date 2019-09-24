@@ -36,11 +36,13 @@ class ImageDescriptor : public QObject
         ImageDescriptor::LoadStatus isCompactLoaded();
 
         tPromise<void>* load(bool compactData);
+        tPromise<void>* reload(bool compactData);
         void unload(bool compactData);
 
         QPixmap image();
         QPixmap compactImage();
         QDateTime dateTaken();
+        QString fileName();
 
         QMap<MetadataKeys, QVariant> metadata();
 

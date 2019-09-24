@@ -68,6 +68,31 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
     });
     ui->deleteButton->setMenu(deleteMenu);
 
+    QMenu* saveMenu = new QMenu();
+    saveMenu->addSection(tr("Save Edits"));
+    saveMenu->addAction(tr("Save In Place"), [=] {
+        d->overlayView->endEdit(":INPLACE");
+    });
+    saveMenu->addAction(tr("Save As New"), [=] {
+
+    });
+    saveMenu->addSeparator();
+    saveMenu->addAction(QIcon::fromTheme("document-save-as", QIcon(":/icons/document-save-as.svg")), tr("Save As..."), [=] {
+        QFileDialog* fileDialog = new QFileDialog(this);
+        fileDialog->setAcceptMode(QFileDialog::AcceptSave);
+        fileDialog->setNameFilters({
+            tr("PNG image (*.png)"),
+            tr("JPEG image (*.jpg)")
+        });
+        fileDialog->setWindowFlag(Qt::Sheet);
+        connect(fileDialog, &QFileDialog::fileSelected, this, [=](QString file) {
+            d->overlayView->endEdit(file);
+        });
+        connect(fileDialog, &QFileDialog::finished, fileDialog, &QFileDialog::deleteLater);
+        fileDialog->open();
+    });
+    ui->editSaveButton->setMenu(saveMenu);
+
     loadLibrary();
 }
 
@@ -255,14 +280,9 @@ void LibraryWindow::on_editButton_clicked()
     d->overlayView->editCurrentImage();
 }
 
-void LibraryWindow::on_editSaveButton_clicked()
-{
-    d->overlayView->endEdit(true);
-}
-
 void LibraryWindow::on_editBackButton_clicked()
 {
-    d->overlayView->endEdit(false);
+    d->overlayView->endEdit("");
 }
 
 void LibraryWindow::on_startSlideshowFromImage_clicked()

@@ -23,7 +23,7 @@ struct ImageViewPrivate {
     bool inSlideshow = false;
 
     QTransform editTransformationMatrix;
-    QImage editingImage;
+    QImage editingImage, editingImageWithTransform;
     QMetaObject::Connection imageDeleteConnection;
 
     QTimer* slideshowTimer;
@@ -74,15 +74,18 @@ QWidget* ImageView::sidebar() {
     return d->sidebar;
 }
 
-void ImageView::editTransform(QTransform transform, QSize newSize)
+void ImageView::editImage(QImage image)
+{
+    d->editingImage = image;
+    editTransform(d->editTransformationMatrix);
+}
+
+void ImageView::editTransform(QTransform transform)
 {
     d->editTransformationMatrix = transform;
-    d->editingImage = QImage(newSize, QImage::Format_ARGB32);
-    d->editingImage.fill(Qt::black);
-
-    QPainter painter(&d->editingImage);
-    painter.setTransform(transform);
-    painter.drawPixmap(QRect(QPoint(0, 0), newSize), d->image->image());
+    d->editingImageWithTransform = d->editingImage.transformed(transform);
+    d->locationAnimation->setEndValue(calculateEndRect(d->editingImageWithTransform.size()));
+    d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->editingImageWithTransform.size().width(), d->editingImageWithTransform.size().height()));
 }
 
 void ImageView::setImageGrid(ImageGrid *grid) {
@@ -98,13 +101,13 @@ void ImageView::paintEvent(QPaintEvent *event) {
     painter.setOpacity(1);
 
     if (!d->image.isNull()) {
-        QPixmap drawImage;
+        QImage drawImage;
         if (d->editing) {
-            drawImage = QPixmap::fromImage(d->editingImage);
+            drawImage = d->editingImageWithTransform;
         } else {
-            drawImage = d->image->image();
+            drawImage = d->image->image().toImage();
         }
-        painter.drawPixmap(d->locationAnimation->currentValue().toRectF(), drawImage, d->sourceRectAnimation->currentValue().toRectF());
+        painter.drawImage(d->locationAnimation->currentValue().toRectF(), drawImage, d->sourceRectAnimation->currentValue().toRectF());
     }
     painter.end();
     this->update();
@@ -124,7 +127,7 @@ void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image
     d->opacityAnimation->start();
 
     d->locationAnimation->setStartValue(location);
-    d->locationAnimation->setEndValue(calculateEndRect());
+    d->locationAnimation->setEndValue(calculateEndRect(image->image().size()));
     connect(d->locationAnimation, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
         this->update();
     });
@@ -148,7 +151,7 @@ void ImageView::close() {
         emit closed();
         d->closing = true;
 
-        QRectF endRect = calculateEndRect();
+        QRectF endRect = calculateEndRect(d->image->image().size());
         endRect.moveTop(endRect.top() + this->height() / 8);
         d->locationAnimation->setStartValue(d->locationAnimation->currentValue());
         d->locationAnimation->setEndValue(endRect);
@@ -174,7 +177,11 @@ void ImageView::close() {
 
 void ImageView::resizeEvent(QResizeEvent *event) {
     if (!d->image.isNull() && !d->closing) {
-        d->locationAnimation->setEndValue(calculateEndRect());
+        if (d->editing) {
+            d->locationAnimation->setEndValue(calculateEndRect(d->editingImageWithTransform.size()));
+        } else {
+            d->locationAnimation->setEndValue(calculateEndRect(d->image->image().size()));
+        }
     }
 }
 
@@ -182,8 +189,8 @@ void ImageView::mousePressEvent(QMouseEvent *event) {
 
 }
 
-QRectF ImageView::calculateEndRect() {
-    QSizeF endSize = d->image->image().size().scaled(this->width(), this->height(), Qt::KeepAspectRatio);
+QRectF ImageView::calculateEndRect(QSize size) {
+    QSizeF endSize = size.scaled(this->width(), this->height(), Qt::KeepAspectRatio);
     QRectF endRect;
     endRect.setSize(endSize);
     endRect.moveCenter(QPointF(this->width() / 2, this->height() / 2));
@@ -241,13 +248,13 @@ void ImageView::loadImage(ImgDesc image) {
     if (image->isLoaded() == ImageDescriptor::NotLoaded) {
         //Load the full image
         image->load(false)->then([=] {
-            d->locationAnimation->setEndValue(calculateEndRect());
+            d->locationAnimation->setEndValue(calculateEndRect(image->image().size()));
             d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
             this->update();
         });
     }
 
-    d->locationAnimation->setEndValue(calculateEndRect());
+    d->locationAnimation->setEndValue(calculateEndRect(image->image().size()));
     d->sourceRectAnimation->setEndValue(QRectF(0, 0, image->image().width(), image->image().height()));
     this->update();
 
@@ -290,15 +297,30 @@ void ImageView::editCurrentImage()
     if (d->editing) return;
     d->editTransformationMatrix.reset();
     d->editingImage = d->image->image().toImage();
+    d->editingImageWithTransform = d->editingImage;
 
-    emit editStarted(d->editingImage.size());
+    emit editStarted(d->editingImage);
     d->editing = true;
 }
 
-void ImageView::endEdit(bool save)
+void ImageView::endEdit(QString filename)
 {
     if (!d->editing) return;
+
+    if (!filename.isEmpty()) {
+        //Save the edits to the new filename
+        if (filename == ":INPLACE") {
+            filename = d->image->fileName();
+        }
+
+        d->editingImageWithTransform.save(filename);
+        d->image->reload(false);
+    }
+
     emit editEnded();
+
+    d->locationAnimation->setEndValue(calculateEndRect(d->image->image().size()));
+    d->sourceRectAnimation->setEndValue(QRectF(0, 0, d->image->image().size().width(), d->image->image().size().height()));
 
     d->editing = false;
 }
