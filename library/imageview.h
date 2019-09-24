@@ -21,6 +21,9 @@ class ImageView : public QWidget
         void setImageGrid(ImageGrid* grid);
         QWidget* sidebar();
 
+        void editTransform(QTransform transform, QSize newSize);
+
+
     public slots:
         void animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image);
         void close();
@@ -28,9 +31,14 @@ class ImageView : public QWidget
         bool previousImage();
 
         void deleteCurrentImage();
+        void editCurrentImage();
+        void endEdit(bool save);
 
     signals:
         void closed();
+
+        void editStarted(QSize imageSize);
+        void editEnded();
 
     private:
         Ui::ImageView *ui;

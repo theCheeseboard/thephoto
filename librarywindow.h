@@ -32,6 +32,12 @@ class LibraryWindow : public QMainWindow
 
         void on_backButton_clicked();
 
+        void on_editButton_clicked();
+
+        void on_editSaveButton_clicked();
+
+        void on_editBackButton_clicked();
+
     private:
         Ui::LibraryWindow *ui;
 

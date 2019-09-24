@@ -32,13 +32,14 @@ struct ImageViewSidebarSection {
     QList<QPair<QString, QString>> fields;
 };
 
+class ImageView;
 struct ImageViewSidebarPrivate;
 class ImageViewSidebar : public QWidget
 {
         Q_OBJECT
 
     public:
-        explicit ImageViewSidebar(QWidget *parent = nullptr);
+        explicit ImageViewSidebar(ImageView *parent = nullptr);
         ~ImageViewSidebar();
 
     public slots:
@@ -46,6 +47,12 @@ class ImageViewSidebar : public QWidget
         void hide();
 
         void setSections(QList<ImageViewSidebarSection> sections);
+
+        void startEdit(QSize imageSize);
+        void endEdit();
+
+    private slots:
+        void on_rotateClockwiseButton_clicked();
 
     private:
         Ui::ImageViewSidebar *ui;

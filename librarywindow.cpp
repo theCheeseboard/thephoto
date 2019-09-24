@@ -208,6 +208,12 @@ void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QR
     connect(d->overlayView.data(), &ImageView::closed, this, [=] {
         ui->headerBar->setCurrentWidget(ui->mainHeader);
     });
+    connect(d->overlayView.data(), &ImageView::editStarted, this, [=] {
+        ui->headerBar->setCurrentWidget(ui->editImageHeader);
+    });
+    connect(d->overlayView.data(), &ImageView::editEnded, this, [=] {
+        ui->headerBar->setCurrentWidget(ui->imageHeader);
+    });
 
     QTimer::singleShot(0, [=] {
         d->overlayView->animateImageIn(location, sourceRect, image);
@@ -230,4 +236,19 @@ bool LibraryWindow::eventFilter(QObject *watched, QEvent *event) {
     }
 #endif
     return false;
+}
+
+void LibraryWindow::on_editButton_clicked()
+{
+    d->overlayView->editCurrentImage();
+}
+
+void LibraryWindow::on_editSaveButton_clicked()
+{
+    d->overlayView->endEdit(true);
+}
+
+void LibraryWindow::on_editBackButton_clicked()
+{
+    d->overlayView->endEdit(false);
 }

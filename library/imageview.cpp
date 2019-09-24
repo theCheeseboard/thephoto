@@ -18,7 +18,10 @@ struct ImageViewPrivate {
     ImgDesc image;
 
     bool closing = false;
+    bool editing = false;
 
+    QTransform editTransformationMatrix;
+    QImage editingImage;
     QMetaObject::Connection imageDeleteConnection;
 };
 
@@ -40,6 +43,8 @@ ImageView::ImageView(QWidget *parent) :
     });
 
     d->sidebar = new ImageViewSidebar(this);
+    connect(this, &ImageView::editStarted, d->sidebar, &ImageViewSidebar::startEdit);
+    connect(this, &ImageView::editEnded, d->sidebar, &ImageViewSidebar::endEdit);
 
     QShortcut* escShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(close()));
     escShortcut->setAutoRepeat(false);
@@ -61,6 +66,17 @@ QWidget* ImageView::sidebar() {
     return d->sidebar;
 }
 
+void ImageView::editTransform(QTransform transform, QSize newSize)
+{
+    d->editTransformationMatrix = transform;
+    d->editingImage = QImage(newSize, QImage::Format_ARGB32);
+    d->editingImage.fill(Qt::black);
+
+    QPainter painter(&d->editingImage);
+    painter.setTransform(transform);
+    painter.drawPixmap(QRect(QPoint(0, 0), newSize), d->image->image());
+}
+
 void ImageView::setImageGrid(ImageGrid *grid) {
     d->grid = grid;
 }
@@ -74,8 +90,16 @@ void ImageView::paintEvent(QPaintEvent *event) {
     painter.setOpacity(1);
 
     if (!d->image.isNull()) {
-        painter.drawPixmap(d->locationAnimation->currentValue().toRectF(), d->image->image(), d->sourceRectAnimation->currentValue().toRectF());
+        QPixmap drawImage;
+        if (d->editing) {
+            drawImage = QPixmap::fromImage(d->editingImage);
+        } else {
+            drawImage = d->image->image();
+        }
+        painter.drawPixmap(d->locationAnimation->currentValue().toRectF(), drawImage, d->sourceRectAnimation->currentValue().toRectF());
     }
+    painter.end();
+    this->update();
 }
 
 void ImageView::animateImageIn(QRectF location, QRectF sourceRect, ImgDesc image) {
@@ -154,6 +178,7 @@ QRectF ImageView::calculateEndRect() {
 }
 
 bool ImageView::nextImage() {
+    if (d->editing) return false;
     if (d->grid == nullptr) return false;
     ImgDesc newImage = d->grid->nextImage(d->image);
     if (newImage != nullptr) {
@@ -164,6 +189,7 @@ bool ImageView::nextImage() {
 }
 
 bool ImageView::previousImage() {
+    if (d->editing) return false;
     if (d->grid == nullptr) return false;
     ImgDesc newImage = d->grid->prevImage(d->image);
     if (newImage != nullptr) {
@@ -229,4 +255,22 @@ void ImageView::loadImage(ImgDesc image) {
 
 void ImageView::deleteCurrentImage() {
     d->image->deleteFromDisk();
+}
+
+void ImageView::editCurrentImage()
+{
+    if (d->editing) return;
+    d->editTransformationMatrix.reset();
+    d->editingImage = d->image->image().toImage();
+
+    emit editStarted(d->editingImage.size());
+    d->editing = true;
+}
+
+void ImageView::endEdit(bool save)
+{
+    if (!d->editing) return;
+    emit editEnded();
+
+    d->editing = false;
 }
