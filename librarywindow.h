@@ -38,6 +38,8 @@ class LibraryWindow : public QMainWindow
 
         void on_editBackButton_clicked();
 
+        void on_startSlideshowFromImage_clicked();
+
     private:
         Ui::LibraryWindow *ui;
 
@@ -48,7 +50,10 @@ class LibraryWindow : public QMainWindow
 
         LibraryWindowPrivate* d;
         void resizeEvent(QResizeEvent* event);
+        void changeEvent(QEvent* event);
         bool eventFilter(QObject* watched, QEvent* event);
+
+        void setSlideshowMode(bool slideshow);
 };
 
 #endif // LIBRARYWINDOW_H

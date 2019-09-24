@@ -34,8 +34,13 @@ class ImageView : public QWidget
         void editCurrentImage();
         void endEdit(bool save);
 
+        void beginSlideshow();
+        void endSlideshow();
+        bool inSlideshow();
+
     signals:
         void closed();
+        void slideshowModeChanged(bool inSlideshow);
 
         void editStarted(QSize imageSize);
         void editEnded();
