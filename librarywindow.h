@@ -38,6 +38,12 @@ class LibraryWindow : public QMainWindow
 
         void on_startSlideshowFromImage_clicked();
 
+        void on_actionFile_Bug_triggered();
+
+        void on_actionSources_triggered();
+
+        void on_actionAbout_triggered();
+
     private:
         Ui::LibraryWindow *ui;
 

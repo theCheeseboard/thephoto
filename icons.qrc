@@ -19,5 +19,7 @@
         <file>icons/smartphone-dark.svg</file>
         <file>icons/go-previous.svg</file>
         <file>icons/transparent.png</file>
+        <file>icons/thephoto.svg</file>
+        <file>icons/aboutsplash.svg</file>
     </qresource>
 </RCC>

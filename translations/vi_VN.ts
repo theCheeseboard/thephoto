@@ -535,63 +535,83 @@
         <translation>Tệp</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="586"/>
+        <location filename="../librarywindow.ui" line="580"/>
+        <source>Help</source>
+        <translation type="unfinished">Trợ giúp</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="596"/>
         <source>Exit</source>
         <translation>Thoát</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="589"/>
+        <location filename="../librarywindow.ui" line="599"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="602"/>
+        <location filename="../librarywindow.ui" line="612"/>
         <source>Event Mode</source>
         <translation>Chế độ biến cố</translation>
     </message>
     <message>
+        <location filename="../librarywindow.ui" line="620"/>
+        <source>File Bug</source>
+        <translation type="unfinished">Báo cáo lỗi</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="628"/>
+        <source>Sources</source>
+        <translation type="unfinished">Mã nguồn</translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="636"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../librarywindow.ui" line="502"/>
-        <location filename="../librarywindow.ui" line="597"/>
+        <location filename="../librarywindow.ui" line="607"/>
         <source>Manage Library</source>
         <translation>Quản lý thư viện ảnh</translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="65"/>
+        <location filename="../librarywindow.cpp" line="67"/>
         <source>Delete Image?</source>
         <translation>Xóa ảnh?</translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="66"/>
+        <location filename="../librarywindow.cpp" line="68"/>
         <source>Delete</source>
         <translation>Xóa</translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="72"/>
+        <location filename="../librarywindow.cpp" line="74"/>
         <source>Save Edits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="73"/>
+        <location filename="../librarywindow.cpp" line="75"/>
         <source>Save In Place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="76"/>
+        <location filename="../librarywindow.cpp" line="78"/>
         <source>Save As New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="80"/>
+        <location filename="../librarywindow.cpp" line="82"/>
         <source>Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="84"/>
+        <location filename="../librarywindow.cpp" line="86"/>
         <source>PNG image (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="85"/>
+        <location filename="../librarywindow.cpp" line="87"/>
         <source>JPEG image (*.jpg)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -764,6 +784,29 @@
         <location filename="../managelibrary.ui" line="87"/>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../main.cpp" line="27"/>
+        <source>Photo Manager</source>
+        <translation type="unfinished">Bộ quản lý ảnh</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="32"/>
+        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)</source>
+        <translation type="unfinished">Sản phẩm này bao gồm phần mềm phát triển bởi dự án OpenSSL để dùng trong công cụ OpenSSL (http://www.openssl.org/)</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="33"/>
+        <source>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)</source>
+        <translation type="unfinished">Sản phẩm này bao gồm phần mềm mã hóa viết bởi Eric Young (eay@cryptsoft.com)</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="34"/>
+        <source>Android™ is a trademark of Google LLC</source>
+        <translation type="unfinished">Android™ là thương hiệu của Google LLC</translation>
     </message>
 </context>
 </TS>

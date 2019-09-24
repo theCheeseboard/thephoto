@@ -3,10 +3,12 @@
 
 #include <QMimeDatabase>
 #include <QDirIterator>
+#include <QDesktopServices>
 
 #include <tcsdtools.h>
 #include <tpopover.h>
 #include <tpromise.h>
+#include <taboutdialog.h>
 #include "managelibrary.h"
 #include "library/imageview.h"
 
@@ -316,4 +318,20 @@ void LibraryWindow::changeEvent(QEvent *event) {
             d->overlayView->endSlideshow();
         }
     }
+}
+
+void LibraryWindow::on_actionFile_Bug_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thePhoto/issues"));
+}
+
+void LibraryWindow::on_actionSources_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thePhoto"));
+}
+
+void LibraryWindow::on_actionAbout_triggered()
+{
+    tAboutDialog aboutDialog(this);
+    aboutDialog.exec();
 }
