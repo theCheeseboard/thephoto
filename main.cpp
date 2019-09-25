@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_MAC
     a.setAttribute(Qt::AA_DontShowIconsInMenus, true);
-    a.setQuitOnLastWindowClosed(false);
 #endif
 
     if (a.arguments().contains("--old-library")) {

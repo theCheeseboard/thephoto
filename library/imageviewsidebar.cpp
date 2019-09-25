@@ -213,13 +213,13 @@ QTransform ImageViewSidebar::transformFromCurrentMatrix()
 
 void ImageViewSidebar::on_rotateClockwiseButton_clicked()
 {
-    d->rightTransformAngle += 90;
+    d->rightTransformAngle -= 90;
     this->animateNewTransform();
 }
 
 void ImageViewSidebar::on_rotateAnticlockwiseButton_clicked()
 {
-    d->rightTransformAngle -= 90;
+    d->rightTransformAngle += 90;
     this->animateNewTransform();
 }
 

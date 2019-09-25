@@ -37,7 +37,7 @@ struct ImageLocation {
         return viewport.intersects(rect.toRect());
     }
 
-    void draw(QPainter* painter, QRect viewport) {
+    void draw(QPainter* painter, QRect viewport, Qt::LayoutDirection direction) {
         QRectF realRect = this->realRect(viewport);
         painter->setPen(Qt::transparent);
         painter->setBrush(QColor(0, 0, 0, 127));
@@ -70,7 +70,11 @@ struct ImageLocation {
             yearMarker.setWidth(QFontMetrics(font).width(dateShown.toString("yyyy")) + 1);
             yearMarker.setHeight(QFontMetrics(font).height());
             yearMarker.moveTop(monthMarker.bottom());
-            yearMarker.moveRight(monthMarker.right());
+            if (direction == Qt::RightToLeft) {
+                yearMarker.moveLeft(monthMarker.left());
+            } else {
+                yearMarker.moveRight(monthMarker.right());
+            }
             painter->setFont(font);
             painter->setPen(parent->palette().color(QPalette::WindowText));
             painter->drawText(yearMarker, dateShown.toString("yyyy"));
@@ -212,7 +216,7 @@ void ImageGrid::paintEvent(QPaintEvent *event) {
     for (ImgLoc loc : d->images) {
         if (loc->isInView(viewport)) {
             painter.save();
-            loc->draw(&painter, viewport);
+            loc->draw(&painter, viewport, this->layoutDirection());
             painter.restore();
         }
     }
@@ -224,7 +228,7 @@ void ImageGrid::wheelEvent(QWheelEvent *event) {
 }
 
 void ImageGrid::resizeEvent(QResizeEvent *event) {
-    d->scrollbar->setGeometry(d->viewWidth(this->width()), 0, d->scrollbarWidth(), this->height());
+    d->scrollbar->setGeometry(this->layoutDirection() == Qt::RightToLeft ? 0 : d->viewWidth(this->width()), 0, d->scrollbarWidth(), this->height());
     relocate();
 }
 
@@ -237,9 +241,13 @@ void ImageGrid::relocate() {
 
     for (ImgLoc loc : d->images) {
         QRectF rect;
-        rect.setX(imgSize.width() * x);
-        rect.setY(imgSize.height() * y);
         rect.setSize(imgSize);
+        rect.moveTop(imgSize.height() * y);
+        if (this->layoutDirection() == Qt::RightToLeft) {
+            rect.moveRight(this->width() - (imgSize.width() * x));
+        } else {
+            rect.moveLeft(imgSize.width() * x);
+        }
         loc->rect = rect;
 
         x++;

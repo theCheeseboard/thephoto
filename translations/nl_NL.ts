@@ -576,42 +576,42 @@
         <translation type="unfinished">Beheer bibliotheek</translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="67"/>
+        <location filename="../librarywindow.cpp" line="68"/>
         <source>Delete Image?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="68"/>
+        <location filename="../librarywindow.cpp" line="69"/>
         <source>Delete</source>
         <translation type="unfinished">Verwijder</translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="74"/>
+        <location filename="../librarywindow.cpp" line="75"/>
         <source>Save Edits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="75"/>
+        <location filename="../librarywindow.cpp" line="76"/>
         <source>Save In Place</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="78"/>
+        <location filename="../librarywindow.cpp" line="79"/>
         <source>Save As New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="82"/>
+        <location filename="../librarywindow.cpp" line="83"/>
         <source>Save As...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="86"/>
+        <location filename="../librarywindow.cpp" line="87"/>
         <source>PNG image (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.cpp" line="87"/>
+        <location filename="../librarywindow.cpp" line="88"/>
         <source>JPEG image (*.jpg)</source>
         <translation type="unfinished"></translation>
     </message>

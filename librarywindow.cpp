@@ -59,6 +59,7 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
         menu->addSeparator();
         menu->addAction(ui->actionEvent_Mode);
         menu->addSeparator();
+        menu->addMenu(ui->menuHelp);
         menu->addAction(ui->actionExit);
         ui->menuButton->setMenu(menu);
     #endif
