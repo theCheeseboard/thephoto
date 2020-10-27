@@ -520,58 +520,58 @@
         <translation>Edit</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="467"/>
+        <location filename="../librarywindow.ui" line="454"/>
         <source>Let&apos;s get started!</source>
         <translation>Let&apos;s get started!</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="477"/>
+        <location filename="../librarywindow.ui" line="464"/>
         <source>Where should we search for images?</source>
         <translation>Where should we search for images?</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="570"/>
+        <location filename="../librarywindow.ui" line="557"/>
         <source>File</source>
         <translation>File</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="580"/>
+        <location filename="../librarywindow.ui" line="567"/>
         <source>Help</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="596"/>
+        <location filename="../librarywindow.ui" line="583"/>
         <source>Exit</source>
         <translation>Exit</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="599"/>
+        <location filename="../librarywindow.ui" line="586"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="612"/>
+        <location filename="../librarywindow.ui" line="599"/>
         <source>Event Mode</source>
         <translation>Event Mode</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="620"/>
+        <location filename="../librarywindow.ui" line="608"/>
         <source>File Bug</source>
         <translation>File Bug</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="628"/>
+        <location filename="../librarywindow.ui" line="617"/>
         <source>Sources</source>
         <translation>Sources</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="636"/>
+        <location filename="../librarywindow.ui" line="626"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="502"/>
-        <location filename="../librarywindow.ui" line="607"/>
+        <location filename="../librarywindow.ui" line="489"/>
+        <location filename="../librarywindow.ui" line="594"/>
         <source>Manage Library</source>
         <translation>Manage Library</translation>
     </message>

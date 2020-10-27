@@ -72,7 +72,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="thephoto" resource="resources.qrc">
+          <iconset theme="thephoto">
            <normaloff>:/icons/thephoto.svg</normaloff>:/icons/thephoto.svg</iconset>
          </property>
          <property name="popupMode">
@@ -157,7 +157,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset theme="go-previous" resource="icons.qrc">
+              <iconset theme="go-previous">
                <normaloff>:/icons/go-previous.svg</normaloff>:/icons/go-previous.svg</iconset>
              </property>
              <property name="flat">
@@ -218,7 +218,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset theme="media-playback-start" resource="icons.qrc">
+              <iconset theme="media-playback-start">
                <normaloff>:/icons/media-playback-start.svg</normaloff>:/icons/media-playback-start.svg</iconset>
              </property>
              <property name="autoRaise">
@@ -238,7 +238,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset theme="edit-delete" resource="icons.qrc">
+              <iconset theme="edit-delete">
                <normaloff>:/icons/edit-delete.svg</normaloff>:/icons/edit-delete.svg</iconset>
              </property>
              <property name="popupMode">
@@ -280,7 +280,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset theme="go-previous" resource="icons.qrc">
+              <iconset theme="go-previous">
                <normaloff>:/icons/go-previous.svg</normaloff>:/icons/go-previous.svg</iconset>
              </property>
              <property name="flat">
@@ -337,19 +337,6 @@
         </widget>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="Line" name="line">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>1</height>
-       </size>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
      </widget>
     </item>
     <item>
@@ -589,7 +576,7 @@
   </widget>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="application-exit" resource="icons.qrc">
+    <iconset theme="application-exit">
      <normaloff>:/icons/application-exit.svg</normaloff>:/icons/application-exit.svg</iconset>
    </property>
    <property name="text">
@@ -614,7 +601,8 @@
   </action>
   <action name="actionFile_Bug">
    <property name="icon">
-    <iconset theme="tools-report-bug"/>
+    <iconset theme="tools-report-bug">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>File Bug</string>
@@ -622,7 +610,8 @@
   </action>
   <action name="actionSources">
    <property name="icon">
-    <iconset theme="commit"/>
+    <iconset theme="commit">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Sources</string>
@@ -630,7 +619,8 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset theme="help-about"/>
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -642,16 +632,19 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>tStackedWidget</class>
-   <extends>QStackedWidget</extends>
-   <header location="global">tstackedwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>tCircularSpinner</class>
    <extends>QWidget</extends>
    <header location="global">tcircularspinner.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>tStackedWidget</class>
+   <extends>QStackedWidget</extends>
+   <header location="global">tstackedwidget.h</header>
+   <container>1</container>
+   <slots>
+    <signal>switchingFrame(int)</signal>
+   </slots>
   </customwidget>
   <customwidget>
    <class>ImageGrid</class>
@@ -663,9 +656,6 @@
    </slots>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="icons.qrc"/>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -12,14 +12,13 @@
 #include "eventmodeuserindicator.h"
 #include "ttoast.h"
 
-EventModeSettings::EventModeSettings(QWidget *parent) :
+EventModeSettings::EventModeSettings(QWidget* parent) :
     QDialog(parent),
-    ui(new Ui::EventModeSettings)
-{
+    ui(new Ui::EventModeSettings) {
     ui->setupUi(this);
 
     showDialog = new EventModeShow();
-    connect(showDialog, &EventModeShow::returnToBackstage, [=] {
+    connect(showDialog, &EventModeShow::returnToBackstage, [ = ] {
         showDialog->hide();
         this->show();
     });
@@ -29,14 +28,14 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
 
     saveDir.setPath(QDir::homePath() + "/Pictures/thePhoto");
 
-    ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(16, 16));
-    ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(16, 16));
+    ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(SC_DPI_T(QSize(16, 16), QSize)));
+    ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(SC_DPI_T(QSize(16, 16), QSize))));
     ui->openMissionControl->setIcon(QIcon("/Applications/Mission Control.app/Contents/Resources/Expose.icns"));
     ui->monitorNumber->setMaximum(QApplication::desktop()->screenCount());
     ui->mainStack->setCurrentAnimation(tStackedWidget::SlideHorizontal);
     ui->closeEventModeButton->setProperty("type", "destructive");
 
-    for (QHostAddress addr : QNetworkInterface::allAddresses()) {
+for (QHostAddress addr : QNetworkInterface::allAddresses()) {
         if (addr.isLoopback()) continue;
         if (addr.isLinkLocal()) continue;
 
@@ -46,10 +45,10 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
         server = new EventServer(this);
         server->listen(QHostAddress::Any, 26157);
         connect(server, SIGNAL(connectionAvailable(EventSocket*)), this, SLOT(newConnection(EventSocket*)));
-        connect(server, &EventServer::ready, [=] {
+        connect(server, &EventServer::ready, [ = ] {
             showDialog->setCode(code);
         });
-        connect(server, &EventServer::error, [=](QString error) {
+        connect(server, &EventServer::error, [ = ](QString error) {
             showDialog->showError(error);
         });
     }
@@ -66,8 +65,7 @@ EventModeSettings::EventModeSettings(QWidget *parent) :
     QScroller::grabGesture(ui->imagesReceivedScrollArea->viewport(), QScroller::LeftMouseButtonGesture);
 }
 
-EventModeSettings::~EventModeSettings()
-{
+EventModeSettings::~EventModeSettings() {
     showDialog->deleteLater();
     delete ui;
 }
@@ -96,34 +94,29 @@ void EventModeSettings::show() {
     //this->move(QApplication::desktop()->screenGeometry(0).center());
 }
 
-void EventModeSettings::on_closeEventModeButton_clicked()
-{
+void EventModeSettings::on_closeEventModeButton_clicked() {
     if (QMessageBox::question(this, tr("End Event Mode?"), tr("Close connections to all connected devices and end Event Mode?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
         this->reject();
     }
 }
 
-void EventModeSettings::on_showWifiDetails_toggled(bool checked)
-{
+void EventModeSettings::on_showWifiDetails_toggled(bool checked) {
     showDialog->updateInternetDetails(ui->ssid->text(), ui->key->text(), ui->showWifiDetails->isChecked());
 }
 
-void EventModeSettings::on_ssid_textChanged(const QString &arg1)
-{
+void EventModeSettings::on_ssid_textChanged(const QString& arg1) {
     showDialog->updateInternetDetails(ui->ssid->text(), ui->key->text(), ui->showWifiDetails->isChecked());
 }
 
-void EventModeSettings::on_key_textChanged(const QString &arg1)
-{
+void EventModeSettings::on_key_textChanged(const QString& arg1) {
     showDialog->updateInternetDetails(ui->ssid->text(), ui->key->text(), ui->showWifiDetails->isChecked());
 }
 
-void EventModeSettings::on_monitorNumber_valueChanged(int arg1)
-{
+void EventModeSettings::on_monitorNumber_valueChanged(int arg1) {
     if (QApplication::screens().count() != 1) {
-        #ifdef Q_OS_LINUX
-            this->showNormal();
-        #endif
+#ifdef Q_OS_LINUX
+        this->showNormal();
+#endif
 
         int monitor = arg1 - 1;
         showDialog->showFullScreen(monitor);
@@ -157,7 +150,7 @@ void EventModeSettings::newConnection(EventSocket* sock) {
     EventModeUserIndicator* userIndicator = new EventModeUserIndicator(sock);
     showDialog->addToProfileLayout(userIndicator);
 
-    connect(sock, &EventSocket::imageDataAvailable, [=](QByteArray imageData) {
+    connect(sock, &EventSocket::imageDataAvailable, [ = ](QByteArray imageData) {
         //Write out to file
         QDir endDir = saveDir;
         if (ui->sessionNameLineEdit->text() == "") {
@@ -199,10 +192,10 @@ void EventModeSettings::newConnection(EventSocket* sock) {
             QLabel* label = new QLabel();
             label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
             label->setContextMenuPolicy(Qt::CustomContextMenu);
-            connect(this, &EventModeSettings::windowSizeChanged, [=] {
+            connect(this, &EventModeSettings::windowSizeChanged, [ = ] {
                 label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
             });
-            connect(label, &QLabel::customContextMenuRequested, [=](QPoint pos) {
+            connect(label, &QLabel::customContextMenuRequested, [ = ](QPoint pos) {
                 QMenu* menu = new QMenu();
                 menu->addSection(tr("About this picture"));
 
@@ -213,10 +206,10 @@ void EventModeSettings::newConnection(EventSocket* sock) {
                 menu->addAction(authorAction);
 
                 menu->addSection(tr("For this picture"));
-                menu->addAction(QIcon::fromTheme("media-playback-start"), tr("Enqueue for show"), [=] {
+                menu->addAction(QIcon::fromTheme("media-playback-start"), tr("Enqueue for show"), [ = ] {
                     showDialog->showNewImage(imageProperties);
                 });
-                menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"), [=] {
+                menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"), [ = ] {
                     label->setVisible(false);
 
                     tToast* toast = new tToast();
@@ -227,14 +220,14 @@ void EventModeSettings::newConnection(EventSocket* sock) {
                     actions.insert("undo", "Undo");
                     toast->setActions(actions);
                     toast->show(ui->imagesReceivedScrollArea);
-                    connect(toast, &tToast::doDefaultOption, [=] {
+                    connect(toast, &tToast::doDefaultOption, [ = ] {
                         QFile::remove(endDir.absoluteFilePath(fileName));
                         label->deleteLater();
                     });
-                    connect(toast, &tToast::dismiss, [=] {
+                    connect(toast, &tToast::dismiss, [ = ] {
                         toast->deleteLater();
                     });
-                    connect(toast, &tToast::actionClicked, [=] {
+                    connect(toast, &tToast::actionClicked, [ = ] {
                         label->setVisible(true);
                     });
                 });
@@ -243,12 +236,12 @@ void EventModeSettings::newConnection(EventSocket* sock) {
             imagesReceivedLayout->addWidget(label);
         }
     });
-    connect(sock, &EventSocket::newUserConnected, [=](QString name) {
+    connect(sock, &EventSocket::newUserConnected, [ = ](QString name) {
         new EventNotification(tr("User Connected"), name, showDialog);
 
         userEntry->setText(name);
     });
-    connect(sock, &EventSocket::aboutToClose, [=] {
+    connect(sock, &EventSocket::aboutToClose, [ = ] {
         new EventNotification(tr("User Disconnected"), sock->deviceName(), showDialog);
         sockets.removeOne(sock);
         userLayout->deleteLater();
@@ -269,40 +262,36 @@ void EventModeSettings::reject() {
     emit done();
 }
 
-void EventModeSettings::on_exchangedImagesButton_toggled(bool checked)
-{
+void EventModeSettings::on_exchangedImagesButton_toggled(bool checked) {
     if (checked) {
         ui->mainStack->setCurrentIndex(2);
     }
 }
 
-void EventModeSettings::on_connectedUsersButton_toggled(bool checked)
-{
+void EventModeSettings::on_connectedUsersButton_toggled(bool checked) {
     if (checked) {
         ui->mainStack->setCurrentIndex(1);
     }
 }
 
-void EventModeSettings::on_sessionSettingsButton_toggled(bool checked)
-{
+void EventModeSettings::on_sessionSettingsButton_toggled(bool checked) {
     if (checked) {
         ui->mainStack->setCurrentIndex(0);
     }
 }
 
-void EventModeSettings::on_usersList_customContextMenuRequested(const QPoint &pos)
-{
+void EventModeSettings::on_usersList_customContextMenuRequested(const QPoint& pos) {
     QMenu* menu = new QMenu();
     if (ui->usersList->selectedItems().count() == 1) {
         QListWidgetItem* selected = ui->usersList->selectedItems().first();
         menu->addSection(tr("For %1").arg(selected->text()));
-        menu->addAction(tr("Kick"), [=] {
+        menu->addAction(tr("Kick"), [ = ] {
             if (QMessageBox::question(this, tr("Kick?"), tr("Kick %1? They'll be able to rejoin the session by entering the session code again.").arg(selected->text()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
                 EventSocket* sock = selected->data(Qt::UserRole).value<EventSocket*>();
                 sock->closeFromClient();
             }
         });
-        menu->addAction(tr("Ban"), [=] {
+        menu->addAction(tr("Ban"), [ = ] {
             if (QMessageBox::question(this, tr("Ban?"), tr("Ban %1? They won't be able to rejoin this session.").arg(selected->text()), QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
                 EventSocket* sock = selected->data(Qt::UserRole).value<EventSocket*>();
                 bans.append(sock->peerAddress());
@@ -315,21 +304,18 @@ void EventModeSettings::on_usersList_customContextMenuRequested(const QPoint &po
     menu->exec(ui->usersList->mapToGlobal(pos));
 }
 
-void EventModeSettings::on_backToEventModeButton_clicked()
-{
+void EventModeSettings::on_backToEventModeButton_clicked() {
     this->hide();
     showDialog->showFullScreen(0);
 
     new EventNotification(tr("Welcome to Event Mode!"), tr("To get back to the Backstage, simply hit the TAB key."), showDialog);
 }
 
-void EventModeSettings::on_openMissionControl_clicked()
-{
+void EventModeSettings::on_openMissionControl_clicked() {
     QProcess::startDetached("open -a \"Mission Control\"");
 }
 
-void EventModeSettings::on_swapDisplayButton_clicked()
-{
+void EventModeSettings::on_swapDisplayButton_clicked() {
     //Swap the displays
     if (ui->monitorNumber->value() == 1) {
         ui->monitorNumber->setValue(2);

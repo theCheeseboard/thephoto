@@ -72,6 +72,7 @@ macx {
 
 SOURCES += main.cpp\
     easyexif/exif.cpp \
+    event/ws/wseventserver.cpp \
     library/imagedescriptor.cpp \
     library/imagedescriptormanager.cpp \
     library/imagegrid.cpp \
@@ -92,6 +93,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     easyexif/exif.h \
+    event/ws/wseventserver.h \
     library/imagedescriptor.h \
     library/imagedescriptormanager.h \
     library/imagegrid.h \

@@ -139,8 +139,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>399</width>
-            <height>561</height>
+            <width>149</width>
+            <height>271</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -404,7 +404,7 @@
               <string>Grayscale</string>
              </property>
              <property name="icon">
-              <iconset resource="../icons.qrc">
+              <iconset>
                <normaloff>:/icons/transparent.png</normaloff>:/icons/transparent.png</iconset>
              </property>
              <property name="toolButtonStyle">
@@ -427,7 +427,7 @@
               <string>Invert</string>
              </property>
              <property name="icon">
-              <iconset resource="../icons.qrc">
+              <iconset>
                <normaloff>:/icons/transparent.png</normaloff>:/icons/transparent.png</iconset>
              </property>
              <property name="toolButtonStyle">
@@ -467,10 +467,11 @@
    <extends>QStackedWidget</extends>
    <header location="global">tstackedwidget.h</header>
    <container>1</container>
+   <slots>
+    <signal>switchingFrame(int)</signal>
+   </slots>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="../icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -520,58 +520,58 @@
         <translation>Düzenle</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="467"/>
+        <location filename="../librarywindow.ui" line="454"/>
         <source>Let&apos;s get started!</source>
         <translation>Başlayalım!</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="477"/>
+        <location filename="../librarywindow.ui" line="464"/>
         <source>Where should we search for images?</source>
         <translation>Görselleri nerede aramalıyız?</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="502"/>
-        <location filename="../librarywindow.ui" line="607"/>
+        <location filename="../librarywindow.ui" line="489"/>
+        <location filename="../librarywindow.ui" line="594"/>
         <source>Manage Library</source>
         <translation>Kitaplığı Yönet</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="570"/>
+        <location filename="../librarywindow.ui" line="557"/>
         <source>File</source>
         <translation>Dosya</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="580"/>
+        <location filename="../librarywindow.ui" line="567"/>
         <source>Help</source>
         <translation>Yardım</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="596"/>
+        <location filename="../librarywindow.ui" line="583"/>
         <source>Exit</source>
         <translation>Vazgeç</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="599"/>
+        <location filename="../librarywindow.ui" line="586"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="612"/>
+        <location filename="../librarywindow.ui" line="599"/>
         <source>Event Mode</source>
         <translation>Etkinlik Modu</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="620"/>
+        <location filename="../librarywindow.ui" line="608"/>
         <source>File Bug</source>
         <translation>Dosya Hatası</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="628"/>
+        <location filename="../librarywindow.ui" line="617"/>
         <source>Sources</source>
         <translation>Kaynaklar</translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="636"/>
+        <location filename="../librarywindow.ui" line="626"/>
         <source>About</source>
         <translation>Hakkında</translation>
     </message>
