@@ -22,7 +22,8 @@ class WsController {
     
     connect(room, username) {
         return new Promise((res, rej) => {
-            let wsUrl = "ws://" + room + ":26158/";
+            // let wsUrl = "ws://" + room + ":26158/";
+            let wsUrl = `${process.env.REACT_APP_RENDEZVOUS_SERVER}/rendezvous/${room}`
             this.#ws = new WebSocket(wsUrl);
             this.#ws.onopen = (event) => {
                 this.sendMessage({
