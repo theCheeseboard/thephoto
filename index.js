@@ -27,21 +27,27 @@ app.get("/setup", (req, res) => {
     });
 });
 app.use("/setup/:id", (req, res, next) => {
+    console.log(`Installing Rendezvous client for ${serverNumber}`);
+
     if (req.method !== "GET") {
+        console.log("FAIL: Method not GET");
         res.send(405);
         return;
     }
 
     if (!passwords[req.params.id]) {
+        console.log("FAIL: Client not set up");
         res.send(403);
     }
 
     let auth = req.header("Authorization");
     if (!auth.startsWith("Bearer ") || passwords[req.params.id] !== auth.substr(7)) {
+        console.log("FAIL: Token invalud");
         res.send(403);
     }
 
     if (currentServer[req.params.id]) {
+        console.log("FAIL: Server already set up");
         res.send(400);
         return;
     }
