@@ -27,7 +27,7 @@ app.get("/setup", (req, res) => {
     });
 });
 app.use("/setup/:id", (req, res, next) => {
-    console.log(`Installing Rendezvous client for ${serverNumber}`);
+    console.log(`Installing Rendezvous client for ${req.params.id}`);
 
     if (req.method !== "GET") {
         console.log("FAIL: Method not GET");
@@ -38,12 +38,14 @@ app.use("/setup/:id", (req, res, next) => {
     if (!passwords[req.params.id]) {
         console.log("FAIL: Client not set up");
         res.send(403);
+        return;
     }
 
     let auth = req.header("Authorization");
     if (!auth.startsWith("Bearer ") || passwords[req.params.id] !== auth.substr(7)) {
         console.log("FAIL: Token invalud");
         res.send(403);
+        return;
     }
 
     if (currentServer[req.params.id]) {
