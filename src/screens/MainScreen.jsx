@@ -39,6 +39,8 @@ class MainScreen extends React.Component {
                 return <span>This is the Transfers page</span>
             case "upload":
                 return <span>This is the Upload page</span>
+            default:
+                return <span>Please navigate to another page</span>
         }
     }
 }

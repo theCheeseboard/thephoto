@@ -13,7 +13,7 @@ class Welcome extends React.Component {
     }
     
     connect() {
-        if (this.state.username == "") {
+        if (this.state.username === "") {
             this.setState({
                 error: "Enter a username"
             });
@@ -29,7 +29,7 @@ class Welcome extends React.Component {
     }
     
     renderError() {
-        if (this.state.error == "") return null;
+        if (this.state.error === "") return null;
         return <span className="error">{this.state.error}</span>
     }
     

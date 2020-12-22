@@ -76,6 +76,7 @@ class CameraScreen extends React.Component {
                     </div>
                 </div>
             case "genericError":
+            default:
                 return <div className="cameraError">
                     <div className="cameraErrorContainer">
                         <CameraUnavailable className="cameraErrorGlyph" />
