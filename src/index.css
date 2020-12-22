@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Contemporary', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +10,235 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+    --bg-color: rgb(40, 40, 40);
+    --fg-color: white;
+    --error-color: rgb(255, 100, 100);
+    --button-color: rgb(0, 50, 150);
+    
+    --bg-hover: rgb(60, 60, 60);
+    --bg-active: rgb(20, 20, 20);
+    
+    --button-hover: rgb(0, 75, 225);
+    --button-active: rgb(0, 33, 100);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+    font-size: 10pt;
+    user-select: none;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 15pt;
+}
+
+h2 {
+    font-size: 10pt;
+    text-transform: uppercase;
+}
+
+hr {
+    border-top: 1px solid var(--fg-color);
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+}
+
+.welcomeWrapper {
+    width: 100vw;
+    height: 100vh;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcomeForm {
+    display: grid;
+    
+    grid-template-columns: auto 100fr;
+    column-gap: 9px;
+    row-gap: 9px;
+    
+    justify-items: stretch;
+    align-items: center;
+}
+
+.welcomeForm .error {
+    color: var(--error-color);
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.welcomeForm button {
+    justify-self: end;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.header {
+    display: flex;
+    
+    justify-content: stretch;
+/*     border-bottom: 1px solid var(--fg-color); */
+}
+
+.header .spacer {
+    flex-grow: 1;
+}
+
+.header .systemButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 44px;
+    width: 44px;
+}
+
+.header .systemButton:before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 24px;
+}
+
+.header .systemButton:hover {
+    background-color: var(--bg-hover);
+}
+
+.header .systemButton:active {
+    background-color: var(--bg-active);
+}
+
+.header .menu:before {
+    background-image: url(./assets/thephoto.svg);
+}
+
+.header .close:before {
+    background-image: url(./assets/system-log-out.svg);
+    filter: invert(1);
+}
+
+.header .headerButton {
+    display: flex;
+    align-items: center;
+    
+    background-color: var(--button-color);
+    padding: 12px;
+}
+
+.header .headerButton:before {
+    content: "";
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    height: 16px;
+    width: 16px;
+    margin-right: 3px;
+    filter: invert(1);
+}
+
+.header .headerButton:hover {
+    background-color: var(--button-hover);
+}
+
+.header .headerButton:active, .header .headerButton.selected {
+    background-color: var(--button-active);
+}
+
+.header .camera:before {
+    background-image: url(./assets/camera-photo.svg);
+}
+
+.mainWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.cameraPage {
+    display: flex;
+    
+    flex-grow: 1;
+}
+
+.cameraError {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    flex-grow: 1;
+}
+
+.cameraErrorContainer {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.cameraErrorGlyph {
+    filter: invert(1);
+}
+
+.cameraWebcam {
+    flex-grow: 1;
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+.cameraHud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: fixed;
+    height: 128px;
+    width: 100vw;
+    right: 0px;
+    bottom: 0px;
+    
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+@media (orientation: landscape) {
+    .cameraHud {
+        height: calc(100vh - 40px);
+        width: 128px;
+    
+        background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    }
+}
+
+.captureButton {
+    display: flex;
+    width: 64px;
+    height: 64px;
+}
+
+.captureButton:before {
+    content: "";
+    background-image: url("./assets/capture.svg");
+    
+    transition: 0.25s ease-out;
+    
+    width: 64px;
+    height: 64px;
+}
+
+.captureButton:active:before {
+    filter: brightness(75%);
+    transform: scale(0.9
+);
 }
