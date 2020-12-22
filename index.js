@@ -42,8 +42,8 @@ app.use("/setup/:id", (req, res, next) => {
     }
 
     let auth = req.header("Authorization");
-    if (!auth.startsWith("Bearer ") || passwords[req.params.id] !== auth.substr(7)) {
-        console.log("FAIL: Token invalud");
+    if (!auth || !auth.startsWith("Bearer ") || passwords[req.params.id] !== auth.substr(7)) {
+        console.log("FAIL: Token invalid");
         res.send(403);
         return;
     }
