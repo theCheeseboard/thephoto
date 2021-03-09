@@ -16,18 +16,18 @@
   ~     You should have received a copy of the GNU General Public License
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   --><resources>
-    <string name="app_name"></string>
+    <string name="app_name">thePhoto Etkinliği</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="title_activity_main"></string>
-    <string name="open_main_app"></string>
-    <string name="get_on_play"></string>
-    <string name="get_unsupported"></string>
-    <string name="connected_notification_channel_name"></string>
-    <string name="connected_notification_channel_description"></string>
-    <string name="connected_notification_title"></string>
-    <string name="connected_notification_text"></string>
-    <string name="check_phone"></string>
+    <string name="title_activity_main">thePhoto Etkinliği</string>
+    <string name="open_main_app">Kamerayı uzaktan kontrol etmek için telefonunuzdaki thePhoto kullanarak bir bilgisayara bağlanın.</string>
+    <string name="get_on_play">Google Play\'den telefonunuza thePhoto uygulamasını indirin</string>
+    <string name="get_unsupported">Saatin bir Android telefon ile eşleştirilmiş değil çünkü thePhoto kullanamazsın.</string>
+    <string name="connected_notification_channel_name">Bağlandı</string>
+    <string name="connected_notification_channel_description">thePhoto\'ya bağlandığınızda görüntülenen bildirimler</string>
+    <string name="connected_notification_title">thePhoto\'ya bağlı</string>
+    <string name="connected_notification_text">Akıllı saatinizle kameranızı uzaktan kontrol edin</string>
+    <string name="check_phone">Telefonunuza bakın</string>
 </resources>
