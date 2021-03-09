@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"></string>
+    <string name="code_prompt"></string>
+    <string name="go_button"></string>
+    <string name="code_hint"></string>
+    <string name="connecting_prompt"></string>
+    <string name="invalid_code_title"></string>
+    <string name="invalid_code_message"></string>
+    <string name="ok"></string>
+    <string name="title_activity_camera"></string>
+    <string name="keep_copy_prompt"></string>
+    <string name="ENTER_NAME_TO_IDENTIFY"></string>
+    <string name="title_activity_settings"></string>
+    <string name="STRING_SETTINGS"></string>
+    <string name="ERROR_DISCONNECTED_TITLE"></string>
+    <string name="ERROR_DISCONNECTED"></string>
+    <string name="connected_notification_title"></string>
+    <string name="connected_notification_text"></string>
+    <string name="connected_notification_disconnect_button"></string>
+    <string name="connected_notification_channel_name"></string>
+    <string name="connected_notification_channel_description"></string>
+    <string name="disconnected_notification_title"></string>
+    <string name="disconnected_dialog_text"></string>
+    <string name="disconnected_notification_text"></string>
+    <!-- Strings related to Settings -->
+    <!-- General settings -->
+    <string name="pref_header_general"></string>
+    <string name="pref_title_display_name"></string>
+    <string name="flash_value_automatic"></string>
+    <string name="flash_value_on"></string>
+    <string name="flash_value_off"></string>
+    <string name="flash_dialog_title"></string>
+    <string name="timer_dialog_title"></string>
+    <string name="timer_value_0sec"></string>
+    <string name="timer_value_3sec"></string>
+    <string name="timer_value_10sec"></string>
+    <string name="pref_sound_type_entries_1"></string>
+    <string name="pref_sound_type_entries_2"></string>
+    <!-- Strings related to Onboarding -->
+    <string name="onboarding_welcome"></string>
+    <string name="onboarding_welcome_description"></string>
+    <string name="onboarding_skip"></string>
+    <string name="onboarding_finish"></string>
+    <string name="onboarding_identify_title"></string>
+    <string name="onboarding_identify_why"></string>
+    <string name="onboarding_identify_display_name"></string>
+    <string name="open_wifi_settings"></string>
+    <string name="menu_options_help"></string>
+    <string name="main_more_button"></string>
+    <string name="help_title"></string>
+    <string name="help_activity_title"></string>
+    <string name="help_getting_started"></string>
+    <string name="help_getting_started_step"></string>
+    <string name="help_getting_started_step_1_title"></string>
+    <string name="help_getting_started_step_1_text1"></string>
+    <string name="help_getting_started_step_2_title"></string>
+    <string name="help_getting_started_step_2_text1"></string>
+    <string name="help_getting_started_step_3_title"></string>
+    <string name="help_getting_started_step_3_text1"></string>
+    <string name="disconnected_reconnecting"></string>
+</resources>
