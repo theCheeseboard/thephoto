@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~     thePhoto Event Mode Client: Sends photos to thePhoto on a PC
+  ~     Copyright (C) 2018 Victor Tran
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  --><resources>
+    <string name="app_name"></string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="title_activity_main"></string>
+    <string name="open_main_app"></string>
+    <string name="get_on_play"></string>
+    <string name="get_unsupported"></string>
+    <string name="connected_notification_channel_name"></string>
+    <string name="connected_notification_channel_description"></string>
+    <string name="connected_notification_title"></string>
+    <string name="connected_notification_text"></string>
+    <string name="check_phone"></string>
+</resources>
