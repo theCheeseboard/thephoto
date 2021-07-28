@@ -4,6 +4,7 @@ import WsController from '../WsController'
 
 import Header from './Header';
 import CameraScreen from './CameraScreen';
+import UploadScreen from './UploadScreen';
 
 class MainScreen extends React.Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class MainScreen extends React.Component {
             case "transfers":
                 return <span>This is the Transfers page</span>
             case "upload":
-                return <span>This is the Upload page</span>
+                return <UploadScreen />
             default:
                 return <span>Please navigate to another page</span>
         }

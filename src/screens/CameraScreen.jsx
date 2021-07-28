@@ -4,6 +4,8 @@ import CameraHud from './CameraHud';
 import Webcam from "react-webcam";
 import { ReactComponent as CameraUnavailable } from "../assets/camera-unavailable.svg";
 
+import Styles from './CameraScreen.module.css';
+
 import WsController from '../WsController'
 
 class CameraScreen extends React.Component {
@@ -37,22 +39,22 @@ class CameraScreen extends React.Component {
                         onUserMediaError={this.mediaError.bind(this)}
                         videoConstraints={this.state.videoConstraints}
                         screenshotFormat="image/png"
-                        className="cameraWebcam" />,
+                        className={Styles.CameraWebcam} />,
                     <CameraHud
                         key="webcamHud"
                         onCapture={this.capture.bind(this)} />
                 ]
             case "noCamera":
-                return <div className="cameraError">
-                    <div className="cameraErrorContainer">
-                        <CameraUnavailable className="cameraErrorGlyph" />
+                return <div className={Styles.CameraError}>
+                    <div className={Styles.CameraErrorContainer}>
+                        <CameraUnavailable className={Styles.CameraErrorGlyph} />
                         <h1>There is no camera on this device.</h1>
                     </div>
                 </div>
             case "noSupport":
-                return <div className="cameraError">
-                    <div className="cameraErrorContainer">
-                        <CameraUnavailable className="cameraErrorGlyph" />
+                return <div className={Styles.CameraError}>
+                    <div className={Styles.CameraErrorContainer}>
+                        <CameraUnavailable className={Styles.CameraErrorGlyph} />
                         <h1>This browser is unsupported</h1>
                         <div>
                             <p>Use a browser that can access the camera. Possible options are:</p>
@@ -66,9 +68,9 @@ class CameraScreen extends React.Component {
                     </div>
                 </div>
             case "noPermission":
-                return <div className="cameraError">
-                    <div className="cameraErrorContainer">
-                        <CameraUnavailable className="cameraErrorGlyph" />
+                return <div className={Styles.CameraError}>
+                    <div className={Styles.CameraErrorContainer}>
+                        <CameraUnavailable className={Styles.CameraErrorGlyph} />
                         <h1>Can't access the camera</h1>
                         <div>
                             <p>Check the permissions for this page, and then reload the page to try again.</p>
@@ -77,9 +79,9 @@ class CameraScreen extends React.Component {
                 </div>
             case "genericError":
             default:
-                return <div className="cameraError">
-                    <div className="cameraErrorContainer">
-                        <CameraUnavailable className="cameraErrorGlyph" />
+                return <div className={Styles.CameraError}>
+                    <div className={Styles.CameraErrorContainer}>
+                        <CameraUnavailable className={Styles.CameraErrorGlyph} />
                         <h1>Can't access the camera</h1>
                     </div>
                 </div>
@@ -87,7 +89,7 @@ class CameraScreen extends React.Component {
     }
     
     render() {
-        return <div className="cameraPage">
+        return <div className={Styles.CameraPage}>
             {this.renderPage()}
         </div>
     }

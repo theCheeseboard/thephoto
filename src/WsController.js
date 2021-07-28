@@ -65,6 +65,8 @@ class WsController {
         
         let decoder = new TextDecoder("utf-8");
         let msg = JSON.parse(decoder.decode(data));
+
+        if (msg.type === "serverKeepalive") return; //Keepalive message
         
         if (msg.replyTo !== null) {
             this.#replies[msg.replyTo](msg);

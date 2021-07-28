@@ -1,0 +1,22 @@
+.CameraHud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: fixed;
+    height: 128px;
+    width: 100vw;
+    right: 0px;
+    bottom: 0px;
+    
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+@media (orientation: landscape) {
+    .CameraHud {
+        height: calc(100vh - 40px);
+        width: 128px;
+    
+        background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    }
+}

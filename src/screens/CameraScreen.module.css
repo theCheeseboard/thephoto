@@ -1,0 +1,51 @@
+.CameraPage {
+    display: flex;
+    
+    flex-grow: 1;
+}
+
+.CameraError {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    flex-grow: 1;
+}
+
+.CameraErrorContainer {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.CameraErrorGlyph {
+    filter: invert(1);
+}
+
+.CameraWebcam {
+    flex-grow: 1;
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+.CaptureButton {
+    display: flex;
+    width: 64px;
+    height: 64px;
+}
+
+.CaptureButton:before {
+    content: "";
+    background-image: url("../assets/capture.svg");
+    
+    transition: 0.25s ease-out;
+    
+    width: 64px;
+    height: 64px;
+}
+
+.CaptureButton:active:before {
+    filter: brightness(75%);
+    transform: scale(0.9);
+}

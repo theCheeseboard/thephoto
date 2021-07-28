@@ -42,7 +42,7 @@ class Welcome extends React.Component {
                 <h2>Connect</h2>
                 <p>You can also connect using your web browser.</p>
                 
-                <div class="welcomeForm">
+                <div className="welcomeForm">
                     <span>Room</span>
                     <input type="text" value={this.state.room} onChange={(e => this.setState({room: e.target.value}))}/>
                     
