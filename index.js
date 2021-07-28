@@ -62,7 +62,16 @@ app.ws("/setup/:id", (ws, req) => {
 
     console.log(`New rendezvous server for ${req.params.id}`);
 
+    //Keep the client alive
+    let timeout = setInterval(() => {
+        ws.send(JSON.stringify({
+            seq: -1,
+            type: "serverKeepalive"
+        }));
+    }, 10000);
+
     ws.on("close", () => {
+        clearInterval(timeout);
         if (currentServer[req.params.id] === ws) delete currentServer[req.params.id];
         serverCount[req.params.id]--;
     });
@@ -93,6 +102,14 @@ app.ws("/rendezvous/:id", (ws, req) => {
         type: "rendezvousClientConnect"
     }));
 
+    //Keep the client alive
+    let timeout = setInterval(() => {
+        ws.send(JSON.stringify({
+            seq: -1,
+            type: "serverKeepalive"
+        }));
+    }, 10000);
+
     ws.on("message", msg => {
         if (server.readyState === 1) server.send(msg)
     });
@@ -100,12 +117,17 @@ app.ws("/rendezvous/:id", (ws, req) => {
         if (ws.readyState === 1) ws.send(msg)
     });
     ws.on("close", () => {
-        if (server.readyState === 1) server.close()
+        if (server.readyState === 1) {
+            clearTimeout(timeout);
+            server.close()
+        }
     });
     server.on("close", () => {
         if (ws.readyState === 1) ws.close()
     });
 });
+
+app.use(express.static("../thephoto-react/build/"));
 
 let port = process.env.PORT || 4000;
 app.listen(port, () => {
