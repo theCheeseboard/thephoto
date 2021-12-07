@@ -117,9 +117,9 @@ class WsController {
         picture = picture.substr(picture.indexOf("base64,") + 7);
         job.setTotal(picture.length);
         
-        //Send the picture 4096 chunks at a time
+        //Send the picture a few chunks at a time
         let sendChunk = (replySeq) => {
-            let pictureData = picture.substr(job.progress(), 4096);
+            let pictureData = picture.substr(job.progress(), 262144);
             let message = {
                 type: "picture",
                 length: picture.length,
