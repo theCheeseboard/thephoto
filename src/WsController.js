@@ -119,7 +119,7 @@ class WsController {
         
         //Send the picture a few chunks at a time
         let sendChunk = (replySeq) => {
-            let pictureData = picture.substr(job.progress(), 262144);
+            let pictureData = picture.substr(job.progress(), 131072);
             let message = {
                 type: "picture",
                 length: picture.length,
