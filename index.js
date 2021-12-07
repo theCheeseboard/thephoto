@@ -104,10 +104,14 @@ app.ws("/rendezvous/:id", (ws, req) => {
 
     //Keep the client alive
     let timeout = setInterval(() => {
-        ws.send(JSON.stringify({
-            seq: -1,
-            type: "serverKeepalive"
-        }));
+        try {
+            ws.send(JSON.stringify({
+                seq: -1,
+                type: "serverKeepalive"
+            }));
+        } catch {
+            //Ignore
+        }
     }, 10000);
 
     ws.on("message", msg => {
