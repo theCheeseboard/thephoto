@@ -12,6 +12,25 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
 
+.CaptureButton {
+
+}
+
+.CaptureButtonInnerCircle {
+    fill: white;
+    opacity: 1;
+    r: 35;
+    cx: 50;
+    cy: 50;
+
+    transition: r ease-out 0.25s, opacity ease-out 0.25s;
+}
+
+.CaptureButton:active .CaptureButtonInnerCircle {
+    opacity: 0.5;
+    r: 30;
+}
+
 @media (orientation: landscape) {
     .CameraHud {
         height: calc(100vh - 40px);

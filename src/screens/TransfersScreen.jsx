@@ -19,15 +19,19 @@ class TransfersScreen extends React.Component {
         this.progressUpdated();
     }
 
+    componentWillUnmount() {
+        TransferController.removeListener("progressUpdated", this.progressUpdated.bind(this));
+    }
+
     progressUpdated() {
         this.setState({
-            jobs: TransferController.jobs()
+            jobs: [...TransferController.jobs()].reverse()
         });
     }
 
     render() {
         return <div className={Styles.TransferGrid}>
-            {this.state.jobs.map(job => <TransferItem job={job} />)};
+            {this.state.jobs.map(job => <TransferItem job={job} />)}
         </div>
     }
 }

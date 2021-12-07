@@ -30,20 +30,19 @@ class CameraScreen extends React.Component {
     renderPage() {
         switch (this.state.errorState) {
             case "noError":
-                return [
+                return <>
                     <Webcam
-                        key="webcam"
                         audio={false}
                         ref={this.webcam}
                         onUserMedia={this.mediaStream.bind(this)}
                         onUserMediaError={this.mediaError.bind(this)}
                         videoConstraints={this.state.videoConstraints}
                         screenshotFormat="image/png"
-                        className={Styles.CameraWebcam} />,
+                        className={Styles.CameraWebcam} />
                     <CameraHud
-                        key="webcamHud"
                         onCapture={this.capture.bind(this)} />
-                ]
+
+                </>
             case "noCamera":
                 return <div className={Styles.CameraError}>
                     <div className={Styles.CameraErrorContainer}>
