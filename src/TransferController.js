@@ -1,3 +1,7 @@
+import EventEmitter from "eventemitter3";
+
+let controller;
+
 class TransferJob {
     #progress;
     #total;
@@ -10,18 +14,25 @@ class TransferJob {
     
     setProgress(value) {
         this.#progress = value;
+        controller.emit("progressUpdated");
     }
     
     addProgress(value) {
         this.#progress += value;
+        controller.emit("progressUpdated");
     }
     
     setTotal(value) {
         this.#total = value;
+        controller.emit("progressUpdated");
     }
     
     setImageData(value) {
         this.#imageData = value;
+    }
+
+    imageData() {
+        return this.#imageData;
     }
     
     progress() {
@@ -31,14 +42,31 @@ class TransferJob {
     total() {
         return this.#total;
     }
-}
 
-class TransferController {
-    makeTransferJob() {
-        let job = new TransferJob();
-        return job;
+    percentComplete() {
+        return this.#progress / this.#total;
     }
 }
 
-let controller = new TransferController();
+class TransferController extends EventEmitter {
+    #jobs;
+
+    constructor() {
+        super();
+        this.#jobs = [];
+    }
+
+    makeTransferJob() {
+        let job = new TransferJob();
+        this.#jobs.push(job);
+        return job;
+    }
+
+    jobs() {
+        // return [...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs, ...this.#jobs];
+        return this.#jobs;
+    }
+}
+
+controller = new TransferController();
 export default controller;

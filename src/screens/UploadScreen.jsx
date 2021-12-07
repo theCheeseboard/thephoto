@@ -86,6 +86,8 @@ class UploadScreen extends React.Component {
                     WsController.sendBase64Picture(reader.result);
                 };
             }
+
+            this.props.onUploadSelected();
         } catch (err) {
             console.log("Not valid files");
         }

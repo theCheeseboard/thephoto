@@ -4,6 +4,7 @@ import WsController from '../WsController'
 
 import Header from './Header';
 import CameraScreen from './CameraScreen';
+import TransfersScreen from './TransfersScreen';
 import UploadScreen from './UploadScreen';
 
 class MainScreen extends React.Component {
@@ -37,12 +38,16 @@ class MainScreen extends React.Component {
             case "camera":
                 return <CameraScreen />
             case "transfers":
-                return <span>This is the Transfers page</span>
+                return <TransfersScreen />
             case "upload":
-                return <UploadScreen />
+                return <UploadScreen onUploadSelected={this.onUploadSelected.bind(this)}/>
             default:
                 return <span>Please navigate to another page</span>
         }
+    }
+
+    onUploadSelected() {
+        this.changePage("transfers");
     }
 }
 
