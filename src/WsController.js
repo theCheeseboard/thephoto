@@ -136,7 +136,7 @@ class WsController {
                     //We're done here
                     //TODO: change the state of the transfer
                 } else {
-                    if (data.continue) sendChunk(data.replyTo);
+                    if (data.continue) sendChunk(data.seq);
                 }
             });
             job.addProgress(pictureData.length);
