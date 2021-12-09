@@ -37,6 +37,7 @@ class WsRendezvousServer : public QObject {
         };
 
         void reconnect();
+        void issueKeys();
         void connectNewClient();
 
         ConnectionState currentConnectionState();

@@ -21,6 +21,7 @@
 #define WSEVENTSOCKET_H
 
 #include <QObject>
+#include <QtCrypto>
 #include <functional>
 
 typedef std::function<void(QJsonObject)> ReplyFunction;
@@ -30,7 +31,7 @@ struct WsEventSocketPrivate;
 class WsEventSocket : public QObject {
         Q_OBJECT
     public:
-        explicit WsEventSocket(QWebSocket* socket, QObject* parent = nullptr);
+        explicit WsEventSocket(QWebSocket* socket, QCA::RSAPrivateKey privateKey, QObject* parent = nullptr);
         ~WsEventSocket();
 
         QString username(quint64 userId);

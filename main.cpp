@@ -2,13 +2,13 @@
 #include "librarywindow.h"
 #include <tapplication.h>
 #include <QTranslator>
+#include <QtCrypto>
 
 #ifdef Q_OS_MAC
-#include <CoreFoundation/CFBundle.h>
+    #include <CoreFoundation/CFBundle.h>
 #endif
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char* argv[]) {
     tApplication a(argc, argv);
 
 #ifdef Q_OS_LINUX
@@ -32,16 +32,18 @@ int main(int argc, char *argv[])
     a.addCopyrightLine(QApplication::translate("main", "This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)"));
     a.addCopyrightLine(QApplication::translate("main", "This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)"));
     a.addCopyrightLine(QApplication::translate("main", "Android™ is a trademark of Google LLC"));
-    #ifdef T_BLUEPRINT_BUILD
-        a.setApplicationName("thePhoto Blueprint");
-    #else
-        a.setApplicationName("thePhoto");
-    #endif
+#ifdef T_BLUEPRINT_BUILD
+    a.setApplicationName("thePhoto Blueprint");
+#else
+    a.setApplicationName("thePhoto");
+#endif
 
 
 #ifdef Q_OS_MAC
     a.setAttribute(Qt::AA_DontShowIconsInMenus, true);
 #endif
+
+    QCA::Initializer initialiser;
 
     if (a.arguments().contains("--old-library")) {
         MainWindow* w = new MainWindow;

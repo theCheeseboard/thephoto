@@ -36,8 +36,8 @@ WsEventServer::WsEventServer(QObject* parent) : QObject(parent) {
     tDebug("WsEventServer") << "Event server URL:" << d->server->serverUrl().toString();
 
     connect(d->server, &QWebSocketServer::newConnection, this, [ = ] {
-        WsEventSocket* socket = new WsEventSocket(d->server->nextPendingConnection());
-        emit newSocketAvailable(socket);
+//        WsEventSocket* socket = new WsEventSocket(d->server->nextPendingConnection());
+//        emit newSocketAvailable(socket);
     });
 }
 

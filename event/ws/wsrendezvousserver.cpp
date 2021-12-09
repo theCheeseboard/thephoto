@@ -25,6 +25,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QWebSocket>
+#include <QtCrypto>
 #include "wseventsocket.h"
 
 struct WsRendezvousServerPrivate {
@@ -34,6 +35,9 @@ struct WsRendezvousServerPrivate {
     QWebSocket* currentPendingSocket = nullptr;
     QString token;
     int serverNumber;
+
+    QCA::RSAPrivateKey privateKey;
+    bool keysIssued = false;
 };
 
 WsRendezvousServer::WsRendezvousServer(QObject* parent) : QObject(parent) {
@@ -63,6 +67,41 @@ void WsRendezvousServer::reconnect() {
         d->serverNumber = replyObj.value("serverNumber").toInt();
         d->token = replyObj.value("token").toString();
 
+        if (d->keysIssued) {
+            emit newServerIdAvailable(d->serverNumber);
+            connectNewClient();
+        } else {
+            issueKeys();
+        }
+    });
+}
+
+void WsRendezvousServer::issueKeys() {
+    QCA::KeyGenerator keygen;
+    keygen.setBlockingEnabled(true);
+    d->privateKey = keygen.createRSA(4096).toRSA();
+    d->privateKey.toPEMFile("/home/victor/x/pem1.pem");
+
+    QUrl keySetupUrl;
+    keySetupUrl.setScheme(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE ? "https" : "http");
+    keySetupUrl.setHost(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
+    keySetupUrl.setPort(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT);
+    keySetupUrl.setPath(QStringLiteral("/keys/%1").arg(d->serverNumber));
+
+    QNetworkRequest keySetupRequest(keySetupUrl);
+    keySetupRequest.setRawHeader("Authorization", QStringLiteral("Bearer %1").arg(d->token).toUtf8());
+    keySetupRequest.setRawHeader("Host", THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
+    keySetupRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-pem-file");
+
+    QNetworkReply* reply = d->mgr.post(keySetupRequest, d->privateKey.toPublicKey().toPEM().toUtf8());
+    connect(reply, &QNetworkReply::finished, this, [ = ] {
+        if (reply->error() != QNetworkReply::NoError) {
+            d->state = Error;
+            emit connectionStateChanged(Error);
+            return;
+        }
+
+        d->keysIssued = true;
         emit newServerIdAvailable(d->serverNumber);
         connectNewClient();
     });
@@ -100,7 +139,7 @@ void WsRendezvousServer::connectNewClient() {
             d->currentPendingSocket = nullptr;
         }
 
-        WsEventSocket* eventSocket = new WsEventSocket(socket);
+        WsEventSocket* eventSocket = new WsEventSocket(socket, d->privateKey);
         connect(eventSocket, &WsEventSocket::rendezvousClientConnect, this, [ = ] {
             connectNewClient();
         });

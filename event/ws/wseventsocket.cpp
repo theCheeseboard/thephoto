@@ -25,6 +25,7 @@
 #include <QRandomGenerator64>
 #include <QTimer>
 #include <QBuffer>
+#include <QtCrypto>
 #include <tlogger.h>
 
 struct WsEventSocketPrivate {
@@ -47,7 +48,10 @@ struct WsEventSocketPrivate {
     QWebSocket* socket;
 
     QMap<quint64, QString> users;
+    QMap<quint64, QCA::SymmetricKey> symks;
     QMap<int, ReplyFunction> replies;
+
+    QCA::RSAPrivateKey privateKey;
 
     static void receiveIntoSocketTransfer(SocketTransfer* transfer, QJsonObject object, WsEventSocket* eventSocket) {
         int seq = object.value("seq").toInt();
@@ -79,15 +83,37 @@ struct WsEventSocketPrivate {
     }
 };
 
-WsEventSocket::WsEventSocket(QWebSocket* socket, QObject* parent) : QObject(parent) {
+WsEventSocket::WsEventSocket(QWebSocket* socket, QCA::RSAPrivateKey privateKey, QObject* parent) : QObject(parent) {
     d = new WsEventSocketPrivate();
     d->socket = socket;
+    d->privateKey = privateKey;
 
     connect(socket, &QWebSocket::textMessageReceived, this, [ = ](QString message) {
         socket->binaryMessageReceived(message.toUtf8());
     });
     connect(socket, &QWebSocket::binaryMessageReceived, this, [ = ](QByteArray message) {
         //TODO: decrypt message
+        QCA::SecureArray decryptOutput;
+        bool decryptSuccess = d->privateKey.decrypt(message, &decryptOutput, QCA::EME_PKCS1_OAEP);
+        if (decryptSuccess) {
+            message = decryptOutput.toByteArray();
+        } else {
+            //Try decrypting using known ciphers
+            char ivLen = message.at(0);
+            QCA::InitializationVector iv(message.mid(1, ivLen));
+            QByteArray messageData = message.mid(1 + ivLen);
+
+            for (quint64 userid : d->symks.keys()) {
+                QCA::SymmetricKey symk = d->symks.value(userid);
+                QCA::Cipher cipher("aes256", QCA::Cipher::CBC, QCA::Cipher::DefaultPadding, QCA::Decode, symk, iv);
+                QByteArray decrypted = cipher.process(messageData).toByteArray();
+
+                if (!decrypted.isEmpty() && (decrypted.at(0) == '{' || decrypted.at(0) == '[')) {
+                    message = decrypted;
+                    break;
+                }
+            }
+        }
 
         QJsonParseError error;
         QJsonDocument doc = QJsonDocument::fromJson(message, &error);
@@ -126,6 +152,12 @@ WsEventSocket::WsEventSocket(QWebSocket* socket, QObject* parent) : QObject(pare
             quint64 userId = QRandomGenerator64::system()->generate();
             d->users.insert(userId, username);
 
+            QString keyString = rootObj.value("key").toString();
+            QByteArray keyBytes = QByteArray::fromBase64(keyString.toUtf8());
+            QCA::SymmetricKey symk(keyBytes);
+
+            d->symks.insert(userId, symk);
+
             emit userLogin(userId, username);
             sendMessage(userId, {
                 {"replyTo", seq},
@@ -143,6 +175,7 @@ WsEventSocket::WsEventSocket(QWebSocket* socket, QObject* parent) : QObject(pare
             emit userGone(userId);
             QTimer::singleShot(0, this, [ = ] {
                 d->users.remove(userId);
+                d->symks.remove(userId);
             });
             sendMessage(userId, {
                 {"replyTo", seq},
