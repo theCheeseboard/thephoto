@@ -6,6 +6,10 @@ class WsController {
     #wsStateChangeHandler;
     #connected;
     #userId;
+
+    #pk;
+
+    #symk;
     
     #seq;
     #replies;
@@ -21,20 +25,55 @@ class WsController {
     }
     
     connect(room, username) {
-        return new Promise((res, rej) => {
-            // let wsUrl = "ws://" + room + ":26158/";
-            let wsUrl = `${process.env.REACT_APP_RENDEZVOUS_SERVER}/rendezvous/${room}`
+        return new Promise(async (res, rej) => {
+            //Retrieve the public key
+            try {
+                let pkData = await fetch(`${process.env.REACT_APP_RENDEZVOUS_SERVER_IS_SECURE === "true" ? "https://" : "http://"}${process.env.REACT_APP_RENDEZVOUS_SERVER}/keys/${room}`);
+
+                let pkDataString = await pkData.text();
+                const pemHeader = "-----BEGIN PRIVATE KEY-----";
+                const pemFooter = "-----END PRIVATE KEY-----";
+                let pemContents = pkDataString.substring(pemHeader.length, pkDataString.length - pemFooter.length);
+
+                let binaryPk = window.atob(pemContents);
+
+                let pkBuf = new ArrayBuffer(binaryPk.length);
+                let bufView = new Uint8Array(pkBuf);
+                for (let i = 0, strLen = binaryPk.length; i < strLen; i++) {
+                    bufView[i] = binaryPk.charCodeAt(i);
+                }
+
+                this.#pk = await crypto.subtle.importKey("spki", pkBuf, {
+                    name: "RSA-OAEP",
+                    hash: "SHA-1"
+                }, false, ["encrypt"]);
+            } catch (err) {
+                console.log(err);
+                rej(err);
+                return;
+            }
+
+            //Generate an AES symmetric key
+            this.#symk = await crypto.subtle.generateKey({
+                name: "AES-CBC",
+                length: 256
+            }, true, ["encrypt", "decrypt"]);
+
+            let wsUrl = `${process.env.REACT_APP_RENDEZVOUS_SERVER_IS_SECURE === "true" ? "wss://" : "ws://"}${process.env.REACT_APP_RENDEZVOUS_SERVER}/rendezvous/${room}`
             this.#ws = new WebSocket(wsUrl);
-            this.#ws.onopen = (event) => {
-                this.sendMessage({
+            this.#ws.onopen = async (event) => {
+                let exportedKey = await crypto.subtle.exportKey("raw", this.#symk);
+
+                await this.sendMessage({
                     type: "connect",
-                    username: username
+                    username: username,
+                    key: btoa(String.fromCharCode(...new Uint8Array(exportedKey)))
                 }, (msg) => {
                     this.#connected = true;
                     this.#userId = msg.user;
                     this.#wsStateChangeHandler();
                     res();
-                });
+                }, true);
             };
             this.#ws.onerror = (event) => {
                 this.#ws = null;
@@ -77,7 +116,7 @@ class WsController {
         return this.#connected;
     }
     
-    sendMessage(message, replyHandler) {
+    async sendMessage(message, replyHandler, encryptWithPk) {
         message.seq = this.#seq++;
         
         if (this.#userId !== null) {
@@ -87,8 +126,32 @@ class WsController {
         let textEncoder = new TextEncoder();
         let payload = textEncoder.encode(JSON.stringify(message));
         
-        //TODO: encrypt payload
-        
+        if (encryptWithPk) {
+            try {
+                payload = await crypto.subtle.encrypt({
+                    name: "RSA-OAEP"
+                }, this.#pk, payload);
+            } catch (err) {
+                console.log(err);
+                return;
+            }
+        } else {
+            try {
+                let iv = crypto.getRandomValues(new Uint8Array(16));
+                let payloadData = await crypto.subtle.encrypt({
+                    name: "AES-CBC",
+                    iv: iv
+                }, this.#symk, payload);
+
+                payload = new Uint8Array(1 + iv.length + payloadData.byteLength);
+                payload.set([iv.length]);
+                payload.set(iv, 1);
+                payload.set(new Uint8Array(payloadData), iv.length + 1);
+            } catch (err) {
+                console.log(err);
+                return;
+            }
+        }
         this.#ws.send(payload);
         
         if (replyHandler !== null) {

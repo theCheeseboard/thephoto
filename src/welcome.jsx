@@ -6,8 +6,8 @@ class Welcome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            room: "",
-            username: "",
+            room: window.localStorage.getItem("room") || "",
+            username: window.localStorage.getItem("username") || "",
             error: ""
         }
     }
@@ -34,6 +34,16 @@ class Welcome extends React.Component {
     }
     
     render() {
+        let onRoomChange = e => {
+            window.localStorage.setItem("room", e.target.value);
+            this.setState({room: e.target.value});
+        }
+
+        let onUsernameChange = e => {
+            window.localStorage.setItem("username", e.target.value);
+            this.setState({username: e.target.value});
+        }
+
         return <div className="welcomeWrapper">
             <div className="welcomeContainer">
                 <h1>Welcome to thePhoto</h1>
@@ -44,10 +54,10 @@ class Welcome extends React.Component {
                 
                 <div className="welcomeForm">
                     <span>Room</span>
-                    <input type="text" value={this.state.room} onChange={(e => this.setState({room: e.target.value}))}/>
+                    <input type="text" value={this.state.room} onChange={onRoomChange}/>
                     
                     <span>Username</span>
-                    <input type="text" value={this.state.username} onChange={(e => this.setState({username: e.target.value}))}/>
+                    <input type="text" value={this.state.username} onChange={onUsernameChange}/>
                     
                     {this.renderError()}
                     <button onClick={this.connect.bind(this)}>Connect</button>
