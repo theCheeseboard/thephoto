@@ -47,177 +47,182 @@
 <context>
     <name>EventModeSettings</name>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="267"/>
+        <location filename="../event/eventmodesettings.ui" line="294"/>
         <source>Event Mode</source>
         <translation>Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="718"/>
+        <location filename="../event/eventmodesettings.ui" line="817"/>
         <source>Show Wi-Fi details</source>
         <translation>Show Wi-Fi details</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="725"/>
+        <location filename="../event/eventmodesettings.ui" line="824"/>
         <source>SSID</source>
         <translation>SSID</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="320"/>
+        <location filename="../event/eventmodesettings.ui" line="347"/>
         <source>Backstage</source>
         <translation>Backstage</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="464"/>
+        <location filename="../event/eventmodesettings.ui" line="563"/>
         <source>SESSION</source>
         <translation>SESSION</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="471"/>
+        <location filename="../event/eventmodesettings.ui" line="570"/>
         <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
         <translation>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="516"/>
+        <location filename="../event/eventmodesettings.ui" line="615"/>
         <source>DISPLAYS</source>
         <translation>DISPLAYS</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="745"/>
+        <location filename="../event/eventmodesettings.ui" line="844"/>
         <source>Key</source>
         <translation>Key</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="758"/>
+        <location filename="../event/eventmodesettings.ui" line="857"/>
         <source>WI-FI</source>
         <translation>WI-FI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="554"/>
+        <location filename="../event/eventmodesettings.ui" line="653"/>
         <source>Use Monitor</source>
         <translation>Use Monitor</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="292"/>
+        <location filename="../event/eventmodesettings.ui" line="319"/>
         <source>thePhoto Event Mode</source>
         <translation>thePhoto Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="388"/>
+        <location filename="../event/eventmodesettings.ui" line="448"/>
         <source>APP</source>
         <translation>APP</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="395"/>
+        <location filename="../event/eventmodesettings.ui" line="455"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
         <translation>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="402"/>
+        <location filename="../event/eventmodesettings.ui" line="462"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
         <translation>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="444"/>
+        <location filename="../event/eventmodesettings.ui" line="494"/>
+        <source>ROOM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="543"/>
         <source>Session Name</source>
         <translation>Session Name</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="451"/>
+        <location filename="../event/eventmodesettings.ui" line="550"/>
         <source>Store users in subfolders</source>
         <translation>Store users in subfolders</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="605"/>
+        <location filename="../event/eventmodesettings.ui" line="704"/>
         <source>Use Mission Control to adjust monitors.</source>
         <translation>Use Mission Control to adjust monitors.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="612"/>
+        <location filename="../event/eventmodesettings.ui" line="711"/>
         <source>Open Mission Control</source>
         <translation>Open Mission Control</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="635"/>
+        <location filename="../event/eventmodesettings.ui" line="734"/>
         <source>There&apos;s only one display on this computer.</source>
         <translation>There&apos;s only one display on this computer.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="664"/>
+        <location filename="../event/eventmodesettings.ui" line="763"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
         <translation>If the Backstage is showing on the wrong display, you can swap the displays.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="671"/>
+        <location filename="../event/eventmodesettings.ui" line="770"/>
         <source>Swap Displays</source>
         <translation>Swap Displays</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="772"/>
+        <location filename="../event/eventmodesettings.ui" line="871"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
         <translation>Show Wi-Fi details on the screen next to the code so guests can connect to the network</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="820"/>
+        <location filename="../event/eventmodesettings.ui" line="919"/>
         <source>INFORMATION DISPLAY</source>
         <translation>INFORMATION DISPLAY</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="827"/>
+        <location filename="../event/eventmodesettings.ui" line="926"/>
         <source>Show Information Display</source>
         <translation>Show Information Display</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="837"/>
+        <location filename="../event/eventmodesettings.ui" line="936"/>
         <source>Show Author</source>
         <translation>Show Author</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="847"/>
+        <location filename="../event/eventmodesettings.ui" line="946"/>
         <source>Show Clock</source>
         <translation>Show Clock</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="857"/>
+        <location filename="../event/eventmodesettings.ui" line="956"/>
         <source>Show Audio Information</source>
         <translation>Show Audio Information</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="901"/>
+        <location filename="../event/eventmodesettings.ui" line="1004"/>
         <source>Here are all the users currently connected to your computer.</source>
         <translation>Here are all the users currently connected to your computer.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1000"/>
+        <location filename="../event/eventmodesettings.ui" line="1103"/>
         <source>Session Settings</source>
         <translation>Session Settings</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1020"/>
+        <location filename="../event/eventmodesettings.ui" line="1123"/>
         <source>Connected Users</source>
         <translation>Connected Users</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1037"/>
+        <location filename="../event/eventmodesettings.ui" line="1140"/>
         <source>Exchanged Images</source>
         <translation>Exchanged Images</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1067"/>
+        <location filename="../event/eventmodesettings.ui" line="1170"/>
         <source>Back to Event Mode</source>
         <translation>Back to Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1078"/>
+        <location filename="../event/eventmodesettings.ui" line="1181"/>
         <source>End Event Mode</source>
         <translation>End Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="101"/>
+        <location filename="../event/eventmodesettings.cpp" line="114"/>
         <source>End Event Mode?</source>
         <translation>End Event Mode?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="101"/>
+        <location filename="../event/eventmodesettings.cpp" line="114"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation>Close connections to all connected devices and end Event Mode?</translation>
     </message>
@@ -232,92 +237,107 @@
         <translation>Uncategorized</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="207"/>
+        <location filename="../event/eventmodesettings.cpp" line="320"/>
         <source>About this picture</source>
         <translation>About this picture</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="210"/>
+        <location filename="../event/eventmodesettings.cpp" line="323"/>
         <source>By %1</source>
         <translation>By %1</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="215"/>
+        <location filename="../event/eventmodesettings.cpp" line="328"/>
         <source>For this picture</source>
         <translation>For this picture</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="216"/>
+        <location filename="../event/eventmodesettings.cpp" line="329"/>
         <source>Enqueue for show</source>
         <translation>Enqueue for show</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="219"/>
+        <location filename="../event/eventmodesettings.cpp" line="332"/>
         <source>Delete</source>
         <translation>Delete</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="223"/>
+        <location filename="../event/eventmodesettings.cpp" line="336"/>
         <source>Image Deleted</source>
         <translation>Image Deleted</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="224"/>
+        <location filename="../event/eventmodesettings.cpp" line="337"/>
         <source>The image was deleted from your computer.</source>
         <translation>The image was deleted from your computer.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="247"/>
+        <location filename="../event/eventmodesettings.cpp" line="256"/>
         <source>User Connected</source>
         <translation>User Connected</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="252"/>
+        <location filename="../event/eventmodesettings.cpp" line="268"/>
         <source>User Disconnected</source>
         <translation>User Disconnected</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="298"/>
+        <location filename="../event/eventmodesettings.cpp" line="200"/>
         <source>For %1</source>
         <translation>For %1</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="299"/>
+        <location filename="../event/eventmodesettings.cpp" line="61"/>
+        <source>An error has occurred. View more details in the Backstage.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="66"/>
+        <source>Your room code is %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="69"/>
+        <source>We&apos;re preparing a room for you. Hang tight!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="201"/>
         <source>Kick</source>
         <translation>Kick</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="300"/>
+        <location filename="../event/eventmodesettings.cpp" line="202"/>
         <source>Kick?</source>
         <translation>Kick?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="300"/>
+        <location filename="../event/eventmodesettings.cpp" line="202"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
         <translation>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="305"/>
+        <location filename="../event/eventmodesettings.cpp" line="207"/>
         <source>Ban</source>
         <translation>Ban</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="306"/>
+        <location filename="../event/eventmodesettings.cpp" line="208"/>
         <source>Ban?</source>
         <translation>Ban?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="306"/>
+        <location filename="../event/eventmodesettings.cpp" line="208"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
         <translation>Ban %1? They won&apos;t be able to rejoin this session.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="323"/>
+        <location filename="../event/eventmodesettings.cpp" line="224"/>
         <source>Welcome to Event Mode!</source>
         <translation>Welcome to Event Mode!</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="323"/>
+        <location filename="../event/eventmodesettings.cpp" line="224"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
         <translation>To get back to the Backstage, simply hit the TAB key.</translation>
     </message>
@@ -350,7 +370,7 @@
         <translation>when asked.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="208"/>
+        <location filename="../event/eventmodeshow.cpp" line="216"/>
         <source>by %1</source>
         <translation>by %1</translation>
     </message>
@@ -358,8 +378,8 @@
 <context>
     <name>EventModeUserIndicator</name>
     <message>
-        <location filename="../event/eventmodeuserindicator.cpp" line="67"/>
-        <location filename="../event/eventmodeuserindicator.cpp" line="233"/>
+        <location filename="../event/eventmodeuserindicator.cpp" line="81"/>
+        <location filename="../event/eventmodeuserindicator.cpp" line="249"/>
         <source>Camera Timer</source>
         <translation>Camera Timer</translation>
     </message>

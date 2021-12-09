@@ -6,42 +6,55 @@
 #include <QPainter>
 #include <tpropertyanimation.h>
 
-EventModeUserIndicator::EventModeUserIndicator(EventSocket* sock, QWidget *parent) :
+struct EventModeUserIndicatorPrivate {
+    WsEventSocket* sock;
+    quint64 userId;
+    QColor backgroundCol;
+    QString username;
+    int timer = 0;
+
+    tVariantAnimation* usernameOpacity;
+    tVariantAnimation* cameraTimerOpacity;
+    QRect drawableRect;
+    bool deleting = false;
+};
+
+EventModeUserIndicator::EventModeUserIndicator(WsEventSocket* sock, quint64 userId, QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::EventModeUserIndicator)
-{
+    ui(new Ui::EventModeUserIndicator) {
     ui->setupUi(this);
 
-    this->sock = sock;
-    connect(sock, &EventSocket::newUserConnected, [=](QString name) {
-        username = name;
-        this->repaint();
-    });
-    connect(sock, &EventSocket::aboutToClose, [=] {
-        deleting = true;
+    d = new EventModeUserIndicatorPrivate();
 
-        QRect newRect = drawableRect;
+    d->sock = sock;
+    d->userId = userId;
+    d->username = d->sock->username(userId);
+    connect(sock, &WsEventSocket::userGone, [ = ](quint64 userId) {
+        if (d->userId != userId) return;
+        d->deleting = true;
+
+        QRect newRect = d->drawableRect;
         newRect.moveTop(this->height());
 
         tVariantAnimation* anim = new tVariantAnimation(this);
-        anim->setStartValue(drawableRect);
+        anim->setStartValue(d->drawableRect);
         anim->setEndValue(newRect);
         anim->setEasingCurve(QEasingCurve::InCubic);
         anim->setDuration(500);
-        connect(anim, &tVariantAnimation::valueChanged, [=](QVariant value) {
-            drawableRect = value.toRect();
+        connect(anim, &tVariantAnimation::valueChanged, [ = ](QVariant value) {
+            d->drawableRect = value.toRect();
             this->repaint();
         });
-        connect(anim, &tVariantAnimation::finished, [=] {
+        connect(anim, &tVariantAnimation::finished, [ = ] {
             tVariantAnimation* anim = new tVariantAnimation(this);
             anim->setStartValue(this->width());
             anim->setEndValue(0);
             anim->setEasingCurve(QEasingCurve::OutCubic);
             anim->setDuration(500);
-            connect(anim, &tVariantAnimation::valueChanged, [=](QVariant value) {
+            connect(anim, &tVariantAnimation::valueChanged, [ = ](QVariant value) {
                 this->setFixedWidth(value.toInt());
             });
-            connect(anim, &tVariantAnimation::finished, [=] {
+            connect(anim, &tVariantAnimation::finished, [ = ] {
                 anim->deleteLater();
                 this->deleteLater();
             });
@@ -50,10 +63,11 @@ EventModeUserIndicator::EventModeUserIndicator(EventSocket* sock, QWidget *paren
         connect(anim, SIGNAL(finished()), anim, SLOT(deleteLater()));
         anim->start();
     });
-    connect(sock, &EventSocket::timer, [=](int secondsLeft) {
-        qDebug() << "TIMER:" << secondsLeft;
+    connect(sock, &WsEventSocket::timer, [ = ](quint64 userId, int secondsLeft) {
+        if (userId != d->userId) return;
+//        qDebug() << "TIMER:" << secondsLeft;
 
-        if (timer == 0 && secondsLeft != 0) {
+        if (d->timer == 0 && secondsLeft != 0) {
             //Expand
 
             QFont f;
@@ -64,57 +78,57 @@ EventModeUserIndicator::EventModeUserIndicator(EventSocket* sock, QWidget *paren
             }
             f.setPointSize(f.pointSize() - 1);
 
-            int width = QFontMetrics(f).width("10") + qMax(this->fontMetrics().width(tr("Camera Timer")),
-                             this->fontMetrics().width(username)) + 27 * theLibsGlobal::getDPIScaling();
+            int width = QFontMetrics(f).horizontalAdvance("10") + qMax(this->fontMetrics().horizontalAdvance(tr("Camera Timer")),
+                    this->fontMetrics().horizontalAdvance(d->username)) + 27 * theLibsGlobal::getDPIScaling();
 
             tVariantAnimation* anim = new tVariantAnimation(this);
             anim->setStartValue(this->width());
             anim->setEndValue(width);
             anim->setEasingCurve(QEasingCurve::InOutCubic);
             anim->setDuration(500);
-            connect(anim, &tVariantAnimation::valueChanged, [=](QVariant value) {
+            connect(anim, &tVariantAnimation::valueChanged, [ = ](QVariant value) {
                 this->setFixedWidth(value.toInt());
             });
             anim->start();
 
-            usernameOpacity->setStartValue((float) 1);
-            usernameOpacity->setEndValue((float) 0);
-            usernameOpacity->start();
+            d->usernameOpacity->setStartValue((float) 1);
+            d->usernameOpacity->setEndValue((float) 0);
+            d->usernameOpacity->start();
 
             QMetaObject::Connection* connection = new QMetaObject::Connection;
-            *connection = connect(usernameOpacity, &tVariantAnimation::finished, [=] {
+            *connection = connect(d->usernameOpacity, &tVariantAnimation::finished, [ = ] {
                 disconnect(*connection);
 
-                cameraTimerOpacity->setStartValue((float) 0);
-                cameraTimerOpacity->setEndValue((float) 1);
-                cameraTimerOpacity->start();
+                d->cameraTimerOpacity->setStartValue((float) 0);
+                d->cameraTimerOpacity->setEndValue((float) 1);
+                d->cameraTimerOpacity->start();
             });
-        } else if (timer != 0 && secondsLeft == 0) {
+        } else if (d->timer != 0 && secondsLeft == 0) {
             //Contract
             tVariantAnimation* anim = new tVariantAnimation(this);
             anim->setStartValue(this->width());
             anim->setEndValue(this->height());
             anim->setEasingCurve(QEasingCurve::InOutCubic);
             anim->setDuration(500);
-            connect(anim, &tVariantAnimation::valueChanged, [=](QVariant value) {
+            connect(anim, &tVariantAnimation::valueChanged, [ = ](QVariant value) {
                 this->setFixedWidth(value.toInt());
             });
             connect(anim, SIGNAL(finished()), anim, SLOT(deleteLater()));
             anim->start();
 
-            cameraTimerOpacity->setStartValue((float) 1);
-            cameraTimerOpacity->setEndValue((float) 0);
-            cameraTimerOpacity->start();
+            d->cameraTimerOpacity->setStartValue((float) 1);
+            d->cameraTimerOpacity->setEndValue((float) 0);
+            d->cameraTimerOpacity->start();
 
             QMetaObject::Connection* connection = new QMetaObject::Connection;
-            *connection = connect(cameraTimerOpacity, &tVariantAnimation::finished, [=] {
+            *connection = connect(d->cameraTimerOpacity, &tVariantAnimation::finished, [ = ] {
                 disconnect(*connection);
-                timer = secondsLeft;
+                d->timer = secondsLeft;
 
 
-                usernameOpacity->setStartValue((float) 0);
-                usernameOpacity->setEndValue((float) 1);
-                usernameOpacity->start();
+                d->usernameOpacity->setStartValue((float) 0);
+                d->usernameOpacity->setEndValue((float) 1);
+                d->usernameOpacity->start();
             });
 
             this->repaint();
@@ -123,12 +137,12 @@ EventModeUserIndicator::EventModeUserIndicator(EventSocket* sock, QWidget *paren
             return;
         }
 
-        timer = secondsLeft;
+        d->timer = secondsLeft;
         this->repaint();
     });
 
     //Set the background to a random colour
-    backgroundCol = QColor::fromRgb(QRandomGenerator::global()->generate());
+    d->backgroundCol = QColor::fromRgb(QRandomGenerator::global()->generate());
 
     this->setFixedWidth(0);
 
@@ -138,54 +152,56 @@ EventModeUserIndicator::EventModeUserIndicator(EventSocket* sock, QWidget *paren
     anim->setEndValue(this->height());
     anim->setEasingCurve(QEasingCurve::OutCubic);
     anim->setDuration(500);
-    connect(anim, &tVariantAnimation::valueChanged, [=](QVariant value) {
+    connect(anim, &tVariantAnimation::valueChanged, [ = ](QVariant value) {
         anim->setEndValue(this->height());
         this->setFixedWidth(value.toInt());
     });
-    connect(anim, SIGNAL(finished()), anim, SLOT(deleteLater()));
+    connect(anim, &QAbstractAnimation::finished, anim, &QObject::deleteLater);
     anim->start();
 
-    usernameOpacity = new tVariantAnimation(this);
-    usernameOpacity->setStartValue((float) 0);
-    usernameOpacity->setEndValue((float) 1);
-    usernameOpacity->setEasingCurve(QEasingCurve::OutCubic);
-    usernameOpacity->setDuration(500);
-    connect(usernameOpacity, &tVariantAnimation::valueChanged, [=] {
+    d->usernameOpacity = new tVariantAnimation(this);
+    d->usernameOpacity->setStartValue((float) 0);
+    d->usernameOpacity->setEndValue((float) 1);
+    d->usernameOpacity->setEasingCurve(QEasingCurve::OutCubic);
+    d->usernameOpacity->setDuration(500);
+    connect(d->usernameOpacity, &tVariantAnimation::valueChanged, [ = ] {
         this->repaint();
     });
-    connect(usernameOpacity, &tVariantAnimation::finished, [=] {
+    connect(d->usernameOpacity, &tVariantAnimation::finished, [ = ] {
         this->repaint();
     });
-    usernameOpacity->start();
+    d->usernameOpacity->start();
 
-    cameraTimerOpacity = new tVariantAnimation(this);
-    cameraTimerOpacity->setEasingCurve(QEasingCurve::OutCubic);
-    cameraTimerOpacity->setDuration(500);
-    connect(cameraTimerOpacity, &tVariantAnimation::valueChanged, [=] {
+    d->cameraTimerOpacity = new tVariantAnimation(this);
+    d->cameraTimerOpacity->setEasingCurve(QEasingCurve::OutCubic);
+    d->cameraTimerOpacity->setDuration(500);
+    connect(d->cameraTimerOpacity, &tVariantAnimation::valueChanged, [ = ] {
         this->repaint();
     });
-    connect(cameraTimerOpacity, &tVariantAnimation::finished, [=] {
+    connect(d->cameraTimerOpacity, &tVariantAnimation::finished, [ = ] {
         this->repaint();
     });
 
 }
 
-EventModeUserIndicator::~EventModeUserIndicator()
-{
+EventModeUserIndicator::~EventModeUserIndicator() {
+    delete d;
     delete ui;
 }
 
-void EventModeUserIndicator::resizeEvent(QResizeEvent *event) {
-    if (!deleting) {
-        drawableRect.setSize(this->size());
-        drawableRect.setTopLeft(QPoint(0, 0));
+void EventModeUserIndicator::resizeEvent(QResizeEvent* event) {
+    Q_UNUSED(event)
+    if (!d->deleting) {
+        d->drawableRect.setSize(this->size());
+        d->drawableRect.setTopLeft(QPoint(0, 0));
     }
 }
 
-void EventModeUserIndicator::paintEvent(QPaintEvent *event) {
+void EventModeUserIndicator::paintEvent(QPaintEvent* event) {
+    Q_UNUSED(event)
     QPen foregroundPen;
 
-    if ((backgroundCol.red() + backgroundCol.green() + backgroundCol.blue()) / 3 > 127) {
+    if ((d->backgroundCol.red() + d->backgroundCol.green() + d->backgroundCol.blue()) / 3 > 127) {
         foregroundPen = QPen(Qt::black);
     } else {
         foregroundPen = QPen(Qt::white);
@@ -193,15 +209,15 @@ void EventModeUserIndicator::paintEvent(QPaintEvent *event) {
 
     QPainter painter(this);
     painter.setPen(Qt::transparent);
-    painter.setBrush(backgroundCol);
-    painter.drawRect(drawableRect);
+    painter.setBrush(d->backgroundCol);
+    painter.drawRect(d->drawableRect);
 
     painter.save();
-    if (username != "") {
+    if (d->username != "") {
         painter.setPen(foregroundPen);
-        painter.setOpacity(usernameOpacity->currentValue().toFloat());
+        painter.setOpacity(d->usernameOpacity->currentValue().toFloat());
 
-        QString nameCharacter(username.at(0).toUpper());
+        QString nameCharacter(d->username.at(0).toUpper());
 
         QFont f;
         f.setFamily(this->font().family());
@@ -213,22 +229,22 @@ void EventModeUserIndicator::paintEvent(QPaintEvent *event) {
         painter.setFont(f);
 
         QFontMetrics metrics(f);
-        int charWidth = metrics.width(nameCharacter);
+        int charWidth = metrics.horizontalAdvance(nameCharacter);
         int charHeight = metrics.height();
 
         QRect textRect;
         textRect.setWidth(charWidth);
         textRect.setHeight(charHeight);
-        textRect.moveTop(drawableRect.top() + drawableRect.height() / 2 - charHeight / 2);
-        textRect.moveLeft(drawableRect.left() + drawableRect.height() / 2 - charWidth / 2); //Use height to position it correctly during animation
+        textRect.moveTop(d->drawableRect.top() + d->drawableRect.height() / 2 - charHeight / 2);
+        textRect.moveLeft(d->drawableRect.left() + d->drawableRect.height() / 2 - charWidth / 2); //Use height to position it correctly during animation
         painter.drawText(textRect, nameCharacter);
     }
     painter.restore();
 
     painter.save();
-    if (timer != 0) {
+    if (d->timer != 0) {
         painter.setPen(foregroundPen);
-        painter.setOpacity(cameraTimerOpacity->currentValue().toFloat());
+        painter.setOpacity(d->cameraTimerOpacity->currentValue().toFloat());
 
         QString text = tr("Camera Timer");
 
@@ -242,7 +258,7 @@ void EventModeUserIndicator::paintEvent(QPaintEvent *event) {
         painter.setFont(f);
 
         QFontMetrics metrics(f);
-        int charWidth = metrics.width("10");
+        int charWidth = metrics.horizontalAdvance("10");
         int charHeight = metrics.height();
 
         QRect textRect;
@@ -253,15 +269,15 @@ void EventModeUserIndicator::paintEvent(QPaintEvent *event) {
 
         QRect realTextRect = textRect;
         realTextRect.setHeight(charHeight);
-        realTextRect.setWidth(metrics.width(QString::number(timer)));
+        realTextRect.setWidth(metrics.horizontalAdvance(QString::number(d->timer)));
         realTextRect.moveCenter(textRect.center());
 
-        painter.drawText(realTextRect, QString::number(timer));
+        painter.drawText(realTextRect, QString::number(d->timer));
 
         painter.setFont(this->font());
         textRect.moveLeft(textRect.right() + 9);
         textRect.setHeight(this->fontMetrics().height());
-        textRect.setWidth(this->fontMetrics().width(text) + 1);
+        textRect.setWidth(this->fontMetrics().horizontalAdvance(text) + 1);
         textRect.moveBottom(this->height() / 2);
         painter.drawText(textRect, text);
 
@@ -269,9 +285,9 @@ void EventModeUserIndicator::paintEvent(QPaintEvent *event) {
         f.setBold(true);
         painter.setFont(f);
 
-        textRect.setWidth(QFontMetrics(f).width(username));
+        textRect.setWidth(QFontMetrics(f).horizontalAdvance(d->username));
         textRect.moveTop(textRect.bottom());
-        painter.drawText(textRect, username);
+        painter.drawText(textRect, d->username);
     }
     painter.restore();
 }

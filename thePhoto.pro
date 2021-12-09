@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network concurrent multimedia
+QT       += core gui network concurrent multimedia websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,9 +13,19 @@ TEMPLATE = app
 CONFIG += c++14
 SHARE_APP_NAME=thephoto
 
+DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER="\\\"thephoto-rendezvous.vicr123.com\\\""
+DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT=443
+DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE=true
+#DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER="\\\"localhost\\\""
+#DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT=4000
+#DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE=false
+
 unix:!macx {
     # Include the-libs build tools
     include(/usr/share/the-libs/pri/buildmaster.pri)
+
+    CONFIG += link_pkgconfig
+    PKGCONFIG += qca2-qt5
 
     QT += thelib dbus
     TARGET = thephoto
@@ -73,6 +83,8 @@ macx {
 SOURCES += main.cpp\
     easyexif/exif.cpp \
     event/ws/wseventserver.cpp \
+    event/ws/wseventsocket.cpp \
+    event/ws/wsrendezvousserver.cpp \
     library/imagedescriptor.cpp \
     library/imagedescriptormanager.cpp \
     library/imagegrid.cpp \
@@ -94,6 +106,8 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     easyexif/exif.h \
     event/ws/wseventserver.h \
+    event/ws/wseventsocket.h \
+    event/ws/wsrendezvousserver.h \
     library/imagedescriptor.h \
     library/imagedescriptormanager.h \
     library/imagegrid.h \

@@ -9,6 +9,7 @@
 #include <tpopover.h>
 #include <tpromise.h>
 #include <taboutdialog.h>
+#include <thelpmenu.h>
 #include "managelibrary.h"
 #include "library/imageview.h"
 
@@ -23,10 +24,9 @@ struct LibraryWindowPrivate {
     Qt::WindowStates stateBeforeFullScreen;
 };
 
-LibraryWindow::LibraryWindow(QWidget *parent) :
+LibraryWindow::LibraryWindow(QWidget* parent) :
     QMainWindow(parent),
-    ui(new Ui::LibraryWindow)
-{
+    ui(new Ui::LibraryWindow) {
     ui->setupUi(this);
 
     ui->stackedWidget->setCurrentAnimation(tStackedWidget::Fade);
@@ -45,42 +45,42 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
     d->csd.installMoveAction(ui->headerWidget);
 
 
-    #ifdef Q_OS_MAC
-        ui->menuButton->setVisible(false);
-        ui->headerBar->installEventFilter(this);
+#ifdef Q_OS_MAC
+    ui->menuButton->setVisible(false);
+    ui->headerBar->installEventFilter(this);
 
-        setupMacOS();
-    #else
-        ui->menubar->setVisible(false);
-        ui->menuButton->setIconSize(SC_DPI_T(QSize(24, 24), QSize));
+    setupMacOS();
+#else
+    ui->menubar->setVisible(false);
+    ui->menuButton->setIconSize(SC_DPI_T(QSize(24, 24), QSize));
 
-        QMenu* menu = new QMenu();
-        menu->addAction(ui->actionManage_Library);
-        menu->addSeparator();
-        menu->addAction(ui->actionEvent_Mode);
-        menu->addSeparator();
-        menu->addMenu(ui->menuHelp);
-        menu->addAction(ui->actionExit);
-        ui->menuButton->setMenu(menu);
-    #endif
+    QMenu* menu = new QMenu();
+    menu->addAction(ui->actionManage_Library);
+    menu->addSeparator();
+    menu->addAction(ui->actionEvent_Mode);
+    menu->addSeparator();
+    menu->addMenu(new tHelpMenu(this));
+    menu->addAction(ui->actionExit);
+    ui->menuButton->setMenu(menu);
+#endif
 
     QMenu* deleteMenu = new QMenu();
     deleteMenu->addSection(tr("Delete Image?"));
-    deleteMenu->addAction(QIcon::fromTheme("edit-delete", QIcon(":/icons/edit-delete.svg")), tr("Delete"), [=] {
+    deleteMenu->addAction(QIcon::fromTheme("edit-delete", QIcon(":/icons/edit-delete.svg")), tr("Delete"), [ = ] {
         d->overlayView->deleteCurrentImage();
     });
     ui->deleteButton->setMenu(deleteMenu);
 
     QMenu* saveMenu = new QMenu();
     saveMenu->addSection(tr("Save Edits"));
-    saveMenu->addAction(tr("Save In Place"), [=] {
+    saveMenu->addAction(tr("Save In Place"), [ = ] {
         d->overlayView->endEdit(":INPLACE");
     });
-    saveMenu->addAction(tr("Save As New"), [=] {
+    saveMenu->addAction(tr("Save As New"), [ = ] {
 
     })->setEnabled(false); //TODO: Implement this
     saveMenu->addSeparator();
-    saveMenu->addAction(QIcon::fromTheme("document-save-as", QIcon(":/icons/document-save-as.svg")), tr("Save As..."), [=] {
+    saveMenu->addAction(QIcon::fromTheme("document-save-as", QIcon(":/icons/document-save-as.svg")), tr("Save As..."), [ = ] {
         QFileDialog* fileDialog = new QFileDialog(this);
         fileDialog->setAcceptMode(QFileDialog::AcceptSave);
         fileDialog->setNameFilters({
@@ -88,7 +88,7 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
             tr("JPEG image (*.jpg)")
         });
         fileDialog->setWindowFlag(Qt::Sheet);
-        connect(fileDialog, &QFileDialog::fileSelected, this, [=](QString file) {
+        connect(fileDialog, &QFileDialog::fileSelected, this, [ = ](QString file) {
             d->overlayView->endEdit(file);
         });
         connect(fileDialog, &QFileDialog::finished, fileDialog, &QFileDialog::deleteLater);
@@ -99,24 +99,21 @@ LibraryWindow::LibraryWindow(QWidget *parent) :
     loadLibrary();
 }
 
-LibraryWindow::~LibraryWindow()
-{
+LibraryWindow::~LibraryWindow() {
     delete ui;
     delete d;
 }
 
-void LibraryWindow::on_actionExit_triggered()
-{
+void LibraryWindow::on_actionExit_triggered() {
     this->close();
 }
 
-void LibraryWindow::resizeEvent(QResizeEvent *event) {
+void LibraryWindow::resizeEvent(QResizeEvent* event) {
 
 }
 
 
-void LibraryWindow::on_actionManage_Library_triggered()
-{
+void LibraryWindow::on_actionManage_Library_triggered() {
     QEventLoop loop;
     ManageLibrary* libWindow = new ManageLibrary(this);
     libWindow->setWindowModality(Qt::WindowModal);
@@ -126,19 +123,18 @@ void LibraryWindow::on_actionManage_Library_triggered()
     loop.exec();
 
     //if (libWindow->result() == QDialog::Accepted) {
-        loadLibrary();
+    loadLibrary();
     //}
 }
 
-void LibraryWindow::on_manageLibraryButton_clicked()
-{
+void LibraryWindow::on_manageLibraryButton_clicked() {
     ui->actionManage_Library->trigger();
 }
 
 void LibraryWindow::loadLibrary() {
     ui->stackedWidget->setCurrentWidget(ui->loadingPage);
 
-    (new tPromise<QStringList>([=](QString& error) {
+    (new tPromise<QStringList>([ = ](QString & error) {
         QThread::sleep(1);
         QStringList imageLibrary;
 
@@ -172,19 +168,18 @@ void LibraryWindow::loadLibrary() {
         } else {
             return imageLibrary;
         }
-    }))->then([=](QStringList imageLibrary) {
+    }))->then([ = ](QStringList imageLibrary) {
         d->imageLibrary = imageLibrary;
         ui->libraryPage->loadImages(imageLibrary);
         ui->stackedWidget->setCurrentWidget(ui->libraryPage);
-    })->error([=](QString error) {
+    })->error([ = ](QString error) {
         if (error == "noimages") {
             ui->stackedWidget->setCurrentWidget(ui->noImagesPage);
         }
     });
 }
 
-void LibraryWindow::on_actionEvent_Mode_triggered()
-{
+void LibraryWindow::on_actionEvent_Mode_triggered() {
     this->hide();
 
     if (QStyleFactory::keys().contains("Contemporary") || QStyleFactory::keys().contains("contemporary")) {
@@ -198,26 +193,25 @@ void LibraryWindow::on_actionEvent_Mode_triggered()
     dialog->show();
     dialog->exec();
 
-    connect(dialog, &EventModeSettings::done, [=] {
+    connect(dialog, &EventModeSettings::done, [ = ] {
         dialog->deleteLater();
 
         QApplication::setPalette(oldPal);
         this->setPalette(oldPal);
 
         if (QStyleFactory::keys().contains("Contemporary") || QStyleFactory::keys().contains("contemporary")) {
-            #ifdef Q_OS_WIN
-                QApplication::setStyle("windowsvista");
-            #elif defined(Q_OS_MAC)
-                QApplication::setStyle("macintosh");
-            #endif
+#ifdef Q_OS_WIN
+            QApplication::setStyle("windowsvista");
+#elif defined(Q_OS_MAC)
+            QApplication::setStyle("macintosh");
+#endif
         }
 
         this->show();
     });
 }
 
-void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QRectF& sourceRect, const ImgDesc& image)
-{
+void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QRectF& sourceRect, const ImgDesc& image) {
     QWidget* overlayWidget = new QWidget();
     QBoxLayout* overlayLayout = new QBoxLayout(QBoxLayout::LeftToRight);
     overlayLayout->setContentsMargins(0, 0, 0, 0);
@@ -234,16 +228,16 @@ void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QR
 
     ui->headerBar->setCurrentWidget(ui->imageHeader);
 
-    connect(d->overlayView.data(), &ImageView::closed, this, [=] {
+    connect(d->overlayView.data(), &ImageView::closed, this, [ = ] {
         ui->headerBar->setCurrentWidget(ui->mainHeader);
     });
-    connect(d->overlayView.data(), &ImageView::editStarted, this, [=] {
+    connect(d->overlayView.data(), &ImageView::editStarted, this, [ = ] {
         ui->headerBar->setCurrentWidget(ui->editImageHeader);
     });
-    connect(d->overlayView.data(), &ImageView::editEnded, this, [=] {
+    connect(d->overlayView.data(), &ImageView::editEnded, this, [ = ] {
         ui->headerBar->setCurrentWidget(ui->imageHeader);
     });
-    connect(d->overlayView.data(), &ImageView::slideshowModeChanged, this, [=](bool inSlideshow) {
+    connect(d->overlayView.data(), &ImageView::slideshowModeChanged, this, [ = ](bool inSlideshow) {
         this->setSlideshowMode(inSlideshow);
 
         //Change the window state
@@ -255,19 +249,18 @@ void LibraryWindow::on_libraryPage_imageClicked(const QRectF& location, const QR
         }
     });
 
-    QTimer::singleShot(0, [=] {
+    QTimer::singleShot(0, [ = ] {
         d->overlayView->animateImageIn(location, sourceRect, image);
     });
 }
 
-void LibraryWindow::on_backButton_clicked()
-{
+void LibraryWindow::on_backButton_clicked() {
     if (!d->overlayView.isNull()) {
         d->overlayView->close();
     }
 }
 
-bool LibraryWindow::eventFilter(QObject *watched, QEvent *event) {
+bool LibraryWindow::eventFilter(QObject* watched, QEvent* event) {
 #ifdef Q_OS_MAC
     if (watched == ui->headerBar) {
         if (event->type() == QEvent::MouseButtonPress) {
@@ -278,18 +271,15 @@ bool LibraryWindow::eventFilter(QObject *watched, QEvent *event) {
     return false;
 }
 
-void LibraryWindow::on_editButton_clicked()
-{
+void LibraryWindow::on_editButton_clicked() {
     d->overlayView->editCurrentImage();
 }
 
-void LibraryWindow::on_editBackButton_clicked()
-{
+void LibraryWindow::on_editBackButton_clicked() {
     d->overlayView->endEdit("");
 }
 
-void LibraryWindow::on_startSlideshowFromImage_clicked()
-{
+void LibraryWindow::on_startSlideshowFromImage_clicked() {
     d->overlayView->beginSlideshow();
 }
 
@@ -303,14 +293,14 @@ void LibraryWindow::setSlideshowMode(bool slideshow) {
     }
     anim->setDuration(500);
     anim->setEasingCurve(QEasingCurve::OutCubic);
-    connect(anim, &tVariantAnimation::valueChanged, this, [=](QVariant value) {
+    connect(anim, &tVariantAnimation::valueChanged, this, [ = ](QVariant value) {
         ui->headerWidget->setFixedHeight(value.toInt());
     });
     connect(anim, &tVariantAnimation::finished, anim, &tVariantAnimation::deleteLater);
     anim->start();
 }
 
-void LibraryWindow::changeEvent(QEvent *event) {
+void LibraryWindow::changeEvent(QEvent* event) {
     if (event->type() == QEvent::WindowStateChange) {
         if ((this->windowState() & Qt::WindowFullScreen) == 0 && !d->overlayView.isNull() && d->overlayView->inSlideshow()) {
             //We're leaving full screen mode so end the slideshow
@@ -321,18 +311,15 @@ void LibraryWindow::changeEvent(QEvent *event) {
     }
 }
 
-void LibraryWindow::on_actionFile_Bug_triggered()
-{
+void LibraryWindow::on_actionFile_Bug_triggered() {
     QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thePhoto/issues"));
 }
 
-void LibraryWindow::on_actionSources_triggered()
-{
+void LibraryWindow::on_actionSources_triggered() {
     QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thePhoto"));
 }
 
-void LibraryWindow::on_actionAbout_triggered()
-{
+void LibraryWindow::on_actionAbout_triggered() {
     tAboutDialog aboutDialog(this);
     aboutDialog.exec();
 }

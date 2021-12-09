@@ -25,12 +25,11 @@ namespace Ui {
     class EventModeShow;
 }
 
-class EventModeShow : public QDialog
-{
+class EventModeShow : public QDialog {
         Q_OBJECT
 
     public:
-        explicit EventModeShow(QWidget *parent = nullptr);
+        explicit EventModeShow(QWidget* parent = nullptr);
         ~EventModeShow();
 
         struct ImageProperties {
@@ -39,13 +38,16 @@ class EventModeShow : public QDialog
         };
 
     public slots:
+        void connecting();
         void setCode(QString code);
+        void ready();
+        void showError(QString error);
+
         void updateInternetDetails(QString ssid, QString password, bool show);
         void showFullScreen(int monitor);
         void showNewImage(ImageProperties image);
         void addToProfileLayout(QWidget* widget);
         int getProfileLayoutHeight();
-        void showError(QString error);
         void updateRedactor();
         void configureVignette(bool showVignette, bool showClock, bool showAuthor, bool showAudio);
 
@@ -53,11 +55,11 @@ class EventModeShow : public QDialog
         void returnToBackstage();
 
     private:
-        Ui::EventModeShow *ui;
+        Ui::EventModeShow* ui;
 
         void paintEvent(QPaintEvent* event);
         void resizeEvent(QResizeEvent* event);
-        bool eventFilter(QObject *watched, QEvent *event);
+        bool eventFilter(QObject* watched, QEvent* event);
         void keyPressEvent(QKeyEvent* event);
 
         void updateBlurredImage();
@@ -74,7 +76,7 @@ class EventModeShow : public QDialog
         QWidget* scrollRedactor;
 
 
-        tVariantAnimation *animationTimerPx, *animationTimerPxOpacity, *animationTimerBlur;
+        tVariantAnimation* animationTimerPx, *animationTimerPxOpacity, *animationTimerBlur;
 };
 
 #endif // EVENTMODESHOW_H

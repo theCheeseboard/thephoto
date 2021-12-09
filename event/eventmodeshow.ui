@@ -249,9 +249,9 @@
       <enum>QFrame::Raised</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
-     <widget class="QWidget" name="page">
+     <widget class="QWidget" name="preparingPage">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="tCircularSpinner" name="spinner" native="true">
@@ -334,7 +334,7 @@
             </font>
            </property>
            <property name="text">
-            <string notr="true">thephoto.vicr123.com/download</string>
+            <string notr="true">app.thephoto.vicr123.com</string>
            </property>
           </widget>
          </item>
@@ -446,7 +446,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>167</width>
+            <width>144</width>
             <height>68</height>
            </rect>
           </property>
@@ -481,6 +481,17 @@
            </item>
           </layout>
          </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="errorPage">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QLabel" name="errorLabel">
+         <property name="text">
+          <string notr="true">An error has occurred. View full details in the Backstage.</string>
+         </property>
         </widget>
        </item>
       </layout>

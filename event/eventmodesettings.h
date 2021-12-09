@@ -19,12 +19,13 @@ namespace Ui {
     class EventModeSettings;
 }
 
-class EventModeSettings : public QDialog
-{
+struct EventModeSettingsPrivate;
+class WsEventSocket;
+class EventModeSettings : public QDialog {
         Q_OBJECT
 
     public:
-        explicit EventModeSettings(QWidget *parent = 0);
+        explicit EventModeSettings(QWidget* parent = 0);
         ~EventModeSettings();
 
     public slots:
@@ -39,9 +40,9 @@ class EventModeSettings : public QDialog
 
         void on_showWifiDetails_toggled(bool checked);
 
-        void on_ssid_textChanged(const QString &arg1);
+        void on_ssid_textChanged(const QString& arg1);
 
-        void on_key_textChanged(const QString &arg1);
+        void on_key_textChanged(const QString& arg1);
 
         void on_monitorNumber_valueChanged(int arg1);
 
@@ -51,7 +52,7 @@ class EventModeSettings : public QDialog
 
         void on_sessionSettingsButton_toggled(bool checked);
 
-        void on_usersList_customContextMenuRequested(const QPoint &pos);
+        void on_usersList_customContextMenuRequested(const QPoint& pos);
 
         void on_backToEventModeButton_clicked();
 
@@ -66,7 +67,8 @@ class EventModeSettings : public QDialog
         void windowSizeChanged();
 
     private:
-        Ui::EventModeSettings *ui;
+        Ui::EventModeSettings* ui;
+        EventModeSettingsPrivate* d;
 
         EventModeShow* showDialog;
         int encryptionCode;
@@ -79,6 +81,8 @@ class EventModeSettings : public QDialog
         EventServer* server;
         QList<EventSocket*> sockets;
         QList<QHostAddress> bans;
+
+        void newSocketAvailable(WsEventSocket* socket);
 
         void resizeEvent(QResizeEvent* event);
 };

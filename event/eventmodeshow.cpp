@@ -12,17 +12,19 @@
 #include <QScrollBar>
 #include <QKeyEvent>
 #include <QDateTime>
+#include <QScreen>
 
 #ifdef Q_OS_LINUX
     #include <QDBusConnection>
     #include <QDBusConnectionInterface>
 #endif
 
-EventModeShow::EventModeShow(QWidget *parent) :
+EventModeShow::EventModeShow(QWidget* parent) :
     QDialog(parent),
-    ui(new Ui::EventModeShow)
-{
+    ui(new Ui::EventModeShow) {
     ui->setupUi(this);
+
+    ui->bottomFrameStack->setCurrentWidget(ui->preparingPage);
 
     ui->internetDetails->setVisible(false);
     ui->spinner->setMaximumSize(ui->spinner->maximumSize() * theLibsGlobal::getDPIScaling());
@@ -37,11 +39,11 @@ EventModeShow::EventModeShow(QWidget *parent) :
     animationTimerPx->setDuration(500);
     animationTimerPxOpacity->setDuration(500);
     animationTimerBlur->setDuration(500);
-    connect(animationTimerPx, &tVariantAnimation::valueChanged, [=] {
+    connect(animationTimerPx, &tVariantAnimation::valueChanged, [ = ] {
         this->repaint();
     });
 
-    connect(ui->profileScroller->horizontalScrollBar(), &QScrollBar::rangeChanged, [=] {
+    connect(ui->profileScroller->horizontalScrollBar(), &QScrollBar::rangeChanged, [ = ] {
         ui->profileScroller->horizontalScrollBar()->setValue(ui->profileScroller->horizontalScrollBar()->maximum());
     });
 
@@ -63,12 +65,15 @@ EventModeShow::EventModeShow(QWidget *parent) :
     musicProvider = new MusicProvider(this);
 }
 
-EventModeShow::~EventModeShow()
-{
+EventModeShow::~EventModeShow() {
     delete ui;
 }
 
-void EventModeShow::resizeEvent(QResizeEvent *event) {
+void EventModeShow::connecting() {
+    ui->bottomFrameStack->setCurrentWidget(ui->preparingPage);
+}
+
+void EventModeShow::resizeEvent(QResizeEvent* event) {
     updateRedactor();
 }
 
@@ -85,19 +90,22 @@ void EventModeShow::updateInternetDetails(QString ssid, QString password, bool s
 
 void EventModeShow::setCode(QString code) {
     ui->code->setText(code);
-    ui->bottomFrameStack->setCurrentIndex(1);
 }
 
-void EventModeShow::showFullScreen(int monitor) {    
-    #ifdef Q_OS_LINUX
-        this->showNormal();
-    #endif
+void EventModeShow::ready() {
+    ui->bottomFrameStack->setCurrentWidget(ui->bottomInfoStackPage);
+}
 
-    if (QApplication::desktop()->screenCount() <= monitor) {
-        monitor = QApplication::desktop()->screenCount() - 1;
+void EventModeShow::showFullScreen(int monitor) {
+#ifdef Q_OS_LINUX
+    this->showNormal();
+#endif
+
+    if (QApplication::screens().count() <= monitor) {
+        monitor = QApplication::screens().count() - 1;
     }
 
-    this->setGeometry(QApplication::desktop()->screenGeometry(monitor));
+    this->setGeometry(QApplication::screens().at(monitor)->geometry());
 
     QDialog::showFullScreen();
 }
@@ -121,7 +129,7 @@ void EventModeShow::tryNewImage() {
         animationTimerPxOpacity->start();
 
         QMetaObject::Connection* connection = new QMetaObject::Connection;
-        *connection = connect(animationTimerPx, &tVariantAnimation::finished, [=] {
+        *connection = connect(animationTimerPx, &tVariantAnimation::finished, [ = ] {
             disconnect(*connection);
 
             this->px = pendingImages.pop();
@@ -140,7 +148,7 @@ void EventModeShow::tryNewImage() {
             animationTimerPxOpacity->start();
 
             //Give each image at least 5 seconds on the screen
-            QTimer::singleShot(5000, [=] {
+            QTimer::singleShot(5000, [ = ] {
                 blockingOnNewImage = false;
                 tryNewImage();
             });
@@ -148,7 +156,7 @@ void EventModeShow::tryNewImage() {
     }
 }
 
-void EventModeShow::paintEvent(QPaintEvent *event) {
+void EventModeShow::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
 
     int height = this->height() - ui->bottomFrameStack->height();
@@ -192,7 +200,7 @@ void EventModeShow::paintEvent(QPaintEvent *event) {
         if (showClock) {
             painter.setFont(QFont(this->font().family(), 20));
             QString time = QDateTime::currentDateTime().toString("hh:mm:ss");
-            int width = painter.fontMetrics().width(time);
+            int width = painter.fontMetrics().horizontalAdvance(time);
             painter.drawText(currentX, baselineY, time);
 
             currentX += width + 9 * theLibsGlobal::getDPIScaling();
@@ -206,13 +214,13 @@ void EventModeShow::paintEvent(QPaintEvent *event) {
         if (showAuthor) {
             painter.setFont(QFont(this->font().family(), 10));
             QString author = tr("by %1").arg(px.author);
-            int width = painter.fontMetrics().width(px.author);
+            int width = painter.fontMetrics().horizontalAdvance(px.author);
             painter.drawText(this->width() - width - 30 * theLibsGlobal::getDPIScaling(), baselineY, author);
         }
     }
 }
 
-void EventModeShow::addToProfileLayout(QWidget *widget) {
+void EventModeShow::addToProfileLayout(QWidget* widget) {
     //ui->profileLayout->addWidget(widget);
     ui->profileArea->layout()->addWidget(widget);
 }
@@ -222,9 +230,8 @@ int EventModeShow::getProfileLayoutHeight() {
 }
 
 void EventModeShow::showError(QString error) {
-    ui->spinner->setVisible(false);
-    ui->statusLabel->setText(error);
-    ui->bottomFrameStack->setCurrentIndex(0);
+    ui->errorLabel->setText(error);
+    ui->bottomFrameStack->setCurrentWidget(ui->errorPage);
 }
 
 void EventModeShow::updateBlurredImage() {
@@ -247,9 +254,13 @@ void EventModeShow::updateBlurredImage() {
     QPainter painter(&blurred);
     blurred.fill(Qt::black);
     scene.render(&painter, QRectF(), QRectF(-radius, -radius, px.image.width() + radius, px.image.height() + radius));
+
+    painter.setBrush(Qt::black);
+    painter.setOpacity(0.5);
+    painter.drawRect(0, 0, blurred.width(), blurred.height());
 }
 
-bool EventModeShow::eventFilter(QObject *watched, QEvent *event) {
+bool EventModeShow::eventFilter(QObject* watched, QEvent* event) {
     if (watched == scrollRedactor) {
         if (event->type() == QEvent::Paint) {
             QPainter painter(scrollRedactor);
@@ -271,7 +282,7 @@ bool EventModeShow::eventFilter(QObject *watched, QEvent *event) {
     return true;
 }
 
-void EventModeShow::keyPressEvent(QKeyEvent *event) {
+void EventModeShow::keyPressEvent(QKeyEvent* event) {
     if (QApplication::screens().count() == 1) {
         if (event->key() == Qt::Key_Tab) {
             emit returnToBackstage();

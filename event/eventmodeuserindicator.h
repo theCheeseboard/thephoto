@@ -2,34 +2,23 @@
 #define EVENTMODEUSERINDICATOR_H
 
 #include <QWidget>
-#include <QPaintEvent>
-#include <tvariantanimation.h>
-#include "eventsocket.h"
+#include "ws/wseventsocket.h"
 
 namespace Ui {
     class EventModeUserIndicator;
 }
 
-class EventModeUserIndicator : public QWidget
-{
+struct EventModeUserIndicatorPrivate;
+class EventModeUserIndicator : public QWidget {
         Q_OBJECT
 
     public:
-        explicit EventModeUserIndicator(EventSocket* sock, QWidget *parent = nullptr);
+        explicit EventModeUserIndicator(WsEventSocket* sock, quint64 userId, QWidget* parent = nullptr);
         ~EventModeUserIndicator();
 
     private:
-        Ui::EventModeUserIndicator *ui;
-
-        EventSocket* sock;
-        QColor backgroundCol;
-        QString username;
-        int timer = 0;
-
-        tVariantAnimation* usernameOpacity;
-        tVariantAnimation* cameraTimerOpacity;
-        QRect drawableRect;
-        bool deleting = false;
+        Ui::EventModeUserIndicator* ui;
+        EventModeUserIndicatorPrivate* d;
 
         void paintEvent(QPaintEvent* event);
         void resizeEvent(QResizeEvent* event);

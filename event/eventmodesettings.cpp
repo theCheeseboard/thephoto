@@ -9,54 +9,69 @@
 #include <QStackedWidget>
 #include <QScroller>
 #include <QScrollBar>
+#include <QScreen>
+#include "ws/wseventserver.h"
+#include "ws/wsrendezvousserver.h"
 #include "eventmodeuserindicator.h"
 #include "ttoast.h"
+
+struct EventModeSettingsPrivate {
+    QHash<quint64, QListWidgetItem*> userItems;
+};
 
 EventModeSettings::EventModeSettings(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::EventModeSettings) {
     ui->setupUi(this);
 
+    d = new EventModeSettingsPrivate();
+
     showDialog = new EventModeShow();
-    connect(showDialog, &EventModeShow::returnToBackstage, [ = ] {
+    connect(showDialog, &EventModeShow::returnToBackstage, this, [ = ] {
         showDialog->hide();
         this->show();
     });
 
     //Set up macOS menu bar
-    QMenuBar* menuBar = new QMenuBar(this);
+    new QMenuBar(this);
 
     saveDir.setPath(QDir::homePath() + "/Pictures/thePhoto");
 
     ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(SC_DPI_T(QSize(16, 16), QSize)));
-    ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(SC_DPI_T(QSize(16, 16), QSize))));
+    ui->keyIcon->setPixmap(QIcon::fromTheme("password-show-on", QIcon(":/icons/password-show-on.svg")).pixmap(SC_DPI_T(QSize(16, 16), QSize)));
     ui->openMissionControl->setIcon(QIcon("/Applications/Mission Control.app/Contents/Resources/Expose.icns"));
-    ui->monitorNumber->setMaximum(QApplication::desktop()->screenCount());
+    ui->monitorNumber->setMaximum(QApplication::screens().count());
     ui->mainStack->setCurrentAnimation(tStackedWidget::SlideHorizontal);
     ui->closeEventModeButton->setProperty("type", "destructive");
 
-for (QHostAddress addr : QNetworkInterface::allAddresses()) {
-        if (addr.isLoopback()) continue;
-        if (addr.isLinkLocal()) continue;
+    WsEventServer* wsServer = new WsEventServer(this);
+    connect(wsServer, &WsEventServer::newSocketAvailable, this, &EventModeSettings::newSocketAvailable);
 
-        QString code = QString("%1").arg(addr.toIPv4Address(), 10, 10, QChar('0'));
-        code.insert(5, " ");
+    WsRendezvousServer* wsRendezvousServer = new WsRendezvousServer(this);
+    connect(wsRendezvousServer, &WsRendezvousServer::newSocketAvailable, this, &EventModeSettings::newSocketAvailable);
+    connect(wsRendezvousServer, &WsRendezvousServer::connectionStateChanged, this, [ = ](WsRendezvousServer::ConnectionState state) {
+        switch (state) {
+            case WsRendezvousServer::SettingUp:
+                showDialog->connecting();
+                break;
+            case WsRendezvousServer::Connected:
+                showDialog->ready();
+                break;
+            case WsRendezvousServer::Error:
+                showDialog->showError(tr("An error has occurred. View more details in the Backstage."));
+                break;
+        }
+    });
+    connect(wsRendezvousServer, &WsRendezvousServer::newServerIdAvailable, this, [ = ](int newServerId) {
+        ui->roomInfoLabel->setText(tr("Your room code is %1.").arg(QStringLiteral("<b>%1</b>").arg(newServerId)));
+        showDialog->setCode(QString::number(newServerId));
+    });
+    ui->roomInfoLabel->setText(tr("We're preparing a room for you. Hang tight!"));
 
-        server = new EventServer(this);
-        server->listen(QHostAddress::Any, 26157);
-        connect(server, SIGNAL(connectionAvailable(EventSocket*)), this, SLOT(newConnection(EventSocket*)));
-        connect(server, &EventServer::ready, [ = ] {
-            showDialog->setCode(code);
-        });
-        connect(server, &EventServer::error, [ = ](QString error) {
-            showDialog->showError(error);
-        });
-    }
-
-    connect(ui->showVignette, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
-    connect(ui->showAudio, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
-    connect(ui->showAuthor, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
-    connect(ui->showClock, SIGNAL(toggled(bool)), this, SLOT(configureVignette()));
+    connect(ui->showVignette, &QAbstractButton::toggled, this, &EventModeSettings::configureVignette);
+    connect(ui->showAudio, &QAbstractButton::toggled, this, &EventModeSettings::configureVignette);
+    connect(ui->showAuthor, &QAbstractButton::toggled, this, &EventModeSettings::configureVignette);
+    connect(ui->showClock, &QAbstractButton::toggled, this, &EventModeSettings::configureVignette);
 
     imagesReceivedLayout = new FlowLayout(ui->imagesReceivedWidget, -1, 0, 0);
     imagesReceivedLayout->setContentsMargins(0, 0, 0, 0);
@@ -67,6 +82,7 @@ for (QHostAddress addr : QNetworkInterface::allAddresses()) {
 
 EventModeSettings::~EventModeSettings() {
     showDialog->deleteLater();
+    delete d;
     delete ui;
 }
 
@@ -89,7 +105,7 @@ void EventModeSettings::show() {
     }
 
     QDialog::showFullScreen();
-    this->setGeometry(QApplication::desktop()->screenGeometry(0));
+    this->setGeometry(QApplication::screens().first()->geometry());
 
     //this->move(QApplication::desktop()->screenGeometry(0).center());
 }
@@ -101,14 +117,17 @@ void EventModeSettings::on_closeEventModeButton_clicked() {
 }
 
 void EventModeSettings::on_showWifiDetails_toggled(bool checked) {
+    Q_UNUSED(checked)
     showDialog->updateInternetDetails(ui->ssid->text(), ui->key->text(), ui->showWifiDetails->isChecked());
 }
 
 void EventModeSettings::on_ssid_textChanged(const QString& arg1) {
+    Q_UNUSED(arg1)
     showDialog->updateInternetDetails(ui->ssid->text(), ui->key->text(), ui->showWifiDetails->isChecked());
 }
 
 void EventModeSettings::on_key_textChanged(const QString& arg1) {
+    Q_UNUSED(arg1)
     showDialog->updateInternetDetails(ui->ssid->text(), ui->key->text(), ui->showWifiDetails->isChecked());
 }
 
@@ -121,11 +140,11 @@ void EventModeSettings::on_monitorNumber_valueChanged(int arg1) {
         int monitor = arg1 - 1;
         showDialog->showFullScreen(monitor);
 
-        if (QApplication::desktop()->screenNumber(this->geometry().center()) == monitor) {
+        if (QApplication::screens().indexOf(QApplication::screenAt(this->geometry().center())) == monitor) {
             if (monitor == 0) {
-                this->setGeometry(QApplication::desktop()->screenGeometry(1));
+                this->setGeometry(QApplication::screens().at(1)->geometry());
             } else {
-                this->setGeometry(QApplication::desktop()->screenGeometry(0));
+                this->setGeometry(QApplication::screens().at(0)->geometry());
             }
         }
 
@@ -140,114 +159,8 @@ void EventModeSettings::newConnection(EventSocket* sock) {
         return;
     }
 
-    QLabel* userLayout = new QLabel;
+//    QLabel* userLayout = new QLabel;
 
-    QListWidgetItem* userEntry = new QListWidgetItem();
-    userEntry->setData(Qt::UserRole, QVariant::fromValue(sock));
-    userEntry->setText(tr("Unidentified User"));
-    ui->usersList->addItem(userEntry);
-
-    EventModeUserIndicator* userIndicator = new EventModeUserIndicator(sock);
-    showDialog->addToProfileLayout(userIndicator);
-
-    connect(sock, &EventSocket::imageDataAvailable, [ = ](QByteArray imageData) {
-        //Write out to file
-        QDir endDir = saveDir;
-        if (ui->sessionNameLineEdit->text() == "") {
-            endDir.setPath(endDir.absoluteFilePath(tr("Uncategorized")));
-        } else {
-            endDir.setPath(endDir.absoluteFilePath(ui->sessionNameLineEdit->text()));
-        }
-
-        if (ui->storeUserSubfolders->isChecked()) {
-            endDir.setPath(endDir.absoluteFilePath(sock->deviceName()));
-        }
-
-        if (!endDir.exists()) {
-            endDir.mkpath(".");
-        }
-
-        QString fileName = "Image_" + QDateTime::currentDateTime().toString("yyMMdd-hhmmsszzz") + ".jpg";
-        QFile image(endDir.absoluteFilePath(fileName));
-        image.open(QFile::ReadWrite);
-        image.write(imageData);
-        image.flush();
-        image.close();
-
-        QImageReader reader(image.fileName());
-        reader.setAutoTransform(true);
-        QImage i = reader.read();
-
-        if (i.isNull()) {
-
-        } else {
-            QString author = sock->deviceName();
-
-            EventModeShow::ImageProperties imageProperties;
-            imageProperties.image = QPixmap::fromImage(i);
-            imageProperties.author = author;
-            showDialog->showNewImage(imageProperties);
-
-            //Add to transferred images list
-            QLabel* label = new QLabel();
-            label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
-            label->setContextMenuPolicy(Qt::CustomContextMenu);
-            connect(this, &EventModeSettings::windowSizeChanged, [ = ] {
-                label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
-            });
-            connect(label, &QLabel::customContextMenuRequested, [ = ](QPoint pos) {
-                QMenu* menu = new QMenu();
-                menu->addSection(tr("About this picture"));
-
-                QAction* authorAction = new QAction();
-                authorAction->setText(tr("By %1").arg(author));
-                authorAction->setIcon(QIcon::fromTheme("user"));
-                authorAction->setEnabled(false);
-                menu->addAction(authorAction);
-
-                menu->addSection(tr("For this picture"));
-                menu->addAction(QIcon::fromTheme("media-playback-start"), tr("Enqueue for show"), [ = ] {
-                    showDialog->showNewImage(imageProperties);
-                });
-                menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"), [ = ] {
-                    label->setVisible(false);
-
-                    tToast* toast = new tToast();
-                    toast->setTitle(tr("Image Deleted"));
-                    toast->setText(tr("The image was deleted from your computer."));
-
-                    QMap<QString, QString> actions;
-                    actions.insert("undo", "Undo");
-                    toast->setActions(actions);
-                    toast->show(ui->imagesReceivedScrollArea);
-                    connect(toast, &tToast::doDefaultOption, [ = ] {
-                        QFile::remove(endDir.absoluteFilePath(fileName));
-                        label->deleteLater();
-                    });
-                    connect(toast, &tToast::dismiss, [ = ] {
-                        toast->deleteLater();
-                    });
-                    connect(toast, &tToast::actionClicked, [ = ] {
-                        label->setVisible(true);
-                    });
-                });
-                menu->exec(label->mapToGlobal(pos));
-            });
-            imagesReceivedLayout->addWidget(label);
-        }
-    });
-    connect(sock, &EventSocket::newUserConnected, [ = ](QString name) {
-        new EventNotification(tr("User Connected"), name, showDialog);
-
-        userEntry->setText(name);
-    });
-    connect(sock, &EventSocket::aboutToClose, [ = ] {
-        new EventNotification(tr("User Disconnected"), sock->deviceName(), showDialog);
-        sockets.removeOne(sock);
-        userLayout->deleteLater();
-
-        delete userEntry;
-    });
     sockets.append(sock);
 }
 
@@ -312,7 +225,7 @@ void EventModeSettings::on_backToEventModeButton_clicked() {
 }
 
 void EventModeSettings::on_openMissionControl_clicked() {
-    QProcess::startDetached("open -a \"Mission Control\"");
+    QProcess::startDetached("open", {"-a", "Mission Control"});
 }
 
 void EventModeSettings::on_swapDisplayButton_clicked() {
@@ -338,7 +251,116 @@ void EventModeSettings::configureVignette() {
     }
 }
 
+void EventModeSettings::newSocketAvailable(WsEventSocket* socket) {
+    connect(socket, &WsEventSocket::userLogin, this, [ = ](quint64 userId, QString username) {
+        new EventNotification(tr("User Connected"), username, showDialog);
+
+        QListWidgetItem* userEntry = new QListWidgetItem();
+        userEntry->setData(Qt::UserRole, userId);
+        userEntry->setText(username);
+        ui->usersList->addItem(userEntry);
+        d->userItems.insert(userId, userEntry);
+
+        EventModeUserIndicator* userIndicator = new EventModeUserIndicator(socket, userId);
+        showDialog->addToProfileLayout(userIndicator);
+    });
+    connect(socket, &WsEventSocket::userGone, this, [ = ](quint64 userId) {
+        new EventNotification(tr("User Disconnected"), socket->username(userId), showDialog);
+
+        QListWidgetItem* item = d->userItems.take(userId);
+        delete item;
+    });
+    connect(socket, &WsEventSocket::pictureReceived, this, [ = ](quint64 userId, QByteArray pictureData) {
+        //Write out to file
+        QDir endDir = saveDir;
+        if (ui->sessionNameLineEdit->text() == "") {
+            endDir.setPath(endDir.absoluteFilePath(tr("Uncategorized")));
+        } else {
+            endDir.setPath(endDir.absoluteFilePath(ui->sessionNameLineEdit->text()));
+        }
+
+        if (ui->storeUserSubfolders->isChecked()) {
+            endDir.setPath(endDir.absoluteFilePath(socket->username(userId)));
+        }
+
+        if (!endDir.exists()) {
+            endDir.mkpath(".");
+        }
+
+        QString fileName = "Image_" + QDateTime::currentDateTime().toString("yyMMdd-hhmmsszzz") + ".jpg";
+        QFile image(endDir.absoluteFilePath(fileName));
+        image.open(QFile::ReadWrite);
+        image.write(pictureData);
+        image.flush();
+        image.close();
+
+        QImageReader reader(image.fileName());
+        reader.setAutoTransform(true);
+        QImage i = reader.read();
+
+        if (i.isNull()) {
+
+        } else {
+            QString author = socket->username(userId);
+
+            EventModeShow::ImageProperties imageProperties;
+            imageProperties.image = QPixmap::fromImage(i);
+            imageProperties.author = author;
+            showDialog->showNewImage(imageProperties);
+
+            //Add to transferred images list
+            QLabel* label = new QLabel();
+            label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
+            label->setContextMenuPolicy(Qt::CustomContextMenu);
+            connect(this, &EventModeSettings::windowSizeChanged, [ = ] {
+                label->setPixmap(QPixmap::fromImage(i).scaledToHeight(imageHeight));
+            });
+            connect(label, &QLabel::customContextMenuRequested, [ = ](QPoint pos) {
+                QMenu* menu = new QMenu();
+                menu->addSection(tr("About this picture"));
+
+                QAction* authorAction = new QAction();
+                authorAction->setText(tr("By %1").arg(author));
+                authorAction->setIcon(QIcon::fromTheme("user"));
+                authorAction->setEnabled(false);
+                menu->addAction(authorAction);
+
+                menu->addSection(tr("For this picture"));
+                menu->addAction(QIcon::fromTheme("media-playback-start"), tr("Enqueue for show"), [ = ] {
+                    showDialog->showNewImage(imageProperties);
+                });
+                menu->addAction(QIcon::fromTheme("edit-delete"), tr("Delete"), [ = ] {
+                    label->setVisible(false);
+
+                    tToast* toast = new tToast();
+                    toast->setTitle(tr("Image Deleted"));
+                    toast->setText(tr("The image was deleted from your computer."));
+
+                    QMap<QString, QString> actions;
+                    actions.insert("undo", "Undo");
+                    toast->setActions(actions);
+                    toast->show(ui->imagesReceivedScrollArea);
+                    connect(toast, &tToast::doDefaultOption, [ = ] {
+                        QFile::remove(endDir.absoluteFilePath(fileName));
+                        label->deleteLater();
+                    });
+                    connect(toast, &tToast::dismiss, [ = ] {
+                        toast->deleteLater();
+                    });
+                    connect(toast, &tToast::actionClicked, [ = ] {
+                        label->setVisible(true);
+                    });
+                });
+                menu->exec(label->mapToGlobal(pos));
+            });
+            imagesReceivedLayout->addWidget(label);
+        }
+    });
+}
+
 void EventModeSettings::resizeEvent(QResizeEvent* event) {
+    Q_UNUSED(event)
+
     //Calculate height of transferred image
     //Assuming we want to fit about 10 4:3 images horizontally
     QSize s(20, 3);

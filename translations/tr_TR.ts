@@ -47,177 +47,182 @@
 <context>
     <name>EventModeSettings</name>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="267"/>
+        <location filename="../event/eventmodesettings.ui" line="294"/>
         <source>Event Mode</source>
         <translation>Etkinlik Modu</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="292"/>
+        <location filename="../event/eventmodesettings.ui" line="319"/>
         <source>thePhoto Event Mode</source>
         <translation>thePhoto Olay Modu</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="320"/>
+        <location filename="../event/eventmodesettings.ui" line="347"/>
         <source>Backstage</source>
         <translation>Kulis</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="388"/>
+        <location filename="../event/eventmodesettings.ui" line="448"/>
         <source>APP</source>
         <translation>UYGULAMA</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="395"/>
+        <location filename="../event/eventmodesettings.ui" line="455"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
         <translation>thePhoto Olay Moduna bağlanmak için, Google Play ™ mağazasından Android ™ uygulamasını edinin.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="402"/>
+        <location filename="../event/eventmodesettings.ui" line="462"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
         <translation>Oraya ulaşmak için telefonunuzdaki bu bağlantıyı ziyaret edebilirsiniz: https://thephoto.vicr123.com/download</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="444"/>
+        <location filename="../event/eventmodesettings.ui" line="494"/>
+        <source>ROOM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="543"/>
         <source>Session Name</source>
         <translation>Oturum Adı</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="451"/>
+        <location filename="../event/eventmodesettings.ui" line="550"/>
         <source>Store users in subfolders</source>
         <translation>Kullanıcıları alt klasörlerde saklayın</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="464"/>
+        <location filename="../event/eventmodesettings.ui" line="563"/>
         <source>SESSION</source>
         <translation>OTURUM</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="471"/>
+        <location filename="../event/eventmodesettings.ui" line="570"/>
         <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
         <translation>Alınan tüm resimleri bu isimli bir klasöre kaydedeceğiz. Burada hiçbir şey yoksa resimleri &quot;Kategorize edilmemiş&quot; adlı bir klasörde saklayacağız</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="516"/>
+        <location filename="../event/eventmodesettings.ui" line="615"/>
         <source>DISPLAYS</source>
         <translation>EKRANLAR</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="554"/>
+        <location filename="../event/eventmodesettings.ui" line="653"/>
         <source>Use Monitor</source>
         <translation>Monitörü Kullan</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="605"/>
+        <location filename="../event/eventmodesettings.ui" line="704"/>
         <source>Use Mission Control to adjust monitors.</source>
         <translation>Monitörleri ayarlamak için Görev Kontrolünü kullanın.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="612"/>
+        <location filename="../event/eventmodesettings.ui" line="711"/>
         <source>Open Mission Control</source>
         <translation>Görev Kontrolünü Aç</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="635"/>
+        <location filename="../event/eventmodesettings.ui" line="734"/>
         <source>There&apos;s only one display on this computer.</source>
         <translation>Bu bilgisayarda yalnızca bir ekran var.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="664"/>
+        <location filename="../event/eventmodesettings.ui" line="763"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
         <translation>Backstage yanlış ekranda gösteriliyorsa, ekranları değiştirebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="671"/>
+        <location filename="../event/eventmodesettings.ui" line="770"/>
         <source>Swap Displays</source>
         <translation>Ekranları Değiştir</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="718"/>
+        <location filename="../event/eventmodesettings.ui" line="817"/>
         <source>Show Wi-Fi details</source>
         <translation>Wi-Fi ayrıntılarını göster</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="725"/>
+        <location filename="../event/eventmodesettings.ui" line="824"/>
         <source>SSID</source>
         <translation>SSID</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="745"/>
+        <location filename="../event/eventmodesettings.ui" line="844"/>
         <source>Key</source>
         <translation>Çözüm</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="758"/>
+        <location filename="../event/eventmodesettings.ui" line="857"/>
         <source>WI-FI</source>
         <translation>WI-FI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="772"/>
+        <location filename="../event/eventmodesettings.ui" line="871"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
         <translation>Kodun yanındaki ekranda Wi-Fi ayrıntılarını gösterin, böylece misafirler ağa bağlanabilir</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="820"/>
+        <location filename="../event/eventmodesettings.ui" line="919"/>
         <source>INFORMATION DISPLAY</source>
         <translation>BİLGİ EKRANI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="827"/>
+        <location filename="../event/eventmodesettings.ui" line="926"/>
         <source>Show Information Display</source>
         <translation>Bilgi Ekranını Göster</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="837"/>
+        <location filename="../event/eventmodesettings.ui" line="936"/>
         <source>Show Author</source>
         <translation>Yazarı Göster</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="847"/>
+        <location filename="../event/eventmodesettings.ui" line="946"/>
         <source>Show Clock</source>
         <translation>Saati Göster</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="857"/>
+        <location filename="../event/eventmodesettings.ui" line="956"/>
         <source>Show Audio Information</source>
         <translation>Ses Bilgilerini Göster</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="901"/>
+        <location filename="../event/eventmodesettings.ui" line="1004"/>
         <source>Here are all the users currently connected to your computer.</source>
         <translation>İşte şu anda bilgisayarınıza bağlı olan tüm kullanıcılar.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1000"/>
+        <location filename="../event/eventmodesettings.ui" line="1103"/>
         <source>Session Settings</source>
         <translation>Oturum Ayarları</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1020"/>
+        <location filename="../event/eventmodesettings.ui" line="1123"/>
         <source>Connected Users</source>
         <translation>Bağlı Kullanıcılar</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1037"/>
+        <location filename="../event/eventmodesettings.ui" line="1140"/>
         <source>Exchanged Images</source>
         <translation>Değiştirilen Görüntüler</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1067"/>
+        <location filename="../event/eventmodesettings.ui" line="1170"/>
         <source>Back to Event Mode</source>
         <translation>Etkinlik Moduna Dön</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="1078"/>
+        <location filename="../event/eventmodesettings.ui" line="1181"/>
         <source>End Event Mode</source>
         <translation>Etkinlik Modunu Sonlandır</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="101"/>
+        <location filename="../event/eventmodesettings.cpp" line="114"/>
         <source>End Event Mode?</source>
         <translation>Etkinlik Modu Sonlandırılsın mı?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="101"/>
+        <location filename="../event/eventmodesettings.cpp" line="114"/>
         <source>Close connections to all connected devices and end Event Mode?</source>
         <translation>Tüm bağlı cihazlara bağlantılar kapatılsın ve Etkinlik Modu sonlandırılsın mı?</translation>
     </message>
@@ -232,92 +237,107 @@
         <translation>Kategorize edilmemiş</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="207"/>
+        <location filename="../event/eventmodesettings.cpp" line="320"/>
         <source>About this picture</source>
         <translation>Bu resim hakkında</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="210"/>
+        <location filename="../event/eventmodesettings.cpp" line="323"/>
         <source>By %1</source>
         <translation>%1 tarafından</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="215"/>
+        <location filename="../event/eventmodesettings.cpp" line="328"/>
         <source>For this picture</source>
         <translation>Bu resim için</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="216"/>
+        <location filename="../event/eventmodesettings.cpp" line="329"/>
         <source>Enqueue for show</source>
         <translation>Gösteri için sıraya koy</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="219"/>
+        <location filename="../event/eventmodesettings.cpp" line="332"/>
         <source>Delete</source>
         <translation>Sil</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="223"/>
+        <location filename="../event/eventmodesettings.cpp" line="336"/>
         <source>Image Deleted</source>
         <translation>Resim silindi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="224"/>
+        <location filename="../event/eventmodesettings.cpp" line="337"/>
         <source>The image was deleted from your computer.</source>
         <translation>Resim bilgisayarınızdan silindi.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="247"/>
+        <location filename="../event/eventmodesettings.cpp" line="256"/>
         <source>User Connected</source>
         <translation>Kullanıcı Bağlandı</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="252"/>
+        <location filename="../event/eventmodesettings.cpp" line="268"/>
         <source>User Disconnected</source>
         <translation>Kullanıcının Bağlantısı Kesildi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="298"/>
+        <location filename="../event/eventmodesettings.cpp" line="200"/>
         <source>For %1</source>
         <translation>%1 için</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="299"/>
+        <location filename="../event/eventmodesettings.cpp" line="61"/>
+        <source>An error has occurred. View more details in the Backstage.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="66"/>
+        <source>Your room code is %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="69"/>
+        <source>We&apos;re preparing a room for you. Hang tight!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="201"/>
         <source>Kick</source>
         <translation>Atmak</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="300"/>
+        <location filename="../event/eventmodesettings.cpp" line="202"/>
         <source>Kick?</source>
         <translation>Atmak?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="300"/>
+        <location filename="../event/eventmodesettings.cpp" line="202"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
         <translation>% 1 vuruş mu? Oturum kodunu tekrar girerek oturuma yeniden katılabilecekler.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="305"/>
+        <location filename="../event/eventmodesettings.cpp" line="207"/>
         <source>Ban</source>
         <translation>Yasakla</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="306"/>
+        <location filename="../event/eventmodesettings.cpp" line="208"/>
         <source>Ban?</source>
         <translation>Yasaklamak mı?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="306"/>
+        <location filename="../event/eventmodesettings.cpp" line="208"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
         <translation>%1 yasaklansın mı? Bu oturuma yeniden katılamayacaklar.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="323"/>
+        <location filename="../event/eventmodesettings.cpp" line="224"/>
         <source>Welcome to Event Mode!</source>
         <translation>Etkinlik Moduna Hoş Geldiniz!</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="323"/>
+        <location filename="../event/eventmodesettings.cpp" line="224"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
         <translation>Backstage&apos;e geri dönmek için TAB tuşuna basmanız yeterlidir.</translation>
     </message>
@@ -350,7 +370,7 @@
         <translation>sorulduğu zaman.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="208"/>
+        <location filename="../event/eventmodeshow.cpp" line="216"/>
         <source>by %1</source>
         <translation>%1 tarafından</translation>
     </message>
@@ -358,8 +378,8 @@
 <context>
     <name>EventModeUserIndicator</name>
     <message>
-        <location filename="../event/eventmodeuserindicator.cpp" line="67"/>
-        <location filename="../event/eventmodeuserindicator.cpp" line="233"/>
+        <location filename="../event/eventmodeuserindicator.cpp" line="81"/>
+        <location filename="../event/eventmodeuserindicator.cpp" line="249"/>
         <source>Camera Timer</source>
         <translation>Kamera Zamanlayıcısı</translation>
     </message>
