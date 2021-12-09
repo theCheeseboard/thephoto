@@ -8,6 +8,13 @@ const expressWs = require('express-ws')(app);
 let passwords = {};
 let serverCount = {};
 let currentServer = {};
+let keys = {};
+
+app.use(express.text({
+    type: [
+        "application/x-pem-file"
+    ]
+}));
 
 app.get("/setup", (req, res) => {
     //Set up a rendezvous server
@@ -75,6 +82,40 @@ app.ws("/setup/:id", (ws, req) => {
         if (currentServer[req.params.id] === ws) delete currentServer[req.params.id];
         serverCount[req.params.id]--;
     });
+});
+
+
+app.post("/keys/:id", (req, res) => {
+    if (!passwords[req.params.id]) {
+        console.log("FAIL: Client not set up");
+        res.send(403);
+        return;
+    }
+
+    let auth = req.header("Authorization");
+    if (!auth || !auth.startsWith("Bearer ") || passwords[req.params.id] !== auth.substr(7)) {
+        console.log("FAIL: Token invalid");
+        res.send(403);
+        return;
+    }
+
+    if (!req.body) {
+        console.log("FAIL: Body invalid");
+        res.send(400);
+        return;
+    }
+
+    keys[req.params.id] = req.body.toString();
+    res.sendStatus(204);
+});
+app.get("/keys/:id", (req, res) => {
+    if (!keys[req.params.id]) {
+        res.sendStatus(404);
+        res.end();
+    }
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.send(keys[req.params.id]);
 });
 
 app.use("/rendezvous/:id", (req, res, next) => {
