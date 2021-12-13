@@ -9,6 +9,7 @@ let passwords = {};
 let serverCount = {};
 let currentServer = {};
 let keys = {};
+let hmacs = {};
 
 app.use(express.text({
     type: [
@@ -99,6 +100,13 @@ app.post("/keys/:id", (req, res) => {
         return;
     }
 
+    let hmac = req.header("X-thePhoto-HMAC");
+    if (!hmac) {
+        console.log("FAIL: No HMAC");
+        res.send(400);
+        return;
+    }
+
     if (!req.body) {
         console.log("FAIL: Body invalid");
         res.send(400);
@@ -106,15 +114,19 @@ app.post("/keys/:id", (req, res) => {
     }
 
     keys[req.params.id] = req.body.toString();
+    hmacs[req.params.id] = hmac;
     res.sendStatus(204);
 });
 app.get("/keys/:id", (req, res) => {
     if (!keys[req.params.id]) {
         res.sendStatus(404);
         res.end();
+        return;
     }
 
     res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Expose-Headers", "X-thePhoto-HMAC");
+    res.setHeader("X-thePhoto-HMAC", hmacs[req.params.id]);
     res.send(keys[req.params.id]);
 });
 
