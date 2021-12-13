@@ -80,7 +80,6 @@ void WsRendezvousServer::issueKeys() {
     QCA::KeyGenerator keygen;
     keygen.setBlockingEnabled(true);
     d->privateKey = keygen.createRSA(4096).toRSA();
-    d->privateKey.toPEMFile("/home/victor/x/pem1.pem");
 
     QUrl keySetupUrl;
     keySetupUrl.setScheme(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE ? "https" : "http");

@@ -97,11 +97,11 @@ WsEventSocket::WsEventSocket(QWebSocket* socket, QCA::RSAPrivateKey privateKey, 
         bool decryptSuccess = d->privateKey.decrypt(message, &decryptOutput, QCA::EME_PKCS1_OAEP);
         if (decryptSuccess) {
             message = decryptOutput.toByteArray();
-        } else {
+        } else if (message.at(0) == 'E') {
             //Try decrypting using known ciphers
-            char ivLen = message.at(0);
-            QCA::InitializationVector iv(message.mid(1, ivLen));
-            QByteArray messageData = message.mid(1 + ivLen);
+            char ivLen = message.at(1);
+            QCA::InitializationVector iv(message.mid(2, ivLen));
+            QByteArray messageData = message.mid(2 + ivLen);
 
             for (quint64 userid : d->symks.keys()) {
                 QCA::SymmetricKey symk = d->symks.value(userid);
@@ -250,7 +250,16 @@ void WsEventSocket::sendMessage(quint64 userId, QJsonObject message, std::functi
 
     //TODO: encrypt payload
 
+    QCA::InitializationVector iv(16);
+    QCA::SymmetricKey symk = d->symks.value(userId);
+    QCA::Cipher cipher("aes256", QCA::Cipher::CBC, QCA::Cipher::DefaultPadding, QCA::Encode, symk, iv);
+    QByteArray encryptedPayload = cipher.process(payload).toByteArray();
+
+    encryptedPayload.prepend(iv.toByteArray());
+    encryptedPayload.prepend(iv.size());
+    encryptedPayload.prepend('E');
+
     d->replies.insert(message.value("seq").toInt(), reply);
 
-    d->socket->sendBinaryMessage(payload);
+    d->socket->sendBinaryMessage(encryptedPayload);
 }
