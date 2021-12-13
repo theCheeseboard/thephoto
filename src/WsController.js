@@ -100,8 +100,18 @@ class WsController {
             data = await new Response(event.data).arrayBuffer();
         }
         
-        //TODO: decrypt data
-        
+        let dataView = new Uint8Array(data);
+        if (String.fromCharCode(dataView[0]) === 'E') {
+            let ivLen = dataView[1];
+            let iv = dataView.slice(2, 2 + ivLen);
+            let encryptedData = dataView.slice(2 + ivLen);
+
+            data = await crypto.subtle.decrypt({
+                name: "AES-CBC",
+                iv: iv
+            }, this.#symk, encryptedData);
+        }
+
         let decoder = new TextDecoder("utf-8");
         let msg = JSON.parse(decoder.decode(data));
 
@@ -143,10 +153,10 @@ class WsController {
                     iv: iv
                 }, this.#symk, payload);
 
-                payload = new Uint8Array(1 + iv.length + payloadData.byteLength);
-                payload.set([iv.length]);
-                payload.set(iv, 1);
-                payload.set(new Uint8Array(payloadData), iv.length + 1);
+                payload = new Uint8Array(2 + iv.length + payloadData.byteLength);
+                payload.set(['E'.charCodeAt(0), iv.length]);
+                payload.set(iv, 2);
+                payload.set(new Uint8Array(payloadData), iv.length + 2);
             } catch (err) {
                 console.log(err);
                 return;
