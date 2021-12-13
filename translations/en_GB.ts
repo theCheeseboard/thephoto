@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" sourcelanguage="en_US" language="en_GB">
+<TS version="2.1" language="en_GB" sourcelanguage="en_US">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -227,12 +227,7 @@
         <translation>Close connections to all connected devices and end Event Mode?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="154"/>
-        <source>Unidentified User</source>
-        <translation>Unidentified User</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="164"/>
+        <location filename="../event/eventmodesettings.cpp" line="277"/>
         <source>Uncategorized</source>
         <translation>Uncategorized</translation>
     </message>
@@ -370,7 +365,7 @@
         <translation>when asked.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="216"/>
+        <location filename="../event/eventmodeshow.cpp" line="218"/>
         <source>by %1</source>
         <translation>by %1</translation>
     </message>

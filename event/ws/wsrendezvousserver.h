@@ -45,7 +45,7 @@ class WsRendezvousServer : public QObject {
 
     signals:
         void newSocketAvailable(WsEventSocket* socket);
-        void newServerIdAvailable(int serverId);
+        void newServerIdAvailable(int serverId, QString hmac);
         void connectionStateChanged(ConnectionState state);
 
     private:

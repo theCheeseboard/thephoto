@@ -365,7 +365,7 @@
         <translation>khi hỏi.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="216"/>
+        <location filename="../event/eventmodeshow.cpp" line="218"/>
         <source>by %1</source>
         <translation>bởi %1</translation>
     </message>

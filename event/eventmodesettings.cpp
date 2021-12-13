@@ -62,9 +62,9 @@ EventModeSettings::EventModeSettings(QWidget* parent) :
                 break;
         }
     });
-    connect(wsRendezvousServer, &WsRendezvousServer::newServerIdAvailable, this, [ = ](int newServerId) {
-        ui->roomInfoLabel->setText(tr("Your room code is %1.").arg(QStringLiteral("<b>%1</b>").arg(newServerId)));
-        showDialog->setCode(QString::number(newServerId));
+    connect(wsRendezvousServer, &WsRendezvousServer::newServerIdAvailable, this, [ = ](int newServerId, QString hmac) {
+        ui->roomInfoLabel->setText(tr("Your room code is %1.").arg(QStringLiteral("<b>%1 %2</b>").arg(newServerId).arg(hmac)));
+        showDialog->setCode(QStringLiteral("%1 %2").arg(newServerId).arg(hmac));
     });
     ui->roomInfoLabel->setText(tr("We're preparing a room for you. Hang tight!"));
 

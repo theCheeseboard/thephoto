@@ -365,7 +365,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="216"/>
+        <location filename="../event/eventmodeshow.cpp" line="218"/>
         <source>by %1</source>
         <translation type="unfinished"></translation>
     </message>

@@ -39,11 +39,11 @@ EventModeShow::EventModeShow(QWidget* parent) :
     animationTimerPx->setDuration(500);
     animationTimerPxOpacity->setDuration(500);
     animationTimerBlur->setDuration(500);
-    connect(animationTimerPx, &tVariantAnimation::valueChanged, [ = ] {
+    connect(animationTimerPx, &tVariantAnimation::valueChanged, this, [ = ] {
         this->repaint();
     });
 
-    connect(ui->profileScroller->horizontalScrollBar(), &QScrollBar::rangeChanged, [ = ] {
+    connect(ui->profileScroller->horizontalScrollBar(), &QScrollBar::rangeChanged, this, [ = ] {
         ui->profileScroller->horizontalScrollBar()->setValue(ui->profileScroller->horizontalScrollBar()->maximum());
     });
 
@@ -59,7 +59,9 @@ EventModeShow::EventModeShow(QWidget* parent) :
 
     QTimer* timer = new QTimer(this);
     timer->setInterval(1000);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(timer, &QTimer::timeout, this, [ = ] {
+        this->update();
+    });
     timer->start();
 
     musicProvider = new MusicProvider(this);
@@ -129,7 +131,7 @@ void EventModeShow::tryNewImage() {
         animationTimerPxOpacity->start();
 
         QMetaObject::Connection* connection = new QMetaObject::Connection;
-        *connection = connect(animationTimerPx, &tVariantAnimation::finished, [ = ] {
+        *connection = connect(animationTimerPx, &tVariantAnimation::finished, this, [ = ] {
             disconnect(*connection);
 
             this->px = pendingImages.pop();
@@ -148,7 +150,7 @@ void EventModeShow::tryNewImage() {
             animationTimerPxOpacity->start();
 
             //Give each image at least 5 seconds on the screen
-            QTimer::singleShot(5000, [ = ] {
+            QTimer::singleShot(5000, this, [ = ] {
                 blockingOnNewImage = false;
                 tryNewImage();
             });

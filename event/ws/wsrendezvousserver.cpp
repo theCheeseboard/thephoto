@@ -26,6 +26,8 @@
 #include <QJsonObject>
 #include <QWebSocket>
 #include <QtCrypto>
+#include <QRandomGenerator>
+#include <QMessageAuthenticationCode>
 #include "wseventsocket.h"
 
 struct WsRendezvousServerPrivate {
@@ -35,6 +37,7 @@ struct WsRendezvousServerPrivate {
     QWebSocket* currentPendingSocket = nullptr;
     QString token;
     int serverNumber;
+    QString hmac;
 
     QCA::RSAPrivateKey privateKey;
     bool keysIssued = false;
@@ -43,6 +46,11 @@ struct WsRendezvousServerPrivate {
 WsRendezvousServer::WsRendezvousServer(QObject* parent) : QObject(parent) {
     d = new WsRendezvousServerPrivate();
     reconnect();
+
+    QByteArray hmac;
+    hmac.resize(2);
+    QRandomGenerator::securelySeeded().generate(hmac.begin(), hmac.end());
+    d->hmac = hmac.toHex().toUpper();
 }
 
 WsRendezvousServer::~WsRendezvousServer() {
@@ -68,7 +76,7 @@ void WsRendezvousServer::reconnect() {
         d->token = replyObj.value("token").toString();
 
         if (d->keysIssued) {
-            emit newServerIdAvailable(d->serverNumber);
+            emit newServerIdAvailable(d->serverNumber, d->hmac);
             connectNewClient();
         } else {
             issueKeys();
@@ -81,6 +89,8 @@ void WsRendezvousServer::issueKeys() {
     keygen.setBlockingEnabled(true);
     d->privateKey = keygen.createRSA(4096).toRSA();
 
+    QByteArray payload = d->privateKey.toPublicKey().toPEM().toUtf8();
+
     QUrl keySetupUrl;
     keySetupUrl.setScheme(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE ? "https" : "http");
     keySetupUrl.setHost(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
@@ -90,9 +100,10 @@ void WsRendezvousServer::issueKeys() {
     QNetworkRequest keySetupRequest(keySetupUrl);
     keySetupRequest.setRawHeader("Authorization", QStringLiteral("Bearer %1").arg(d->token).toUtf8());
     keySetupRequest.setRawHeader("Host", THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
+    keySetupRequest.setRawHeader("X-thePhoto-HMAC", QMessageAuthenticationCode::hash(payload, d->hmac.toUtf8(), QCryptographicHash::Sha512).toBase64());
     keySetupRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-pem-file");
 
-    QNetworkReply* reply = d->mgr.post(keySetupRequest, d->privateKey.toPublicKey().toPEM().toUtf8());
+    QNetworkReply* reply = d->mgr.post(keySetupRequest, payload);
     connect(reply, &QNetworkReply::finished, this, [ = ] {
         if (reply->error() != QNetworkReply::NoError) {
             d->state = Error;
@@ -101,7 +112,7 @@ void WsRendezvousServer::issueKeys() {
         }
 
         d->keysIssued = true;
-        emit newServerIdAvailable(d->serverNumber);
+        emit newServerIdAvailable(d->serverNumber, d->hmac);
         connectNewClient();
     });
 }

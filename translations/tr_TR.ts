@@ -227,12 +227,7 @@
         <translation>Tüm bağlı cihazlara bağlantılar kapatılsın ve Etkinlik Modu sonlandırılsın mı?</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.cpp" line="154"/>
-        <source>Unidentified User</source>
-        <translation>Tanımlanamayan Kullanıcı</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="164"/>
+        <location filename="../event/eventmodesettings.cpp" line="277"/>
         <source>Uncategorized</source>
         <translation>Kategorize edilmemiş</translation>
     </message>
@@ -370,7 +365,7 @@
         <translation>sorulduğu zaman.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodeshow.cpp" line="216"/>
+        <location filename="../event/eventmodeshow.cpp" line="218"/>
         <source>by %1</source>
         <translation>%1 tarafından</translation>
     </message>
