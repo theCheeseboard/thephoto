@@ -23,25 +23,42 @@ class WsController {
     setWsStateChangeHandler(handler) {
         this.#wsStateChangeHandler = handler;
     }
+
+    stringToBuf(string) {
+        let buf = new ArrayBuffer(string.length);
+        let bufView = new Uint8Array(buf);
+        for (let i = 0, strLen = string.length; i < strLen; i++) {
+            bufView[i] = string.charCodeAt(i);
+        }
+        return buf;
+    }
     
-    connect(room, username) {
+    connect(room, username, hmac) {
         return new Promise(async (res, rej) => {
             //Retrieve the public key
             try {
                 let pkData = await fetch(`${process.env.REACT_APP_RENDEZVOUS_SERVER_IS_SECURE === "true" ? "https://" : "http://"}${process.env.REACT_APP_RENDEZVOUS_SERVER}/keys/${room}`);
 
-                let pkDataString = await pkData.text();
+                let hmacKey = await crypto.subtle.importKey("raw", this.stringToBuf(hmac), {
+                    name: "HMAC",
+                    hash: "SHA-512"
+                }, false, ["verify"]);
+                let hmacHeader = pkData.headers.get("X-thePhoto-HMAC");
+
+                let pkDataBinary = await pkData.arrayBuffer();
+
+                if (!await crypto.subtle.verify("HMAC", hmacKey, this.stringToBuf(window.atob(hmacHeader)), pkDataBinary)) {
+                    rej();
+                    return;
+                }
+
+                let pkDataString = new TextDecoder("utf-8").decode(pkDataBinary);
                 const pemHeader = "-----BEGIN PRIVATE KEY-----";
                 const pemFooter = "-----END PRIVATE KEY-----";
                 let pemContents = pkDataString.substring(pemHeader.length, pkDataString.length - pemFooter.length);
 
                 let binaryPk = window.atob(pemContents);
-
-                let pkBuf = new ArrayBuffer(binaryPk.length);
-                let bufView = new Uint8Array(pkBuf);
-                for (let i = 0, strLen = binaryPk.length; i < strLen; i++) {
-                    bufView[i] = binaryPk.charCodeAt(i);
-                }
+                let pkBuf = this.stringToBuf(binaryPk);
 
                 this.#pk = await crypto.subtle.importKey("spki", pkBuf, {
                     name: "RSA-OAEP",

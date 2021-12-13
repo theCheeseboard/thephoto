@@ -19,8 +19,11 @@ class Welcome extends React.Component {
             });
             return;
         }
+
+        let room = this.state.room.substr(0, 4);
+        let hmac = this.state.room.substr(4);
         
-        WsController.connect(this.state.room, this.state.username).catch((error) => {
+        WsController.connect(room, this.state.username, hmac).catch((error) => {
             this.setState({
                 error: "Check the room code and try again"
             });
