@@ -2,6 +2,8 @@
 #include "librarywindow.h"
 #include <tapplication.h>
 #include <QTranslator>
+#include <tsettings.h>
+#include <tstylemanager.h>
 #include <QtCrypto>
 
 #ifdef Q_OS_MAC
@@ -42,6 +44,14 @@ int main(int argc, char* argv[]) {
 #ifdef Q_OS_MAC
     a.setAttribute(Qt::AA_DontShowIconsInMenus, true);
 #endif
+
+    tSettings settings;
+    QObject::connect(&settings, &tSettings::settingChanged, [ = ](QString key, QVariant value) {
+        if (key == "theme/mode") {
+            tStyleManager::setOverrideStyleForApplication(value.toString() == "light" ? tStyleManager::ContemporaryLight : tStyleManager::ContemporaryDark);
+        }
+    });
+    tStyleManager::setOverrideStyleForApplication(settings.value("theme/mode").toString() == "light" ? tStyleManager::ContemporaryLight : tStyleManager::ContemporaryDark);
 
     QCA::Initializer initialiser;
 

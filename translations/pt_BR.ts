@@ -52,47 +52,47 @@
         <translation>Modo Evento</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="652"/>
+        <location filename="../event/eventmodesettings.ui" line="658"/>
         <source>Show Wi-Fi details</source>
         <translation>Mostrar detalhes do WiFi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="659"/>
+        <location filename="../event/eventmodesettings.ui" line="665"/>
         <source>SSID</source>
         <translation>SSID</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="186"/>
+        <location filename="../event/eventmodesettings.ui" line="192"/>
         <source>Backstage</source>
         <translation>Backstage</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="399"/>
+        <location filename="../event/eventmodesettings.ui" line="405"/>
         <source>SESSION</source>
         <translation>SESSÃO</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="406"/>
+        <location filename="../event/eventmodesettings.ui" line="412"/>
         <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
         <translation>Nós salvaremos todas as imagens recebidas dentro de uma pasta com esse nome. Se não tiver nada aqui, salvaremos as fotos em uma pasta chamada &quot;Não categorizada&quot;</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="450"/>
+        <location filename="../event/eventmodesettings.ui" line="456"/>
         <source>DISPLAYS</source>
         <translation>TELAS</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="679"/>
+        <location filename="../event/eventmodesettings.ui" line="685"/>
         <source>Key</source>
         <translation>Chave</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="691"/>
+        <location filename="../event/eventmodesettings.ui" line="697"/>
         <source>WI-FI</source>
         <translation>WIFI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="488"/>
+        <location filename="../event/eventmodesettings.ui" line="494"/>
         <source>Use Monitor</source>
         <translation>Usar Monitor</translation>
     </message>
@@ -102,92 +102,92 @@
         <translation>Modo Evento thePhoto</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="286"/>
+        <location filename="../event/eventmodesettings.ui" line="292"/>
         <source>APP</source>
         <translation>APLICATIVO</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="293"/>
+        <location filename="../event/eventmodesettings.ui" line="299"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
         <translation>Para conectar ao Modo Evento thePhoto, baixe o applicativo para Android™ na Google Play™.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="300"/>
+        <location filename="../event/eventmodesettings.ui" line="306"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="331"/>
+        <location filename="../event/eventmodesettings.ui" line="337"/>
         <source>ROOM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="380"/>
+        <location filename="../event/eventmodesettings.ui" line="386"/>
         <source>Session Name</source>
         <translation>Nome da sessão</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="387"/>
+        <location filename="../event/eventmodesettings.ui" line="393"/>
         <source>Store users in subfolders</source>
         <translation>Guardar usuários em subpastas</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="539"/>
+        <location filename="../event/eventmodesettings.ui" line="545"/>
         <source>Use Mission Control to adjust monitors.</source>
         <translation>Use Mission Control para ajustar monitores.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="546"/>
+        <location filename="../event/eventmodesettings.ui" line="552"/>
         <source>Open Mission Control</source>
         <translation>Abrir Mission Control</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="569"/>
+        <location filename="../event/eventmodesettings.ui" line="575"/>
         <source>There&apos;s only one display on this computer.</source>
         <translation>Só há uma tela nesse computador.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="598"/>
+        <location filename="../event/eventmodesettings.ui" line="604"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
         <translation>Se o Backstage está aparencendo na tela errada, você pode trocar as telas.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="605"/>
+        <location filename="../event/eventmodesettings.ui" line="611"/>
         <source>Swap Displays</source>
         <translation>Trocar Telas</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="705"/>
+        <location filename="../event/eventmodesettings.ui" line="711"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
         <translation>Mostrar os detalhes do WiFi na tela próxima ao código para que convidados possam entrar na rede</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="752"/>
+        <location filename="../event/eventmodesettings.ui" line="758"/>
         <source>INFORMATION DISPLAY</source>
         <translation>MOSTRAR INFORMAÇÕES</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="759"/>
+        <location filename="../event/eventmodesettings.ui" line="765"/>
         <source>Show Information Display</source>
         <translation>Mostrar Informações</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="769"/>
+        <location filename="../event/eventmodesettings.ui" line="775"/>
         <source>Show Author</source>
         <translation>Mostrar Autor</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="779"/>
+        <location filename="../event/eventmodesettings.ui" line="785"/>
         <source>Show Clock</source>
         <translation>Mostrar Relógio</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="789"/>
+        <location filename="../event/eventmodesettings.ui" line="795"/>
         <source>Show Audio Information</source>
         <translation>Mostrar Informações de Audio</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="837"/>
+        <location filename="../event/eventmodesettings.ui" line="843"/>
         <source>Here are all the users currently connected to your computer.</source>
         <translation>Aqui estão todos os usuários conectados ao seu computador.</translation>
     </message>
@@ -202,17 +202,17 @@
         <translation>Usuários Conectados</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="135"/>
+        <location filename="../event/eventmodesettings.ui" line="141"/>
         <source>Exchanged Images</source>
         <translation>Imagens Trocadas</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="949"/>
+        <location filename="../event/eventmodesettings.ui" line="955"/>
         <source>Back to Event Mode</source>
         <translation>Voltar ao Modo Evento</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="960"/>
+        <location filename="../event/eventmodesettings.ui" line="966"/>
         <source>End Event Mode</source>
         <translation>Terminar Modo Evento</translation>
     </message>
@@ -789,22 +789,22 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="27"/>
+        <location filename="../main.cpp" line="29"/>
         <source>Photo Manager</source>
         <translation type="unfinished">Gerenciador de Fotos</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="32"/>
+        <location filename="../main.cpp" line="34"/>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)</source>
         <translation type="unfinished">Esse produto inclui software desenvolvido pelo OpenSSL Project para uso no OpenSSL Toolkit (http://www.openssl.org/)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="33"/>
+        <location filename="../main.cpp" line="35"/>
         <source>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)</source>
         <translation type="unfinished">Esse produto inclui software criptográfico desenvolvido por Eric Young (eay@cryptsoft.com)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="34"/>
+        <location filename="../main.cpp" line="36"/>
         <source>Android™ is a trademark of Google LLC</source>
         <translation type="unfinished">Android™ é um trademark de Google LLC</translation>
     </message>

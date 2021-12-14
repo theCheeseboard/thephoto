@@ -15,14 +15,16 @@ cleanup:
   - '/qt'
   - '/share/man'
   - '/share/the-libs'
-  - '/bin/cd*'
-  - '/bin/iso*'
-  - '/bin/mmc-tool'
-  - '/bin/taglib-config'
   - '/bin/tltrdesktop'
   - '/lib/debug'
   - '/lib/pkgconfig'
 modules:
+  - name: qca
+    buildsystem: cmake
+    sources:
+      - type: git
+        url: https://invent.kde.org/libraries/qca.git
+        branch: v2.3.4
   - name: the-libs
     buildsystem: qmake
     sources:

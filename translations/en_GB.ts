@@ -52,47 +52,47 @@
         <translation>Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="652"/>
+        <location filename="../event/eventmodesettings.ui" line="658"/>
         <source>Show Wi-Fi details</source>
         <translation>Show Wi-Fi details</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="659"/>
+        <location filename="../event/eventmodesettings.ui" line="665"/>
         <source>SSID</source>
         <translation>SSID</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="186"/>
+        <location filename="../event/eventmodesettings.ui" line="192"/>
         <source>Backstage</source>
         <translation>Backstage</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="399"/>
+        <location filename="../event/eventmodesettings.ui" line="405"/>
         <source>SESSION</source>
         <translation>SESSION</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="406"/>
+        <location filename="../event/eventmodesettings.ui" line="412"/>
         <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
         <translation>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="450"/>
+        <location filename="../event/eventmodesettings.ui" line="456"/>
         <source>DISPLAYS</source>
         <translation>DISPLAYS</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="679"/>
+        <location filename="../event/eventmodesettings.ui" line="685"/>
         <source>Key</source>
         <translation>Key</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="691"/>
+        <location filename="../event/eventmodesettings.ui" line="697"/>
         <source>WI-FI</source>
         <translation>WI-FI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="488"/>
+        <location filename="../event/eventmodesettings.ui" line="494"/>
         <source>Use Monitor</source>
         <translation>Use Monitor</translation>
     </message>
@@ -102,92 +102,92 @@
         <translation>thePhoto Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="286"/>
+        <location filename="../event/eventmodesettings.ui" line="292"/>
         <source>APP</source>
         <translation>APP</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="293"/>
+        <location filename="../event/eventmodesettings.ui" line="299"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
         <translation>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="300"/>
+        <location filename="../event/eventmodesettings.ui" line="306"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
         <translation>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="331"/>
+        <location filename="../event/eventmodesettings.ui" line="337"/>
         <source>ROOM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="380"/>
+        <location filename="../event/eventmodesettings.ui" line="386"/>
         <source>Session Name</source>
         <translation>Session Name</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="387"/>
+        <location filename="../event/eventmodesettings.ui" line="393"/>
         <source>Store users in subfolders</source>
         <translation>Store users in subfolders</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="539"/>
+        <location filename="../event/eventmodesettings.ui" line="545"/>
         <source>Use Mission Control to adjust monitors.</source>
         <translation>Use Mission Control to adjust monitors.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="546"/>
+        <location filename="../event/eventmodesettings.ui" line="552"/>
         <source>Open Mission Control</source>
         <translation>Open Mission Control</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="569"/>
+        <location filename="../event/eventmodesettings.ui" line="575"/>
         <source>There&apos;s only one display on this computer.</source>
         <translation>There&apos;s only one display on this computer.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="598"/>
+        <location filename="../event/eventmodesettings.ui" line="604"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
         <translation>If the Backstage is showing on the wrong display, you can swap the displays.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="605"/>
+        <location filename="../event/eventmodesettings.ui" line="611"/>
         <source>Swap Displays</source>
         <translation>Swap Displays</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="705"/>
+        <location filename="../event/eventmodesettings.ui" line="711"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
         <translation>Show Wi-Fi details on the screen next to the code so guests can connect to the network</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="752"/>
+        <location filename="../event/eventmodesettings.ui" line="758"/>
         <source>INFORMATION DISPLAY</source>
         <translation>INFORMATION DISPLAY</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="759"/>
+        <location filename="../event/eventmodesettings.ui" line="765"/>
         <source>Show Information Display</source>
         <translation>Show Information Display</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="769"/>
+        <location filename="../event/eventmodesettings.ui" line="775"/>
         <source>Show Author</source>
         <translation>Show Author</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="779"/>
+        <location filename="../event/eventmodesettings.ui" line="785"/>
         <source>Show Clock</source>
         <translation>Show Clock</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="789"/>
+        <location filename="../event/eventmodesettings.ui" line="795"/>
         <source>Show Audio Information</source>
         <translation>Show Audio Information</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="837"/>
+        <location filename="../event/eventmodesettings.ui" line="843"/>
         <source>Here are all the users currently connected to your computer.</source>
         <translation>Here are all the users currently connected to your computer.</translation>
     </message>
@@ -202,17 +202,17 @@
         <translation>Connected Users</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="135"/>
+        <location filename="../event/eventmodesettings.ui" line="141"/>
         <source>Exchanged Images</source>
         <translation>Exchanged Images</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="949"/>
+        <location filename="../event/eventmodesettings.ui" line="955"/>
         <source>Back to Event Mode</source>
         <translation>Back to Event Mode</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="960"/>
+        <location filename="../event/eventmodesettings.ui" line="966"/>
         <source>End Event Mode</source>
         <translation>End Event Mode</translation>
     </message>
@@ -789,22 +789,22 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="27"/>
+        <location filename="../main.cpp" line="29"/>
         <source>Photo Manager</source>
         <translation>Photo Manager</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="32"/>
+        <location filename="../main.cpp" line="34"/>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)</source>
         <translation>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="33"/>
+        <location filename="../main.cpp" line="35"/>
         <source>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)</source>
         <translation>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="34"/>
+        <location filename="../main.cpp" line="36"/>
         <source>Android™ is a trademark of Google LLC</source>
         <translation>Android™ is a trademark of Google LLC</translation>
     </message>
