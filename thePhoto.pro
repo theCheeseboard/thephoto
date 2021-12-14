@@ -22,7 +22,10 @@ DESKTOP_FILE_BLUEPRINT=com.vicr123.thephoto_blueprint.desktop
 
 unix:!macx {
     # Include the-libs build tools
-    include(/usr/share/the-libs/pri/buildmaster.pri)
+    equals(THELIBS_BUILDTOOLS_PATH, "") {
+        THELIBS_BUILDTOOLS_PATH = $$[QT_INSTALL_PREFIX]/share/the-libs/pri
+    }
+    include($$THELIBS_BUILDTOOLS_PATH/buildmaster.pri)
 
     CONFIG += link_pkgconfig
     PKGCONFIG += qca2-qt5
