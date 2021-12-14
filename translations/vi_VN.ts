@@ -52,47 +52,47 @@
         <translation>Chế độ biến cố</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="658"/>
+        <location filename="../event/eventmodesettings.ui" line="670"/>
         <source>Show Wi-Fi details</source>
         <translation>Hiện chi tiết Wi-Fi</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="665"/>
+        <location filename="../event/eventmodesettings.ui" line="677"/>
         <source>SSID</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="192"/>
+        <location filename="../event/eventmodesettings.ui" line="204"/>
         <source>Backstage</source>
         <translation>Hậu trường</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="405"/>
+        <location filename="../event/eventmodesettings.ui" line="417"/>
         <source>SESSION</source>
         <translation>PHIÊN</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="412"/>
+        <location filename="../event/eventmodesettings.ui" line="424"/>
         <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
         <translation>Chúng tôi lưu ảnh được nhận trong thư mục với tên này. Nếu không gì viết đấy, chúng tôi lưu ảnh trong thư mục gọi &quot;Không phân loại&quot;</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="456"/>
+        <location filename="../event/eventmodesettings.ui" line="468"/>
         <source>DISPLAYS</source>
         <translation>MÀN HÌNH</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="685"/>
+        <location filename="../event/eventmodesettings.ui" line="697"/>
         <source>Key</source>
         <translation>Mật mã</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="697"/>
+        <location filename="../event/eventmodesettings.ui" line="709"/>
         <source>WI-FI</source>
         <translation>WI-FI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="494"/>
+        <location filename="../event/eventmodesettings.ui" line="506"/>
         <source>Use Monitor</source>
         <translation>Dùng màn hình</translation>
     </message>
@@ -102,117 +102,117 @@
         <translation>Chế độ biến cố thePhoto</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="292"/>
+        <location filename="../event/eventmodesettings.ui" line="304"/>
         <source>APP</source>
         <translation>ỨNG DỤNG ĐIỆN THOẠI</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="299"/>
+        <location filename="../event/eventmodesettings.ui" line="311"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
         <translation>Để kết nối với chế độ biến cố thePhoto, tải xuống ứng dụng cho Android™ trên cửa hàng Google Play™.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="306"/>
+        <location filename="../event/eventmodesettings.ui" line="318"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
         <translation>Bạn truy cập liên kết này trên điện thoại để đi đến đó: https://thephoto.vicr123.com/download</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="337"/>
+        <location filename="../event/eventmodesettings.ui" line="349"/>
         <source>ROOM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="386"/>
+        <location filename="../event/eventmodesettings.ui" line="398"/>
         <source>Session Name</source>
         <translation>Tên Phiên</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="393"/>
+        <location filename="../event/eventmodesettings.ui" line="405"/>
         <source>Store users in subfolders</source>
         <translation>Giữ người dùng trong thư mục con riêng</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="545"/>
+        <location filename="../event/eventmodesettings.ui" line="557"/>
         <source>Use Mission Control to adjust monitors.</source>
         <translation>Dùng Mission Control để chuyển sang màn hình.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="552"/>
+        <location filename="../event/eventmodesettings.ui" line="564"/>
         <source>Open Mission Control</source>
         <translation>Mở Mission Control</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="575"/>
+        <location filename="../event/eventmodesettings.ui" line="587"/>
         <source>There&apos;s only one display on this computer.</source>
         <translation>Bạn chỉ có một màn hình trên máy tính này.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="604"/>
+        <location filename="../event/eventmodesettings.ui" line="616"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
         <translation>Nếu hậu trường đằng hiện trên màn hình sai, bạn có thể trao đổi màn hình.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="611"/>
+        <location filename="../event/eventmodesettings.ui" line="623"/>
         <source>Swap Displays</source>
         <translation>Trao đổi màn hình</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="711"/>
+        <location filename="../event/eventmodesettings.ui" line="723"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
         <translation>Hiện chi tiết Wi-Fi bên sang mã cho người khách kết nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="758"/>
+        <location filename="../event/eventmodesettings.ui" line="770"/>
         <source>INFORMATION DISPLAY</source>
         <translation>THÔNG TIN TRÊN MÀN HÌNH</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="765"/>
+        <location filename="../event/eventmodesettings.ui" line="777"/>
         <source>Show Information Display</source>
         <translation>Hiển thị thông tin trên màn hình</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="775"/>
+        <location filename="../event/eventmodesettings.ui" line="787"/>
         <source>Show Author</source>
         <translation>Hiện thị người dùng chụp ảnh</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="785"/>
+        <location filename="../event/eventmodesettings.ui" line="797"/>
         <source>Show Clock</source>
         <translation>Hiển thị đồng hồ</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="795"/>
+        <location filename="../event/eventmodesettings.ui" line="807"/>
         <source>Show Audio Information</source>
         <translation>Hiển thị thông tin nhạc</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="843"/>
+        <location filename="../event/eventmodesettings.ui" line="855"/>
         <source>Here are all the users currently connected to your computer.</source>
         <translation>Đây là tất cả người dùng đang kết nối với máy tính của bạn.</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="98"/>
+        <location filename="../event/eventmodesettings.ui" line="104"/>
         <source>Session Settings</source>
         <translation>Cài Đặt Phiên</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="118"/>
+        <location filename="../event/eventmodesettings.ui" line="130"/>
         <source>Connected Users</source>
         <translation>Người Dùng Kết Nối</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="141"/>
+        <location filename="../event/eventmodesettings.ui" line="153"/>
         <source>Exchanged Images</source>
         <translation>Ảnh Được Chuyển</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="955"/>
+        <location filename="../event/eventmodesettings.ui" line="967"/>
         <source>Back to Event Mode</source>
         <translation>Trở lại đến Chế độ biến cố</translation>
     </message>
     <message>
-        <location filename="../event/eventmodesettings.ui" line="966"/>
+        <location filename="../event/eventmodesettings.ui" line="978"/>
         <source>End Event Mode</source>
         <translation>Thoát Chế độ biến cố</translation>
     </message>
@@ -750,24 +750,24 @@
         <translation>Bắt đầu trình chiếu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="89"/>
+        <location filename="../mainwindow.cpp" line="88"/>
         <source>Reading Library...</source>
         <translation>Đang đọc thư viện ảnh...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="90"/>
+        <location filename="../mainwindow.cpp" line="89"/>
         <source>&lt;p&gt;We&apos;re building your library. Please wait while we do this.&lt;/p&gt;&lt;p&gt;You can shorten this process by narrowing your library.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Chúng tôi đang xây thư viện ảnh. Xin chờ trong khi giờ chúng tôi làm việc này.&lt;/p&gt;&lt;p&gt;Nếu bạn có ít ảnh hơn, chúng tôi có thể xong nhanh hơn.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="367"/>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="341"/>
+        <location filename="../mainwindow.cpp" line="344"/>
         <source>Delete Image</source>
         <translation>Xóa ảnh</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="368"/>
-        <location filename="../mainwindow.cpp" line="371"/>
+        <location filename="../mainwindow.cpp" line="342"/>
+        <location filename="../mainwindow.cpp" line="345"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
         <translation>Bạn có chắc chắn muốn xóa ảnh này cho thời gian mãi mãi không?</translation>
     </message>

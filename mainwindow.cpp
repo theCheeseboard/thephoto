@@ -4,11 +4,11 @@
 #include "aboutdialog.h"
 #include <QMessageBox>
 #include <QDesktopServices>
+#include <tstylemanager.h>
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget* parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
+    ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     //ui->graphicsView->installEventFilter(this);
@@ -78,8 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
 #endif
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
@@ -88,7 +87,7 @@ void MainWindow::reloadLibrary(bool rebuild) {
     dialog->setWindowModality(Qt::WindowModal);
     dialog->setWindowTitle(tr("Reading Library..."));
     dialog->setLabelText(tr("<p>We're building your library. Please wait while we do this.</p>"
-                         "<p>You can shorten this process by narrowing your library.</p>"));
+            "<p>You can shorten this process by narrowing your library.</p>"));
     dialog->setMaximum(0);
 
     dialog->show();
@@ -133,13 +132,11 @@ void MainWindow::reloadLibrary(bool rebuild) {
     dialog->close();
 }
 
-void MainWindow::on_pushButton_clicked()
-{
+void MainWindow::on_pushButton_clicked() {
     on_actionManage_Library_triggered();
 }
 
-void MainWindow::on_actionManage_Library_triggered()
-{
+void MainWindow::on_actionManage_Library_triggered() {
     QEventLoop loop;
     ManageLibrary* libWindow = new ManageLibrary(this);
     libWindow->setWindowModality(Qt::WindowModal);
@@ -170,7 +167,7 @@ void MainWindow::loadImage(int imageIndex) {
     }
 }
 
-bool MainWindow::eventFilter(QObject *, QEvent *event) {
+bool MainWindow::eventFilter(QObject*, QEvent* event) {
     if (event->type() == QEvent::KeyPress) {
         QKeyEvent* keyEvent = (QKeyEvent*) event;
         if (keyEvent->key() == Qt::Key_Right) {
@@ -196,7 +193,7 @@ void MainWindow::nextImage() {
     }
 }
 
-void MainWindow::resizeEvent(QResizeEvent *event) {
+void MainWindow::resizeEvent(QResizeEvent* event) {
     loadImage(currentImage);
 }
 
@@ -258,28 +255,23 @@ void MainWindow::recenterImage() {
     ui->imageLabel->move(newx, newy);
 }
 
-void MainWindow::on_actionZoom_In_triggered()
-{
+void MainWindow::on_actionZoom_In_triggered() {
     scaleImage(1.25);
 }
 
-void MainWindow::on_actionZoom_Out_triggered()
-{
+void MainWindow::on_actionZoom_Out_triggered() {
     scaleImage(0.8);
 }
 
-void MainWindow::on_actionZoom_to_100_triggered()
-{
+void MainWindow::on_actionZoom_to_100_triggered() {
     setScaleFactor(1);
 }
 
-void MainWindow::on_actionFit_to_Window_triggered()
-{
+void MainWindow::on_actionFit_to_Window_triggered() {
     setScaleFactor(calculateScaling(ui->scrollArea->size(), ui->imageLabel->size(), true));
 }
 
-void MainWindow::on_actionStart_Slideshow_triggered()
-{
+void MainWindow::on_actionStart_Slideshow_triggered() {
     if (!ui->scrollArea->isVisible()) return; //No pictures so no point doing a slideshow
 
     if (this->isFullScreen()) {
@@ -315,48 +307,30 @@ void MainWindow::on_actionStart_Slideshow_triggered()
     }
 }
 
-void MainWindow::on_actionConnect_to_Phone_triggered()
-{
+void MainWindow::on_actionConnect_to_Phone_triggered() {
     //PhoneDialog* dialog = new PhoneDialog(this);
     //dialog->showFullScreen();
 
     /*if (QApplication::desktop()->screenCount() == 1) {
         QMessageBox::warning(this, tr("Connect another screen"), tr("Connect another screen to this PC to use Event Mode."), QMessageBox::Ok, QMessageBox::Ok);
     } else {*/
-        this->hide();
+    this->hide();
 
-        if (QStyleFactory::keys().contains("Contemporary") || QStyleFactory::keys().contains("contemporary")) {
-            QApplication::setStyle("Contemporary");
-        }
+    tStyleManager::setOverrideStyleOnPlatforms(tApplication::TheDesk | tApplication::Flatpak | tApplication::MacOS | tApplication::Windows | tApplication::WindowsAppPackage | tApplication::OtherPlatform);
 
-        QPalette oldPal = QApplication::palette();
+    EventModeSettings* dialog = new EventModeSettings();
+    QApplication::setPalette(dialog->palette());
+    dialog->show();
+    dialog->exec();
 
-        EventModeSettings* dialog = new EventModeSettings();
-        QApplication::setPalette(dialog->palette());
-        dialog->show();
-        dialog->exec();
-
-        connect(dialog, &EventModeSettings::done, [=] {
-            dialog->deleteLater();
-
-            QApplication::setPalette(oldPal);
-            this->setPalette(oldPal);
-
-            if (QStyleFactory::keys().contains("Contemporary") || QStyleFactory::keys().contains("contemporary")) {
-                #ifdef Q_OS_WIN
-                    QApplication::setStyle("windowsvista");
-                #elif defined(Q_OS_MAC)
-                    QApplication::setStyle("macintosh");
-                #endif
-            }
-
-            this->show();
-        });
+    connect(dialog, &EventModeSettings::done, [ = ] {
+        dialog->deleteLater();
+        this->show();
+    });
     //}
 }
 
-void MainWindow::on_actionDelete_triggered()
-{
+void MainWindow::on_actionDelete_triggered() {
 
     if (!ui->scrollArea->isVisible()) return; //No pictures so no point trying to delete
 
@@ -393,23 +367,19 @@ void MainWindow::show() {
     loadImage(currentImage);
 }
 
-void MainWindow::on_actionAbout_triggered()
-{
+void MainWindow::on_actionAbout_triggered() {
     AboutDialog a;
     a.exec();
 }
 
-void MainWindow::on_actionExit_triggered()
-{
+void MainWindow::on_actionExit_triggered() {
     QApplication::exit();
 }
 
-void MainWindow::on_actionFile_Bug_triggered()
-{
+void MainWindow::on_actionFile_Bug_triggered() {
     QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thephoto/issues"));
 }
 
-void MainWindow::on_actionSources_triggered()
-{
+void MainWindow::on_actionSources_triggered() {
     QDesktopServices::openUrl(QUrl("https://github.com/vicr123/thephoto"));
 }

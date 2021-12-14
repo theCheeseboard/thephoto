@@ -94,6 +94,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="sessionSettingsButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Session Settings</string>
         </property>
@@ -114,6 +120,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="connectedUsersButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Connected Users</string>
         </property>
