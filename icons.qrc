@@ -25,5 +25,6 @@
         <file>icons/list-add.svg</file>
         <file>icons/list-remove.svg</file>
         <file>icons/com.vicr123.thephoto.svg</file>
+        <file>icons/com.vicr123.thephoto_blueprint.svg</file>
     </qresource>
 </RCC>
