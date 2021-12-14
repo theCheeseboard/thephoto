@@ -35,6 +35,14 @@ EventModeSettings::EventModeSettings(QWidget* parent) :
     //Set up macOS menu bar
     new QMenuBar(this);
 
+#ifdef T_BLUEPRINT_BUILD
+    ui->menuButton->setIcon(QIcon(":/icons/com.vicr123.thephoto_blueprint.svg"));
+#else
+    ui->menuButton->setIcon(QIcon::fromTheme("com.vicr123.thephoto", QIcon(":/icons/com.vicr123.thephoto.svg")));
+#endif
+    ui->menuButton->setIconSize(SC_DPI_T(QSize(24, 24), QSize));
+//    ui->menuButton->setMenu(menu);
+
     saveDir.setPath(QDir::homePath() + "/Pictures/thePhoto");
 
     ui->wifiIcon->setPixmap(QIcon::fromTheme("network-wireless", QIcon(":/icons/network-wireless.svg")).pixmap(SC_DPI_T(QSize(16, 16), QSize)));
@@ -63,8 +71,8 @@ EventModeSettings::EventModeSettings(QWidget* parent) :
         }
     });
     connect(wsRendezvousServer, &WsRendezvousServer::newServerIdAvailable, this, [ = ](int newServerId, QString hmac) {
-        ui->roomInfoLabel->setText(tr("Your room code is %1.").arg(QStringLiteral("<b>%1 %2</b>").arg(newServerId).arg(hmac)));
-        showDialog->setCode(QStringLiteral("%1 %2").arg(newServerId).arg(hmac));
+        ui->roomInfoLabel->setText(tr("Your room code is %1.").arg(QStringLiteral("<b>%1 %2</b>").arg(newServerId, 4, 10, QLatin1Char('0')).arg(hmac)));
+        showDialog->setCode(QStringLiteral("%1 %2").arg(newServerId, 4, 10, QLatin1Char('0')).arg(hmac));
     });
     ui->roomInfoLabel->setText(tr("We're preparing a room for you. Hang tight!"));
 

@@ -13,12 +13,12 @@ TEMPLATE = app
 CONFIG += c++14
 SHARE_APP_NAME=thephoto
 
-#DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER="\\\"thephoto-rendezvous.vicr123.com\\\""
-#DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT=443
-#DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE=true
-DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER="\\\"localhost\\\""
-DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT=4000
-DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE=false
+DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER="\\\"thephoto-rendezvous.vicr123.com\\\""
+DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT=443
+DEFINES += THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE=true
+
+DESKTOP_FILE=com.vicr123.thephoto.desktop
+DESKTOP_FILE_BLUEPRINT=com.vicr123.thephoto_blueprint.desktop
 
 unix:!macx {
     # Include the-libs build tools
@@ -30,15 +30,20 @@ unix:!macx {
     QT += thelib dbus
     TARGET = thephoto
 
-    target.path = /usr/bin
+    target.path = $$THELIBS_INSTALL_BIN
 
-    desktop.path = /usr/share/applications
-    desktop.files = com.vicr123.thephoto.desktop
+    blueprint {
+        metainfo.files = com.vicr123.thephoto_blueprint.metainfo.xml
+        icon.files = icons/com.vicr123.thephoto_blueprint.svg
+    } else {
+        metainfo.files = com.vicr123.thephoto.metainfo.xml
+        icon.files = icons/com.vicr123.thephoto.svg
+    }
 
-    icon.path = /usr/share/icons/hicolor/scalable/apps/
-    icon.files = icons/thephoto.svg
+    icon.path = $$THELIBS_INSTALL_PREFIX/share/icons/hicolor/scalable/apps/
+    metainfo.path = $$THELIBS_INSTALL_PREFIX/share/metainfo
 
-    INSTALLS += target icon desktop
+    INSTALLS += target icon metainfo
 }
 
 win32 {

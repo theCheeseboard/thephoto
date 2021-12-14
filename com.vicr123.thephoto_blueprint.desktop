@@ -2,9 +2,8 @@
 [Desktop Entry]
 Type=Application
 Version=1.0
-Name[]=thePhoto
+Name[]=thePhoto Blueprint
 GenericName[]=Photo Manager
-GenericName[pl]=Menedżer zdjęć
 Exec=thephoto
 Icon=com.vicr123.thephoto
 MimeType=image/jpeg;image/png;image/gif;image/exif;

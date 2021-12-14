@@ -19,11 +19,11 @@
         <file>icons/smartphone-dark.svg</file>
         <file>icons/go-previous.svg</file>
         <file>icons/transparent.png</file>
-        <file>icons/thephoto.svg</file>
         <file>icons/aboutsplash.svg</file>
         <file>icons/document-save.svg</file>
         <file>icons/edit-rename.svg</file>
         <file>icons/list-add.svg</file>
         <file>icons/list-remove.svg</file>
+        <file>icons/com.vicr123.thephoto.svg</file>
     </qresource>
 </RCC>

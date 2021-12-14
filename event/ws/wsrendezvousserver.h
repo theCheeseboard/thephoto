@@ -50,6 +50,10 @@ class WsRendezvousServer : public QObject {
 
     private:
         WsRendezvousServerPrivate* d;
+
+        bool serverIsSecure();
+        QString server();
+        int serverPort();
 };
 
 #endif // WSRENDEZVOUSSERVER_H

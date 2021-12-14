@@ -62,9 +62,9 @@ void WsRendezvousServer::reconnect() {
     tDebug("WsRendezvousServer") << "Opening Rendezvous server session";
 
     QUrl rendezvousSetupUrl;
-    rendezvousSetupUrl.setScheme(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE ? "https" : "http");
-    rendezvousSetupUrl.setHost(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
-    rendezvousSetupUrl.setPort(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT);
+    rendezvousSetupUrl.setScheme(serverIsSecure() ? "https" : "http");
+    rendezvousSetupUrl.setHost(server());
+    rendezvousSetupUrl.setPort(serverPort());
     rendezvousSetupUrl.setPath("/setup");
     QNetworkReply* reply = d->mgr.get(QNetworkRequest(rendezvousSetupUrl));
     connect(reply, &QNetworkReply::finished, this, [ = ] {
@@ -92,14 +92,14 @@ void WsRendezvousServer::issueKeys() {
     QByteArray payload = d->privateKey.toPublicKey().toPEM().toUtf8();
 
     QUrl keySetupUrl;
-    keySetupUrl.setScheme(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE ? "https" : "http");
-    keySetupUrl.setHost(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
-    keySetupUrl.setPort(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT);
+    keySetupUrl.setScheme(serverIsSecure() ? "https" : "http");
+    keySetupUrl.setHost(server());
+    keySetupUrl.setPort(serverPort());
     keySetupUrl.setPath(QStringLiteral("/keys/%1").arg(d->serverNumber));
 
     QNetworkRequest keySetupRequest(keySetupUrl);
     keySetupRequest.setRawHeader("Authorization", QStringLiteral("Bearer %1").arg(d->token).toUtf8());
-    keySetupRequest.setRawHeader("Host", THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
+    keySetupRequest.setRawHeader("Host", server().toUtf8());
     keySetupRequest.setRawHeader("X-thePhoto-HMAC", QMessageAuthenticationCode::hash(payload, d->hmac.toUtf8(), QCryptographicHash::Sha512).toBase64());
     keySetupRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-pem-file");
 
@@ -130,14 +130,14 @@ void WsRendezvousServer::connectNewClient() {
     tDebug("WsRendezvousServer") << "Opening Rendezvous server client";
 
     QUrl rendezvousConnectUrl;
-    rendezvousConnectUrl.setScheme(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE ? "wss" : "ws");
-    rendezvousConnectUrl.setHost(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
-    rendezvousConnectUrl.setPort(THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT);
+    rendezvousConnectUrl.setScheme(serverIsSecure() ? "wss" : "ws");
+    rendezvousConnectUrl.setHost(server());
+    rendezvousConnectUrl.setPort(serverPort());
     rendezvousConnectUrl.setPath(QStringLiteral("/setup/%1").arg(d->serverNumber));
 
     QNetworkRequest rendezvousRequest(rendezvousConnectUrl);
     rendezvousRequest.setRawHeader("Authorization", QStringLiteral("Bearer %1").arg(d->token).toUtf8());
-    rendezvousRequest.setRawHeader("Host", THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
+    rendezvousRequest.setRawHeader("Host", server().toUtf8());
 
     QWebSocket* socket = new QWebSocket("", QWebSocketProtocol::VersionLatest, this);
     socket->open(rendezvousRequest);
@@ -179,4 +179,23 @@ void WsRendezvousServer::connectNewClient() {
 
 WsRendezvousServer::ConnectionState WsRendezvousServer::currentConnectionState() {
     return d->state;
+}
+
+bool WsRendezvousServer::serverIsSecure() {
+    if (qEnvironmentVariableIsSet("THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE")) {
+        return qEnvironmentVariable("THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE") == "true";
+    } else {
+        return THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_SECURE;
+    }
+}
+
+QString WsRendezvousServer::server() {
+    return qEnvironmentVariable("THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER", THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER);
+}
+
+int WsRendezvousServer::serverPort() {
+    bool ok;
+    int port = qEnvironmentVariableIntValue("THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT", &ok);
+    if (!ok) port = THEPHOTO_EVENT_MODE_RENDEZVOUS_SERVER_PORT;
+    return port;
 }

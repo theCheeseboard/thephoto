@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="vi_VN" sourcelanguage="en_US">
+<TS version="2.1" sourcelanguage="en_US">
 <context>
     <name>AboutDialog</name>
     <message>
         <location filename="../aboutdialog.ui" line="14"/>
         <source>About thePhoto</source>
-        <translation>Giới thiệu về thePhoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="25"/>
         <source>thePhoto 2.0</source>
-        <translation>thePhoto 2.0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="32"/>
         <source>Photo Manager</source>
-        <translation>Bộ quản lý ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="52"/>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)</source>
-        <translation>Sản phẩm này bao gồm phần mềm phát triển bởi dự án OpenSSL để dùng trong công cụ OpenSSL (http://www.openssl.org/)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="62"/>
         <source>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)</source>
-        <translation>Sản phẩm này bao gồm phần mềm mã hóa viết bởi Eric Young (eay@cryptsoft.com)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="72"/>
         <source>Android™ is a trademark of Google LLC</source>
-        <translation>Android™ là thương hiệu của Google LLC</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="79"/>
         <source>Copyright (c) Victor Tran 2018. Licensed under the terms of the GNU General Public License, version 3 or later.</source>
-        <translation>Bản quyền (c) Victor Tran 2018. Cấp phép với giấy phép Công cộng GNU, phiên bản 3 hoặc mới hơn.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdialog.ui" line="104"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -49,72 +49,32 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="21"/>
         <source>Event Mode</source>
-        <translation>Chế độ biến cố</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="652"/>
-        <source>Show Wi-Fi details</source>
-        <translation>Hiện chi tiết Wi-Fi</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="659"/>
-        <source>SSID</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="186"/>
-        <source>Backstage</source>
-        <translation>Hậu trường</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="399"/>
-        <source>SESSION</source>
-        <translation>PHIÊN</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="406"/>
-        <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
-        <translation>Chúng tôi lưu ảnh được nhận trong thư mục với tên này. Nếu không gì viết đấy, chúng tôi lưu ảnh trong thư mục gọi &quot;Không phân loại&quot;</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="450"/>
-        <source>DISPLAYS</source>
-        <translation>MÀN HÌNH</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="679"/>
-        <source>Key</source>
-        <translation>Mật mã</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="691"/>
-        <source>WI-FI</source>
-        <translation>WI-FI</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.ui" line="488"/>
-        <source>Use Monitor</source>
-        <translation>Dùng màn hình</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="46"/>
         <source>thePhoto Event Mode</source>
-        <translation>Chế độ biến cố thePhoto</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="186"/>
+        <source>Backstage</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="286"/>
         <source>APP</source>
-        <translation>ỨNG DỤNG ĐIỆN THOẠI</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="293"/>
         <source>To connect to thePhoto Event Mode, get the app for Android™ on the Google Play™ store.</source>
-        <translation>Để kết nối với chế độ biến cố thePhoto, tải xuống ứng dụng cho Android™ trên cửa hàng Google Play™.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="300"/>
         <source>You can visit this link on your phone to get there: https://thephoto.vicr123.com/download</source>
-        <translation>Bạn truy cập liên kết này trên điện thoại để đi đến đó: https://thephoto.vicr123.com/download</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="331"/>
@@ -124,162 +84,137 @@
     <message>
         <location filename="../event/eventmodesettings.ui" line="380"/>
         <source>Session Name</source>
-        <translation>Tên Phiên</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="387"/>
         <source>Store users in subfolders</source>
-        <translation>Giữ người dùng trong thư mục con riêng</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="399"/>
+        <source>SESSION</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="406"/>
+        <source>We&apos;ll save all received images inside a folder of this name. If there&apos;s nothing here, we&apos;ll store images in a folder called &quot;Uncategorized&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="450"/>
+        <source>DISPLAYS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="488"/>
+        <source>Use Monitor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="539"/>
         <source>Use Mission Control to adjust monitors.</source>
-        <translation>Dùng Mission Control để chuyển sang màn hình.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="546"/>
         <source>Open Mission Control</source>
-        <translation>Mở Mission Control</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="569"/>
         <source>There&apos;s only one display on this computer.</source>
-        <translation>Bạn chỉ có một màn hình trên máy tính này.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="598"/>
         <source>If the Backstage is showing on the wrong display, you can swap the displays.</source>
-        <translation>Nếu hậu trường đằng hiện trên màn hình sai, bạn có thể trao đổi màn hình.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="605"/>
         <source>Swap Displays</source>
-        <translation>Trao đổi màn hình</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="652"/>
+        <source>Show Wi-Fi details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="659"/>
+        <source>SSID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="679"/>
+        <source>Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.ui" line="691"/>
+        <source>WI-FI</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="705"/>
         <source>Show Wi-Fi details on the screen next to the code so guests can connect to the network</source>
-        <translation>Hiện chi tiết Wi-Fi bên sang mã cho người khách kết nối</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="752"/>
         <source>INFORMATION DISPLAY</source>
-        <translation>THÔNG TIN TRÊN MÀN HÌNH</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="759"/>
         <source>Show Information Display</source>
-        <translation>Hiển thị thông tin trên màn hình</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="769"/>
         <source>Show Author</source>
-        <translation>Hiện thị người dùng chụp ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="779"/>
         <source>Show Clock</source>
-        <translation>Hiển thị đồng hồ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="789"/>
         <source>Show Audio Information</source>
-        <translation>Hiển thị thông tin nhạc</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="837"/>
         <source>Here are all the users currently connected to your computer.</source>
-        <translation>Đây là tất cả người dùng đang kết nối với máy tính của bạn.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="98"/>
         <source>Session Settings</source>
-        <translation>Cài Đặt Phiên</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="118"/>
         <source>Connected Users</source>
-        <translation>Người Dùng Kết Nối</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="135"/>
         <source>Exchanged Images</source>
-        <translation>Ảnh Được Chuyển</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="949"/>
         <source>Back to Event Mode</source>
-        <translation>Trở lại đến Chế độ biến cố</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.ui" line="960"/>
         <source>End Event Mode</source>
-        <translation>Thoát Chế độ biến cố</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="122"/>
-        <source>End Event Mode?</source>
-        <translation>Thoát Chế độ biến cố?</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="122"/>
-        <source>Close connections to all connected devices and end Event Mode?</source>
-        <translation>Bạn có muốn ngắt kết nối với tất cả thiết bị và thoát Chế độ biến cố?</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="285"/>
-        <source>Uncategorized</source>
-        <translation>Không phân loại</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="328"/>
-        <source>About this picture</source>
-        <translation>Giới thiệu về ảnh này</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="331"/>
-        <source>By %1</source>
-        <translation>Bởi %1</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="336"/>
-        <source>For this picture</source>
-        <translation>Cho ảnh này</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="337"/>
-        <source>Enqueue for show</source>
-        <translation>Thêm vào hàng xuất hiện</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="340"/>
-        <source>Delete</source>
-        <translation>Xóa</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="344"/>
-        <source>Image Deleted</source>
-        <translation>Ảnh đã xóa</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="345"/>
-        <source>The image was deleted from your computer.</source>
-        <translation>Ảnh này đã được xóa khỏi máy tính của bạn.</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="264"/>
-        <source>User Connected</source>
-        <translation>Người đã kết nối</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="276"/>
-        <source>User Disconnected</source>
-        <translation>Người ngắt kết nối</translation>
-    </message>
-    <message>
-        <location filename="../event/eventmodesettings.cpp" line="208"/>
-        <source>For %1</source>
-        <translation>Cho %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="69"/>
@@ -297,44 +232,109 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../event/eventmodesettings.cpp" line="122"/>
+        <source>End Event Mode?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="122"/>
+        <source>Close connections to all connected devices and end Event Mode?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="208"/>
+        <source>For %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../event/eventmodesettings.cpp" line="209"/>
         <source>Kick</source>
-        <translation>Đuổi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="210"/>
         <source>Kick?</source>
-        <translation>Đuổi?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="210"/>
         <source>Kick %1? They&apos;ll be able to rejoin the session by entering the session code again.</source>
-        <translation>Đuổi %1? Họ sẽ được kết nối lại dùng mã phiên.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="215"/>
         <source>Ban</source>
-        <translation>Chặn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="216"/>
         <source>Ban?</source>
-        <translation>Chặn?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="216"/>
         <source>Ban %1? They won&apos;t be able to rejoin this session.</source>
-        <translation>Chặn %1? Họ sẽ không được kết nối lại.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="232"/>
         <source>Welcome to Event Mode!</source>
-        <translation>Chào mừng đến Chế độ biến cố!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodesettings.cpp" line="232"/>
         <source>To get back to the Backstage, simply hit the TAB key.</source>
-        <translation>Để trở lại Backstage, đánh phím TAB.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="264"/>
+        <source>User Connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="276"/>
+        <source>User Disconnected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="285"/>
+        <source>Uncategorized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="328"/>
+        <source>About this picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="331"/>
+        <source>By %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="336"/>
+        <source>For this picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="337"/>
+        <source>Enqueue for show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="340"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="344"/>
+        <source>Image Deleted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../event/eventmodesettings.cpp" line="345"/>
+        <source>The image was deleted from your computer.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -342,32 +342,32 @@
     <message>
         <location filename="../event/eventmodeshow.ui" line="186"/>
         <source>Event Mode</source>
-        <translation>Chế độ biến cố</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="275"/>
         <source>Preparing Event Mode...</source>
-        <translation>Đang chuẩn bị Chế độ biến cố...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="318"/>
         <source>To connect, go to</source>
-        <translation>Để kết nối, truy cập</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="344"/>
         <source>and use</source>
-        <translation>và sử dụng</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.ui" line="363"/>
         <source>when asked.</source>
-        <translation>khi hỏi.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../event/eventmodeshow.cpp" line="218"/>
         <source>by %1</source>
-        <translation>bởi %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -376,7 +376,7 @@
         <location filename="../event/eventmodeuserindicator.cpp" line="81"/>
         <location filename="../event/eventmodeuserindicator.cpp" line="249"/>
         <source>Camera Timer</source>
-        <translation>Hẹn giờ chụp ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -384,7 +384,7 @@
     <message>
         <location filename="../event/eventserver.cpp" line="39"/>
         <source>Can&apos;t create X509 certificate. Event Mode cannot start.</source>
-        <translation>Không tạo ra chúng chỉ X509 được. Chế độ biến cố không sẽ bắt đầu được.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -393,7 +393,7 @@
         <location filename="../event/eventsocket.cpp" line="53"/>
         <location filename="../event/eventsocket.h" line="42"/>
         <source>An unknown person</source>
-        <translation>Người</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -401,42 +401,57 @@
     <message>
         <location filename="../library/imageview.cpp" line="272"/>
         <source>File</source>
-        <translation>Tệp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="273"/>
         <source>Filename</source>
-        <translation>Tên tệp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="274"/>
         <source>Dimensions</source>
-        <translation>Kích thước</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="279"/>
         <source>Image</source>
-        <translation>Ảnh</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="280"/>
+        <source>Flash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="280"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../library/imageview.cpp" line="280"/>
+        <source>No</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="281"/>
         <source>ISO</source>
-        <translation>ISO</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="283"/>
         <source>Camera</source>
-        <translation>Máy ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="284"/>
         <source>Camera Make</source>
-        <translation>Nhà xuất máy ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="285"/>
         <source>Camera Model</source>
-        <translation>Mẫu máy ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../library/imageview.cpp" line="338"/>
@@ -447,21 +462,6 @@
         <location filename="../library/imageview.cpp" line="339"/>
         <source>Hit ESC to exit slideshow mode.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../library/imageview.cpp" line="280"/>
-        <source>Flash</source>
-        <translation>Đèn flash</translation>
-    </message>
-    <message>
-        <location filename="../library/imageview.cpp" line="280"/>
-        <source>Yes</source>
-        <translation>Có</translation>
-    </message>
-    <message>
-        <location filename="../library/imageview.cpp" line="280"/>
-        <source>No</source>
-        <translation>Không</translation>
     </message>
 </context>
 <context>
@@ -517,17 +517,17 @@
     <message>
         <location filename="../librarywindow.ui" line="14"/>
         <source>thePhoto</source>
-        <translation>thePhoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="122"/>
         <source>Library</source>
-        <translation>Thư viện</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="182"/>
         <source>Image</source>
-        <translation>Ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="305"/>
@@ -537,47 +537,53 @@
     <message>
         <location filename="../librarywindow.ui" line="454"/>
         <source>Let&apos;s get started!</source>
-        <translation>Hãy bắt đầu!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="464"/>
         <source>Where should we search for images?</source>
-        <translation>Chúng tôi sẽ tìm ảnh ở đâu?</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../librarywindow.ui" line="489"/>
+        <location filename="../librarywindow.ui" line="594"/>
+        <source>Manage Library</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="557"/>
         <source>File</source>
-        <translation>Tệp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="567"/>
         <source>Help</source>
-        <translation type="unfinished">Trợ giúp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="583"/>
         <source>Exit</source>
-        <translation>Thoát</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="586"/>
         <source>Ctrl+Q</source>
-        <translation>Ctrl+Q</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="599"/>
         <source>Event Mode</source>
-        <translation>Chế độ biến cố</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="608"/>
         <source>File Bug</source>
-        <translation type="unfinished">Báo cáo lỗi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="617"/>
         <source>Sources</source>
-        <translation type="unfinished">Mã nguồn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.ui" line="626"/>
@@ -585,20 +591,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../librarywindow.ui" line="489"/>
-        <location filename="../librarywindow.ui" line="594"/>
-        <source>Manage Library</source>
-        <translation>Quản lý thư viện ảnh</translation>
-    </message>
-    <message>
         <location filename="../librarywindow.cpp" line="68"/>
         <source>Delete Image?</source>
-        <translation>Xóa ảnh?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.cpp" line="69"/>
         <source>Delete</source>
-        <translation>Xóa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../librarywindow.cpp" line="75"/>
@@ -636,140 +636,140 @@
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>thePhoto</source>
-        <translation>thePhoto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="172"/>
         <source>There are no images in your library.</source>
-        <translation>Bạn không có ảnh nào trong thư viện ảnh của bạn.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="194"/>
         <source>Manage Library</source>
-        <translation>Quản lý thư viện ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="246"/>
         <source>Fi&amp;le</source>
-        <translation>&amp;Tệp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="257"/>
         <source>Help</source>
-        <translation>Trợ giúp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
         <source>&amp;Event Mode</source>
-        <translation>&amp;Chế độ biến cố</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="299"/>
         <source>&amp;Manage Library</source>
-        <translation>&amp;Quản lý thư viện ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="311"/>
         <location filename="../mainwindow.cpp" line="39"/>
         <source>Zoom In</source>
-        <translation>Phóng to</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="314"/>
         <source>Ctrl+=</source>
-        <translation>Ctrl+=</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="323"/>
         <location filename="../mainwindow.cpp" line="45"/>
         <source>Zoom Out</source>
-        <translation>Thu nhỏ</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="326"/>
         <source>Ctrl+-</source>
-        <translation>Ctrl+-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="335"/>
         <location filename="../mainwindow.cpp" line="51"/>
         <source>Zoom to 100%</source>
-        <translation>Thu phòng đến 100%</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="338"/>
         <source>Ctrl+0</source>
-        <translation>Ctrl+0</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="347"/>
         <location filename="../mainwindow.cpp" line="57"/>
         <source>Fit to Window</source>
-        <translation>Thu phóng vừa với cửa sổ</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="359"/>
-        <source>F5</source>
-        <translation>F5</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="368"/>
-        <location filename="../mainwindow.cpp" line="63"/>
-        <source>Delete</source>
-        <translation>Xóa</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="377"/>
-        <source>&amp;About</source>
-        <translation>&amp;Giới thiệu</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="389"/>
-        <source>Exit</source>
-        <translation>Thoát</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="392"/>
-        <source>Ctrl+Q</source>
-        <translation>Ctrl+Q</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="404"/>
-        <source>File Bug</source>
-        <translation>Báo cáo lỗi</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="413"/>
-        <source>Sources</source>
-        <translation>Mã nguồn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="356"/>
         <location filename="../mainwindow.cpp" line="69"/>
         <source>Start Slideshow</source>
-        <translation>Bắt đầu trình chiếu</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="359"/>
+        <source>F5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="368"/>
+        <location filename="../mainwindow.cpp" line="63"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="377"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="389"/>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="392"/>
+        <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="404"/>
+        <source>File Bug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="413"/>
+        <source>Sources</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="89"/>
         <source>Reading Library...</source>
-        <translation>Đang đọc thư viện ảnh...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="90"/>
         <source>&lt;p&gt;We&apos;re building your library. Please wait while we do this.&lt;/p&gt;&lt;p&gt;You can shorten this process by narrowing your library.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Chúng tôi đang xây thư viện ảnh. Xin chờ trong khi giờ chúng tôi làm việc này.&lt;/p&gt;&lt;p&gt;Nếu bạn có ít ảnh hơn, chúng tôi có thể xong nhanh hơn.&lt;/p&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="367"/>
         <location filename="../mainwindow.cpp" line="370"/>
         <source>Delete Image</source>
-        <translation>Xóa ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="368"/>
         <location filename="../mainwindow.cpp" line="371"/>
         <source>You&apos;re about to delete this image forever. Are you sure?</source>
-        <translation>Bạn có chắc chắn muốn xóa ảnh này cho thời gian mãi mãi không?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -778,12 +778,12 @@
         <location filename="../managelibrary.ui" line="14"/>
         <location filename="../managelibrary.ui" line="67"/>
         <source>Manage Library</source>
-        <translation>Quản lý thư viện ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../managelibrary.ui" line="167"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -791,22 +791,22 @@
     <message>
         <location filename="../main.cpp" line="27"/>
         <source>Photo Manager</source>
-        <translation type="unfinished">Bộ quản lý ảnh</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="32"/>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)</source>
-        <translation type="unfinished">Sản phẩm này bao gồm phần mềm phát triển bởi dự án OpenSSL để dùng trong công cụ OpenSSL (http://www.openssl.org/)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="33"/>
         <source>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com)</source>
-        <translation type="unfinished">Sản phẩm này bao gồm phần mềm mã hóa viết bởi Eric Young (eay@cryptsoft.com)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="34"/>
         <source>Android™ is a trademark of Google LLC</source>
-        <translation type="unfinished">Android™ là thương hiệu của Google LLC</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

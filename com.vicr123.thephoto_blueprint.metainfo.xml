@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.vicr123.thephoto_blueprint</id>
+  
+  <name>thePhoto Blueprint</name>
+  <summary>Photo Manager</summary>
+  
+  <metadata_license>CC-BY-SA-4.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer_name>Victor Tran</developer_name>
+  
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+  
+  <description>
+    <p>
+      WARNING: This is prerelease software. Features are subject to change at any time, and stability is not guaranteed.
+    </p>
+    <p>
+      Manage your pictures. thePhoto automatically discovers photos on your computer and presents it in an easy-to-use interface.
+    </p>
+    <ul>
+      <li>Make basic edits to your photos</li>
+      <li>Easily collect photos from participants during events and show them automatically on the big screen</li>
+    </ul>
+  </description>
+    
+  <launchable type="desktop-id">com.vicr123.thephoto_blueprint.desktop</launchable>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-info">mild</content_attribute>
+    <content_attribute id="social-audio">intense</content_attribute>
+  </content_rating>
+  
+  <provides>
+    <binary>thephoto-blueprint</binary>
+  </provides>
+</component>
