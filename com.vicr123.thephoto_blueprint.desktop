@@ -5,6 +5,6 @@ Version=1.0
 Name[]=thePhoto Blueprint
 GenericName[]=Photo Manager
 Exec=thephoto
-Icon=com.vicr123.thephoto
+Icon=com.vicr123.thephoto_blueprint
 MimeType=image/jpeg;image/png;image/gif;image/exif;
 Categories=Graphics;
